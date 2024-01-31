@@ -17,9 +17,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.borealnetwork.allen.font
 
 private val LightColorScheme = lightColorScheme(
     primary = md_theme_light_primary,
@@ -101,6 +103,85 @@ private val AppTypography = Typography(
     )
 )
 
+@Composable
+internal fun loadRoboto(){
+    val robotoThin = FontFamily(
+        font(
+            "Roboto", "roboto_thin", FontWeight.Normal, FontStyle.Normal
+        )
+    )
+    val robotoLight = FontFamily(
+        font(
+            "Roboto", "roboto_light", FontWeight.Normal, FontStyle.Normal
+        )
+    )
+    val robotoRegular = FontFamily(
+        font(
+            "Roboto", "roboto", FontWeight.Normal, FontStyle.Normal
+        )
+    )
+    val robotoBold = FontFamily(
+        font(
+            "Roboto", "roboto_bold", FontWeight.Normal, FontStyle.Normal
+        )
+    )
+}
+
+@Composable
+internal fun loadTypography(){
+    loadRoboto()
+    val typo = Typography(
+        h1 = TextStyle(
+            fontFamily = robotoRegular,
+            fontWeight = FontWeight.Bold,
+            fontSize = 52.sp,
+        ),
+        h2 = TextStyle(fontFamily = nunitoBold, fontWeight = FontWeight.Bold, fontSize = 24.sp),
+        h3 = TextStyle(
+            fontFamily = nunitoBold,
+            fontWeight = FontWeight.Bold,
+            fontSize = 18.sp,
+        ),
+        h4 = TextStyle(
+            fontFamily = nunitoBold,
+            fontWeight = FontWeight.Bold,
+            fontSize = 16.sp,
+        ),
+        h5 = TextStyle(fontFamily = nunitoBold, fontWeight = FontWeight.Bold, fontSize = 14.sp),
+        h6 = TextStyle(
+            fontFamily = nunitoSemiBold,
+            fontWeight = FontWeight.SemiBold,
+            fontSize = 12.sp,
+        ),
+        subtitle1 = TextStyle(
+            fontFamily = nunitoSemiBold,
+            fontWeight = FontWeight.SemiBold,
+            fontSize = 16.sp,
+        ),
+        subtitle2 = TextStyle(
+            fontFamily = nunitoRegular,
+            fontWeight = FontWeight.Normal,
+            fontSize = 14.sp,
+        ),
+        body1 = TextStyle(
+            fontFamily = nunitoRegular, fontWeight = FontWeight.Normal, fontSize = 14.sp
+        ),
+        body2 = TextStyle(fontFamily = nunitoRegular, fontSize = 10.sp),
+        button = TextStyle(
+            fontFamily = nunitoRegular,
+            fontWeight = FontWeight.Normal,
+            fontSize = 15.sp,
+            color = OnPrimary
+        ),
+        caption = TextStyle(
+            fontFamily = nunitoRegular, fontWeight = FontWeight.Normal, fontSize = 8.sp
+        ),
+        overline = TextStyle(
+            fontFamily = nunitoRegular, fontWeight = FontWeight.Normal, fontSize = 12.sp
+        )
+    )
+}
+
 internal val LocalThemeIsDark = compositionLocalOf { mutableStateOf(true) }
 
 @Composable
@@ -109,6 +190,8 @@ internal fun AppTheme(
 ) {
     val systemIsDark = isSystemInDarkTheme()
     val isDarkState = remember { mutableStateOf(systemIsDark) }
+
+
     CompositionLocalProvider(
         LocalThemeIsDark provides isDarkState
     ) {

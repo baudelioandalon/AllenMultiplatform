@@ -1,132 +1,137 @@
 package com.borealnetwork.allen.ui.login
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.DarkMode
+import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.LightMode
+import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
-import com.boreal.allen.R
-import com.boreal.allen.components.*
-import com.boreal.allen.domain.HOME_CLIENT_GRAPH
-import com.boreal.allen.domain.HOME_CONTAINER_SELLER_GRAPH
-import com.boreal.allen.domain.LoginScreen
-import com.boreal.allen.theme.SemiBold
+import com.borealnetwork.allen.openUrl
+import com.borealnetwork.allen.platform
+import com.borealnetwork.allen.theme.AppTheme
+import com.borealnetwork.allen.theme.LocalThemeIsDark
+import io.kamel.image.KamelImage
+import io.kamel.image.asyncPainterResource
 
 @Composable
-fun AELoginCompose(
-) {
+internal fun LoginUI() = AppTheme {
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+    var passwordVisibility by remember { mutableStateOf(false) }
 
-    val scrollState = rememberScrollState()
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.White)
-    ) {
-        TopTitle {
-//            navController.navigateUp()
-        }
-        Column(
-            modifier = Modifier
-                .padding(horizontal = 30.dp)
-                .verticalScroll(scrollState)
+    Column(modifier = Modifier.fillMaxSize().windowInsetsPadding(WindowInsets.safeDrawing)) {
+
+        Row(
+            horizontalArrangement = Arrangement.Center
         ) {
-
             Text(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentHeight()
-                    .padding(top = 45.dp),
-                text = "Soy cliente / Quiero ser cliente",
-                fontSize = 20.sp,
-                color = Color.Black,
-                fontWeight = SemiBold
+                text = "Login",
+                style = MaterialTheme.typography.titleMedium,
+                modifier = Modifier.padding(16.dp)
             )
-            Row(
-                modifier = Modifier
-                    .padding(top = 34.dp)
-                    .fillMaxWidth()
+
+            Spacer(modifier = Modifier.weight(1.0f))
+
+            var isDark by LocalThemeIsDark.current
+            IconButton(
+                onClick = { isDark = !isDark }
             ) {
-                CornerImgButton(
-                    modifier = Modifier
-                        .padding(end = 8.dp)
-                        .fillMaxWidth(0.5f),
-                    imgId = R.drawable.ic_google_logo,
-                    labelId = R.string.google_name
-                )
-                CornerImgButton(
-                    modifier = Modifier
-                        .padding(start = 8.dp),
-                    imgId = R.drawable.ic_facebook_logo,
-                    labelId = R.string.facebook_name
+                Icon(
+                    modifier = Modifier.padding(8.dp).size(20.dp),
+                    imageVector = if (isDark) Icons.Default.LightMode else Icons.Default.DarkMode,
+                    contentDescription = null
                 )
             }
+        }
 
-            SeparatorHorizontal(
-                modifier = Modifier
-                    .padding(top = 20.dp, bottom = 39.dp)
+        Row(
+            modifier = Modifier.height(200.dp),
+            horizontalArrangement = Arrangement.Center
+        ) {
+            KamelImage(
+                asyncPainterResource(
+                    "https://firebasestorage.googleapis.com/v0/b/safestudent-a0e1e.appspot.com/o/Alter%2Fproducts%2F0ac75350-4c79-428e-ae20-ad74688a8dde-_s?alt=media&token=aa8aedd6-f250-45b7-a2e9-6762bd1576a0",
+                ),
+                contentDescription = "imageExample"
             )
+        }
 
-            MediumText(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentHeight(),
-                text = "Soy socio vendedor"
-            )
+        OutlinedTextField(
+            value = email,
+            onValueChange = { email = it },
+            label = { Text("Email") },
+            singleLine = true,
+            modifier = Modifier.fillMaxWidth().padding(16.dp)
+        )
 
-            OutlinedTextField(
-                modifier = Modifier.padding(top = 31.dp),
-                helperText = "Correo",
-                value = "",
-                onValueChange = {},
-                placeHolder = "nombre@dominio.com",
-            )
-            OutlinedTextField(
-                modifier = Modifier.padding(top = 16.dp),
-                helperText = "Contraseña",
-                value = "",
-                onValueChange = {},
-                placeHolder = "Ingrese contraseña",
-            )
-
-            BlueButton(
-                modifier = Modifier.padding(top = 25.dp),
-                labelId = R.string.welcome_button_enter
-            ){
-                navController.navigate(HOME_CLIENT_GRAPH)
+        OutlinedTextField(
+            value = password,
+            onValueChange = { password = it },
+            label = { Text("Password") },
+            singleLine = true,
+            visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
+            modifier = Modifier.fillMaxWidth().padding(16.dp),
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Password
+            ),
+            trailingIcon = {
+                IconButton(onClick = { passwordVisibility = !passwordVisibility }) {
+                    val imageVector =
+                        if (passwordVisibility) Icons.Default.Close else Icons.Default.Edit
+                    Icon(
+                        imageVector,
+                        contentDescription = if (passwordVisibility) "Hide password" else "Show password"
+                    )
+                }
             }
+        )
 
-            RegularText(
-                modifier = Modifier
-                    .padding(top = 30.dp)
-                    .fillMaxWidth(),
-                labelId = R.string.login_forget_p, align = TextAlign.Center
-            )
+        Button(
+            onClick = { /* Handle login logic here */ },
+            modifier = Modifier.fillMaxWidth().padding(16.dp)
+        ) {
+            Text("Login en ${platform().name}")
+        }
 
-            SeparatorHorizontal(
-                modifier = Modifier
-                    .padding(vertical = 22.dp)
-            )
-
-            CornerButton(labelId = R.string.welcome_i_want_to_be_seller) {
-                navController.navigate(LoginScreen.RegisterLoginScreen.route)
-            }
-            LogoBlue(
-                modifier = Modifier
-                    .padding(top = 15.dp, bottom = 50.dp)
-                    .width(35.dp)
-                    .height(11.dp)
-                    .align(alignment = Alignment.CenterHorizontally)
-            )
+        TextButton(
+            onClick = {
+                openUrl("https://github.com/baudelioandalon")
+                      },
+            modifier = Modifier.fillMaxWidth().padding(16.dp)
+        ) {
+            Text("Open github")
         }
     }
-
 }
+
+

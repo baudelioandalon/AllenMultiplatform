@@ -27,6 +27,7 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.borealnetwork.allen.domain.model.BirdImage
+import com.borealnetwork.allen.ui.login.LoginUI
 import com.borealnetwork.allen.viewmodel.BirdsViewModel
 import dev.icerock.moko.mvvm.compose.getViewModel
 import dev.icerock.moko.mvvm.compose.viewModelFactory
@@ -52,7 +53,7 @@ fun BirdAppTheme(
 @Composable
 internal fun App() = BirdAppTheme {
     val birdsViewModel = getViewModel(Unit, viewModelFactory { BirdsViewModel() })
-    BirdsPage(birdsViewModel)
+    LoginUI()
 }
 
 @Composable
