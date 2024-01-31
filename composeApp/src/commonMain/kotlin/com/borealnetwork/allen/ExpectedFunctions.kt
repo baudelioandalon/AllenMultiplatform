@@ -11,6 +11,7 @@ internal expect fun randomUUID(): String
 
 internal expect fun platform(): Platform
 
+@Composable
 expect fun font(name: String, res: String, weight: FontWeight, style: FontStyle): Font
 internal interface Platform {
     val name: String

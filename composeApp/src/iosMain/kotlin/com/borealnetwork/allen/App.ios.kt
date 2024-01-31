@@ -27,7 +27,7 @@ internal class IOSPlatform : Platform {
 }
 
 private val cache: MutableMap<String, Font> = mutableMapOf()
-@OptIn(ExperimentalResourceApi::class)
+
 @Composable
 actual fun font(name: String, res: String, weight: FontWeight, style: FontStyle): Font {
     return cache.getOrPut(res) {

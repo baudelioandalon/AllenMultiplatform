@@ -11,13 +11,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
+import com.borealnetwork.allen.theme.robotoBold
 
 @Composable
 fun BoldText(
     modifier: Modifier = Modifier,
     text: String,
     size: TextUnit = 25.sp,
-    color: Color = Color.Black,
+    color: Color = Color.White,
     align: TextAlign? = null,
     textOverflow: TextOverflow = TextOverflow.Clip,
     maxLines: Int = Int.MAX_VALUE,
@@ -33,6 +34,6 @@ fun BoldText(
         textAlign = align,
         overflow = textOverflow,
         maxLines = maxLines,
-        fontFamily = val fontFamilyExtraBold: FontFamily = fontFamilyResource(SharedRes.fonts.PlayfairDisplay.extraBold)
+        fontFamily = robotoBold()
     )
 }

@@ -35,6 +35,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
+import com.borealnetwork.allen.components.BoldText
 import com.borealnetwork.allen.openUrl
 import com.borealnetwork.allen.platform
 import com.borealnetwork.allen.theme.AppTheme
@@ -120,7 +121,7 @@ internal fun LoginUI() = AppTheme {
             onClick = { /* Handle login logic here */ },
             modifier = Modifier.fillMaxWidth().padding(16.dp)
         ) {
-            Text("Login en ${platform().name}")
+            BoldText(text ="Login en ${platform().name}")
         }
 
         TextButton(
