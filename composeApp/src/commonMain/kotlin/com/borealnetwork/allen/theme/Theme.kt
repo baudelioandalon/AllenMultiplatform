@@ -37,7 +37,7 @@ private enum class TypographyEmbedded() {
 private val DEFAULT_TYPOGRAPHY = TypographyEmbedded.ROBOTO
 
 private val LightColorScheme = lightColors(
-    primary = md_theme_light_primary,
+    primary = PrimaryColor,
     onPrimary = md_theme_light_onPrimary,
     secondary = md_theme_light_secondary,
     onSecondary = md_theme_light_onSecondary,

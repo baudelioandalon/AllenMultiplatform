@@ -12,7 +12,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.DarkMode
@@ -62,9 +64,9 @@ internal fun LoginUI() = AppTheme {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var passwordVisibility by remember { mutableStateOf(false) }
+    val scrollState = rememberScrollState()
 
-
-    Column(modifier = Modifier.fillMaxSize().windowInsetsPadding(WindowInsets.safeDrawing)) {
+    Column(modifier = Modifier.fillMaxSize().windowInsetsPadding(WindowInsets.safeDrawing).verticalScroll(scrollState)) {
 
         Row(
             horizontalArrangement = Arrangement.Center
@@ -160,7 +162,7 @@ internal fun LoginUI() = AppTheme {
             RightRoundedButton()
         }
 
-        BlueButton(text = "Bienvenido")
+        BlueButton(modifier = Modifier.padding(10.dp),text = "Bienvenido")
 //        ShadowButton(labelId = R.string.welcome_button_enter)
         CornerButton(modifier = Modifier.padding(10.dp), text = "Entrar")
         CornerImgButton(modifier = Modifier.padding(10.dp), text = "Entrar")

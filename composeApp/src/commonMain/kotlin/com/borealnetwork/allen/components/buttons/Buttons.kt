@@ -464,7 +464,7 @@ fun ScannerButton(
     Card(
         modifier = modifier
             .fillMaxWidth(), elevation = 0.dp,
-        border = BorderStroke(1.dp, PrimaryColor)
+        border = BorderStroke(1.dp, MaterialTheme.colors.primary)
     ) {
         Button(
             modifier = Modifier

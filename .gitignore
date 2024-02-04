@@ -31,3 +31,4 @@ replay_pid*
 /build/ios/XCBuildData/73545dd49d2dd3dec082d18d0dd6f5b9.xcbuilddata/build-request.json
 /.gradle/kotlin/*
 /.gradle/*
+.gradle/*
