@@ -36,8 +36,19 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import com.borealnetwork.allen.components.BoldText
+import com.borealnetwork.allen.components.buttons.BackButton
+import com.borealnetwork.allen.components.buttons.BlueButton
+import com.borealnetwork.allen.components.buttons.CornerButton
 import com.borealnetwork.allen.components.buttons.FavoriteButton
 import com.borealnetwork.allen.components.buttons.FavoriteCounterButton
+import com.borealnetwork.allen.components.buttons.GoalIcon
+import com.borealnetwork.allen.components.buttons.GrayButton
+import com.borealnetwork.allen.components.buttons.LittleAddButton
+import com.borealnetwork.allen.components.buttons.LocationIcon
+import com.borealnetwork.allen.components.buttons.MinimumAddButton
+import com.borealnetwork.allen.components.buttons.RightRoundedButton
+import com.borealnetwork.allen.components.buttons.ShadowButton
+import com.borealnetwork.allen.components.buttons.ShareButton
 import com.borealnetwork.allen.openUrl
 import com.borealnetwork.allen.platform
 import com.borealnetwork.allen.theme.AppTheme
@@ -126,9 +137,32 @@ internal fun LoginUI() = AppTheme {
             BoldText(text ="Login en ${platform().name}")
         }
 
-        FavoriteButton()
-        FavoriteCounterButton()
+        Row (horizontalArrangement = Arrangement.spacedBy(5.dp)){
+            FavoriteButton()
+            FavoriteCounterButton()
+            ShareButton()
+            BackButton()
+            LittleAddButton(modifier = Modifier.padding(10.dp))
+            MinimumAddButton(modifier = Modifier.padding(10.dp))
 
+        }
+
+        Row (horizontalArrangement = Arrangement.spacedBy(5.dp)){
+            LocationIcon()
+            GoalIcon()
+            RightRoundedButton()
+        }
+
+        BlueButton(text = "Bienvenido")
+//        ShadowButton(labelId = R.string.welcome_button_enter)
+//        CornerButton(labelId = R.string.welcome_button_enter)
+//        CornerImgButton(
+//            imgId = R.drawable.ic_google_logo,
+//            labelId = R.string.google_name,
+//            modifier = Modifier.fillMaxWidth()
+//        )
+
+        GrayButton()
         TextButton(
             onClick = {
                 openUrl("https://github.com/baudelioandalon")
@@ -139,5 +173,3 @@ internal fun LoginUI() = AppTheme {
         }
     }
 }
-
-
