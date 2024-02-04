@@ -36,6 +36,8 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import com.borealnetwork.allen.components.BoldText
+import com.borealnetwork.allen.components.buttons.FavoriteButton
+import com.borealnetwork.allen.components.buttons.FavoriteCounterButton
 import com.borealnetwork.allen.openUrl
 import com.borealnetwork.allen.platform
 import com.borealnetwork.allen.theme.AppTheme
@@ -123,6 +125,9 @@ internal fun LoginUI() = AppTheme {
         ) {
             BoldText(text ="Login en ${platform().name}")
         }
+
+        FavoriteButton()
+        FavoriteCounterButton()
 
         TextButton(
             onClick = {

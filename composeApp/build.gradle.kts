@@ -35,6 +35,7 @@ kotlin {
             }
         }
         commonMain.dependencies {
+
             implementation(compose.runtime)
             implementation(compose.material3)
             implementation(compose.material)
@@ -77,10 +78,14 @@ kotlin {
             implementation(libs.sqlDelight.driver.native)
         }
 
+
     }
 }
 
+
 android {
+
+
     namespace = "com.borealnetwork.allen"
     compileSdk = 34
 
@@ -94,8 +99,8 @@ android {
     }
     sourceSets["main"].apply {
         manifest.srcFile("src/androidMain/AndroidManifest.xml")
-        res.srcDirs("src/androidMain/resources")
-        resources.srcDirs("src/commonMain/resources")
+        res.srcDirs("src/androidMain/res", "src/commonMain/resources")
+        resources.srcDir("src/commonMain/resources")
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
