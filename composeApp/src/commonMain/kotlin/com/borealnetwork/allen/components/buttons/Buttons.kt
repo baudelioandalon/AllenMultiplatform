@@ -172,6 +172,7 @@ fun GrayButton(
     }
 }
 
+
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun MinimumAddButton(
@@ -401,6 +402,54 @@ fun CornerButton(
                 textAlign = TextAlign.Center,
                 fontFamily = MaterialTheme.typography.caption.fontFamily
             )
+        }
+    }
+}
+
+@Composable
+fun CornerImgButton(
+    modifier: Modifier = Modifier,
+    text: String,//? = null,
+//    @StringRes labelId: Int? = null,
+    onClick: (() -> Unit)? = null
+) {
+    Card(
+        modifier = modifier
+            .fillMaxWidth(), elevation = 0.dp,
+        border = BorderStroke(1.dp, GrayBorder)
+    ) {
+        Button(
+            modifier = Modifier
+                .background(color = Color.White)
+                .height(54.dp),
+            elevation = ButtonDefaults.elevation(
+                defaultElevation = 0.dp,
+                pressedElevation = 5.dp,
+                disabledElevation = 0.dp
+            ),
+            shape = RoundedCornerShape(corner = CornerSize(5.dp)),
+            onClick = { onClick?.invoke() },
+            colors = ButtonDefaults.buttonColors(backgroundColor = Color.White)
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceAround
+            ) {
+                Image(
+                    painter = painterResource(res = "ic_google_logo.xml"),
+                    contentDescription = "Login"
+                )
+                Text(
+                    modifier = Modifier.padding(end = 110.dp),
+                    text = text,// ?: stringResource(id = labelId ?: R.string.empty_string),
+                    fontSize = 15.sp,
+                    color = Color.Black,
+                    fontWeight = SemiBold,
+                    letterSpacing = 0.sp,
+                    textAlign = TextAlign.Center,
+                    fontFamily = MaterialTheme.typography.caption.fontFamily
+                )
+            }
         }
     }
 }
