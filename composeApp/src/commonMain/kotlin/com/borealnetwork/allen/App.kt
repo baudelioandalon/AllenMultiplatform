@@ -15,7 +15,6 @@ import androidx.compose.foundation.shape.AbsoluteCutCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -27,7 +26,8 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.borealnetwork.allen.domain.model.BirdImage
-import com.borealnetwork.allen.ui.login.LoginUI
+import com.borealnetwork.allen.presentation.ui.general.logingraph.AELoginCompose
+import com.borealnetwork.allen.presentation.ui.general.logingraph.LoginUI
 import com.borealnetwork.allen.viewmodel.BirdsViewModel
 import dev.icerock.moko.mvvm.compose.getViewModel
 import dev.icerock.moko.mvvm.compose.viewModelFactory
@@ -53,7 +53,7 @@ fun BirdAppTheme(
 @Composable
 internal fun App() = BirdAppTheme {
     val birdsViewModel = getViewModel(Unit, viewModelFactory { BirdsViewModel() })
-    LoginUI()
+    AELoginCompose()
 }
 
 @Composable

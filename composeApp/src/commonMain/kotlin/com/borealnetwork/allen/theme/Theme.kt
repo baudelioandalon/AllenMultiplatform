@@ -38,7 +38,7 @@ private val DEFAULT_TYPOGRAPHY = TypographyEmbedded.ROBOTO
 
 private val LightColorScheme = lightColors(
     primary = PrimaryColor,
-    onPrimary = md_theme_light_onPrimary,
+    onPrimary = PrimaryEndColor,
     secondary = md_theme_light_secondary,
     onSecondary = md_theme_light_onSecondary,
     error = md_theme_light_error,

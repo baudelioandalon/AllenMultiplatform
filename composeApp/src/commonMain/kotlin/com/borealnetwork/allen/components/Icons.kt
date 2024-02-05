@@ -1,4 +1,4 @@
-package com.borealnetwork.allen.components.buttons
+package com.borealnetwork.allen.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -16,7 +16,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.unit.dp
 import com.borealnetwork.allen.theme.GrayBackgroundDrawerDismiss
-import com.borealnetwork.allen.theme.GrayBorderSearch
 import com.borealnetwork.allen.theme.GrayStrong
 import com.borealnetwork.allen.theme.OrangeStrong
 import com.borealnetwork.allen.theme.OrangeTransparentLow
@@ -51,7 +50,7 @@ fun LocationIcon(onClick: (() -> Unit)? = null) {
             Box(contentAlignment = Alignment.Center) {
                 Icon(
                     modifier = Modifier.size(15.dp),
-                    painter = painterResource("ic_location.xml"),
+                    painter = painterResource(res = "ic_location.xml"),
                     contentDescription = "moreIcon",
                     tint = White
                 )

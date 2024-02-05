@@ -1,4 +1,4 @@
-package com.borealnetwork.allen.components.buttons
+package com.borealnetwork.allen.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -30,14 +30,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.layoutId
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.font.FontWeight.Companion.SemiBold
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.borealnetwork.allen.components.BoldText
-import com.borealnetwork.allen.components.SemiBoldText
 import com.borealnetwork.allen.components.extensions.drawColoredShadow
 import com.borealnetwork.allen.theme.BlueTransparent
 import com.borealnetwork.allen.theme.FavoriteSelectedColor
@@ -46,7 +45,6 @@ import com.borealnetwork.allen.theme.GrayBackgroundDrawerDismiss
 import com.borealnetwork.allen.theme.GrayBorder
 import com.borealnetwork.allen.theme.GreenStrong
 import com.borealnetwork.allen.theme.GreenTransparent
-import com.borealnetwork.allen.theme.PrimaryColor
 import com.borealnetwork.allen.theme.StarColor
 import org.jetbrains.compose.resources.painterResource
 
@@ -96,8 +94,8 @@ fun FavoriteCounterButton(
                     .wrapContentWidth(),
                 text = "$amount",
                 color = FavoriteSelectedColor,
-                size = 12.sp,
-                align = TextAlign.Start
+                fontSize = 12.sp,
+                textAlign = TextAlign.Start
             )
         }
 
@@ -165,8 +163,8 @@ fun GrayButton(
             SemiBoldText(
                 modifier = Modifier.fillMaxWidth(),
                 text = text,
-                size = 13.sp,
-                align = TextAlign.Center
+                fontSize = 13.sp,
+                textAlign = TextAlign.Center
             )
         }
     }
@@ -253,7 +251,7 @@ fun ShadowButton(
                 color = BlueTransparent, alpha = 1f, borderRadius = 10.dp,
                 offsetY = 6.dp, offsetX = 5.dp, blurRadius = 10.dp
             ),
-        size = size,
+        fontSize = size,
         text = text,// ?: stringResource(id = labelId ?: R.string.empty_string),
         borderRadius = 10.dp
     ) {
@@ -341,7 +339,7 @@ fun BlueButton(
     text: String,//? = null,
 //    @StringRes labelId: Int? = null,
     borderRadius: Dp = 5.dp,
-    size: TextUnit = 15.sp,
+    fontSize: TextUnit = 15.sp,
     onClick: (() -> Unit)? = null
 ) {
     Button(
@@ -356,13 +354,11 @@ fun BlueButton(
         shape = RoundedCornerShape(corner = CornerSize(borderRadius)),
         onClick = { onClick?.invoke() }
     ) {
-        Text(
-            text = text,// ?: stringResource(id = labelId ?: R.string.empty_string),
-            fontSize = size,
+        SemiBoldText(
+            text = text,
+            fontSize = fontSize,
             color = Color.White,
-            fontWeight = SemiBold,
             letterSpacing = 0.5.sp,
-            fontFamily = MaterialTheme.typography.caption.fontFamily,
             textAlign = TextAlign.Center
         )
     }
@@ -393,14 +389,12 @@ fun CornerButton(
             onClick = { onClick?.invoke() },
             colors = ButtonDefaults.buttonColors(backgroundColor = Color.White)
         ) {
-            Text(
+            SemiBoldText(
                 text = text,// ?: stringResource(id = labelId ?: R.string.empty_string),
                 fontSize = 15.sp,
                 color = Color.Black,
-                fontWeight = SemiBold,
                 letterSpacing = 0.sp,
-                textAlign = TextAlign.Center,
-                fontFamily = MaterialTheme.typography.caption.fontFamily
+                textAlign = TextAlign.Center
             )
         }
     }
@@ -409,8 +403,8 @@ fun CornerButton(
 @Composable
 fun CornerImgButton(
     modifier: Modifier = Modifier,
-    text: String,//? = null,
-//    @StringRes labelId: Int? = null,
+    text: String,
+    imgRes: String = "ic_google_logo.xml",
     onClick: (() -> Unit)? = null
 ) {
     Card(
@@ -436,18 +430,15 @@ fun CornerImgButton(
                 horizontalArrangement = Arrangement.SpaceAround
             ) {
                 Image(
-                    painter = painterResource(res = "ic_google_logo.xml"),
+                    painter = painterResource(res = imgRes),
                     contentDescription = "Login"
                 )
-                Text(
-                    modifier = Modifier.padding(end = 110.dp),
+                SemiBoldText(
                     text = text,// ?: stringResource(id = labelId ?: R.string.empty_string),
                     fontSize = 15.sp,
                     color = Color.Black,
-                    fontWeight = SemiBold,
                     letterSpacing = 0.sp,
-                    textAlign = TextAlign.Center,
-                    fontFamily = MaterialTheme.typography.caption.fontFamily
+                    textAlign = TextAlign.Center
                 )
             }
         }
@@ -488,7 +479,7 @@ fun ScannerButton(
                 Text(
                     text = text,// ?: stringResource(id = labelId ?: R.string.empty_string),
                     fontSize = 15.sp,
-                    color = PrimaryColor,
+                    color = MaterialTheme.colors.primary,
                     fontWeight = SemiBold,
                     letterSpacing = 0.sp,
                     textAlign = TextAlign.Center,
