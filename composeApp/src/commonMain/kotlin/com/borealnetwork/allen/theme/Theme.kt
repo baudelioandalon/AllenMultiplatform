@@ -19,7 +19,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.font.FontWeight.Companion.Bold
 import androidx.compose.ui.text.font.FontWeight.Companion.Light
 import androidx.compose.ui.text.font.FontWeight.Companion.Medium
@@ -34,7 +33,7 @@ private enum class TypographyEmbedded() {
     ROBOTO, MONTSERRAT
 }
 
-private val DEFAULT_TYPOGRAPHY = TypographyEmbedded.ROBOTO
+private val DEFAULT_TYPOGRAPHY = TypographyEmbedded.MONTSERRAT
 
 private val LightColorScheme = lightColors(
     primary = PrimaryColor,
@@ -127,6 +126,45 @@ fun regularTypo() = FontFamily(
 )
 
 @Composable
+fun mediumTypo() =
+    FontFamily(
+        when (DEFAULT_TYPOGRAPHY) {
+            TypographyEmbedded.MONTSERRAT -> font(
+                "Montserrat",
+                "montserrat_medium",
+                Medium,
+                FontStyle.Normal
+            )
+
+            else -> {
+
+                font(
+                    "Roboto", "roboto", Medium, FontStyle.Normal
+                )
+            }
+        }
+    )
+
+@Composable
+fun semiBoldTypo() = FontFamily(
+    when (DEFAULT_TYPOGRAPHY) {
+        TypographyEmbedded.MONTSERRAT -> font(
+            "Montserrat",
+            "montserrat_semibold",
+            Normal,
+            FontStyle.Normal
+        )
+
+        else -> {
+
+            font(
+                "Roboto", "roboto", SemiBold, FontStyle.Normal
+            )
+        }
+    }
+)
+
+@Composable
 fun boldTypo() =
     FontFamily(
         when (DEFAULT_TYPOGRAPHY) {
@@ -147,11 +185,11 @@ fun boldTypo() =
     )
 
 
-internal val LocalThemeIsDark = compositionLocalOf { mutableStateOf(true) }
+internal val LocalThemeIsDark = compositionLocalOf { mutableStateOf(false) }
 
 
 @Composable
-internal fun AppTheme(
+fun AppTheme(
     content: @Composable () -> Unit,
 ) {
     val systemIsDark = isSystemInDarkTheme()
@@ -197,7 +235,7 @@ internal fun AppTheme(
     ) {
 
         val isDark by isDarkState
-        SystemAppearance(!isDark)
+        SystemAppearance(isDark)
 
         MaterialTheme(
             typography = defaultTypography,

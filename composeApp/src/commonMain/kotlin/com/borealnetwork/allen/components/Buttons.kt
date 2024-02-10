@@ -30,7 +30,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.layoutId
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.font.FontWeight.Companion.SemiBold
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
@@ -336,8 +335,7 @@ fun BackButton(
 @Composable
 fun BlueButton(
     modifier: Modifier = Modifier,
-    text: String,//? = null,
-//    @StringRes labelId: Int? = null,
+    text: String,
     borderRadius: Dp = 5.dp,
     fontSize: TextUnit = 15.sp,
     onClick: (() -> Unit)? = null
@@ -352,7 +350,7 @@ fun BlueButton(
             disabledElevation = 0.dp
         ),
         shape = RoundedCornerShape(corner = CornerSize(borderRadius)),
-        onClick = { onClick?.invoke() }
+        onClick = { onClick?.invoke() },
     ) {
         SemiBoldText(
             text = text,

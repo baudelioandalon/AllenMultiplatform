@@ -17,7 +17,7 @@ fun EditText(
         modifier = modifier.fillMaxWidth(),
         value = value,
         onValueChange = onValueChange,
-        placeholder = { RegularText(text = placeHolderText.orEmpty()) },
-        label = { RegularText(text = topLabelText.orEmpty()) }
+        placeholder = { SemiBoldText(text = placeHolderText.orEmpty()) },
+        label = { SemiBoldText(text = topLabelText.orEmpty()) }
     )
 }

@@ -25,10 +25,11 @@ import com.borealnetwork.allen.components.EditText
 import com.borealnetwork.allen.components.LogoBlue
 import com.borealnetwork.allen.components.MediumText
 import com.borealnetwork.allen.components.RegularText
+import com.borealnetwork.allen.components.SemiBoldText
 import com.borealnetwork.allen.components.SeparatorHorizontal
 
 @Composable
-fun AELoginCompose() {
+fun LoginViewCompose() {
 
     val scrollState = rememberScrollState()
 
@@ -46,7 +47,7 @@ fun AELoginCompose() {
                 .verticalScroll(scrollState)
         ) {
 
-            RegularText(
+            SemiBoldText(
                 modifier = Modifier
                     .fillMaxWidth()
                     .wrapContentHeight()
@@ -80,10 +81,11 @@ fun AELoginCompose() {
                     .padding(top = 20.dp, bottom = 39.dp)
             )
 
-            MediumText(
+            SemiBoldText(
                 modifier = Modifier
                     .fillMaxWidth()
                     .wrapContentHeight(),
+                fontSize = 20.sp,
                 text = "Soy socio vendedor"
             )
 
@@ -110,10 +112,11 @@ fun AELoginCompose() {
 //                navController.navigate(HOME_CLIENT_GRAPH)
             }
 
-            RegularText(
+            SemiBoldText(
                 modifier = Modifier
                     .padding(top = 30.dp)
                     .fillMaxWidth(),
+                fontSize = 15.sp,
                 text = "Olvidé la contraseña", textAlign = TextAlign.Center
             )
 

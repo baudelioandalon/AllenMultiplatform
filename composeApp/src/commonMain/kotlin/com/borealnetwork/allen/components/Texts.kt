@@ -17,7 +17,9 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 import com.borealnetwork.allen.theme.GrayLetterSeeAll
 import com.borealnetwork.allen.theme.boldTypo
+import com.borealnetwork.allen.theme.mediumTypo
 import com.borealnetwork.allen.theme.regularTypo
+import com.borealnetwork.allen.theme.semiBoldTypo
 
 
 @Composable
@@ -42,7 +44,7 @@ fun SemiBoldText(
         textAlign = textAlign,
         overflow = textOverflow,
         maxLines = maxLines,
-        fontFamily = regularTypo()
+        fontFamily = semiBoldTypo()
     )
 }
 
@@ -110,7 +112,7 @@ fun MediumText(
         textAlign = textAlign,
         overflow = textOverflow,
         maxLines = maxLines,
-        fontFamily = regularTypo()
+        fontFamily = mediumTypo()
     )
 }
 
