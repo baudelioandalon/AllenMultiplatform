@@ -121,13 +121,14 @@ fun MediumText(
 fun MediumTextBold(
     modifier: Modifier = Modifier,
     text: String,
+    fontSize: TextUnit = 20.sp,
     color: Color = Color.Black,
     textAlign: TextAlign? = null
 ) {
     Text(
         modifier = modifier,
-        text = text,// ?: stringResource(id = labelId ?: R.string.empty_string),
-        fontSize = 20.sp,
+        text = text,
+        fontSize = fontSize,
         color = color,
         letterSpacing = 0.sp,
         fontWeight = Bold,

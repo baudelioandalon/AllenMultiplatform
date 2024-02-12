@@ -128,6 +128,13 @@ fun regularTypo() = FontFamily(
 )
 
 @Composable
+fun robotoMediumTypo() = FontFamily(
+    font(
+        "Roboto", "roboto_medium", Normal, FontStyle.Normal
+    )
+)
+
+@Composable
 fun mediumTypo() =
     FontFamily(
         when (DEFAULT_TYPOGRAPHY) {

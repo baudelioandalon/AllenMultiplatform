@@ -1,6 +1,26 @@
 package com.borealnetwork.allen.components
 
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
+import androidx.compose.material.TextFieldColors
+import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color.Companion.Black
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight.Companion.SemiBold
+import androidx.compose.ui.text.input.KeyboardCapitalization
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.unit.sp
+import com.borealnetwork.allen.theme.GrayLetterHint
 
 //@Composable
 //fun TestPreviewTextField() {
@@ -28,77 +48,8 @@ import androidx.compose.runtime.Composable
 //    }
 //}
 //
-//@Composable
-//fun OutlinedTextField(
-//    modifier: Modifier = Modifier,
-//    placeHolder: String = "",
-//    value: String,
-//    onValueChange: (String) -> Unit,
-//    isError: Boolean = false,
-//    errorMessage: String = "",
-//    keyboardOptions: KeyboardOptions = KeyboardOptions(
-//        capitalization = KeyboardCapitalization.Words,
-//        keyboardType = KeyboardType.Text
-//    ),
-//    keyboardActions: KeyboardActions = KeyboardActions { },
-//    trailingIcon: @Composable (() -> Unit)? = null,
-//    enabled: Boolean = true,
-//    helperText: String = "",
-//    enabledHelper: Boolean = false,
-//    enabledCounter: Boolean = false,
-//    maxLength: Int = 0,
-//    singleLine: Boolean = false,
-//    colors: TextFieldColors = TextFieldDefaults.outlinedTextFieldColors(unfocusedLabelColor = GrayLetterHint),
-//    visualTransformation: VisualTransformation = VisualTransformation.None
-//) {
-//    val interactionSource = remember { MutableInteractionSource() }
-//    Column(modifier = modifier) {
-//
-//        Text(
-//            modifier = Modifier.padding(bottom = 9.dp),
-//            text = helperText,
-//            color = Black,
-//            fontWeight = SemiBold,
-////            fontFamily = RobotoTypo.caption.fontFamily,
-//            fontFamily = MaterialTheme.typography.caption.fontFamily,
-//            fontSize = 15.sp
-//        )
-//
-//        OutlinedTextField(
-//            modifier = Modifier
-//                .fillMaxWidth(),
-//            textStyle = TextStyle(
-//                color = Black,
-//                fontWeight = SemiBold,
-//                fontSize = 15.sp
-//            ),
-//            interactionSource = interactionSource,
-//            value = value,
-//            onValueChange = {
-//                if (enabledCounter) {
-//                    if (it.length <= maxLength) {
-//                        onValueChange(it)
-//                    }
-//                } else
-//                    onValueChange(it)
-//            }, placeholder = {
-//                Text(
-//                    text = placeHolder,
-//                    color = GrayLetterHint,
-//                    fontWeight = SemiBold,
-//                    fontSize = 15.sp
-//                )
-//            },
-//            colors = colors,
-//            isError = isError,
-//            keyboardOptions = keyboardOptions,
-//            keyboardActions = keyboardActions,
-//            trailingIcon = trailingIcon,
-//            enabled = enabled,
-//            singleLine = singleLine,
-//            visualTransformation = visualTransformation
-//        )
-//
+
+//Start
 //        ConstraintLayout(
 //            modifier = Modifier.fillMaxWidth(),
 //            constraintSet = buildHelperCounterConstraints()

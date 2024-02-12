@@ -22,6 +22,7 @@ import com.borealnetwork.allen.components.BlueButton
 import com.borealnetwork.allen.components.CornerButton
 import com.borealnetwork.allen.components.CornerImgButton
 import com.borealnetwork.allen.components.EditText
+import com.borealnetwork.allen.components.EditTextTopLabel
 import com.borealnetwork.allen.components.LogoBlue
 import com.borealnetwork.allen.components.SemiBoldText
 import com.borealnetwork.allen.components.SeparatorHorizontal
@@ -90,14 +91,15 @@ fun LoginViewCompose() {
 
 
 
-            EditText(
+            EditTextTopLabel(
                 modifier = Modifier.padding(top = 31.dp).fillMaxWidth(),
                 placeHolderText = "correo@dominio.com",
                 topLabelText = "Correo",
+                enabledHelper = true,
                 onValueChange = {
                 }
             )
-            EditText(
+            EditTextTopLabel(
                 modifier = Modifier.padding(top = 16.dp).fillMaxWidth(),
                 placeHolderText = "Ingrese contraseña",
                 topLabelText = "Contraseña",
