@@ -23,10 +23,9 @@ import com.borealnetwork.allen.components.CornerButton
 import com.borealnetwork.allen.components.CornerImgButton
 import com.borealnetwork.allen.components.EditText
 import com.borealnetwork.allen.components.LogoBlue
-import com.borealnetwork.allen.components.MediumText
-import com.borealnetwork.allen.components.RegularText
 import com.borealnetwork.allen.components.SemiBoldText
 import com.borealnetwork.allen.components.SeparatorHorizontal
+import com.borealnetwork.allen.components.TopTitle
 
 @Composable
 fun LoginViewCompose() {
@@ -38,9 +37,9 @@ fun LoginViewCompose() {
             .fillMaxSize()
             .background(Color.White)
     ) {
-//        TopTitle {
-////            navController.navigateUp()
-//        }
+        TopTitle(titleText = "Este es el titulo") {
+//            navController.navigateUp()
+        }
         Column(
             modifier = Modifier
                 .padding(horizontal = 30.dp)
@@ -89,19 +88,22 @@ fun LoginViewCompose() {
                 text = "Soy socio vendedor"
             )
 
+
+
             EditText(
                 modifier = Modifier.padding(top = 31.dp).fillMaxWidth(),
                 placeHolderText = "correo@dominio.com",
                 topLabelText = "Correo",
-                onValueChange = {},
-                value = ""
+                onValueChange = {
+                }
             )
             EditText(
                 modifier = Modifier.padding(top = 16.dp).fillMaxWidth(),
                 placeHolderText = "Ingrese contraseña",
                 topLabelText = "Contraseña",
-                onValueChange = {},
-                value = ""
+                onValueChange = {
+
+                }
             )
 
 

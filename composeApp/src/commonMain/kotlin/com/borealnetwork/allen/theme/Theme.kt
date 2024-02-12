@@ -9,6 +9,8 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Typography
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.compositionLocalOf
@@ -188,6 +190,7 @@ fun boldTypo() =
 internal val LocalThemeIsDark = compositionLocalOf { mutableStateOf(false) }
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppTheme(
     content: @Composable () -> Unit,

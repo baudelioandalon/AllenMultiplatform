@@ -1,5 +1,21 @@
 package com.borealnetwork.allen.components
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.material.Card
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.layoutId
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+
 //@Composable
 //fun TestToolbars() {
 //    Column(
@@ -96,6 +112,7 @@ package com.borealnetwork.allen.components
 //        }
 //    }
 //}
+
 //
 //@Composable
 //fun ToolbarSearch(
@@ -239,51 +256,33 @@ package com.borealnetwork.allen.components
 //    }
 //}
 //
-//@Composable
-//fun TopTitle(
-//    titleText: String? = null,
-//    @IdRes labelId: Int? = null,
-//    backClicked: (() -> Unit)? = null
-//) {
-//    ConstraintLayout(
-//        modifier = Modifier
-//            .fillMaxWidth()
-//            .height(60.dp), constraintSet = ConstraintSet {
-//            val backButton = createRefFor("backButton")
-//            val title = createRefFor("title")
-//            constrain(title) {
-//                start.linkTo(parent.start)
-//                top.linkTo(parent.top)
-//                end.linkTo(parent.end)
-//                bottom.linkTo(parent.bottom)
-//                width = Dimension.fillToConstraints
-//                height = Dimension.wrapContent
-//            }
-//            constrain(backButton) {
-//                start.linkTo(parent.start)
-//                top.linkTo(parent.top)
-//                bottom.linkTo(parent.bottom)
-//                height = Dimension.wrapContent
-//            }
-//        }
-//    ) {
-//        BackButton(
-//            Modifier
-//                .layoutId("backButton")
-//                .padding(start = 30.dp)
-//                .width(35.dp)
-//                .height(35.dp)
-//        ) {
-//            backClicked?.invoke()
-//        }
-//        SemiBoldText(
-//            modifier = Modifier
-//                .layoutId("title"),
-//            text = titleText ?: stringResource(id = labelId ?: R.string.empty_string),
-//            align = TextAlign.Center
-//        )
-//    }
-//}
+@Composable
+fun TopTitle(
+    titleText: String,
+    backClicked: (() -> Unit)? = null
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(60.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        BackButton(
+            Modifier
+                .padding(start = 30.dp)
+                .width(35.dp)
+                .height(35.dp)
+        ) {
+            backClicked?.invoke()
+        }
+        SemiBoldText(
+            modifier = Modifier.weight(1f),
+            text = titleText,
+            textAlign = TextAlign.Center
+        )
+        Spacer(modifier = Modifier.width(35.dp).background(color = Color.Cyan))
+    }
+}
 //
 //@OptIn(ExperimentalMaterialApi::class)
 //@Preview
