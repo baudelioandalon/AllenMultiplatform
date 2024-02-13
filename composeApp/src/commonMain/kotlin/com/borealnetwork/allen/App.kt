@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.AbsoluteCutCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -28,7 +27,7 @@ import androidx.compose.ui.unit.dp
 import com.borealnetwork.allen.domain.model.BirdImage
 import com.borealnetwork.allen.presentation.ui.general.logingraph.LoginViewCompose
 import com.borealnetwork.allen.theme.AppTheme
-import com.borealnetwork.allen.viewmodel.BirdsViewModel
+import com.borealnetwork.allen.viewmodel.LoginViewModel
 import dev.icerock.moko.mvvm.compose.getViewModel
 import dev.icerock.moko.mvvm.compose.viewModelFactory
 import io.kamel.image.KamelImage
@@ -52,13 +51,13 @@ fun BirdAppTheme(
 
 @Composable
 internal fun App() = AppTheme {
-    val birdsViewModel = getViewModel(Unit, viewModelFactory { BirdsViewModel() })
-    LoginViewCompose()
+    val loginViewModel = getViewModel(Unit, viewModelFactory { LoginViewModel() })
+    LoginViewCompose(loginViewModel)
 //LoginUI()
 }
 
 @Composable
-fun BirdsPage(viewModel: BirdsViewModel) {
+fun BirdsPage(viewModel: LoginViewModel) {
     val uiState by viewModel.uiState.collectAsState()
     Column(
         Modifier.fillMaxSize(),
@@ -92,9 +91,9 @@ fun BirdsPage(viewModel: BirdsViewModel) {
                 verticalArrangement = Arrangement.spacedBy(5.dp),
                 modifier = Modifier.fillMaxSize().padding(horizontal = 5.dp),
                 content = {
-                    items(uiState.selectedImages) {
-                        BirdImageCell(it)
-                    }
+//                    items(uiState.selectedImages) {
+//                        BirdImageCell(it)
+//                    }
                 }
             )
         }

@@ -338,12 +338,14 @@ fun BlueButton(
     text: String,
     borderRadius: Dp = 5.dp,
     fontSize: TextUnit = 15.sp,
+    enabled: Boolean = true,
     onClick: (() -> Unit)? = null
 ) {
     Button(
         modifier = modifier
             .fillMaxWidth()
             .height(54.dp),
+        enabled = enabled,
         elevation = ButtonDefaults.elevation(
             defaultElevation = 0.dp,
             pressedElevation = 5.dp,

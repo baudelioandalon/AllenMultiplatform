@@ -1,6 +1,11 @@
 package com.borealnetwork.allen.viewmodel
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import com.borealnetwork.allen.domain.login.StateApi
 import com.borealnetwork.allen.domain.model.BirdImage
+import com.borealnetwork.allen.tools.isEmailValid
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -20,10 +25,15 @@ data class BirdsUiState(
     val selectedImages = images.filter { it.category == selectedCategory }
 }
 
-class BirdsViewModel : ViewModel() {
+class LoginViewModel : ViewModel() {
 
     private val _uiState = MutableStateFlow(BirdsUiState())
     val uiState = _uiState.asStateFlow()
+    var loginEmailUser by mutableStateOf("")
+    var loginTokenUser by mutableStateOf("")
+
+    var loginUserState by mutableStateOf<StateApi>(StateApi.None)
+    var loginTokenState by mutableStateOf<StateApi>(StateApi.None)
 
     init {
         updateImages()
@@ -39,7 +49,7 @@ class BirdsViewModel : ViewModel() {
         httpClient.close()
     }
 
-    fun selectCategory(category: String){
+    fun selectCategory(category: String) {
         _uiState.update {
             it.copy(selectedCategory = category)
         }
@@ -58,6 +68,23 @@ class BirdsViewModel : ViewModel() {
         return httpClient
             .get("https://sebi.io/demo-image-api/pictures.json")
             .body<List<BirdImage>>()
+    }
+
+    fun login() {
+        if (!loginEmailUser.isEmailValid()) {
+            loginUserState = StateApi.Error.error("El usuario es invalido")
+        } else if (loginTokenUser.isEmpty()) {
+            loginTokenState = StateApi.Error.error("Contraseña no valida")
+        } else if (loginTokenUser.length < 8) {
+            loginTokenState = StateApi.Error.error("Minimo 8 caracteres")
+        } else {
+            //GoToLogin
+        }
+    }
+
+    fun resetLoginError() {
+        loginUserState = StateApi.None
+        loginTokenState = StateApi.None
     }
 
 }
