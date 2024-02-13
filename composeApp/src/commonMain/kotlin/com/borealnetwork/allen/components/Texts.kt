@@ -73,25 +73,6 @@ fun BoldText(
     )
 }
 
-
-@Composable
-fun LargeText(
-    modifier: Modifier = Modifier,
-    text: String,
-    color: Color = Color.Black,
-    textAlign: TextAlign? = null
-) {
-    Text(
-        modifier = modifier
-            .fillMaxWidth(),
-        text = text,
-        fontSize = 30.sp,
-        color = color,
-        fontWeight = Bold,
-        textAlign = textAlign
-    )
-}
-
 @Composable
 fun MediumText(
     modifier: Modifier = Modifier,
