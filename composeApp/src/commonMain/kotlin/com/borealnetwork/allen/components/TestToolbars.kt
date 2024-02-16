@@ -1,28 +1,100 @@
 package com.borealnetwork.allen.components
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.layout.wrapContentWidth
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.borealnetwork.allen.theme.FavoriteUnselectedColor
 import org.jetbrains.compose.resources.painterResource
 
+
+@Composable
+fun TopTitle(
+    titleText: String,
+    backClicked: (() -> Unit)? = null
+) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth(),
+        elevation = 5.dp,
+        shape = RectangleShape
+    ) {
+        Box {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(60.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                BackButton(
+                    Modifier
+                        .padding(start = 30.dp)
+                        .width(35.dp)
+                        .height(35.dp)
+                ) {
+                    backClicked?.invoke()
+                }
+
+            }
+            SemiBoldText(
+                modifier = Modifier.wrapContentWidth().align(Alignment.Center),
+                text = titleText,
+                textAlign = TextAlign.Center
+            )
+        }
+
+    }
+
+}
+
+
+@Composable
+fun TopTitleImg(
+    backClicked: (() -> Unit)? = null
+) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth(),
+        elevation = 5.dp,
+        shape = RectangleShape
+    ) {
+        Box {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(60.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                BackButton(
+                    Modifier
+                        .padding(start = 30.dp)
+                        .width(35.dp)
+                        .height(35.dp)
+                ) {
+                    backClicked?.invoke()
+                }
+
+            }
+            Image(
+                modifier = Modifier.width(53.dp)
+                    .height(23.dp).align(Alignment.Center),
+                painter = painterResource(res = "allen_blue_logo.xml"),
+                contentDescription = "logo"
+            )
+        }
+    }
+
+}
 //@Composable
 //fun TestToolbars() {
 //    Column(
@@ -263,68 +335,7 @@ import org.jetbrains.compose.resources.painterResource
 //    }
 //}
 //
-@Composable
-fun TopTitle(
-    titleText: String,
-    backClicked: (() -> Unit)? = null
-) {
-    Card(
-        modifier = Modifier
-            .wrapContentSize(),
-        elevation = 5.dp,
-        shape = RectangleShape) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(60.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            BackButton(
-                Modifier
-                    .padding(start = 30.dp)
-                    .width(35.dp)
-                    .height(35.dp)
-            ) {
-                backClicked?.invoke()
-            }
-            SemiBoldText(
-                modifier = Modifier.weight(1f),
-                text = titleText,
-                textAlign = TextAlign.Center
-            )
-        }
-    }
 
-}
-
-
-@Composable
-fun TopTitleImg(
-    backClicked: (() -> Unit)? = null
-) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(60.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        BackButton(
-            Modifier
-                .padding(start = 30.dp)
-                .width(35.dp)
-                .height(35.dp)
-        ) {
-            backClicked?.invoke()
-        }
-        Image(
-            modifier = Modifier.weight(1f).width(73.dp)
-                .height(23.dp),
-            painter = painterResource(res = "allen_blue_logo.xml"),
-            contentDescription = "logo"
-        )
-        Spacer(modifier = Modifier.width(35.dp).background(color = Color.Cyan))
-    }
-}
 //
 //@OptIn(ExperimentalMaterialApi::class)
 //@Preview

@@ -46,7 +46,7 @@ fun LoginViewCompose(loginViewModel: LoginViewModel) {
             SemiBoldText(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .wrapContentHeight().padding(top = 55.dp),
+                    .wrapContentHeight().padding(top = 35.dp),
                 fontSize = 20.sp,
                 text = "Iniciar sesión"
             )
