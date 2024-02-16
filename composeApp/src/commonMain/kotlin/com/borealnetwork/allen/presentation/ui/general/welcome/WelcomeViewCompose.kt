@@ -123,8 +123,7 @@ fun WelcomeViewCompose() {
             LogoBlue(
                 modifier = Modifier
                     .padding(top = 15.dp, bottom = 50.dp)
-                    .width(35.dp)
-                    .height(11.dp)
+                    .width(75.dp)
                     .align(alignment = Alignment.CenterHorizontally)
             )
         }
