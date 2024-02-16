@@ -8,12 +8,19 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.borealnetwork.allen.theme.FavoriteUnselectedColor
 import org.jetbrains.compose.resources.painterResource
 
 //@Composable
@@ -261,27 +268,33 @@ fun TopTitle(
     titleText: String,
     backClicked: (() -> Unit)? = null
 ) {
-    Row(
+    Card(
         modifier = Modifier
-            .fillMaxWidth()
-            .height(60.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        BackButton(
-            Modifier
-                .padding(start = 30.dp)
-                .width(35.dp)
-                .height(35.dp)
+            .wrapContentSize(),
+        elevation = 5.dp,
+        shape = RectangleShape) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(60.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            backClicked?.invoke()
+            BackButton(
+                Modifier
+                    .padding(start = 30.dp)
+                    .width(35.dp)
+                    .height(35.dp)
+            ) {
+                backClicked?.invoke()
+            }
+            SemiBoldText(
+                modifier = Modifier.weight(1f),
+                text = titleText,
+                textAlign = TextAlign.Center
+            )
         }
-        SemiBoldText(
-            modifier = Modifier.weight(1f),
-            text = titleText,
-            textAlign = TextAlign.Center
-        )
-        Spacer(modifier = Modifier.width(35.dp).background(color = Color.Cyan))
     }
+
 }
 
 

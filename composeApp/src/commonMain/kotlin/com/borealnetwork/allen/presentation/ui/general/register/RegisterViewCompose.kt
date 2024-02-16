@@ -29,7 +29,6 @@ fun RegisterViewCompose() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White)
     ) {
         TopTitle(titleText = "Nuevo socio") {
 //            navController.navigateUp()
@@ -43,6 +42,7 @@ fun RegisterViewCompose() {
 
             verticalArrangement = Arrangement.SpaceAround
         ) {
+
             EditTextTopLabel(
                 modifier = Modifier.padding(top = 31.dp),
                 topLabelText = "Nombre",
