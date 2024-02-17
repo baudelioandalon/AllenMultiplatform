@@ -75,11 +75,7 @@ fun HomeClientViewCompose(closeApp: () -> Unit = {}) {
             }, searchClicked = {
 //                            navController?.navigate(SEARCH_CLIENT_GRAPH)
             })
-            LaunchedEffect(Unit){
-                scope.launch {
-                    scaffoldState.drawerState.open()
-                }
-            }
+
         },
             drawerGesturesEnabled = scaffoldState.drawerState.isOpen,
             scaffoldState = scaffoldState,
