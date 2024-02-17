@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material.Card
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -95,6 +96,7 @@ fun TopTitleImg(
     }
 
 }
+
 //@Composable
 //fun TestToolbars() {
 //    Column(
@@ -113,84 +115,40 @@ fun TopTitleImg(
 //}
 //
 //@OptIn(ExperimentalMaterialApi::class)
-//@Composable
-//fun ToolbarSearchHome(
-//    modifier: Modifier = Modifier,
-//    textPlaceHolder: String = "Buscar",
-//    leftIcon: String = "ic_menu_icon.xml",
-//    menuClicked: (() -> Unit)? = null,
-//    searchClicked: (() -> Unit)? = null,
-//    cartClicked: (() -> Unit)? = null
-//) {
-//    Row(modifier = modifier) {
-//        Card(
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .height(80.dp)
-//                .layoutId("imageMenu"),
-//            elevation = 5.dp
-//        ) {
-//            ConstraintLayout(
-//                modifier = Modifier
-//                    .fillMaxSize(),
-//                constraintSet = ConstraintSet {
-//                    val imageMenu = createRefFor("imageMenu")
-//                    val imageCart = createRefFor("imageCart")
-//                    constrain(imageMenu) {
-//                        start.linkTo(parent.start, margin = 28.dp)
-//                        top.linkTo(parent.top)
-//                        bottom.linkTo(parent.bottom)
-//                    }
-//                    constrain(createRefFor("search")) {
-//                        start.linkTo(imageMenu.end, margin = 20.dp)
-//                        top.linkTo(parent.top)
-//                        end.linkTo(imageCart.start, margin = 20.dp)
-//                        bottom.linkTo(parent.bottom)
-//                        width = Dimension.fillToConstraints
-//                        height = Dimension.wrapContent
-//                    }
-//                    constrain(imageCart) {
-//                        end.linkTo(parent.end, margin = 28.dp)
-//                        top.linkTo(parent.top)
-//                        bottom.linkTo(parent.bottom)
-//                    }
-//                }) {
-//                Card(
-//                    modifier = Modifier
-//                        .width(35.dp)
-//                        .height(35.dp)
-//                        .layoutId("imageMenu"),
-//                    elevation = 0.dp,
-//                    shape = CircleShape, onClick = { menuClicked?.invoke() }) {
-//                    Image(
-//                        modifier = Modifier.wrapContentSize(),
-//                        painter = painterResource(id = leftIcon),
-//                        contentDescription = ""
-//                    )
-//                }
-//                SearchOutlinedTextField(
-//                    modifier = Modifier.layoutId("search"),
-//                    value = "",
-//                    placeHolder = textPlaceHolder,
-//                    itemClicked = { searchClicked?.invoke() }
-//                )
-//                Card(
-//                    modifier = Modifier
-//                        .width(35.dp)
-//                        .height(35.dp)
-//                        .layoutId("imageCart"),
-//                    elevation = 0.dp,
-//                    shape = CircleShape, onClick = { cartClicked?.invoke() }) {
-//                    Image(
-//                        modifier = Modifier.wrapContentSize(),
-//                        painter = painterResource(id = R.drawable.ic_cart_icon),
-//                        contentDescription = ""
-//                    )
-//                }
-//            }
-//        }
-//    }
-//}
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun ToolbarSearchHome(
+    modifier: Modifier = Modifier,
+    textPlaceHolder: String = "Buscar",
+    menuClicked: (() -> Unit)? = null,
+    searchClicked: (() -> Unit)? = null,
+    cartClicked: (() -> Unit)? = null
+) {
+    Card(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(80.dp),
+        shape = RectangleShape,
+        elevation = 5.dp
+    ) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            MenuIcon(
+                modifier = Modifier.weight(1f),
+                onClick = menuClicked
+            )
+            SearchOutlinedTextField(
+                value = "",
+                placeHolder = textPlaceHolder,
+                itemClicked = { searchClicked?.invoke() }
+            )
+            CartIcon(
+                modifier = Modifier.weight(1f),
+                onClick = cartClicked
+            )
+        }
+    }
+
+}
 
 //
 //@Composable

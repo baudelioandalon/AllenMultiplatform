@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
@@ -97,8 +98,8 @@ fun SearchOutlinedTextField(
     Column(modifier = modifier) {
         OutlinedTextField(
             modifier = Modifier
-                .fillMaxWidth()
                 .height(52.dp)
+                .fillMaxWidth(0.6f)
                 .border(
                     width = 1.dp,
                     shape = RoundedCornerShape(corner = CornerSize(10.dp)),
@@ -134,8 +135,7 @@ fun SearchOutlinedTextField(
             leadingIcon = {
                 Card(
                     modifier = Modifier
-                        .width(35.dp)
-                        .height(35.dp),
+                        .size(35.dp),
                     elevation = 0.dp,
                     shape = CircleShape, backgroundColor = GrayBackgroundSearch
                 ) {
@@ -149,8 +149,7 @@ fun SearchOutlinedTextField(
             trailingIcon = {
                 Card(
                     modifier = Modifier
-                        .width(35.dp)
-                        .height(35.dp),
+                        .size(35.dp),
                     elevation = 0.dp,
                     shape = CircleShape,
                     backgroundColor = GrayBackgroundSearch,

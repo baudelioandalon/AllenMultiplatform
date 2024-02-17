@@ -1,14 +1,39 @@
 package com.borealnetwork.allen.components
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowColumn
+import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.sizeIn
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material.Card
+import androidx.compose.material.Divider
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.RadioButton
+import androidx.compose.material.RadioButtonDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -17,10 +42,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Black
 import androidx.compose.ui.graphics.Color.Companion.Red
+import androidx.compose.ui.graphics.Color.Companion.Transparent
 import androidx.compose.ui.graphics.Color.Companion.White
-import androidx.compose.ui.text.font.FontWeight.Companion.SemiBold
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
@@ -31,6 +58,7 @@ import com.borealnetwork.allen.domain.model.ItemCartModel
 import com.borealnetwork.allen.domain.model.ItemShoppingModel
 import com.borealnetwork.allen.domain.model.ProductShoppingCart
 import com.borealnetwork.allen.theme.BlueStatusLineColor
+import com.borealnetwork.allen.theme.CategoryBackgroundSelectorOne
 import com.borealnetwork.allen.theme.GrayBackgroundDrawerDismiss
 import com.borealnetwork.allen.theme.GrayBorderLight
 import com.borealnetwork.allen.theme.GrayBrandingBackground
@@ -100,13 +128,13 @@ fun CategoryItem() {
             }
         }
 
-        Text(
+        SemiBoldText(
             modifier = Modifier
                 .fillMaxWidth(),
             text = "Ferreteria",
             fontSize = 13.sp,
             letterSpacing = 0.sp,
-            fontWeight = SemiBold
+            color = Black
         )
     }
 
@@ -147,84 +175,77 @@ fun BrandingItem(itemSize: Dp = 60.dp) {
     }
 }
 
-//@OptIn(ExperimentalMaterialApi::class)
-//@Composable
-//fun CategorySelectorItem(
-//    maxBackground: Boolean = false,
-//    color: Color = CategoryBackgroundSelectorOne
-//) {
-//    ConstraintLayout(
-//        modifier = Modifier
-//            .padding(start = 30.dp, end = 4.dp)
-//            .height(144.dp)
-//            .width(134.dp), constraintSet = ConstraintSet {
-//            val background = createRefFor("background")
-//            val favSelector = createRefFor("favorite_selector")
-//            val item = createRefFor("item")
-//            constrain(background) {
-//                start.linkTo(parent.start)
-//                end.linkTo(parent.end)
-//                bottom.linkTo(parent.bottom)
-//                width = Dimension.wrapContent
-//                height = Dimension.wrapContent
-//            }
-//            constrain(favSelector) {
-//                top.linkTo(parent.top, 10.dp)
-//                start.linkTo(parent.start, 14.dp)
-//                width = Dimension.wrapContent
-//                height = Dimension.wrapContent
-//            }
-//            constrain(item) {
-//                start.linkTo(parent.start)
-//                top.linkTo(parent.top)
-//                end.linkTo(parent.end)
-//                width = Dimension.fillToConstraints
-//                height = Dimension.wrapContent
-//            }
-//        }
-//    ) {
-//        Card(
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .height(if (maxBackground) 144.dp else 76.dp)
-//                .layoutId("background"),
-//            shape = RoundedCornerShape(15.dp),
-//            elevation = 0.dp,
-//            backgroundColor = color
-//        ) {
-//
-//        }
-//        Card(
-//            modifier = Modifier
-//                .layoutId("item"), onClick = {},
-//            elevation = 0.dp,
-//            shape = RoundedCornerShape(corner = CornerSize(10.dp)),
-//            backgroundColor = Color.Transparent
-//        ) {
-//            Column(
-//                modifier = Modifier
-//                    .padding(horizontal = 10.dp)
-//                    .fillMaxSize(),
-//                horizontalAlignment = Alignment.CenterHorizontally,
-//                verticalArrangement = Arrangement.Center
-//            ) {
-//                Image(
-//                    modifier = Modifier
-//                        .padding(top = 10.dp)
-//                        .fillMaxWidth()
-//                        .height(80.dp),
-//                    painter = painterResource(id = R.drawable.laptop_test),
-//                    contentDescription = "item"
-//                )
-//                BoldText(
-//                    modifier = Modifier
-//                        .fillMaxWidth(), text = "Laptops", align = TextAlign.Center,
-//                    size = 15.sp
-//                )
-//            }
-//        }
-//    }
-//}
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun CategorySelectorItem(
+    maxBackground: Boolean = false,
+    color: Color = CategoryBackgroundSelectorOne
+) {
+    Box(
+        modifier = Modifier
+            .padding(start = 30.dp, end = 4.dp)
+            .height(144.dp)
+            .width(134.dp).graphicsLayer {
+                shape = RoundedCornerShape(corner = CornerSize(15.dp))
+            }
+    ) {
+
+        Column {
+            AnimatedVisibility(!maxBackground) {
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .fillMaxHeight(if (maxBackground) 1F else 0.5F),
+                    elevation = 0.dp,
+                    backgroundColor = Transparent
+                ) {
+
+                }
+            }
+            Card(
+                modifier = Modifier
+                    .fillMaxSize(),
+                elevation = 0.dp,
+                backgroundColor = color
+            ) {
+
+            }
+        }
+
+        Card(
+            modifier = Modifier, onClick = {},
+            elevation = 0.dp,
+            backgroundColor = Transparent
+        ) {
+            Column(
+                modifier = Modifier
+                    .padding(horizontal = 10.dp)
+                    .fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                Image(
+                    modifier = Modifier
+                        .padding(top = 10.dp)
+                        .fillMaxWidth()
+                        .height(80.dp),
+                    painter = painterResource(res = "laptop_test.png"),
+                    contentDescription = "item"
+                )
+                BoldText(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    text = "Laptops", textAlign = TextAlign.Center,
+                    fontSize = 15.sp,
+                    color = Black
+                )
+            }
+
+        }
+
+    }
+
+}
 
 @Composable
 fun SellerItem(
@@ -754,7 +775,7 @@ fun AnswerItem(text: String = "") {
             ) {
                 Image(
                     modifier = Modifier.fillMaxSize(),
-                    painter = painterResource(res ="tools_icon.png"),
+                    painter = painterResource(res = "tools_icon.png"),
                     contentDescription = "item"
                 )
             }
@@ -1161,7 +1182,7 @@ fun FavoriteItem(
                         }
                         if (productShoppingCart.fastOrder) {
                             Icon(
-                                painter = painterResource(res ="ic_thunder_icon.xml"),
+                                painter = painterResource(res = "ic_thunder_icon.xml"),
                                 contentDescription = "free shipping",
                                 tint = StarColor
                             )
@@ -1244,7 +1265,7 @@ fun NotificationItem(
                         )
                         Image(
                             modifier = Modifier.mirror(),
-                            painter = painterResource(res ="ic_on_way_traffic_circle.xml"),
+                            painter = painterResource(res = "ic_on_way_traffic_circle.xml"),
                             contentDescription = "on way"
                         )
                     }
@@ -1519,7 +1540,7 @@ fun StatusPackageItem(
                 )
                 Image(
                     modifier = Modifier.mirror(),
-                    painter = painterResource(res ="ic_on_way_traffic_circle.xml"),
+                    painter = painterResource(res = "ic_on_way_traffic_circle.xml"),
                     contentDescription = "on way"
                 )
             }
@@ -1738,12 +1759,12 @@ fun StepIndicatorNotification(
                     tint = if (step >= 0) MaterialTheme.colors.primary else GrayBackgroundDrawerDismiss
                 )
                 Icon(
-                    painter = painterResource(res ="ic_circle.xml"),
+                    painter = painterResource(res = "ic_circle.xml"),
                     contentDescription = "on way",
                     tint = if (step > 2) MaterialTheme.colors.primary else GrayBackgroundDrawerDismiss
                 )
                 Icon(
-                    painter = painterResource(res ="ic_circle.xml"),
+                    painter = painterResource(res = "ic_circle.xml"),
                     contentDescription = "on way",
                     tint = if (step > 4) MaterialTheme.colors.primary else GrayBackgroundDrawerDismiss
                 )

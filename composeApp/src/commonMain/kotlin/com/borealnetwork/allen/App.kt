@@ -25,7 +25,7 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.borealnetwork.allen.domain.model.BirdImage
-import com.borealnetwork.allen.presentation.ui.general.logingraph.LoginViewCompose
+import com.borealnetwork.allen.presentation.ui.client.HomeClientViewCompose
 import com.borealnetwork.allen.presentation.ui.general.register.RegisterViewCompose
 import com.borealnetwork.allen.theme.AppTheme
 import com.borealnetwork.allen.viewmodel.LoginViewModel
@@ -55,8 +55,8 @@ internal fun App() = AppTheme {
     val loginViewModel = getViewModel(Unit, viewModelFactory { LoginViewModel() })
 //    WelcomeViewCompose()
 //    RegisterViewCompose()
-    LoginViewCompose(loginViewModel)
-//LoginUI()
+//    LoginViewCompose(loginViewModel)
+    HomeClientViewCompose {}
 }
 
 @Composable

@@ -1,9 +1,14 @@
+@file:OptIn(ExperimentalMaterialApi::class)
+
 package com.borealnetwork.allen.components
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.ExperimentalMaterialApi
@@ -21,7 +26,6 @@ import com.borealnetwork.allen.theme.OrangeStrong
 import com.borealnetwork.allen.theme.OrangeTransparentLow
 import org.jetbrains.compose.resources.painterResource
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun LocationIcon(onClick: (() -> Unit)? = null) {
     Box(
@@ -84,6 +88,47 @@ fun GoalIcon(onClick: (() -> Unit)? = null) {
                     tint = GrayStrong
                 )
             }
+        }
+    }
+}
+
+@Composable
+fun MenuIcon(
+    modifier: Modifier = Modifier,
+    icon: String = "ic_menu_icon.xml",
+    onClick: (() -> Unit)? = null
+) {
+    CircularIcon(modifier, icon = icon, onClick)
+}
+
+@Composable
+fun CartIcon(modifier: Modifier = Modifier,
+             icon: String = "ic_cart_icon.xml",
+             onClick: (() -> Unit)? = null) {
+    CircularIcon(modifier, icon = icon, onClick)
+}
+
+
+@Composable
+fun CircularIcon(
+    modifier: Modifier = Modifier,
+    icon: String, onClick: (() -> Unit)? = null
+) {
+    Box(
+        modifier = modifier
+            .size(62.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        Card(
+            modifier = Modifier
+                .size(45.dp),
+            elevation = 0.dp,
+            shape = CircleShape, onClick = { onClick?.invoke() }) {
+            Image(
+                modifier = Modifier.wrapContentSize().padding(5.dp),
+                painter = painterResource(res = icon),
+                contentDescription = ""
+            )
         }
     }
 }

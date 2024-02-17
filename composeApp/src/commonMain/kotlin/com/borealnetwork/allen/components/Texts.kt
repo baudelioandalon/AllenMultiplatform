@@ -79,6 +79,7 @@ fun MediumText(
     text: String,
     color: Color = Color.Black,
     textAlign: TextAlign? = null,
+    letterSpacing: TextUnit = 0.sp,
     fontSize: TextUnit = 20.sp,
     textOverflow: TextOverflow = TextOverflow.Clip,
     maxLines: Int = Int.MAX_VALUE
@@ -87,7 +88,7 @@ fun MediumText(
         modifier = modifier,
         text = text,
         fontSize = fontSize,
-        letterSpacing = 0.sp,
+        letterSpacing = letterSpacing,
         color = color,
         fontWeight = Medium,
         textAlign = textAlign,
@@ -114,7 +115,7 @@ fun MediumTextBold(
         letterSpacing = 0.sp,
         fontWeight = Bold,
         textAlign = textAlign,
-        fontFamily = regularTypo()
+        fontFamily = mediumTypo()
     )
 }
 
@@ -161,20 +162,18 @@ fun SmallText(
 @Composable
 fun SeeAll(
     modifier: Modifier = Modifier,
-    text: String,//? = null,
-//    labelId: Int? = null,
+    text: String,
     color: Color = GrayLetterSeeAll,
-    textAlign: TextAlign? = null
+    textAlign: TextAlign? = null,
+    fontSize: TextUnit = 18.sp
 ) {
-    Text(
+    BoldText(
         modifier = modifier,
         text = text,// ?: stringResource(id = labelId ?: R.string.empty_string),
-        fontSize = 18.sp,
+        fontSize = fontSize,
         color = color,
         letterSpacing = 0.sp,
-        fontWeight = Bold,
         textAlign = textAlign,
-        fontFamily = regularTypo()
     )
 }
 
