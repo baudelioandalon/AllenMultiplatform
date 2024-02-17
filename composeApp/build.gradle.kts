@@ -1,3 +1,4 @@
+
 plugins {
     alias(libs.plugins.multiplatform)
     alias(libs.plugins.compose)
@@ -86,16 +87,16 @@ kotlin {
 android {
 
 
-    namespace = "com.borealnetwork.allen"
-    compileSdk = 34
+    namespace = AndroidConfig.namespace
+    compileSdk = AndroidConfig.compileSdk
 
     defaultConfig {
-        minSdk = 24
-        targetSdk = 34
+        minSdk = AndroidConfig.minSdk
+        targetSdk = AndroidConfig.targetSdk
 
-        applicationId = "com.borealnetwork.allen.androidApp"
-        versionCode = 1
-        versionName = "1.0.0"
+        applicationId = AndroidConfig.applicationId
+        versionCode = AndroidConfig.versionCode
+        versionName = AndroidConfig.versionName
     }
     sourceSets["main"].apply {
         manifest.srcFile("src/androidMain/AndroidManifest.xml")
@@ -120,6 +121,9 @@ dependencies {
 buildConfig {
     // BuildConfig configuration here.
     // https://github.com/gmazzo/gradle-buildconfig-plugin#usage-in-kts
+    packageName(AndroidConfig.namespace)
+    buildConfigField("String", "versionName", "\"${AndroidConfig.versionName}\"")
+    buildConfigField("String", "versionCode", "\"${AndroidConfig.versionCode}\"")
 }
 
 sqldelight {

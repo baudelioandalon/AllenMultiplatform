@@ -5,7 +5,6 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import kotlinx.coroutines.runBlocking
-import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.resource
 import platform.Foundation.NSURL
 import platform.Foundation.NSUUID
@@ -21,9 +20,11 @@ internal actual fun randomUUID(): String = NSUUID().UUIDString()
 
 internal actual fun platform(): Platform = IOSPlatform()
 internal class IOSPlatform : Platform {
-    override val name: String = UIDevice.currentDevice.systemName() + " " + UIDevice.currentDevice.systemVersion
+    override val name: String =
+        UIDevice.currentDevice.systemName() + " " + UIDevice.currentDevice.systemVersion
     override val osName = UIDevice.currentDevice.systemName()
-    override val versionName =UIDevice.currentDevice.systemVersion
+    override val versionName = BuildConfig.versionName
+    override val versionCode = BuildConfig.versionCode
 }
 
 private val cache: MutableMap<String, Font> = mutableMapOf()

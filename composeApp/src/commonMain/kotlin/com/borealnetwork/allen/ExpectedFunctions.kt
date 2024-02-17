@@ -17,4 +17,5 @@ internal interface Platform {
     val name: String
     val osName: String
     val versionName: String
+    val versionCode: String
 }

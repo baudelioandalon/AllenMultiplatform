@@ -7,12 +7,12 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
@@ -28,6 +28,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.Black
+import androidx.compose.ui.graphics.Color.Companion.Red
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
@@ -38,10 +39,11 @@ import com.borealnetwork.allen.components.BoldText
 import com.borealnetwork.allen.components.BrandingHorizontal
 import com.borealnetwork.allen.components.CategoryItem
 import com.borealnetwork.allen.components.CategorySelectorItem
+import com.borealnetwork.allen.components.LogoBlue
 import com.borealnetwork.allen.components.ProductItem
 import com.borealnetwork.allen.components.SeeAll
 import com.borealnetwork.allen.components.ToolbarSearchHome
-import com.borealnetwork.allen.components.drawer.DrawerBody
+import com.borealnetwork.allen.components.drawer.DrawerBodyClient
 import com.borealnetwork.allen.components.drawer.DrawerHeaderClient
 import com.borealnetwork.allen.components.drawer.model.DrawerOptions
 import com.borealnetwork.allen.components.drawer.model.MenuItem
@@ -57,9 +59,28 @@ import org.jetbrains.compose.resources.painterResource
 fun HomeClientViewCompose(closeApp: () -> Unit = {}) {
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
-    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
         Scaffold(modifier = Modifier
-            .fillMaxWidth(),
+            .fillMaxWidth(), drawerShape = RectangleShape, topBar = {
+            ToolbarSearchHome(menuClicked = {
+                scope.launch {
+                    scaffoldState.drawerState.open()
+                }
+
+            }, cartClicked = {
+//                            navController?.navigate(SHOPPING_CART_GRAPH)
+            }, searchClicked = {
+//                            navController?.navigate(SEARCH_CLIENT_GRAPH)
+            })
+            LaunchedEffect(Unit){
+                scope.launch {
+                    scaffoldState.drawerState.open()
+                }
+            }
+        },
             drawerGesturesEnabled = scaffoldState.drawerState.isOpen,
             scaffoldState = scaffoldState,
             drawerContent = {
@@ -68,7 +89,7 @@ fun HomeClientViewCompose(closeApp: () -> Unit = {}) {
                         scaffoldState.drawerState.close()
                     }
                 }
-                DrawerBody(
+                DrawerBodyClient(
                     items = listOf(
                         MenuItem(
                             "Compras",
@@ -162,9 +183,6 @@ fun HomeClientViewCompose(closeApp: () -> Unit = {}) {
                             .background(GrayBackgroundMain)
                     ) {
                         item {
-                            Spacer(modifier = Modifier.height(75.dp))
-                        }
-                        item {
                             Card(
                                 modifier = Modifier
                                     .fillMaxWidth(),
@@ -221,15 +239,15 @@ fun HomeClientViewCompose(closeApp: () -> Unit = {}) {
                     }
                 }
 
-                ToolbarSearchHome(menuClicked = {
-                    scope.launch {
-                        scaffoldState.drawerState.open()
-                    }
-                }, cartClicked = {
-//                            navController?.navigate(SHOPPING_CART_GRAPH)
-                }, searchClicked = {
-//                            navController?.navigate(SEARCH_CLIENT_GRAPH)
-                })
+//                ToolbarSearchHome(menuClicked = {
+//                    scope.launch {
+//                        scaffoldState.drawerState.open()
+//                    }
+//                }, cartClicked = {
+////                            navController?.navigate(SHOPPING_CART_GRAPH)
+//                }, searchClicked = {
+////                            navController?.navigate(SEARCH_CLIENT_GRAPH)
+//                })
 
                 it.calculateBottomPadding()
             })

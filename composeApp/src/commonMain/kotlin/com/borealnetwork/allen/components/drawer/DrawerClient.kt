@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
@@ -19,17 +20,20 @@ import androidx.compose.material.Card
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color.Companion.Black
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.borealnetwork.allen.components.BoldText
+import com.borealnetwork.allen.components.LogoBlue
 import com.borealnetwork.allen.components.MediumText
 import com.borealnetwork.allen.components.drawer.model.MenuItem
+import com.borealnetwork.allen.platform
 import com.borealnetwork.allen.theme.GrayBackgroundDrawerDismiss
 import com.borealnetwork.allen.theme.GrayBackgroundMain
+import com.borealnetwork.allen.theme.GrayBorder
 import com.borealnetwork.allen.theme.GrayLetterDrawer
 import com.borealnetwork.allen.theme.StarColor
 import org.jetbrains.compose.resources.painterResource
@@ -44,19 +48,44 @@ fun DrawerHeaderClient(closeClicked: (() -> Unit)? = null) {
             .wrapContentHeight()
             .background(GrayBackgroundMain)
     ) {
+
         Row(
             modifier = Modifier
                 .background(White)
-                .padding(top = 8.dp, start = 30.dp, end = 21.dp)
+                .height(110.dp)
                 .fillMaxWidth()
-                .align(Alignment.End)
-                .height(40.dp),
-            horizontalArrangement = Arrangement.End
+                .padding(top = 13.dp, start = 30.dp, end = 15.dp),
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Card(
                 modifier = Modifier
-                    .width(40.dp)
-                    .height(40.dp),
+                    .size(68.dp),
+                elevation = 0.dp,
+                shape = CircleShape, onClick = { }) {
+                Image(
+                    modifier = Modifier.height(50.dp),
+                    painter = painterResource(res = "person_test.png"),
+                    contentDescription = ""
+                )
+            }
+            Column(
+                modifier = Modifier
+                    .wrapContentHeight()
+                    .fillMaxWidth(0.7f)
+                    .padding(start = 15.dp)
+            ) {
+                BoldText(
+                    text = "Hola, buen dia",
+                    color = GrayLetterDrawer,
+                    fontSize = 15.sp
+                )
+                BoldText(text = "Luna", color = Black)
+                StarStatus()
+
+            }
+            Card(
+                modifier = Modifier
+                    .size(40.dp),
                 backgroundColor = GrayBackgroundDrawerDismiss,
                 elevation = 0.dp,
                 shape = CircleShape, onClick = { closeClicked?.invoke() }) {
@@ -70,39 +99,7 @@ fun DrawerHeaderClient(closeClicked: (() -> Unit)? = null) {
                     contentDescription = ""
                 )
             }
-        }
 
-        Row(
-            modifier = Modifier
-                .background(White)
-                .height(110.dp)
-                .padding(top = 13.dp, start = 30.dp)
-        ) {
-            Card(
-                modifier = Modifier
-                    .width(68.dp)
-                    .height(68.dp),
-                elevation = 0.dp,
-                shape = CircleShape, onClick = { }) {
-                Image(
-                    modifier = Modifier.height(50.dp),
-                    painter = painterResource(res = "person_test.png"),
-                    contentDescription = ""
-                )
-            }
-            Column(
-                modifier = Modifier
-                    .wrapContentHeight()
-                    .padding(start = 15.dp)
-            ) {
-                BoldText(
-                    text = "Hola, buen dia",
-                    color = GrayLetterDrawer,
-                    fontSize = 15.sp
-                )
-                BoldText(text = "Luna")
-                StarStatus()
-            }
         }
     }
 }
@@ -123,7 +120,12 @@ fun StarStatus(
             contentDescription = "star User",
             tint = StarColor
         )
-        BoldText(modifier = Modifier.padding(start = 5.dp), fontSize = 15.sp, text = stars)
+        BoldText(
+            modifier = Modifier.padding(start = 5.dp),
+            fontSize = 15.sp,
+            text = stars,
+            color = Black
+        )
         BoldText(
             modifier = Modifier.padding(start = 10.dp),
             text = text,
@@ -134,7 +136,7 @@ fun StarStatus(
 }
 
 @Composable
-fun DrawerBody(
+fun DrawerBodyClient(
     items: List<MenuItem>,
     onItemClick: (MenuItem) -> Unit
 ) {
@@ -144,6 +146,7 @@ fun DrawerBody(
             .fillMaxSize()
             .background(GrayBackgroundMain)
     ) {
+
         itemsIndexed(items) { index, item ->
             Row(
                 modifier = Modifier
@@ -161,19 +164,49 @@ fun DrawerBody(
                         }
                     )
                     .background(White)
-                    .fillMaxWidth()
-                    .clickable {
+                    .fillMaxWidth().wrapContentHeight().clickable {
                         onItemClick(item)
-                    },
+                    }
+                    .padding(start = 14.dp, end = 12.dp),
                 verticalAlignment = CenterVertically
             ) {
 
+
+                Icon(
+                    modifier = Modifier.size(22.dp),
+                    painter = painterResource(res = item.icon),
+                    contentDescription = item.contentDescription,
+                    tint = GrayBorder
+                )
                 MediumText(
                     text = item.title,
                     fontSize = 15.sp,
                     modifier = Modifier
                         .padding(top = 12.dp, bottom = 12.dp, start = 12.dp)
                         .weight(1f)
+                )
+                Image(
+                    modifier = Modifier.size(30.dp),
+                    painter = painterResource("ic_rounded_arrow_right.xml"),
+                    contentDescription = ""
+                )
+            }
+
+        }
+
+        item {
+            Row(
+                modifier = Modifier.fillMaxWidth().padding(top = 20.dp),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                LogoBlue(
+                    modifier = Modifier
+                        .width(55.dp)
+                )
+                MediumText(
+                    modifier = Modifier.padding(start = 13.dp),
+                    text = platform().versionName,
+                    fontSize = 13.sp
                 )
             }
         }

@@ -51,7 +51,8 @@ internal actual fun platform() : Platform = AndroidPlatform()
 class AndroidPlatform : Platform {
     override val name = "Android ${Build.VERSION.SDK_INT}"
     override val osName = "Android"
-    override val versionName = "${Build.VERSION.SDK_INT}"
+    override val versionName = BuildConfig.versionName
+    override val versionCode = BuildConfig.versionCode
 }
 
 
