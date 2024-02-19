@@ -56,11 +56,13 @@ fun TestSearchs() {
     ) {
         SearchOutlinedTextField(
             value = "",
-            placeHolder = "Buscar"
+            placeHolder = "Buscar",
+            onValueChange = {}
         )
         SearcherWithButton(
             value = "",
-            placeHolder = "Buscar"
+            placeHolder = "Buscar",
+            onValueChange = {}
         )
         SearcherWithSettings(
             value = "",
@@ -75,6 +77,7 @@ fun TestSearchs() {
 fun SearchOutlinedTextField(
     modifier: Modifier = Modifier,
     placeHolder: String = "",
+    onValueChange: (String) -> Unit,
     value: String,
     keyboardOptions: KeyboardOptions = KeyboardOptions(
         capitalization = KeyboardCapitalization.Words,
@@ -120,7 +123,9 @@ fun SearchOutlinedTextField(
             ),
             interactionSource = interactionSource,
             value = value,
-            onValueChange = {}, placeholder = {
+            onValueChange = {
+                onValueChange(it)
+            }, placeholder = {
                 Text(
                     text = placeHolder,
                     color = GrayLetterHint,
@@ -174,7 +179,9 @@ fun SearchOutlinedTextField(
 fun SearcherWithButton(
     modifier: Modifier = Modifier,
     placeHolder: String = "",
+    onValueChange: (String) -> Unit,
     value: String,
+    withButtonSearch: Boolean = false,
     keyboardOptions: KeyboardOptions = KeyboardOptions(
         capitalization = KeyboardCapitalization.Words,
         keyboardType = KeyboardType.Text
@@ -208,7 +215,7 @@ fun SearcherWithButton(
                 ),
                 interactionSource = interactionSource,
                 value = value,
-                onValueChange = {}, placeholder = {
+                onValueChange = { onValueChange(it) }, placeholder = {
                     Text(
                         text = placeHolder,
                         color = GrayLetterHint,
@@ -258,13 +265,15 @@ fun SearcherWithButton(
             )
 
         }
-        BoldText(
-            modifier = Modifier
-                .padding(start = 33.dp)
-                .clickable { itemClicked?.invoke() },
-            text = "Buscar", fontSize = 14.sp,
-            color = MaterialTheme.colors.primary
-        )
+        if (withButtonSearch) {
+            BoldText(
+                modifier = Modifier
+                    .padding(start = 33.dp)
+                    .clickable { itemClicked?.invoke() },
+                text = "Buscar", fontSize = 14.sp,
+                color = MaterialTheme.colors.primary
+            )
+        }
     }
 }
 

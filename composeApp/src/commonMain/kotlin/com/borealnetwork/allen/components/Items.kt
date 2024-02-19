@@ -263,7 +263,7 @@ fun SellerItem(
                 .fillMaxSize()
                 .padding(top = 20.dp, start = 30.dp, end = 30.dp)
         ) {
-            BoldText(text = "Vendedor", fontSize = 18.sp, color =  Black)
+            BoldText(text = "Vendedor", fontSize = 18.sp, color = Black)
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -482,7 +482,7 @@ fun SellerItemsItem(modifier: Modifier = Modifier) {
                 fontSize = 18.sp,
                 modifier = Modifier.padding(top = 20.dp),
                 textAlign = TextAlign.Start, text = "Más productos del\nvendedor",
-                color =  Black
+                color = Black
             )
             RightRoundedButton()
         }
@@ -648,7 +648,7 @@ fun QuestionItem(
     Row(
         modifier = Modifier
             .background(White)
-            .padding(start = 30.dp, end = 30.dp)
+            .padding(start = 30.dp, top = 25.dp, end = 30.dp)
             .fillMaxSize(),
         verticalAlignment = Alignment.Top,
         horizontalArrangement = Arrangement.Start
@@ -685,8 +685,11 @@ fun QuestionItem(
                 FavoriteCounterButton(amount = likesList.size)
             }
             FlowColumn {
-                answerList.forEach {
-                    AnswerItem(text = it)
+                answerList.forEachIndexed { index, item ->
+                    AnswerItem(
+                        modifier = if (index == answerList.size - 1) Modifier.padding(bottom = 15.dp) else Modifier,
+                        text = item
+                    )
                 }
             }
         }
@@ -751,10 +754,10 @@ fun RatingByUserItem(
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun AnswerItem(text: String = "") {
+fun AnswerItem(modifier: Modifier = Modifier, text: String = "") {
     Row(
-        modifier = Modifier
-            .padding(start = 30.dp, end = 4.dp, bottom = 35.dp)
+        modifier = modifier
+            .padding(start = 30.dp, end = 4.dp)
             .sizeIn(maxWidth = 200.dp)
             .background(White),
         verticalAlignment = Alignment.Top,

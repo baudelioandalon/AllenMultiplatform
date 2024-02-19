@@ -143,7 +143,8 @@ fun ToolbarSearchHome(
             SearchOutlinedTextField(
                 value = "",
                 placeHolder = textPlaceHolder,
-                itemClicked = { searchClicked?.invoke() }
+                itemClicked = { searchClicked?.invoke() },
+                onValueChange = {}
             )
             CircularIcon(
                 modifier = Modifier.weight(1f),
@@ -340,7 +341,7 @@ fun ToolbarTitle(
                 textAlign = TextAlign.Center
             )
             if (showEndImage) {
-                CircularIcon(
+                CircularImage(
                     modifier = Modifier.align(Alignment.CenterEnd).padding(end = 20.dp),
                     onClick = endClicked,
                     icon = endIcon

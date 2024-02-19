@@ -35,30 +35,95 @@ import com.borealnetwork.allen.theme.robotoMediumTypo
 import com.borealnetwork.allen.theme.semiBoldTypo
 import org.jetbrains.compose.resources.painterResource
 
+
 @Composable
 fun EditText(
     modifier: Modifier = Modifier,
-    placeHolderText: String? = null,
-    topLabelText: String? = null,
-    onValueChange: (String) -> Unit
+    placeHolderText: String = "",
+    onValueChange: (String) -> Unit,
+    value: String,
+    isError: Boolean = false,
+    errorMessage: String = "",
+    keyboardOptions: KeyboardOptions = KeyboardOptions(
+        capitalization = KeyboardCapitalization.Words,
+        keyboardType = KeyboardType.Text
+    ),
+    keyboardActions: KeyboardActions = KeyboardActions { },
+    trailingIcon: @Composable (() -> Unit)? = null,
+    enabled: Boolean = true,
+    enabledCounter: Boolean = false,
+    maxLength: Int = 0,
+    singleLine: Boolean = false,
+    colors: TextFieldColors = TextFieldDefaults.outlinedTextFieldColors(unfocusedLabelColor = GrayLetterHint),
+    isPassword: Boolean = false,
+    visualTransformation: VisualTransformation = VisualTransformation.None
 ) {
-    var text by remember { mutableStateOf("") }
-    var focused by remember { mutableStateOf(false) }
-    OutlinedTextField(modifier = modifier.fillMaxWidth().onFocusChanged {
-        focused = it.isFocused
-    },
-        value = text,
-        onValueChange = {
-            text = it
-            onValueChange(it)
-        },
-        placeholder = { SemiBoldText(text = placeHolderText.orEmpty(), color = GrayLetterHint) },
-        label = {
-            if (focused || !focused && text.isNotEmpty()) RegularText(text = topLabelText.orEmpty()) else SemiBoldText(
-                text = topLabelText.orEmpty(),
-                color = GrayLetterHint
+    val interactionSource = remember { MutableInteractionSource() }
+    var passwordVisibility by remember { mutableStateOf(isPassword) }
+    val icon = if (passwordVisibility)
+        painterResource(res = "ic_design_visibility_off.xml")
+    else
+        painterResource(res = "ic_design_visibility.xml")
+
+    Column(modifier = modifier) {
+
+        OutlinedTextField(
+            modifier = Modifier
+                .fillMaxWidth(),
+            textStyle = TextStyle(
+                fontFamily = semiBoldTypo(),
+                color = Color.Black,
+                fontWeight = SemiBold,
+                fontSize = 15.sp
+            ),
+            interactionSource = interactionSource,
+            value = value,
+            onValueChange = {
+                if (enabledCounter) {
+                    if (it.length <= maxLength) {
+                        onValueChange(it)
+                    }
+                } else {
+                    onValueChange(it)
+                }
+            }, placeholder = {
+                SemiBoldText(
+                    text = placeHolderText,
+                    color = GrayLetterHint,
+                    fontSize = 15.sp
+                )
+            },
+            colors = colors,
+            isError = isError,
+            keyboardOptions = if (isPassword) KeyboardOptions(
+                keyboardType = KeyboardType.Password
+            ) else keyboardOptions,
+            trailingIcon = {
+                if (isPassword) IconButton(onClick = {
+                    passwordVisibility = !passwordVisibility
+                }) {
+                    Icon(
+                        painter = icon,
+                        contentDescription = "Visibility Icon"
+                    )
+                } else trailingIcon
+            },
+            enabled = enabled,
+            singleLine = singleLine,
+            keyboardActions = keyboardActions,
+            visualTransformation = if (!passwordVisibility) visualTransformation
+            else PasswordVisualTransformation(mask = '●')
+        )
+
+        AnimatedVisibility(visible = isError && errorMessage.isNotEmpty()) {
+            Text(
+                text = errorMessage,
+                color = MaterialTheme.colors.error,
+                fontSize = 15.sp,
+                fontFamily = robotoMediumTypo()
             )
-        })
+        }
+    }
 }
 
 @Composable

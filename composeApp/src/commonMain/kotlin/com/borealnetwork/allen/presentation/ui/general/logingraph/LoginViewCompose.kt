@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -30,15 +31,15 @@ fun LoginViewCompose(loginViewModel: LoginViewModel) {
 
     val scrollState = rememberScrollState()
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.White)
-    ) {
-        TopTitleImg()
+    Scaffold(modifier = Modifier
+        .fillMaxSize()
+        .background(Color.White),
+        topBar = {
+            TopTitleImg()
+        }) {
         Column(
             modifier = Modifier
-                .padding(start = 30.dp)
+                .padding(horizontal = 30.dp)
                 .verticalScroll(scrollState)
         ) {
 
@@ -145,6 +146,6 @@ fun LoginViewCompose(loginViewModel: LoginViewModel) {
 //                navController.navigate(LoginScreen.RegisterLoginScreen.route)
             }
         }
+        it.calculateBottomPadding()
     }
-
 }
