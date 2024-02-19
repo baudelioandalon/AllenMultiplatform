@@ -58,7 +58,7 @@ import com.borealnetwork.allen.theme.StarColor
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun ViewProductCompose() {
+fun ProductViewCompose() {
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
