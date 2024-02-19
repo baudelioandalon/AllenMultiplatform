@@ -529,7 +529,7 @@ fun ShowSellerItem(modifier: Modifier = Modifier) {
                 color = GrayLetterSeeAll,
                 fontSize = 15.sp
             )
-            BoldText(text = "Casa y Hogar", fontSize = 15.sp)
+            BoldText(text = "Casa y Hogar", fontSize = 15.sp, color = Black)
         }
     }
 }
@@ -585,7 +585,7 @@ fun CategorySeller(
                         color = GrayLetterSeeAll,
                         fontSize = 15.sp
                     )
-                    BoldText(text = "Casa y Hogar", fontSize = 15.sp)
+                    BoldText(text = "Casa y Hogar", fontSize = 15.sp, color = Black)
                 }
                 RightRoundedButton()
             }

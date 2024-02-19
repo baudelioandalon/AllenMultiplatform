@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import org.jetbrains.compose.resources.painterResource
 
 
@@ -37,11 +38,12 @@ fun TopTitle(
                     .height(60.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                BackButton(
-                    Modifier
+                CircularIcon(
+                    modifier = Modifier
                         .padding(start = 30.dp)
                         .width(35.dp)
-                        .height(35.dp)
+                        .height(35.dp),
+                    icon = "ic_back_arrow.xml"
                 ) {
                     backClicked?.invoke()
                 }
@@ -76,11 +78,12 @@ fun TopTitleImg(
                     .height(60.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                BackButton(
-                    Modifier
+                CircularIcon(
+                    modifier = Modifier
                         .padding(start = 30.dp)
                         .width(35.dp)
-                        .height(35.dp)
+                        .height(35.dp),
+                    icon = "ic_back_arrow.xml"
                 ) {
                     backClicked?.invoke()
                 }
@@ -132,18 +135,20 @@ fun ToolbarSearchHome(
         elevation = 5.dp
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            MenuIcon(
+            CircularIcon(
                 modifier = Modifier.weight(1f),
-                onClick = menuClicked
+                onClick = menuClicked,
+                icon = "ic_menu_icon.xml"
             )
             SearchOutlinedTextField(
                 value = "",
                 placeHolder = textPlaceHolder,
                 itemClicked = { searchClicked?.invoke() }
             )
-            CartIcon(
+            CircularIcon(
                 modifier = Modifier.weight(1f),
-                onClick = cartClicked
+                onClick = cartClicked,
+                icon = "ic_cart_icon.xml"
             )
         }
     }
@@ -293,6 +298,57 @@ fun ToolbarSearchHome(
 //    }
 //}
 //
+
+
+@Composable
+fun ToolbarTitle(
+    modifier: Modifier = Modifier,
+    titleText: String,
+    showStartImage: Boolean = true,
+    startClicked: (() -> Unit)? = null,
+    endClicked: (() -> Unit)? = null,
+    showEndImage: Boolean = true,
+    firstIcon: String = "ic_back_arrow.xml",
+    endIcon: String = "ic_cart_icon.xml"
+) {
+    Card(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(80.dp),
+        shape = RectangleShape,
+        elevation = 5.dp
+    ) {
+        Box {
+            if (showStartImage) {
+                CircularIcon(
+                    modifier = Modifier.padding(start = 20.dp).align(Alignment.CenterStart),
+                    icon = firstIcon
+                ) {
+                    startClicked?.invoke()
+                }
+            }
+            CircularIcon(
+                modifier = Modifier.padding(start = 20.dp).align(Alignment.CenterStart),
+                icon = firstIcon
+            ) {
+                startClicked?.invoke()
+            }
+            SemiBoldText(
+                modifier = Modifier.align(Alignment.Center),
+                fontSize = 20.sp,
+                text = titleText,
+                textAlign = TextAlign.Center
+            )
+            if (showEndImage) {
+                CircularIcon(
+                    modifier = Modifier.align(Alignment.CenterEnd).padding(end = 20.dp),
+                    onClick = endClicked,
+                    icon = endIcon
+                )
+            }
+        }
+    }
+}
 
 //
 //@OptIn(ExperimentalMaterialApi::class)

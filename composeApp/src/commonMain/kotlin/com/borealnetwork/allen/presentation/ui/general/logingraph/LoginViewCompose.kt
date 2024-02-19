@@ -38,7 +38,7 @@ fun LoginViewCompose(loginViewModel: LoginViewModel) {
         TopTitleImg()
         Column(
             modifier = Modifier
-                .padding(horizontal = 30.dp)
+                .padding(start = 30.dp)
                 .verticalScroll(scrollState)
         ) {
 

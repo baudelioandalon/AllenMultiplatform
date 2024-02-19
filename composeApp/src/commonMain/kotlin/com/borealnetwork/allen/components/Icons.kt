@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalMaterialApi::class)
-
 package com.borealnetwork.allen.components
 
 import androidx.compose.foundation.Image
@@ -26,6 +24,7 @@ import com.borealnetwork.allen.theme.OrangeStrong
 import com.borealnetwork.allen.theme.OrangeTransparentLow
 import org.jetbrains.compose.resources.painterResource
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun LocationIcon(onClick: (() -> Unit)? = null) {
     Box(
@@ -92,25 +91,35 @@ fun GoalIcon(onClick: (() -> Unit)? = null) {
     }
 }
 
-@Composable
-fun MenuIcon(
-    modifier: Modifier = Modifier,
-    icon: String = "ic_menu_icon.xml",
-    onClick: (() -> Unit)? = null
-) {
-    CircularIcon(modifier, icon = icon, onClick)
-}
 
-@Composable
-fun CartIcon(modifier: Modifier = Modifier,
-             icon: String = "ic_cart_icon.xml",
-             onClick: (() -> Unit)? = null) {
-    CircularIcon(modifier, icon = icon, onClick)
-}
-
-
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun CircularIcon(
+    modifier: Modifier = Modifier,
+    icon: String, onClick: (() -> Unit)? = null
+) {
+    Box(
+        modifier = modifier
+            .size(62.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        Card(
+            modifier = Modifier
+                .size(45.dp),
+            elevation = 0.dp,
+            shape = CircleShape, onClick = { onClick?.invoke() }) {
+            Icon(
+                modifier = Modifier.wrapContentSize().padding(5.dp),
+                painter = painterResource(res = icon),
+                contentDescription = ""
+            )
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun CircularImage(
     modifier: Modifier = Modifier,
     icon: String, onClick: (() -> Unit)? = null
 ) {

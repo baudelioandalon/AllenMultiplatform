@@ -5,12 +5,10 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Shapes
-import androidx.compose.material.Surface
 import androidx.compose.material.Typography
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.compositionLocalOf
@@ -251,9 +249,7 @@ fun AppTheme(
             typography = defaultTypography,
             shapes = AppShapes,
             colors = if (isDark) DarkColorScheme else LightColorScheme,
-            content = {
-                Surface(content = content)
-            }
+            content = content
         )
     }
 }

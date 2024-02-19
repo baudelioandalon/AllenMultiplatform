@@ -312,26 +312,6 @@ fun StarRatingSelector(modifier: Modifier = Modifier) {
     }
 }
 
-@OptIn(ExperimentalMaterialApi::class)
-@Composable
-fun BackButton(
-    modifier: Modifier = Modifier,
-    onClick: (() -> Unit)? = null
-) {
-    Card(
-        modifier = modifier
-            .width(35.dp)
-            .height(35.dp),
-        elevation = 0.dp,
-        shape = CircleShape, onClick = { onClick?.invoke() }) {
-        Image(
-            modifier = Modifier.wrapContentSize(),
-            painter = painterResource("ic_back_arrow.xml"),
-            contentDescription = ""
-        )
-    }
-}
-
 @Composable
 fun BlueButton(
     modifier: Modifier = Modifier,

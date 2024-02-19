@@ -37,9 +37,9 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
-import com.borealnetwork.allen.components.BoldText
-import com.borealnetwork.allen.components.BackButton
 import com.borealnetwork.allen.components.BlueButton
+import com.borealnetwork.allen.components.BoldText
+import com.borealnetwork.allen.components.CircularIcon
 import com.borealnetwork.allen.components.CornerButton
 import com.borealnetwork.allen.components.CornerImgButton
 import com.borealnetwork.allen.components.FavoriteButton
@@ -66,7 +66,10 @@ internal fun LoginUI() = AppTheme {
     var passwordVisibility by remember { mutableStateOf(false) }
     val scrollState = rememberScrollState()
 
-    Column(modifier = Modifier.fillMaxSize().windowInsetsPadding(WindowInsets.safeDrawing).verticalScroll(scrollState)) {
+    Column(
+        modifier = Modifier.fillMaxSize().windowInsetsPadding(WindowInsets.safeDrawing)
+            .verticalScroll(scrollState)
+    ) {
 
         Row(
             horizontalArrangement = Arrangement.Center
@@ -147,7 +150,7 @@ internal fun LoginUI() = AppTheme {
             FavoriteButton()
             FavoriteCounterButton()
             ShareButton()
-            BackButton()
+            CircularIcon(icon = "ic_back_arrow.xml")
             LittleAddButton(modifier = Modifier.padding(10.dp))
             MinimumAddButton(modifier = Modifier.padding(10.dp))
 
@@ -162,7 +165,7 @@ internal fun LoginUI() = AppTheme {
             RightRoundedButton()
         }
 
-        BlueButton(modifier = Modifier.padding(10.dp),text = "Bienvenido")
+        BlueButton(modifier = Modifier.padding(10.dp), text = "Bienvenido")
 //        ShadowButton(labelId = R.string.welcome_button_enter)
         CornerButton(modifier = Modifier.padding(10.dp), text = "Entrar")
         CornerImgButton(modifier = Modifier.padding(10.dp), text = "Entrar")

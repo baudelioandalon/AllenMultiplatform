@@ -142,8 +142,7 @@ fun RegularText(
 @Composable
 fun SmallText(
     modifier: Modifier = Modifier,
-    text: String,//? = null,
-//    labelId: Int? = null,
+    text: String,
     color: Color = GrayLetterSeeAll,
     textAlign: TextAlign? = null
 ) {
