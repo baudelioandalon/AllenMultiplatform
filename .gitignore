@@ -32,7 +32,7 @@ replay_pid*
 /.gradle/kotlin/*
 /.gradle/*
 .gradle/*
-.gradle/buildOutputCleanup/buildOutputCleanup.lock
+.gradle/buildOutputCleanup.lock
 /buildSrc/.gradle/buildOutputCleanup/buildOutputCleanup.lock
 /buildSrc/.gradle/buildOutputCleanup/cache.properties
 /buildSrc/.gradle/8.0/checksums/checksums.lock
