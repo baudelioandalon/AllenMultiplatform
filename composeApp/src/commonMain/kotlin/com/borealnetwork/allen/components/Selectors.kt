@@ -36,6 +36,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.geometry.CornerRadius
+import androidx.compose.ui.graphics.Color.Companion.Black
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.drawscope.Stroke
@@ -795,7 +796,8 @@ fun SelectorDetail(
             modifier = Modifier
                 .padding(start = 16.dp)
                 .weight(1f),
-            text = text, fontSize = 13.sp
+            text = text, fontSize = 13.sp,
+            color = Black
         )
         Icon(
             modifier = Modifier

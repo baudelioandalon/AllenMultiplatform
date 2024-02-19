@@ -263,7 +263,7 @@ fun SellerItem(
                 .fillMaxSize()
                 .padding(top = 20.dp, start = 30.dp, end = 30.dp)
         ) {
-            BoldText(text = "Vendedor", fontSize = 18.sp)
+            BoldText(text = "Vendedor", fontSize = 18.sp, color =  Black)
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -481,7 +481,8 @@ fun SellerItemsItem(modifier: Modifier = Modifier) {
             BoldText(
                 fontSize = 18.sp,
                 modifier = Modifier.padding(top = 20.dp),
-                textAlign = TextAlign.Start, text = "Más productos del\nvendedor"
+                textAlign = TextAlign.Start, text = "Más productos del\nvendedor",
+                color =  Black
             )
             RightRoundedButton()
         }
