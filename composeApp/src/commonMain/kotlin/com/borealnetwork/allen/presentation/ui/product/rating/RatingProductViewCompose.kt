@@ -6,8 +6,10 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -149,6 +151,45 @@ fun RatingProductViewCompose() {
                     answerList = listOf(
                         "¡Comprando 4 el envio es gratis¡"
                     )
+                ),
+                QuestionModel(
+                    question = "¿Costo de envio?",
+                    imageUser = "",
+                    answerList = listOf(
+                        "¡Comprando 4 el envio es gratis¡"
+                    )
+                ),
+                QuestionModel(
+                    question = "¿Costo de envio?",
+                    imageUser = "",
+                    answerList = listOf(
+                        "¡Comprando 4 el envio es gratis¡"
+                    )
+                ), QuestionModel(
+                    question = "¿Costo de envio?",
+                    imageUser = "",
+                    answerList = listOf(
+                        "¡Comprando 4 el envio es gratis¡"
+                    )
+                ), QuestionModel(
+                    question = "¿Costo de envio?",
+                    imageUser = "",
+                    answerList = listOf(
+                        "¡Comprando 4 el envio es gratis¡"
+                    )
+                ), QuestionModel(
+                    question = "¿Costo de envio?",
+                    imageUser = "",
+                    answerList = listOf(
+                        "¡Comprando 4 el envio es gratis¡"
+                    )
+                ),
+                QuestionModel(
+                    question = "¿Costo de envio a 48290?",
+                    imageUser = "",
+                    answerList = listOf(
+                        "¡Comprando 4 el envio es gratis¡"
+                    )
                 )
             )
             items(
@@ -158,6 +199,10 @@ fun RatingProductViewCompose() {
                     text = item.question,
                     likesList = item.likesList
                 )
+            }
+
+            item {
+                Spacer(modifier = Modifier.height(300.dp))
             }
         }
         it.calculateBottomPadding()
