@@ -28,6 +28,7 @@ import com.borealnetwork.allen.domain.model.BirdImage
 import com.borealnetwork.allen.presentation.ui.general.logingraph.LoginViewCompose
 import com.borealnetwork.allen.presentation.ui.product.ProductViewCompose
 import com.borealnetwork.allen.presentation.ui.product.question.QuestionViewCompose
+import com.borealnetwork.allen.presentation.ui.product.rating.RatingProductViewCompose
 import com.borealnetwork.allen.theme.AppTheme
 import com.borealnetwork.allen.viewmodel.LoginViewModel
 import dev.icerock.moko.mvvm.compose.getViewModel
@@ -59,7 +60,8 @@ internal fun App() = AppTheme {
 //    LoginViewCompose(loginViewModel)
 //    HomeClientViewCompose {}
 //    ProductViewCompose()
-    QuestionViewCompose()
+//    QuestionViewCompose()
+    RatingProductViewCompose()
 }
 
 @Composable
