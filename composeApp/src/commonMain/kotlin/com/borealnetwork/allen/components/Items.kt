@@ -47,6 +47,7 @@ import androidx.compose.ui.graphics.Color.Companion.Black
 import androidx.compose.ui.graphics.Color.Companion.Red
 import androidx.compose.ui.graphics.Color.Companion.Transparent
 import androidx.compose.ui.graphics.Color.Companion.White
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -645,56 +646,60 @@ fun QuestionItem(
     text: String = "", answerList: List<String> = emptyList(),
     likesList: List<String> = emptyList()
 ) {
-    Row(
-        modifier = Modifier
-            .background(White)
-            .padding(start = 30.dp, top = 25.dp, end = 30.dp)
-            .fillMaxSize(),
-        verticalAlignment = Alignment.Top,
-        horizontalArrangement = Arrangement.Start
+    Card(
+        elevation = 5.dp,
+        shape = RectangleShape
     ) {
-        Card(
+        Row(
             modifier = Modifier
-                .padding(bottom = 9.dp)
-                .size(41.dp), onClick = {},
-            elevation = 0.dp,
-            shape = CircleShape,
-            backgroundColor = GrayCategoryBackground
+                .background(White)
+                .padding(start = 30.dp, top = 25.dp, end = 30.dp)
+                .fillMaxSize(),
+            verticalAlignment = Alignment.Top,
+            horizontalArrangement = Arrangement.Start
         ) {
-            Column(
+            Card(
                 modifier = Modifier
-                    .fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
+                    .padding(bottom = 9.dp)
+                    .size(41.dp), onClick = {},
+                elevation = 0.dp,
+                shape = CircleShape,
+                backgroundColor = GrayCategoryBackground
             ) {
-                Image(
-                    painter = painterResource("tools_icon.png"),
-                    contentDescription = "item"
-                )
-            }
-        }
-        Column(modifier = Modifier.fillMaxWidth()) {
-            Row(
-                modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                SemiBoldText(
-                    modifier = Modifier.padding(start = 28.dp, bottom = 30.dp),
-                    text = text,
-                    fontSize = 17.sp
-                )
-                FavoriteCounterButton(amount = likesList.size)
-            }
-            FlowColumn {
-                answerList.forEachIndexed { index, item ->
-                    AnswerItem(
-                        modifier = if (index == answerList.size - 1) Modifier.padding(bottom = 15.dp) else Modifier,
-                        text = item
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    Image(
+                        painter = painterResource("tools_icon.png"),
+                        contentDescription = "item"
                     )
                 }
             }
+            Column(modifier = Modifier.fillMaxWidth()) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    SemiBoldText(
+                        modifier = Modifier.padding(start = 28.dp, bottom = 30.dp),
+                        text = text,
+                        fontSize = 17.sp
+                    )
+                    FavoriteCounterButton(amount = likesList.size)
+                }
+                FlowColumn {
+                    answerList.forEachIndexed { index, item ->
+                        AnswerItem(
+                            modifier = if (index == answerList.size - 1) Modifier.padding(bottom = 15.dp) else Modifier,
+                            text = item
+                        )
+                    }
+                }
+            }
         }
-
-
     }
 }
 

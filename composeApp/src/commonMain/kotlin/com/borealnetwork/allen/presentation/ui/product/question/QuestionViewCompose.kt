@@ -1,7 +1,6 @@
 package com.borealnetwork.allen.presentation.ui.product.question
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -11,16 +10,16 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Card
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color.Companion.Red
 import androidx.compose.ui.graphics.Color.Companion.White
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.borealnetwork.allen.components.EditText
@@ -98,6 +97,8 @@ fun QuestionViewCompose() {
                 }
             }
         }) {
+
+
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
@@ -116,38 +117,39 @@ fun QuestionViewCompose() {
                 )
             }
 
-            itemsIndexed(
-                listOf(
-                    QuestionModel(
-                        question = "¿Sirve para 220v?",
-                        imageUser = "",
-                        likesList = listOf("33", "33333", "33332"),
-                        answerList = listOf("Si, incluso para 110v")
-                    ), QuestionModel(
-                        question = "¿Es nuevo el articulo?",
-                        imageUser = "",
-                        likesList = listOf("33", "333"),
-                        answerList = listOf(
-                            "¡Asi es, todos nuestros " +
-                                    "articulos son nuevos " +
-                                    "completamente!", "A precios bajos"
-                        )
-                    ), QuestionModel(
-                        question = "¿Costo de envio?",
-                        imageUser = "",
-                        answerList = listOf(
-                            "¡Comprando 4 el envio es gratis¡"
-                        )
+            val questionList = listOf(
+                QuestionModel(
+                    question = "¿Sirve para 220v?",
+                    imageUser = "",
+                    likesList = listOf("33", "33333", "33332"),
+                    answerList = listOf("Si, incluso para 110v")
+                ), QuestionModel(
+                    question = "¿Es nuevo el articulo?",
+                    imageUser = "",
+                    likesList = listOf("33", "333"),
+                    answerList = listOf(
+                        "¡Asi es, todos nuestros " +
+                                "articulos son nuevos " +
+                                "completamente!", "A precios bajos"
+                    )
+                ), QuestionModel(
+                    question = "¿Costo de envio?",
+                    imageUser = "",
+                    answerList = listOf(
+                        "¡Comprando 4 el envio es gratis¡"
                     )
                 )
+            )
+            itemsIndexed(
+                questionList
             ) { index, item ->
-
                 QuestionItem(
                     text = item.question,
                     likesList = item.likesList,
                     answerList = item.answerList
                 )
             }
+
 
             item {
                 Spacer(modifier = Modifier.height(300.dp))
