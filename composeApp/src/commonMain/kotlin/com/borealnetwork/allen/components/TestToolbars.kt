@@ -322,17 +322,11 @@ fun ToolbarTitle(
         Box {
             if (showStartImage) {
                 CircularIcon(
-                    modifier = Modifier.padding(start = 20.dp).align(Alignment.CenterStart),
+                    modifier = Modifier.padding(start = 10.dp).align(Alignment.CenterStart),
                     icon = firstIcon
                 ) {
                     startClicked?.invoke()
                 }
-            }
-            CircularIcon(
-                modifier = Modifier.padding(start = 20.dp).align(Alignment.CenterStart),
-                icon = firstIcon
-            ) {
-                startClicked?.invoke()
             }
             SemiBoldText(
                 modifier = Modifier.align(Alignment.Center),
@@ -342,7 +336,7 @@ fun ToolbarTitle(
             )
             if (showEndImage) {
                 CircularImage(
-                    modifier = Modifier.align(Alignment.CenterEnd).padding(end = 20.dp),
+                    modifier = Modifier.align(Alignment.CenterEnd).padding(end = 5.dp),
                     onClick = endClicked,
                     icon = endIcon
                 )

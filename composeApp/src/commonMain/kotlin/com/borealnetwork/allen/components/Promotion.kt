@@ -6,8 +6,12 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.defaultMinSize
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredSize
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.CornerSize
@@ -18,7 +22,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Red
 import androidx.compose.ui.graphics.Color.Companion.White
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -26,6 +32,7 @@ import com.borealnetwork.allen.theme.GreenStrong
 import com.borealnetwork.allen.theme.GreenTransparent
 import com.borealnetwork.allen.theme.OrangeMedium
 import com.borealnetwork.allen.theme.OrangeTransparent
+import com.borealnetwork.allen.theme.StarColor
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
@@ -42,16 +49,16 @@ fun FreeShipping(modifier: Modifier = Modifier) {
         BoldText(
             modifier = Modifier
                 .padding(start = 10.dp, top = 5.dp, bottom = 5.dp)
-                .wrapContentSize(),
+                .fillMaxWidth(0.7f),
             text = "Envio gratis",
             fontSize = 10.sp,
             color = White
         )
         Icon(
-            modifier = Modifier.padding(start = 4.dp, end = 6.dp),
+            modifier = Modifier.requiredSize(20.dp).padding(start = 4.dp, end = 10.dp),
             painter = painterResource(res = "ic_thunder_icon.xml"),
             contentDescription = "free shipping",
-            tint = White
+            tint = StarColor
         )
     }
 }

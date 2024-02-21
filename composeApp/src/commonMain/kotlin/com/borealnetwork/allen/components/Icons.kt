@@ -96,7 +96,8 @@ fun GoalIcon(onClick: (() -> Unit)? = null) {
 @Composable
 fun CircularIcon(
     modifier: Modifier = Modifier,
-    icon: String, onClick: (() -> Unit)? = null
+    icon: String, contentDescription: String? = null,
+    onClick: (() -> Unit)? = null
 ) {
     Box(
         modifier = modifier
@@ -111,7 +112,7 @@ fun CircularIcon(
             Icon(
                 modifier = Modifier.wrapContentSize().padding(5.dp),
                 painter = painterResource(res = icon),
-                contentDescription = ""
+                contentDescription = contentDescription
             )
         }
     }

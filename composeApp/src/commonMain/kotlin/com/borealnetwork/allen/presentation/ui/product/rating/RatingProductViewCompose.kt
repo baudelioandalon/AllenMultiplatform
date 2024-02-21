@@ -95,6 +95,69 @@ fun RatingProductViewCompose() {
         }
     }) {
 
+        val ratingList = listOf(
+            QuestionModel(
+                question = "¿Sirve para 220v?",
+                imageUser = "",
+                likesList = listOf("33", "33333", "33332"),
+                answerList = listOf("Si, incluso para 110v")
+            ), QuestionModel(
+                question = "¿Es nuevo el articulo?",
+                imageUser = "",
+                likesList = listOf("33", "333"),
+                answerList = listOf(
+                    "¡Asi es, todos nuestros " +
+                            "articulos son nuevos " +
+                            "completamente!", "A precios bajos"
+                )
+            ), QuestionModel(
+                question = "¿Costo de envio?",
+                imageUser = "",
+                answerList = listOf(
+                    "¡Comprando 4 el envio es gratis¡"
+                )
+            ),
+            QuestionModel(
+                question = "¿Costo de envio?",
+                imageUser = "",
+                answerList = listOf(
+                    "¡Comprando 4 el envio es gratis¡"
+                )
+            ),
+            QuestionModel(
+                question = "¿Costo de envio?",
+                imageUser = "",
+                answerList = listOf(
+                    "¡Comprando 4 el envio es gratis¡"
+                )
+            ), QuestionModel(
+                question = "¿Costo de envio?",
+                imageUser = "",
+                answerList = listOf(
+                    "¡Comprando 4 el envio es gratis¡"
+                )
+            ), QuestionModel(
+                question = "¿Costo de envio?",
+                imageUser = "",
+                answerList = listOf(
+                    "¡Comprando 4 el envio es gratis¡"
+                )
+            ), QuestionModel(
+                question = "¿Costo de envio?",
+                imageUser = "",
+                answerList = listOf(
+                    "¡Comprando 4 el envio es gratis¡"
+                )
+            ),
+            QuestionModel(
+                question = "¿Costo de envio a 48290?",
+                imageUser = "",
+                answerList = listOf(
+                    "¡Comprando 4 el envio es gratis¡"
+                )
+            )
+        )
+
         LazyColumn(
             modifier = Modifier
                 .fillMaxWidth()
@@ -109,7 +172,7 @@ fun RatingProductViewCompose() {
                 ) {
                     SemiBoldText(
                         modifier = Modifier.align(Alignment.CenterStart),
-                        text = "11 comentarios",
+                        text = "${ratingList.size} calificaciones",
                         fontSize = 15.sp
                     )
                     Row(
@@ -130,68 +193,7 @@ fun RatingProductViewCompose() {
 
             }
 
-            val ratingList = listOf(
-                QuestionModel(
-                    question = "¿Sirve para 220v?",
-                    imageUser = "",
-                    likesList = listOf("33", "33333", "33332"),
-                    answerList = listOf("Si, incluso para 110v")
-                ), QuestionModel(
-                    question = "¿Es nuevo el articulo?",
-                    imageUser = "",
-                    likesList = listOf("33", "333"),
-                    answerList = listOf(
-                        "¡Asi es, todos nuestros " +
-                                "articulos son nuevos " +
-                                "completamente!", "A precios bajos"
-                    )
-                ), QuestionModel(
-                    question = "¿Costo de envio?",
-                    imageUser = "",
-                    answerList = listOf(
-                        "¡Comprando 4 el envio es gratis¡"
-                    )
-                ),
-                QuestionModel(
-                    question = "¿Costo de envio?",
-                    imageUser = "",
-                    answerList = listOf(
-                        "¡Comprando 4 el envio es gratis¡"
-                    )
-                ),
-                QuestionModel(
-                    question = "¿Costo de envio?",
-                    imageUser = "",
-                    answerList = listOf(
-                        "¡Comprando 4 el envio es gratis¡"
-                    )
-                ), QuestionModel(
-                    question = "¿Costo de envio?",
-                    imageUser = "",
-                    answerList = listOf(
-                        "¡Comprando 4 el envio es gratis¡"
-                    )
-                ), QuestionModel(
-                    question = "¿Costo de envio?",
-                    imageUser = "",
-                    answerList = listOf(
-                        "¡Comprando 4 el envio es gratis¡"
-                    )
-                ), QuestionModel(
-                    question = "¿Costo de envio?",
-                    imageUser = "",
-                    answerList = listOf(
-                        "¡Comprando 4 el envio es gratis¡"
-                    )
-                ),
-                QuestionModel(
-                    question = "¿Costo de envio a 48290?",
-                    imageUser = "",
-                    answerList = listOf(
-                        "¡Comprando 4 el envio es gratis¡"
-                    )
-                )
-            )
+
             items(
                 items = ratingList
             ) { item ->
