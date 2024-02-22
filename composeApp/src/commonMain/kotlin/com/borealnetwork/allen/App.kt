@@ -29,6 +29,7 @@ import com.borealnetwork.allen.presentation.ui.general.logingraph.LoginViewCompo
 import com.borealnetwork.allen.presentation.ui.product.ProductViewCompose
 import com.borealnetwork.allen.presentation.ui.product.question.QuestionViewCompose
 import com.borealnetwork.allen.presentation.ui.product.rating.RatingProductViewCompose
+import com.borealnetwork.allen.presentation.ui.shoppingcart.DetailBuyCartViewCompose
 import com.borealnetwork.allen.presentation.ui.shoppingcart.ShoppingCartViewCompose
 import com.borealnetwork.allen.theme.AppTheme
 import com.borealnetwork.allen.viewmodel.LoginViewModel
@@ -63,7 +64,8 @@ internal fun App() = AppTheme {
 //    ProductViewCompose()
 //    QuestionViewCompose()
 //    RatingProductViewCompose()
-    ShoppingCartViewCompose()
+//    ShoppingCartViewCompose()
+    DetailBuyCartViewCompose()
 }
 
 @Composable

@@ -55,11 +55,14 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.borealnetwork.allen.components.extensions.DottedShape
+import com.borealnetwork.allen.components.extensions.drawColoredShadow
 import com.borealnetwork.allen.components.extensions.mirror
 import com.borealnetwork.allen.domain.model.ItemCartModel
 import com.borealnetwork.allen.domain.model.ItemShoppingModel
 import com.borealnetwork.allen.domain.model.ProductShoppingCart
 import com.borealnetwork.allen.theme.BlueStatusLineColor
+import com.borealnetwork.allen.theme.BlueTransparent
 import com.borealnetwork.allen.theme.CategoryBackgroundSelectorOne
 import com.borealnetwork.allen.theme.GrayBackgroundDrawerDismiss
 import com.borealnetwork.allen.theme.GrayBorderLight
@@ -68,9 +71,12 @@ import com.borealnetwork.allen.theme.GrayCategoryBackground
 import com.borealnetwork.allen.theme.GrayLetterCategoryProduct
 import com.borealnetwork.allen.theme.GrayLetterHint
 import com.borealnetwork.allen.theme.GrayLetterSeeAll
+import com.borealnetwork.allen.theme.GrayLetterShipping
 import com.borealnetwork.allen.theme.GrayMedium
 import com.borealnetwork.allen.theme.GraySinceTo
+import com.borealnetwork.allen.theme.GreenStrong
 import com.borealnetwork.allen.theme.OrangeStrong
+import com.borealnetwork.allen.theme.OrangeTransparent
 import com.borealnetwork.allen.theme.RedEndColor
 import com.borealnetwork.allen.theme.RedStartColor
 import com.borealnetwork.allen.theme.StarColor
@@ -847,14 +853,11 @@ fun ShoppingCartStoreItem(
             StoreInformationItem(
                 deleteOptions, selector, item, showItems
             )
-            if (showItems.value) {
+            AnimatedVisibility(visible = showItems.value) {
                 Divider(
                     thickness = 1.5.dp,
                     color = GrayBorderLight
                 )
-            }
-            if (showItems.value) {
-
                 FlowRow(
                     modifier = Modifier
                         .fillMaxWidth(),
@@ -2152,6 +2155,156 @@ fun ItemSold() {
                 fontSize = 12.sp,
                 color = GraySinceTo
             )
+        }
+    }
+}
+
+
+//Items de Compra
+@Composable
+fun BottomBuyCartItem() {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth(),
+        shape = RectangleShape,
+        elevation = 15.dp
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 10.dp)
+                .background(White),
+            verticalAlignment = Alignment.Bottom,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Column(
+                modifier = Modifier.padding(
+                    start = 30.dp, end = 30.dp,
+                    bottom = 18.dp
+                ),
+                verticalArrangement = Arrangement.SpaceBetween,
+                horizontalAlignment = Alignment.Start
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 15.dp, bottom = 15.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    MediumText(
+                        text = "Descuento de tienda",
+                        color = GrayLetterSeeAll,
+                        fontSize = 13.sp
+                    )
+                    SemiBoldText(
+                        text = "8%",
+                        color = GrayLetterShipping,
+                        fontSize = 15.sp
+                    )
+                }
+
+                Box(
+                    Modifier
+                        .height(1.dp)
+                        .fillMaxWidth()
+                        .background(Color.Gray, shape = DottedShape(step = 20.dp))
+                )
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceEvenly,
+                    verticalAlignment = Alignment.Bottom
+                ) {
+                    SemiBoldText(
+                        modifier = Modifier.weight(1f),
+                        text = "Pagar",
+                        color = GrayLetterShipping,
+                        fontSize = 18.sp
+                    )
+                    BoldText(
+                        modifier = Modifier
+                            .wrapContentWidth()
+                            .padding(bottom = 5.dp),
+                        text = "$100",
+                        color = OrangeTransparent,
+                        fontSize = 12.sp
+                    )
+                    BoldText(
+                        modifier = Modifier
+                            .wrapContentWidth()
+                            .padding(start = 21.dp),
+                        text = "$92",
+                        color = GreenStrong,
+                        fontSize = 30.sp,
+                        textAlign = TextAlign.End
+                    )
+                }
+                ShadowButton(
+                    modifier = Modifier
+                        .padding(bottom = 18.dp, top = 24.dp)
+                        .fillMaxWidth()
+                        .drawColoredShadow(
+                            color = BlueTransparent, alpha = 1f, borderRadius = 10.dp,
+                            offsetY = 6.dp, offsetX = 5.dp, blurRadius = 10.dp
+                        ),
+                    text = "Continuar"
+                ) {
+//                            navController?.navigate(SHOPPING_DETAIL_GRAPH)
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun ResumeItem(
+    modifier: Modifier = Modifier,
+    title: String,
+    hideIcon: Boolean = true,
+    content: @Composable () -> Unit
+) {
+
+    val showItems = rememberSaveable { mutableStateOf(true) }
+    Card(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(bottom = 30.dp),
+        shape = RectangleShape,
+        elevation = 5.dp
+    ) {
+        Column(
+            modifier = Modifier
+                .background(White)
+                .padding(horizontal = 30.dp)
+                .wrapContentHeight()
+                .fillMaxWidth()
+        ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 20.dp, bottom = 30.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                SemiBoldText(
+                    text = title,
+                    fontSize = 15.sp
+                )
+                if (hideIcon) {
+                    CircularIcon(
+                        modifier = Modifier
+                            .size(35.dp).wrapContentSize()
+                            .rotate(if (showItems.value) 0f else 180f), icon = "ic_arrow_down.xml",
+                        contentDescription = "arrow", onClick = {
+                            showItems.value = (!showItems.value)
+                        })
+
+                }
+
+            }
+            AnimatedVisibility(visible = showItems.value) {
+                content()
+            }
+
         }
     }
 }
