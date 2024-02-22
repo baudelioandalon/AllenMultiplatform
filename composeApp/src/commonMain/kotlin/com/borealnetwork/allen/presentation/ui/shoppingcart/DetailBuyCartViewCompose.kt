@@ -9,28 +9,19 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.Card
-import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.borealnetwork.allen.components.AddressSelector
 import com.borealnetwork.allen.components.BottomBuyCartItem
-import com.borealnetwork.allen.components.MediumText
 import com.borealnetwork.allen.components.ResumeItem
 import com.borealnetwork.allen.components.SelectorSpinner
 import com.borealnetwork.allen.components.ShippingSelector
 import com.borealnetwork.allen.components.ToolbarTitle
 import com.borealnetwork.allen.components.UserSelector
 import com.borealnetwork.allen.theme.GrayBackgroundMain
-import com.borealnetwork.allen.theme.GrayStrong
-import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun DetailBuyCartViewCompose() {
@@ -97,7 +88,7 @@ fun DetailBuyCartViewCompose() {
                     }
                 }
 
-                ResumeItem(title = "Forma de pago"){
+                ResumeItem(title = "Forma de pago") {
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()

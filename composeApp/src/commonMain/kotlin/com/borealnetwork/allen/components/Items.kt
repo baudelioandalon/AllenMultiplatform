@@ -2256,6 +2256,42 @@ fun BottomBuyCartItem() {
 }
 
 @Composable
+fun BottomContinueItem() {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth(),
+        shape = RectangleShape,
+        elevation = 15.dp
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(White).padding(
+                    top = 10.dp,
+                    start = 30.dp,
+                    end = 30.dp,
+                    bottom = 18.dp
+                ),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ) {
+            ShadowButton(
+                modifier = Modifier
+                    .padding(bottom = 18.dp, top = 24.dp)
+                    .fillMaxWidth()
+                    .drawColoredShadow(
+                        color = BlueTransparent, alpha = 1f, borderRadius = 10.dp,
+                        offsetY = 6.dp, offsetX = 5.dp, blurRadius = 10.dp
+                    ),
+                text = "Continuar"
+            ) {
+//                            navController?.navigate(SHOPPING_DETAIL_GRAPH)
+            }
+        }
+    }
+}
+
+@Composable
 fun ResumeItem(
     modifier: Modifier = Modifier,
     title: String,
