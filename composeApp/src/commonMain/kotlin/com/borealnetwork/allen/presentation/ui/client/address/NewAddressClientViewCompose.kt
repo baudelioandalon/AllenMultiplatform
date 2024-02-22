@@ -104,8 +104,16 @@ fun NewAddressClientViewCompose() {
                         )
 
                         SelectorSpinner(
+                            modifier = Modifier.padding(bottom = 26.dp),
                             topLabelText = "Estado",
                             spinnerText = "Seleccione un estado"
+                        )
+
+                        EditTextTopLabel(
+                            topLabelText = "Alias",
+                            value = "",
+                            onValueChange = {},
+                            placeHolderText = "Casa de verano",
                         )
                     }
                 }
