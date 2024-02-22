@@ -26,6 +26,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.borealnetwork.allen.domain.model.BirdImage
 import com.borealnetwork.allen.presentation.ui.client.address.AddressClientViewCompose
+import com.borealnetwork.allen.presentation.ui.client.address.NewAddressClientViewCompose
 import com.borealnetwork.allen.presentation.ui.general.logingraph.LoginViewCompose
 import com.borealnetwork.allen.presentation.ui.product.ProductViewCompose
 import com.borealnetwork.allen.presentation.ui.product.question.QuestionViewCompose
@@ -67,7 +68,8 @@ internal fun App() = AppTheme {
 //    RatingProductViewCompose()
 //    ShoppingCartViewCompose()
 //    DetailBuyCartViewCompose()
-    AddressClientViewCompose()
+//    AddressClientViewCompose()
+    NewAddressClientViewCompose()
 }
 
 @Composable

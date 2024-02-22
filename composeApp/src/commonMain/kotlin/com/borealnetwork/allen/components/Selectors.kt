@@ -54,6 +54,7 @@ import com.borealnetwork.allen.theme.GrayMedium
 import com.borealnetwork.allen.theme.GraySelector
 import com.borealnetwork.allen.theme.GraySinceTo
 import com.borealnetwork.allen.theme.GreenStrong
+import com.borealnetwork.allen.theme.robotoMediumTypo
 import org.jetbrains.compose.resources.painterResource
 
 //@Preview(showBackground = true)
@@ -679,47 +680,64 @@ fun <T> Spinner(
 @Composable
 fun SelectorSpinner(
     modifier: Modifier = Modifier,
+    topLabelText: String = "",
+    spinnerText: String = "Seleccione una opcion",
     list: List<String> = listOf("Seleccione una opcion", "Data 1", "Data 2")
 ) {
-    Spinner(
-        modifier = modifier.wrapContentSize(),
-        dropDownModifier = Modifier.wrapContentSize(),
-        items = list,
-        selectedItem = "Seleccione una opcion",
-        onItemSelected = {},
-        selectedItemFactory = { modifierContainer, item ->
-            Card(
-                modifier = modifierContainer
-                    .fillMaxWidth()
-                    .height(60.dp),
-                elevation = 0.dp,
-                shape = RoundedCornerShape(10.dp),
-                backgroundColor = GraySelector
-            ) {
-                Row(
-                    modifier = modifierContainer
-                        .padding(start = 16.dp, end = 20.dp)
-                        .fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    MediumText(
-                        text = item,
-                        fontSize = 15.sp
-                    )
 
-                    Icon(
-                        painter = painterResource(res = "ic_arrow_down.xml"),
-                        contentDescription = "drop down arrow"
-                    )
-                }
-            }
+    Column(modifier = modifier) {
 
-        },
-        dropdownItemFactory = { item, _ ->
-            Text(text = item)
+        if (topLabelText.isNotEmpty()) {
+            Text(
+                modifier = Modifier.padding(bottom = 9.dp),
+                text = topLabelText,
+                color = Black,
+                fontSize = 15.sp,
+                fontFamily = robotoMediumTypo()
+            )
         }
-    )
+
+        Spinner(
+            modifier = Modifier.wrapContentSize(),
+            dropDownModifier = Modifier.wrapContentSize(),
+            items = list,
+            selectedItem = spinnerText,
+            onItemSelected = {},
+            selectedItemFactory = { modifierContainer, item ->
+                Card(
+                    modifier = modifierContainer
+                        .fillMaxWidth()
+                        .height(60.dp),
+                    elevation = 0.dp,
+                    shape = RoundedCornerShape(10.dp),
+                    backgroundColor = GraySelector
+                ) {
+                    Row(
+                        modifier = modifierContainer
+                            .padding(start = 16.dp, end = 20.dp)
+                            .fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        MediumText(
+                            text = item,
+                            fontSize = 15.sp
+                        )
+
+                        Icon(
+                            painter = painterResource(res = "ic_arrow_down.xml"),
+                            contentDescription = "drop down arrow"
+                        )
+                    }
+                }
+
+            },
+            dropdownItemFactory = { item, _ ->
+                Text(text = item)
+            }
+        )
+    }
+
 }
 
 @Composable
