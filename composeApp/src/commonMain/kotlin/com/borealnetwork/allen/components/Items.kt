@@ -929,7 +929,13 @@ fun StoreInformationItem(
         )
         SemiBoldText(
             modifier = Modifier.padding(end = 23.dp),
-            text = "${item.listItems.size} articulos",
+            text = "${item.listItems.size} articulo${
+                if (item.listItems.size > 1) {
+                    "s"
+                } else {
+                    ""
+                }
+            }",
             color = GrayMedium,
             fontSize = 13.sp
         )
@@ -2275,14 +2281,10 @@ fun BottomContinueItem() {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ) {
-            ShadowButton(
+            BlueButton(
                 modifier = Modifier
                     .padding(bottom = 18.dp, top = 24.dp)
-                    .fillMaxWidth()
-                    .drawColoredShadow(
-                        color = BlueTransparent, alpha = 1f, borderRadius = 10.dp,
-                        offsetY = 6.dp, offsetX = 5.dp, blurRadius = 10.dp
-                    ),
+                    .fillMaxWidth(),
                 text = "Continuar"
             ) {
 //                            navController?.navigate(SHOPPING_DETAIL_GRAPH)
