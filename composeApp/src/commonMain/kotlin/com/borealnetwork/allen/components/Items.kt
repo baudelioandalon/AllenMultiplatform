@@ -34,6 +34,7 @@ import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.RadioButton
 import androidx.compose.material.RadioButtonDefaults
+import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
@@ -61,6 +62,8 @@ import com.borealnetwork.allen.components.extensions.mirror
 import com.borealnetwork.allen.domain.model.ItemCartModel
 import com.borealnetwork.allen.domain.model.ItemShoppingModel
 import com.borealnetwork.allen.domain.model.ProductShoppingCart
+import com.borealnetwork.allen.domain.payments.CardModel
+import com.borealnetwork.allen.domain.payments.TypeCard
 import com.borealnetwork.allen.theme.BlueStatusLineColor
 import com.borealnetwork.allen.theme.BlueTransparent
 import com.borealnetwork.allen.theme.CategoryBackgroundSelectorOne
@@ -80,6 +83,7 @@ import com.borealnetwork.allen.theme.OrangeTransparent
 import com.borealnetwork.allen.theme.RedEndColor
 import com.borealnetwork.allen.theme.RedStartColor
 import com.borealnetwork.allen.theme.StarColor
+import com.borealnetwork.allen.tools.getGradient
 import org.jetbrains.compose.resources.painterResource
 
 //@Composable
@@ -107,24 +111,20 @@ import org.jetbrains.compose.resources.painterResource
 @Composable
 fun CategoryItem() {
     Column(
-        modifier = Modifier
-            .padding(start = 30.dp, end = 4.dp, bottom = 35.dp)
-            .wrapContentSize()
+        modifier = Modifier.padding(start = 30.dp, end = 4.dp, bottom = 35.dp).wrapContentSize()
             .background(White),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
         Card(
-            modifier = Modifier
-                .padding(top = 23.dp, bottom = 9.dp)
-                .size(74.dp), onClick = {},
+            modifier = Modifier.padding(top = 23.dp, bottom = 9.dp).size(74.dp),
+            onClick = {},
             elevation = 0.dp,
             shape = CircleShape,
             backgroundColor = GrayCategoryBackground
         ) {
             Column(
-                modifier = Modifier
-                    .fillMaxSize(),
+                modifier = Modifier.fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
@@ -137,8 +137,7 @@ fun CategoryItem() {
         }
 
         SemiBoldText(
-            modifier = Modifier
-                .fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth(),
             text = "Ferreteria",
             fontSize = 13.sp,
             letterSpacing = 0.sp,
@@ -152,29 +151,24 @@ fun CategoryItem() {
 @Composable
 fun BrandingItem(itemSize: Dp = 60.dp) {
     Column(
-        modifier = Modifier
-            .wrapContentSize()
-            .padding(start = 30.dp, end = 4.dp),
+        modifier = Modifier.wrapContentSize().padding(start = 30.dp, end = 4.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
         Card(
-            modifier = Modifier
-                .size(itemSize), onClick = {},
+            modifier = Modifier.size(itemSize),
+            onClick = {},
             elevation = 0.dp,
             shape = RoundedCornerShape(corner = CornerSize(10.dp)),
             backgroundColor = GrayBrandingBackground
         ) {
             Column(
-                modifier = Modifier
-                    .fillMaxSize(),
+                modifier = Modifier.fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
                 Image(
-                    modifier = Modifier
-                        .padding(horizontal = 10.dp)
-                        .fillMaxSize(),
+                    modifier = Modifier.padding(horizontal = 10.dp).fillMaxSize(),
                     painter = painterResource(res = "tools_icon.png"),
                     contentDescription = "item"
                 )
@@ -186,23 +180,17 @@ fun BrandingItem(itemSize: Dp = 60.dp) {
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun CategorySelectorItem(
-    maxBackground: Boolean = false,
-    color: Color = CategoryBackgroundSelectorOne
+    maxBackground: Boolean = false, color: Color = CategoryBackgroundSelectorOne
 ) {
-    Box(
-        modifier = Modifier
-            .padding(start = 30.dp, end = 4.dp)
-            .height(144.dp)
-            .width(134.dp).graphicsLayer {
-                shape = RoundedCornerShape(corner = CornerSize(15.dp))
-            }
-    ) {
+    Box(modifier = Modifier.padding(start = 30.dp, end = 4.dp).height(144.dp).width(134.dp)
+        .graphicsLayer {
+            shape = RoundedCornerShape(corner = CornerSize(15.dp))
+        }) {
 
         Column {
             AnimatedVisibility(!maxBackground) {
                 Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth()
                         .fillMaxHeight(if (maxBackground) 1F else 0.5F),
                     elevation = 0.dp,
                     backgroundColor = Transparent
@@ -211,39 +199,29 @@ fun CategorySelectorItem(
                 }
             }
             Card(
-                modifier = Modifier
-                    .fillMaxSize(),
-                elevation = 0.dp,
-                backgroundColor = color
+                modifier = Modifier.fillMaxSize(), elevation = 0.dp, backgroundColor = color
             ) {
 
             }
         }
 
         Card(
-            modifier = Modifier, onClick = {},
-            elevation = 0.dp,
-            backgroundColor = Transparent
+            modifier = Modifier, onClick = {}, elevation = 0.dp, backgroundColor = Transparent
         ) {
             Column(
-                modifier = Modifier
-                    .padding(horizontal = 10.dp)
-                    .fillMaxSize(),
+                modifier = Modifier.padding(horizontal = 10.dp).fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
                 Image(
-                    modifier = Modifier
-                        .padding(top = 10.dp)
-                        .fillMaxWidth()
-                        .height(80.dp),
+                    modifier = Modifier.padding(top = 10.dp).fillMaxWidth().height(80.dp),
                     painter = painterResource(res = "laptop_test.png"),
                     contentDescription = "item"
                 )
                 BoldText(
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                    text = "Laptops", textAlign = TextAlign.Center,
+                    modifier = Modifier.fillMaxWidth(),
+                    text = "Laptops",
+                    textAlign = TextAlign.Center,
                     fontSize = 15.sp,
                     color = Black
                 )
@@ -260,30 +238,22 @@ fun SellerItem(
     onClicked: (() -> Unit)? = null
 ) {
     Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(White),
+        modifier = Modifier.fillMaxWidth().background(White),
         verticalAlignment = Alignment.Bottom,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(top = 20.dp, start = 30.dp, end = 30.dp)
+            modifier = Modifier.fillMaxSize().padding(top = 20.dp, start = 30.dp, end = 30.dp)
         ) {
             BoldText(text = "Vendedor", fontSize = 18.sp, color = Black)
             Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 35.dp, top = 22.dp)
-                    .wrapContentHeight()
-                    .clickable { onClicked?.invoke() },
+                modifier = Modifier.fillMaxWidth().padding(bottom = 35.dp, top = 22.dp)
+                    .wrapContentHeight().clickable { onClicked?.invoke() },
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Card(
-                    modifier = Modifier
-                        .size(53.dp),
+                    modifier = Modifier.size(53.dp),
                     backgroundColor = GrayBackgroundDrawerDismiss,
                     elevation = 0.dp,
                     shape = RoundedCornerShape(10.dp)
@@ -291,16 +261,11 @@ fun SellerItem(
 
                 }
                 Column(
-                    modifier = Modifier
-                        .padding(start = 19.dp)
-                        .weight(1f)
-                        .fillMaxHeight()
+                    modifier = Modifier.padding(start = 19.dp).weight(1f).fillMaxHeight()
                 ) {
                     BoldText(text = "Ferreteria La Hormiga", fontSize = 15.sp)
                     MediumText(
-                        text = "Para Casa y Hogar",
-                        color = GrayLetterSeeAll,
-                        fontSize = 15.sp
+                        text = "Para Casa y Hogar", color = GrayLetterSeeAll, fontSize = 15.sp
                     )
                 }
                 RightRoundedButton()
@@ -313,59 +278,45 @@ fun SellerItem(
 @Composable
 fun ProductItem(productClicked: (() -> Unit)? = null) {
     Card(
-        modifier = Modifier
-            .padding(start = 30.dp, end = 4.dp)
-            .height(240.dp)
-            .width(178.dp), onClick = { productClicked?.invoke() },
+        modifier = Modifier.padding(start = 30.dp, end = 4.dp).height(240.dp).width(178.dp),
+        onClick = { productClicked?.invoke() },
         elevation = 6.dp,
         shape = RoundedCornerShape(corner = CornerSize(10.dp)),
         backgroundColor = White
     ) {
         Column(
-            modifier = Modifier
-                .padding(horizontal = 10.dp)
-                .fillMaxSize(),
+            modifier = Modifier.padding(horizontal = 10.dp).fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
             Box {
                 FavoriteButton()
                 Image(
-                    modifier = Modifier
-                        .padding(top = 10.dp)
-                        .fillMaxWidth()
-                        .height(130.dp),
+                    modifier = Modifier.padding(top = 10.dp).fillMaxWidth().height(130.dp),
                     painter = painterResource("tools_icon.png"),
                     contentDescription = "item"
                 )
             }
 
             NameProductText(
-                modifier = Modifier
-                    .padding(start = 14.dp)
-                    .fillMaxWidth(), text = "Sensor Hc-sr04", textAlign = TextAlign.Start
+                modifier = Modifier.padding(start = 14.dp).fillMaxWidth(),
+                text = "Sensor Hc-sr04",
+                textAlign = TextAlign.Start
             )
             CategoryProductText(
-                modifier = Modifier
-                    .padding(start = 14.dp)
-                    .fillMaxWidth(),
+                modifier = Modifier.padding(start = 14.dp).fillMaxWidth(),
                 text = "Electronica",
                 color = GrayLetterCategoryProduct,
                 textAlign = TextAlign.Start
             )
 
             Row(
-                modifier = Modifier
-                    .padding(start = 14.dp)
-                    .fillMaxWidth(),
+                modifier = Modifier.padding(start = 14.dp).fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.Bottom
             ) {
                 BoldText(
-                    modifier = Modifier
-                        .padding(bottom = 5.dp)
-                        .wrapContentSize(),
-                    text = "$54"
+                    modifier = Modifier.padding(bottom = 5.dp).wrapContentSize(), text = "$54"
                 )
                 LittleAddButton()
             }
@@ -376,36 +327,28 @@ fun ProductItem(productClicked: (() -> Unit)? = null) {
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun ProductResultItem(
-    modifier: Modifier = Modifier,
-    productClicked: (() -> Unit)? = null
+    modifier: Modifier = Modifier, productClicked: (() -> Unit)? = null
 ) {
     Card(
-        modifier = modifier
-            .wrapContentHeight()
-            .fillMaxWidth(),
+        modifier = modifier.wrapContentHeight().fillMaxWidth(),
         onClick = { productClicked?.invoke() },
         elevation = 0.dp,
         shape = RoundedCornerShape(topStart = 10.dp, topEnd = 10.dp),
         backgroundColor = White
     ) {
         Column(
-            modifier = Modifier
-                .fillMaxSize(),
+            modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top
         ) {
             Box(
-                modifier = Modifier
-                    .background(
-                        color = GrayBackgroundDrawerDismiss,
-                        shape = RoundedCornerShape(10.dp)
-                    )
-                    .height(200.dp)
+                modifier = Modifier.background(
+                    color = GrayBackgroundDrawerDismiss, shape = RoundedCornerShape(10.dp)
+                ).height(200.dp)
             ) {
                 FavoriteButton(modifier = Modifier.padding(start = 7.dp, top = 7.dp))
                 Image(
-                    modifier = Modifier
-                        .fillMaxSize(),
+                    modifier = Modifier.fillMaxSize(),
                     painter = painterResource("tools_icon.png"),
                     contentDescription = "item"
                 )
@@ -413,38 +356,30 @@ fun ProductResultItem(
 
             Row {
                 SemiBoldText(
-                    modifier = Modifier
-                        .weight(1f),
-                    text = "Sensor Hc-sr04", textAlign = TextAlign.Start,
+                    modifier = Modifier.weight(1f),
+                    text = "Sensor Hc-sr04",
+                    textAlign = TextAlign.Start,
                     fontSize = 13.sp
                 )
                 BoldText(
-                    modifier = Modifier
-                        .wrapContentSize(),
-                    text = "$54",
-                    fontSize = 14.sp
+                    modifier = Modifier.wrapContentSize(), text = "$54", fontSize = 14.sp
                 )
             }
 
             CategoryProductText(
-                modifier = Modifier
-                    .fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth(),
                 text = "Electronica",
                 color = GrayLetterCategoryProduct,
                 textAlign = TextAlign.Start
             )
 
             Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 10.dp),
+                modifier = Modifier.fillMaxWidth().padding(top = 10.dp),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.Top
             ) {
                 Icon(
-                    modifier = Modifier
-                        .padding(top = 10.dp)
-                        .size(20.dp),
+                    modifier = Modifier.padding(top = 10.dp).size(20.dp),
                     painter = painterResource("ic_thunder_icon.xml"),
                     contentDescription = "free shipping",
                     tint = StarColor
@@ -457,8 +392,7 @@ fun ProductResultItem(
 
 @Composable
 fun BrandingHorizontal(
-    modifier: Modifier = Modifier,
-    itemSize: Dp = 60.dp
+    modifier: Modifier = Modifier, itemSize: Dp = 60.dp
 ) {
     LazyRow(
         modifier = modifier
@@ -472,34 +406,28 @@ fun BrandingHorizontal(
 @Composable
 fun SellerItemsItem(modifier: Modifier = Modifier) {
     Column(
-        modifier = modifier
-            .fillMaxWidth()
-            .background(White),
+        modifier = modifier.fillMaxWidth().background(White),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween
     ) {
         Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(start = 30.dp, end = 30.dp)
-                .clickable { },
+            modifier = Modifier.fillMaxWidth().padding(start = 30.dp, end = 30.dp).clickable { },
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
             BoldText(
                 fontSize = 18.sp,
                 modifier = Modifier.padding(top = 20.dp),
-                textAlign = TextAlign.Start, text = "Más productos del\nvendedor",
+                textAlign = TextAlign.Start,
+                text = "Más productos del\nvendedor",
                 color = Black
             )
             RightRoundedButton()
         }
         LazyRow(
-            modifier = Modifier
-                .padding(
-                    top = 30.dp,
-                    bottom = 35.dp
-                )
+            modifier = Modifier.padding(
+                top = 30.dp, bottom = 35.dp
+            )
         ) {
             items(10) {
                 ProductItem()
@@ -512,16 +440,12 @@ fun SellerItemsItem(modifier: Modifier = Modifier) {
 @Composable
 fun ShowSellerItem(modifier: Modifier = Modifier) {
     Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .wrapContentHeight()
-            .clickable { },
+        modifier = modifier.fillMaxWidth().wrapContentHeight().clickable { },
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Card(
-            modifier = Modifier
-                .size(53.dp),
+            modifier = Modifier.size(53.dp),
             backgroundColor = GrayBackgroundDrawerDismiss,
             elevation = 0.dp,
             shape = RoundedCornerShape(10.dp)
@@ -529,14 +453,10 @@ fun ShowSellerItem(modifier: Modifier = Modifier) {
 
         }
         Column(
-            modifier = Modifier
-                .padding(start = 19.dp)
-                .fillMaxWidth()
+            modifier = Modifier.padding(start = 19.dp).fillMaxWidth()
         ) {
             MediumText(
-                text = "Para",
-                color = GrayLetterSeeAll,
-                fontSize = 15.sp
+                text = "Para", color = GrayLetterSeeAll, fontSize = 15.sp
             )
             BoldText(text = "Casa y Hogar", fontSize = 15.sp, color = Black)
         }
@@ -550,34 +470,24 @@ fun CategorySeller(
     onClicked: (() -> Unit)? = null
 ) {
     Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .wrapContentHeight()
-            .background(White)
-            .clickable {
-                onClicked?.invoke()
-            },
+        modifier = modifier.fillMaxWidth().wrapContentHeight().background(White).clickable {
+            onClicked?.invoke()
+        },
         verticalAlignment = Alignment.Bottom,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Column(
-            modifier = innerModifier
-                .fillMaxWidth()
+            modifier = innerModifier.fillMaxWidth()
         ) {
             Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(
-                        start = 30.dp
-                    )
-                    .wrapContentHeight()
-                    .clickable { },
+                modifier = Modifier.fillMaxWidth().padding(
+                    start = 30.dp
+                ).wrapContentHeight().clickable { },
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Card(
-                    modifier = Modifier
-                        .size(53.dp),
+                    modifier = Modifier.size(53.dp),
                     backgroundColor = GrayBackgroundDrawerDismiss,
                     elevation = 0.dp,
                     shape = RoundedCornerShape(10.dp)
@@ -585,24 +495,17 @@ fun CategorySeller(
 
                 }
                 Column(
-                    modifier = Modifier
-                        .padding(start = 19.dp)
-                        .weight(1f)
+                    modifier = Modifier.padding(start = 19.dp).weight(1f)
                 ) {
                     MediumText(
-                        text = "Para",
-                        color = GrayLetterSeeAll,
-                        fontSize = 15.sp
+                        text = "Para", color = GrayLetterSeeAll, fontSize = 15.sp
                     )
                     BoldText(text = "Casa y Hogar", fontSize = 15.sp, color = Black)
                 }
                 RightRoundedButton()
             }
             LazyRow(
-                modifier = Modifier
-                    .background(White)
-                    .fillMaxWidth()
-                    .padding(top = 36.dp)
+                modifier = Modifier.background(White).fillMaxWidth().padding(top = 36.dp)
             ) {
                 items(10) {
                     ProductItem()
@@ -616,14 +519,10 @@ fun CategorySeller(
 @Composable
 fun SellersItem(modifier: Modifier = Modifier) {
     Column(
-        modifier = modifier
-            .fillMaxWidth()
-            .background(White)
+        modifier = modifier.fillMaxWidth().background(White)
     ) {
         Row(
-            modifier = Modifier
-                .padding(end = 30.dp, start = 30.dp, top = 20.dp)
-                .fillMaxWidth()
+            modifier = Modifier.padding(end = 30.dp, start = 30.dp, top = 20.dp).fillMaxWidth()
                 .clickable { },
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
@@ -634,11 +533,9 @@ fun SellersItem(modifier: Modifier = Modifier) {
             RightRoundedButton()
         }
         LazyRow(
-            modifier = Modifier
-                .padding(
-                    top = 30.dp,
-                    bottom = 35.dp
-                )
+            modifier = Modifier.padding(
+                top = 30.dp, bottom = 35.dp
+            )
         ) {
             items(10) {
                 BrandingItem()
@@ -650,38 +547,31 @@ fun SellersItem(modifier: Modifier = Modifier) {
 @OptIn(ExperimentalMaterialApi::class, ExperimentalLayoutApi::class)
 @Composable
 fun QuestionItem(
-    text: String = "", answerList: List<String> = emptyList(),
-    likesList: List<String> = emptyList()
+    text: String = "", answerList: List<String> = emptyList(), likesList: List<String> = emptyList()
 ) {
     Card(
-        elevation = 5.dp,
-        shape = RectangleShape
+        elevation = 5.dp, shape = RectangleShape
     ) {
         Row(
-            modifier = Modifier
-                .background(White)
-                .padding(start = 30.dp, top = 25.dp, end = 30.dp)
+            modifier = Modifier.background(White).padding(start = 30.dp, top = 25.dp, end = 30.dp)
                 .fillMaxSize(),
             verticalAlignment = Alignment.Top,
             horizontalArrangement = Arrangement.Start
         ) {
             Card(
-                modifier = Modifier
-                    .padding(bottom = 9.dp)
-                    .size(41.dp), onClick = {},
+                modifier = Modifier.padding(bottom = 9.dp).size(41.dp),
+                onClick = {},
                 elevation = 0.dp,
                 shape = CircleShape,
                 backgroundColor = GrayCategoryBackground
             ) {
                 Column(
-                    modifier = Modifier
-                        .fillMaxSize(),
+                    modifier = Modifier.fillMaxSize(),
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center
                 ) {
                     Image(
-                        painter = painterResource("tools_icon.png"),
-                        contentDescription = "item"
+                        painter = painterResource("tools_icon.png"), contentDescription = "item"
                     )
                 }
             }
@@ -713,44 +603,36 @@ fun QuestionItem(
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun RatingByUserItem(
-    text: String = "",
-    likesList: List<String> = emptyList()
+    text: String = "", likesList: List<String> = emptyList()
 ) {
     Card(
-        shape = RectangleShape,
-        elevation = 5.dp
+        shape = RectangleShape, elevation = 5.dp
     ) {
         Row(
-            modifier = Modifier
-                .background(White)
-                .padding(start = 30.dp, top = 10.dp, end = 30.dp, bottom = 25.dp)
-                .fillMaxSize(),
+            modifier = Modifier.background(White)
+                .padding(start = 30.dp, top = 10.dp, end = 30.dp, bottom = 25.dp).fillMaxSize(),
             verticalAlignment = Alignment.Top,
             horizontalArrangement = Arrangement.Start
         ) {
             Card(
-                modifier = Modifier
-                    .padding(bottom = 9.dp)
-                    .size(41.dp), onClick = {},
+                modifier = Modifier.padding(bottom = 9.dp).size(41.dp),
+                onClick = {},
                 elevation = 0.dp,
                 shape = CircleShape,
                 backgroundColor = GrayCategoryBackground
             ) {
                 Column(
-                    modifier = Modifier
-                        .fillMaxSize(),
+                    modifier = Modifier.fillMaxSize(),
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center
                 ) {
                     Image(
-                        painter = painterResource("tools_icon.png"),
-                        contentDescription = "item"
+                        painter = painterResource("tools_icon.png"), contentDescription = "item"
                     )
                 }
             }
             Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
+                modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Column {
                     SemiBoldText(
@@ -774,24 +656,20 @@ fun RatingByUserItem(
 @Composable
 fun AnswerItem(modifier: Modifier = Modifier, text: String = "") {
     Row(
-        modifier = modifier
-            .padding(start = 30.dp, end = 4.dp)
-            .sizeIn(maxWidth = 200.dp)
+        modifier = modifier.padding(start = 30.dp, end = 4.dp).sizeIn(maxWidth = 200.dp)
             .background(White),
         verticalAlignment = Alignment.Top,
         horizontalArrangement = Arrangement.Start
     ) {
         Card(
-            modifier = Modifier
-                .padding(bottom = 9.dp)
-                .size(30.dp), onClick = {},
+            modifier = Modifier.padding(bottom = 9.dp).size(30.dp),
+            onClick = {},
             elevation = 0.dp,
             shape = CircleShape,
             backgroundColor = GrayCategoryBackground
         ) {
             Column(
-                modifier = Modifier
-                    .fillMaxSize(),
+                modifier = Modifier.fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
@@ -804,11 +682,11 @@ fun AnswerItem(modifier: Modifier = Modifier, text: String = "") {
         }
 
         SemiBoldText(
-            modifier = Modifier
-                .padding(start = 28.dp),
+            modifier = Modifier.padding(start = 28.dp),
             text = text,
             textAlign = TextAlign.Justify,
-            fontSize = 17.sp, color = MaterialTheme.colors.primary
+            fontSize = 17.sp,
+            color = MaterialTheme.colors.primary
         )
     }
 }
@@ -818,9 +696,7 @@ fun AnswerItem(modifier: Modifier = Modifier, text: String = "") {
 fun ShoppingCartStoreItem(
     modifier: Modifier = Modifier,
     item: ItemCartModel = ItemCartModel(
-        "Test",
-        "3e23dc2",
-        "dd", listOf()
+        "Test", "3e23dc2", "dd", listOf()
     ),
     counter: Boolean = true,
     deleteOptions: Boolean = true,
@@ -831,22 +707,16 @@ fun ShoppingCartStoreItem(
 ) {
 
     Card(
-        modifier = modifier
-            .fillMaxWidth(),
-        shape = RectangleShape,
-        elevation = elevation
+        modifier = modifier.fillMaxWidth(), shape = RectangleShape, elevation = elevation
     ) {
 
         val showItems = rememberSaveable { mutableStateOf(true) }
         Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(White)
+            modifier = Modifier.fillMaxWidth().background(White)
         ) {
             if (!hideTopLine) {
                 Divider(
-                    thickness = 1.5.dp,
-                    color = GrayBorderLight
+                    thickness = 1.5.dp, color = GrayBorderLight
                 )
             }
             //TopStoreInformation
@@ -855,17 +725,14 @@ fun ShoppingCartStoreItem(
             )
             AnimatedVisibility(visible = showItems.value) {
                 Divider(
-                    thickness = 1.5.dp,
-                    color = GrayBorderLight
+                    thickness = 1.5.dp, color = GrayBorderLight
                 )
                 FlowRow(
-                    modifier = Modifier
-                        .fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth(),
                 ) {
                     //Items
                     item.listItems.forEach {
-                        ShoppingCartItem(
-                            productShoppingCart = it,
+                        ShoppingCartItem(productShoppingCart = it,
                             counter = counter,
                             deleteOptions = deleteOptions,
                             check = check,
@@ -874,8 +741,7 @@ fun ShoppingCartStoreItem(
                             },
                             saveAfterClicked = { item ->
 
-                            }
-                        )
+                            })
                     }
                 }
             }
@@ -890,8 +756,7 @@ fun StoreInformationItem(
     showItems: MutableState<Boolean>,
 ) {
     Row(
-        modifier = Modifier
-            .fillMaxWidth()
+        modifier = Modifier.fillMaxWidth()
             .padding(top = 12.dp, bottom = 14.dp, end = if (deleteOptions) 20.dp else 0.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceAround
@@ -902,15 +767,13 @@ fun StoreInformationItem(
                 selected = false,
                 onClick = { },
                 colors = RadioButtonDefaults.colors(
-                    unselectedColor = GrayLetterHint,
-                    selectedColor = MaterialTheme.colors.primary
+                    unselectedColor = GrayLetterHint, selectedColor = MaterialTheme.colors.primary
                 )
             )
         }
 
         Card(
-            modifier = Modifier
-                .size(30.dp),
+            modifier = Modifier.size(30.dp),
             backgroundColor = GrayBackgroundDrawerDismiss,
             elevation = 0.dp,
             shape = RoundedCornerShape(10.dp)
@@ -918,9 +781,7 @@ fun StoreInformationItem(
 
         }
         BoldText(
-            modifier = Modifier
-                .weight(0.5f)
-                .padding(start = 6.dp, end = 10.dp),
+            modifier = Modifier.weight(0.5f).padding(start = 6.dp, end = 10.dp),
             text = item.nameStore,
             fontSize = 15.sp,
             textOverflow = TextOverflow.Ellipsis,
@@ -928,22 +789,19 @@ fun StoreInformationItem(
             color = Black
         )
         SemiBoldText(
-            modifier = Modifier.padding(end = 23.dp),
-            text = "${item.listItems.size} articulo${
+            modifier = Modifier.padding(end = 23.dp), text = "${item.listItems.size} articulo${
                 if (item.listItems.size > 1) {
                     "s"
                 } else {
                     ""
                 }
-            }",
-            color = GrayMedium,
-            fontSize = 13.sp
+            }", color = GrayMedium, fontSize = 13.sp
         )
-        CircularIcon(
-            modifier = Modifier
-                .size(35.dp).wrapContentSize()
-                .rotate(if (showItems.value) 0f else 180f), icon = "ic_arrow_down.xml",
-            contentDescription = "arrow", onClick = {
+        CircularIcon(modifier = Modifier.size(35.dp).wrapContentSize()
+            .rotate(if (showItems.value) 0f else 180f),
+            icon = "ic_arrow_down.xml",
+            contentDescription = "arrow",
+            onClick = {
                 showItems.value = (!showItems.value)
             })
     }
@@ -969,13 +827,9 @@ fun ShoppingCartItem(
     saveAfterClicked: ((ProductShoppingCart) -> Unit)? = null,
 ) {
     Column(
-        modifier = if (deleteOptions)
-            Modifier
-                .fillMaxWidth()
-                .padding(start = 30.dp, end = 30.dp, top = 14.dp, bottom = 20.dp)
-        else Modifier
-            .fillMaxWidth()
-            .padding(top = 14.dp, bottom = 20.dp)
+        modifier = if (deleteOptions) Modifier.fillMaxWidth()
+            .padding(start = 30.dp, end = 30.dp, top = 14.dp, bottom = 20.dp)
+        else Modifier.fillMaxWidth().padding(top = 14.dp, bottom = 20.dp)
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -987,8 +841,7 @@ fun ShoppingCartItem(
                 modifier = Modifier.wrapContentWidth()
             ) {
                 Card(
-                    modifier = Modifier
-                        .size(81.dp),
+                    modifier = Modifier.size(81.dp),
                     backgroundColor = GrayBackgroundDrawerDismiss,
                     elevation = 0.dp,
                     shape = RoundedCornerShape(10.dp)
@@ -998,10 +851,7 @@ fun ShoppingCartItem(
 
             }
             Column(
-                modifier = Modifier
-                    .height(81.dp)
-                    .padding(start = 27.dp)
-                    .weight(0.3f),
+                modifier = Modifier.height(81.dp).padding(start = 27.dp).weight(0.3f),
                 verticalArrangement = Arrangement.SpaceAround
             ) {
                 SemiBoldText(
@@ -1023,30 +873,24 @@ fun ShoppingCartItem(
                 ) {
                     if (productShoppingCart.discountPercentage > 0) {
                         PriceBeforeDiscount(
-                            modifier = Modifier.weight(0.3f),
-                            price = productShoppingCart.price
+                            modifier = Modifier.weight(0.3f), price = productShoppingCart.price
                         )
                     }
                     BoldText(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .weight(1f),
+                        modifier = Modifier.fillMaxWidth().weight(1f),
                         text = "$${productShoppingCart.getProductWithDiscount().toInt()}",
-                        fontSize = 15.sp, textAlign = TextAlign.End
+                        fontSize = 15.sp,
+                        textAlign = TextAlign.End
                     )
                 }
             }
             Column(
-                modifier = Modifier
-                    .height(81.dp)
-                    .weight(0.3f),
+                modifier = Modifier.height(81.dp).weight(0.3f),
                 verticalArrangement = Arrangement.SpaceBetween,
                 horizontalAlignment = Alignment.End
             ) {
                 Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .wrapContentHeight(),
+                    modifier = Modifier.fillMaxWidth().wrapContentHeight(),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
@@ -1075,15 +919,11 @@ fun ShoppingCartItem(
                     ) {
                         SemiBoldText(
                             modifier = Modifier.padding(
-                                end = 14.dp,
-                                bottom = 5.dp,
-                                start = 10.dp
-                            ),
-                            text = "Cantidad", fontSize = 15.sp
+                                end = 14.dp, bottom = 5.dp, start = 10.dp
+                            ), text = "Cantidad", fontSize = 15.sp
                         )
                         SemiBoldText(
-                            text = "${productShoppingCart.quantity}",
-                            fontSize = 25.sp
+                            text = "${productShoppingCart.quantity}", fontSize = 25.sp
                         )
                     }
                 }
@@ -1099,9 +939,7 @@ fun ShoppingCartItem(
         if (deleteOptions) {
             Row(modifier = Modifier.padding(top = 12.dp)) {
                 BoldText(
-                    text = "Remover",
-                    fontSize = 12.sp,
-                    color = OrangeStrong
+                    text = "Remover", fontSize = 12.sp, color = OrangeStrong
                 ) {
                     removeClicked?.invoke(productShoppingCart)
                 }
@@ -1133,15 +971,10 @@ fun FavoriteItem(
     )
 ) {
     Card(
-        modifier = Modifier
-            .fillMaxWidth(),
-        elevation = 10.dp
+        modifier = Modifier.fillMaxWidth(), elevation = 10.dp
     ) {
         Column(
-            modifier =
-            Modifier
-                .fillMaxWidth()
-                .background(White)
+            modifier = Modifier.fillMaxWidth().background(White)
                 .padding(start = 30.dp, end = 30.dp, top = 14.dp, bottom = 20.dp)
         ) {
             Row(
@@ -1154,8 +987,7 @@ fun FavoriteItem(
                     modifier = Modifier.wrapContentWidth()
                 ) {
                     Card(
-                        modifier = Modifier
-                            .size(81.dp),
+                        modifier = Modifier.size(81.dp),
                         backgroundColor = GrayBackgroundDrawerDismiss,
                         elevation = 0.dp,
                         shape = RoundedCornerShape(10.dp)
@@ -1165,10 +997,7 @@ fun FavoriteItem(
 
                 }
                 Column(
-                    modifier = Modifier
-                        .height(81.dp)
-                        .padding(start = 27.dp)
-                        .weight(0.3f),
+                    modifier = Modifier.height(81.dp).padding(start = 27.dp).weight(0.3f),
                     verticalArrangement = Arrangement.SpaceAround
                 ) {
                     SemiBoldText(
@@ -1190,30 +1019,24 @@ fun FavoriteItem(
                     ) {
                         if (productShoppingCart.discountPercentage > 0) {
                             PriceBeforeDiscount(
-                                modifier = Modifier.weight(0.3f),
-                                price = productShoppingCart.price
+                                modifier = Modifier.weight(0.3f), price = productShoppingCart.price
                             )
                         }
                         BoldText(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .weight(1f),
+                            modifier = Modifier.fillMaxWidth().weight(1f),
                             text = "$${productShoppingCart.getProductWithDiscount().toInt()}",
-                            fontSize = 15.sp, textAlign = TextAlign.End
+                            fontSize = 15.sp,
+                            textAlign = TextAlign.End
                         )
                     }
                 }
                 Column(
-                    modifier = Modifier
-                        .height(81.dp)
-                        .weight(0.3f),
+                    modifier = Modifier.height(81.dp).weight(0.3f),
                     verticalArrangement = Arrangement.SpaceBetween,
                     horizontalAlignment = Alignment.End
                 ) {
                     Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .wrapContentHeight(),
+                        modifier = Modifier.fillMaxWidth().wrapContentHeight(),
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
@@ -1237,9 +1060,7 @@ fun FavoriteItem(
             }
             Row(modifier = Modifier.padding(top = 12.dp)) {
                 BoldText(
-                    text = "Remover",
-                    fontSize = 12.sp,
-                    color = OrangeStrong
+                    text = "Remover", fontSize = 12.sp, color = OrangeStrong
                 ) {
 
                 }
@@ -1262,10 +1083,7 @@ fun NotificationItem(
     shippingStatus: String = "OK"
 ) {
     Column(
-        modifier =
-        Modifier
-            .fillMaxWidth()
-            .background(White)
+        modifier = Modifier.fillMaxWidth().background(White)
             .padding(start = 30.dp, end = 30.dp, top = 14.dp, bottom = 20.dp)
     ) {
         Row(
@@ -1278,8 +1096,7 @@ fun NotificationItem(
                 modifier = Modifier.wrapContentWidth()
             ) {
                 Card(
-                    modifier = Modifier
-                        .size(81.dp),
+                    modifier = Modifier.size(81.dp),
                     backgroundColor = GrayBackgroundDrawerDismiss,
                     elevation = 0.dp,
                     shape = RoundedCornerShape(10.dp)
@@ -1290,12 +1107,8 @@ fun NotificationItem(
             }
             if (default) {
                 Column(
-                    modifier = Modifier
-                        .wrapContentHeight()
-                        .padding(start = 22.dp)
-                        .fillMaxWidth()
-                        .background(White),
-                    verticalArrangement = Arrangement.Top
+                    modifier = Modifier.wrapContentHeight().padding(start = 22.dp).fillMaxWidth()
+                        .background(White), verticalArrangement = Arrangement.Top
                 ) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
@@ -1322,8 +1135,7 @@ fun NotificationItem(
                     )
 
                     StepIndicatorNotification(
-                        modifier = Modifier.padding(top = 20.dp),
-                        step = step
+                        modifier = Modifier.padding(top = 20.dp), step = step
                     )
                     BoldText(
                         modifier = Modifier.padding(top = 10.dp),
@@ -1336,12 +1148,8 @@ fun NotificationItem(
                 }
             } else {
                 Column(
-                    modifier = Modifier
-                        .wrapContentHeight()
-                        .padding(start = 22.dp)
-                        .fillMaxWidth()
-                        .background(White),
-                    verticalArrangement = Arrangement.Top
+                    modifier = Modifier.wrapContentHeight().padding(start = 22.dp).fillMaxWidth()
+                        .background(White), verticalArrangement = Arrangement.Top
                 ) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
@@ -1349,30 +1157,22 @@ fun NotificationItem(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         SemiBoldText(
-                            text = if (shippingType == "SHIPPING" && shippingStatus == "OK") "Preparando pedido" else if (
-                                shippingType == "PICKUP" && shippingStatus == "OK"
-                            ) "Pedido listo" else if (shippingStatus == "CANCELLED_BY_SELLER") "Cancelado por el vendedor" else "Cancelado por el cliente",
+                            text = if (shippingType == "SHIPPING" && shippingStatus == "OK") "Preparando pedido" else if (shippingType == "PICKUP" && shippingStatus == "OK") "Pedido listo" else if (shippingStatus == "CANCELLED_BY_SELLER") "Cancelado por el vendedor" else "Cancelado por el cliente",
                             fontSize = 15.sp,
                             maxLines = 3,
                             textOverflow = TextOverflow.Ellipsis
                         )
                     }
                     Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(top = 7.dp)
-                            .background(
-                                brush = Brush.horizontalGradient(
-                                    colors = if (shippingStatus == "OK") listOf(
-                                        MaterialTheme.colors.primary,
-                                        MaterialTheme.colors.onPrimary
-                                    ) else listOf(
-                                        RedStartColor,
-                                        RedEndColor
-                                    )
-                                ),
-                                shape = RoundedCornerShape(10.dp)
-                            )
+                        modifier = Modifier.fillMaxWidth().padding(top = 7.dp).background(
+                            brush = Brush.horizontalGradient(
+                                colors = if (shippingStatus == "OK") listOf(
+                                    MaterialTheme.colors.primary, MaterialTheme.colors.onPrimary
+                                ) else listOf(
+                                    RedStartColor, RedEndColor
+                                )
+                            ), shape = RoundedCornerShape(10.dp)
+                        )
                     ) {
                         Row(
                             modifier = Modifier.padding(vertical = 9.dp),
@@ -1380,18 +1180,14 @@ fun NotificationItem(
                             horizontalArrangement = Arrangement.Start
                         ) {
                             Icon(
-                                modifier = Modifier
-                                    .wrapContentHeight()
-                                    .padding(horizontal = 16.dp),
+                                modifier = Modifier.wrapContentHeight().padding(horizontal = 16.dp),
                                 painter = painterResource(res = if (shippingType == "PICKUP") "ic_on_way_walking.xml" else "ic_on_way_traffic.xml"),
                                 contentDescription = "on way",
                                 tint = White
                             )
                             Column(modifier = Modifier.wrapContentWidth()) {
                                 MediumText(
-                                    text = if (shippingType == "SHIPPING" && shippingStatus == "OK") "Preparando pedido" else if (
-                                        shippingType == "PICKUP" && shippingStatus == "OK"
-                                    ) "Pedido listo" else "Pedido cancelado",
+                                    text = if (shippingType == "SHIPPING" && shippingStatus == "OK") "Preparando pedido" else if (shippingType == "PICKUP" && shippingStatus == "OK") "Pedido listo" else "Pedido cancelado",
                                     color = White,
                                     fontSize = 15.sp
                                 )
@@ -1435,10 +1231,7 @@ fun NotificationNewSaleItem(
     onClicked: (() -> Unit)? = null
 ) {
     Column(
-        modifier =
-        Modifier
-            .fillMaxWidth()
-            .background(White)
+        modifier = Modifier.fillMaxWidth().background(White)
             .padding(start = 30.dp, end = 30.dp, top = 14.dp, bottom = 20.dp)
     ) {
         Row(
@@ -1451,8 +1244,7 @@ fun NotificationNewSaleItem(
                 modifier = Modifier.wrapContentWidth()
             ) {
                 Card(
-                    modifier = Modifier
-                        .size(81.dp),
+                    modifier = Modifier.size(81.dp),
                     backgroundColor = GrayBackgroundDrawerDismiss,
                     elevation = 0.dp,
                     shape = RoundedCornerShape(10.dp)
@@ -1462,12 +1254,8 @@ fun NotificationNewSaleItem(
 
             }
             Column(
-                modifier = Modifier
-                    .wrapContentHeight()
-                    .padding(start = 22.dp)
-                    .fillMaxWidth()
-                    .background(White),
-                verticalArrangement = Arrangement.Top
+                modifier = Modifier.wrapContentHeight().padding(start = 22.dp).fillMaxWidth()
+                    .background(White), verticalArrangement = Arrangement.Top
             ) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -1475,52 +1263,37 @@ fun NotificationNewSaleItem(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     SemiBoldText(
-                        text = if (shippingType == "SHIPPING" && shippingStatus == "WAITING") "Preparar pedido" else if (
-                            shippingType == "PICKUP" && shippingStatus == "WAITING"
-                        ) "Preparar pedido" else "Cancelado por el cliente",
+                        text = if (shippingType == "SHIPPING" && shippingStatus == "WAITING") "Preparar pedido" else if (shippingType == "PICKUP" && shippingStatus == "WAITING") "Preparar pedido" else "Cancelado por el cliente",
                         fontSize = 15.sp,
                         maxLines = 3,
                         textOverflow = TextOverflow.Ellipsis
                     )
                 }
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 7.dp)
-                        .background(
-                            brush = Brush.horizontalGradient(
-                                colors = if (shippingStatus == "WAITING") listOf(
-                                    MaterialTheme.colors.primary,
-                                    MaterialTheme.colors.onPrimary
-                                ) else listOf(
-                                    RedStartColor,
-                                    RedEndColor
-                                )
-                            ),
-                            shape = RoundedCornerShape(10.dp)
+                Box(modifier = Modifier.fillMaxWidth().padding(top = 7.dp).background(
+                    brush = Brush.horizontalGradient(
+                        colors = if (shippingStatus == "WAITING") listOf(
+                            MaterialTheme.colors.primary, MaterialTheme.colors.onPrimary
+                        ) else listOf(
+                            RedStartColor, RedEndColor
                         )
-                        .clickable {
-                            onClicked?.invoke()
-                        }
-                ) {
+                    ), shape = RoundedCornerShape(10.dp)
+                ).clickable {
+                    onClicked?.invoke()
+                }) {
                     Row(
                         modifier = Modifier.padding(vertical = 9.dp),
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.Start
                     ) {
                         Icon(
-                            modifier = Modifier
-                                .wrapContentHeight()
-                                .padding(horizontal = 16.dp),
+                            modifier = Modifier.wrapContentHeight().padding(horizontal = 16.dp),
                             painter = painterResource(res = if (shippingType == "PICKUP") "ic_on_way_walking.xml" else "ic_on_way_traffic.xml"),
                             contentDescription = "on way",
                             tint = White
                         )
                         Column(modifier = Modifier.wrapContentWidth()) {
                             MediumText(
-                                text = if (shippingType == "SHIPPING" && shippingStatus == "WAITING") "Preparar pedido" else if (
-                                    shippingType == "PICKUP" && shippingStatus == "WAITING"
-                                ) "4 Articulos" else "No recolectar",
+                                text = if (shippingType == "SHIPPING" && shippingStatus == "WAITING") "Preparar pedido" else if (shippingType == "PICKUP" && shippingStatus == "WAITING") "4 Articulos" else "No recolectar",
                                 color = White,
                                 fontSize = 15.sp
                             )
@@ -1565,12 +1338,8 @@ fun StatusPackageItem(
 ) {
     if (default) {
         Column(
-            modifier = Modifier
-                .wrapContentHeight()
-                .padding(start = 22.dp)
-                .fillMaxWidth()
-                .background(White),
-            verticalArrangement = Arrangement.Top
+            modifier = Modifier.wrapContentHeight().padding(start = 22.dp).fillMaxWidth()
+                .background(White), verticalArrangement = Arrangement.Top
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -1597,8 +1366,7 @@ fun StatusPackageItem(
             )
 
             StepIndicatorNotification(
-                modifier = Modifier.padding(top = 20.dp),
-                step = step
+                modifier = Modifier.padding(top = 20.dp), step = step
             )
             BoldText(
                 modifier = Modifier.padding(top = 10.dp),
@@ -1611,21 +1379,15 @@ fun StatusPackageItem(
         }
     } else {
         Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 7.dp)
-                .background(
-                    brush = Brush.horizontalGradient(
-                        colors = if (shippingStatus == "OK") listOf(
-                            MaterialTheme.colors.primary,
-                            MaterialTheme.colors.onPrimary
-                        ) else listOf(
-                            RedStartColor,
-                            RedEndColor
-                        )
-                    ),
-                    shape = RoundedCornerShape(10.dp)
-                )
+            modifier = Modifier.fillMaxWidth().padding(top = 7.dp).background(
+                brush = Brush.horizontalGradient(
+                    colors = if (shippingStatus == "OK") listOf(
+                        MaterialTheme.colors.primary, MaterialTheme.colors.onPrimary
+                    ) else listOf(
+                        RedStartColor, RedEndColor
+                    )
+                ), shape = RoundedCornerShape(10.dp)
+            )
         ) {
             Row(
                 modifier = Modifier.padding(vertical = 9.dp),
@@ -1633,18 +1395,14 @@ fun StatusPackageItem(
                 horizontalArrangement = Arrangement.Start
             ) {
                 Icon(
-                    modifier = Modifier
-                        .wrapContentHeight()
-                        .padding(horizontal = 16.dp),
+                    modifier = Modifier.wrapContentHeight().padding(horizontal = 16.dp),
                     painter = painterResource(res = if (shippingType == "PICKUP") "ic_on_way_walking.xml" else "ic_on_way_traffic.xml"),
                     contentDescription = "on way",
                     tint = White
                 )
                 Column(modifier = Modifier.wrapContentWidth()) {
                     MediumText(
-                        text = if (shippingType == "SHIPPING" && shippingStatus == "OK") "Preparando pedido" else if (
-                            shippingType == "PICKUP" && shippingStatus == "OK"
-                        ) "Pedido listo" else "Pedido cancelado",
+                        text = if (shippingType == "SHIPPING" && shippingStatus == "OK") "Preparando pedido" else if (shippingType == "PICKUP" && shippingStatus == "OK") "Pedido listo" else "Pedido cancelado",
                         color = White,
                         fontSize = 15.sp
                     )
@@ -1678,12 +1436,9 @@ fun StatusPreviouPackageItem(
     lastItem: Boolean = false
 ) {
     Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(
-                color = White,
-                shape = RoundedCornerShape(10.dp)
-            )
+        modifier = Modifier.fillMaxWidth().background(
+            color = White, shape = RoundedCornerShape(10.dp)
+        )
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -1694,15 +1449,12 @@ fun StatusPreviouPackageItem(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Divider(
-                    modifier = Modifier
-                        .height(20.dp)
-                        .width(2.dp),
+                    modifier = Modifier.height(20.dp).width(2.dp),
                     color = BlueStatusLineColor,
                     thickness = 1.dp
                 )
                 Icon(
-                    modifier = Modifier
-                        .wrapContentHeight()
+                    modifier = Modifier.wrapContentHeight()
                         .padding(horizontal = 16.dp, vertical = 5.dp),
                     painter = painterResource(res = "ic_dot.xml"),
                     contentDescription = "on way",
@@ -1710,9 +1462,7 @@ fun StatusPreviouPackageItem(
                 )
                 if (!lastItem) {
                     Divider(
-                        modifier = Modifier
-                            .height(20.dp)
-                            .width(2.dp),
+                        modifier = Modifier.height(20.dp).width(2.dp),
                         color = BlueStatusLineColor,
                         thickness = 1.dp
                     )
@@ -1720,9 +1470,7 @@ fun StatusPreviouPackageItem(
             }
             Column(modifier = Modifier.wrapContentWidth()) {
                 MediumText(
-                    text = if (shippingType == "SHIPPING" && shippingStatus == "OK") "Preparando pedido" else if (
-                        shippingType == "PICKUP" && shippingStatus == "OK"
-                    ) "Pedido listo" else "Pedido cancelado",
+                    text = if (shippingType == "SHIPPING" && shippingStatus == "OK") "Preparando pedido" else if (shippingType == "PICKUP" && shippingStatus == "OK") "Pedido listo" else "Pedido cancelado",
                     color = Black,
                     fontSize = 15.sp
                 )
@@ -1758,45 +1506,35 @@ fun StepIndicatorNotification(
 ) {
     Column(modifier = modifier.fillMaxWidth()) {
         Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
+            modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween
         ) {
             BoldText(
-                text = messageOne,
-                fontSize = 12.sp
+                text = messageOne, fontSize = 12.sp
             )
             BoldText(
-                text = messageTwo,
-                fontSize = 12.sp
+                text = messageTwo, fontSize = 12.sp
             )
             BoldText(
-                text = messageThree,
-                fontSize = 12.sp
+                text = messageThree, fontSize = 12.sp
             )
         }
         Box(
-            modifier = Modifier.fillMaxWidth(),
-            contentAlignment = Alignment.Center
+            modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center
         ) {
             Row(modifier = Modifier.fillMaxWidth()) {
                 Divider(
-                    modifier = Modifier
-                        .padding(start = 5.dp)
-                        .weight(0.5f),
+                    modifier = Modifier.padding(start = 5.dp).weight(0.5f),
                     color = if (step > 0) MaterialTheme.colors.primary else GrayBackgroundDrawerDismiss,
                     thickness = 7.dp
                 )
                 Divider(
-                    modifier = Modifier
-                        .padding(end = 5.dp)
-                        .weight(0.5f),
+                    modifier = Modifier.padding(end = 5.dp).weight(0.5f),
                     color = if (step > 3) MaterialTheme.colors.primary else GrayBackgroundDrawerDismiss,
                     thickness = 7.dp
                 )
             }
             Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
+                modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Icon(
                     painter = painterResource(res = "ic_circle.xml"),
@@ -1843,34 +1581,26 @@ fun ShoppingCategoryHistoryItem(
 ) {
 
     Card(
-        modifier = Modifier
-            .fillMaxWidth(),
-        elevation = elevation
+        modifier = Modifier.fillMaxWidth(), elevation = elevation
     ) {
 
         Column(
-            modifier = modifier
-                .fillMaxWidth()
-                .background(White)
+            modifier = modifier.fillMaxWidth().background(White)
         ) {
             if (!hideTopLine) {
                 Divider(
-                    thickness = 1.5.dp,
-                    color = GrayBorderLight
+                    thickness = 1.5.dp, color = GrayBorderLight
                 )
             }
             Row(
-                modifier = Modifier
-                    .fillMaxWidth()
+                modifier = Modifier.fillMaxWidth()
                     .padding(top = 12.dp, bottom = 14.dp, end = if (deleteOptions) 30.dp else 0.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceAround
             ) {
                 if (selector) {
                     RadioButton(
-                        selected = false,
-                        onClick = { },
-                        colors = RadioButtonDefaults.colors(
+                        selected = false, onClick = { }, colors = RadioButtonDefaults.colors(
                             unselectedColor = GrayLetterHint,
                             selectedColor = MaterialTheme.colors.primary
                         )
@@ -1878,8 +1608,7 @@ fun ShoppingCategoryHistoryItem(
                 }
 
                 Card(
-                    modifier = Modifier
-                        .size(30.dp),
+                    modifier = Modifier.size(30.dp),
                     backgroundColor = GrayBackgroundDrawerDismiss,
                     elevation = 0.dp,
                     shape = RoundedCornerShape(10.dp)
@@ -1887,9 +1616,7 @@ fun ShoppingCategoryHistoryItem(
 
                 }
                 BoldText(
-                    modifier = Modifier
-                        .weight(0.5f)
-                        .padding(start = 6.dp, end = 10.dp),
+                    modifier = Modifier.weight(0.5f).padding(start = 6.dp, end = 10.dp),
                     text = item.nameStore,
                     fontSize = 15.sp,
                     textOverflow = TextOverflow.Ellipsis,
@@ -1904,13 +1631,10 @@ fun ShoppingCategoryHistoryItem(
 
             }
             Divider(
-                thickness = 1.5.dp,
-                color = GrayBorderLight
+                thickness = 1.5.dp, color = GrayBorderLight
             )
             ShoppingHistoryItem(
-                counter = counter,
-                deleteOptions = deleteOptions,
-                historyModel = item
+                counter = counter, deleteOptions = deleteOptions, historyModel = item
             ) {
                 onClicked?.invoke()
             }
@@ -1931,25 +1655,16 @@ fun ShoppingHistoryItem(
         apologyStatus = "NONE",
         canceledBy = "NONE",
         numberProducts = 1
-    ),
-    counter: Boolean = true,
-    deleteOptions: Boolean = true,
-    onClicked: (() -> Unit)? = null
+    ), counter: Boolean = true, deleteOptions: Boolean = true, onClicked: (() -> Unit)? = null
 ) {
     Column(
-        modifier = if (deleteOptions)
-            Modifier
-                .fillMaxWidth()
-                .padding(start = 30.dp, end = 30.dp, top = 14.dp, bottom = 20.dp)
-        else Modifier
-            .fillMaxWidth()
-            .padding(top = 14.dp, bottom = 20.dp)
+        modifier = if (deleteOptions) Modifier.fillMaxWidth()
+            .padding(start = 30.dp, end = 30.dp, top = 14.dp, bottom = 20.dp)
+        else Modifier.fillMaxWidth().padding(top = 14.dp, bottom = 20.dp)
     ) {
 
         Row(
-            modifier = Modifier
-                .fillMaxSize()
-                .clickable { onClicked?.invoke() },
+            modifier = Modifier.fillMaxSize().clickable { onClicked?.invoke() },
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
@@ -1958,8 +1673,7 @@ fun ShoppingHistoryItem(
                 modifier = Modifier.wrapContentWidth()
             ) {
                 Card(
-                    modifier = Modifier
-                        .size(81.dp),
+                    modifier = Modifier.size(81.dp),
                     backgroundColor = GrayBackgroundDrawerDismiss,
                     elevation = 0.dp,
                     shape = RoundedCornerShape(10.dp)
@@ -1969,10 +1683,7 @@ fun ShoppingHistoryItem(
 
             }
             Column(
-                modifier = Modifier
-                    .height(100.dp)
-                    .padding(start = 27.dp)
-                    .weight(0.3f),
+                modifier = Modifier.height(100.dp).padding(start = 27.dp).weight(0.3f),
                 verticalArrangement = Arrangement.SpaceAround
             ) {
                 SemiBoldText(
@@ -2002,10 +1713,7 @@ fun ShoppingHistoryItem(
                         else -> {
                             "confirmada"
                         }
-                    },
-                    fontSize = 15.sp,
-                    maxLines = 2,
-                    color = when (historyModel.status) {
+                    }, fontSize = 15.sp, maxLines = 2, color = when (historyModel.status) {
                         "CANCELED" -> {
                             Red
                         }
@@ -2013,8 +1721,7 @@ fun ShoppingHistoryItem(
                         else -> {
                             Black
                         }
-                    },
-                    textOverflow = TextOverflow.Ellipsis
+                    }, textOverflow = TextOverflow.Ellipsis
                 )
                 SemiBoldText(
                     modifier = Modifier.wrapContentHeight(),
@@ -2024,9 +1731,7 @@ fun ShoppingHistoryItem(
                 )
 
                 SemiBoldText(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .wrapContentHeight(),
+                    modifier = Modifier.fillMaxWidth().wrapContentHeight(),
                     text = "12/08/2023 a las 09:41 am",
                     color = GrayLetterCategoryProduct,
                     fontSize = 12.sp,
@@ -2037,18 +1742,13 @@ fun ShoppingHistoryItem(
 
             }
             Column(
-                modifier = Modifier
-                    .height(81.dp)
-                    .weight(0.3f),
+                modifier = Modifier.height(81.dp).weight(0.3f),
                 verticalArrangement = if (historyModel.giftStatus != "NONE") Arrangement.Center else Arrangement.SpaceBetween,
                 horizontalAlignment = Alignment.End
             ) {
-                if (historyModel.status == "RUNNING" || historyModel.status == "WAITING_SELLER" ||
-                    historyModel.status == "WAITING_CLIENT"
-                ) {
+                if (historyModel.status == "RUNNING" || historyModel.status == "WAITING_SELLER" || historyModel.status == "WAITING_CLIENT") {
                     Card(
-                        modifier = Modifier
-                            .size(81.dp),
+                        modifier = Modifier.size(81.dp),
                         backgroundColor = GrayBackgroundDrawerDismiss,
                         elevation = 0.dp,
                         shape = RoundedCornerShape(10.dp)
@@ -2082,17 +1782,13 @@ fun ShoppingHistoryItem(
                                 verticalAlignment = Alignment.Bottom
                             ) {
                                 SemiBoldText(
-                                    modifier = Modifier
-                                        .padding(end = 10.dp)
-                                        .alpha(0.39f),
+                                    modifier = Modifier.padding(end = 10.dp).alpha(0.39f),
                                     text = "Recolectado",
                                     color = GrayMedium,
                                     fontSize = 12.sp
                                 )
                                 Image(
-                                    modifier = Modifier
-                                        .size(25.dp)
-                                        .alpha(0.39f),
+                                    modifier = Modifier.size(25.dp).alpha(0.39f),
                                     painter = painterResource(res = "ic_gift.png"),
                                     contentDescription = "gift"
                                 )
@@ -2134,17 +1830,13 @@ fun ItemSold() {
         verticalAlignment = Alignment.CenterVertically
     ) {
         Column(
-            modifier = Modifier.weight(3f),
-            verticalArrangement = Arrangement.SpaceBetween
+            modifier = Modifier.weight(3f), verticalArrangement = Arrangement.SpaceBetween
         ) {
             SemiBoldText(
-                text = "Feb 21, 2022",
-                fontSize = 15.sp
+                text = "Feb 21, 2022", fontSize = 15.sp
             )
             SemiBoldText(
-                text = "14:02",
-                fontSize = 12.sp,
-                color = GraySinceTo
+                text = "14:02", fontSize = 12.sp, color = GraySinceTo
             )
         }
         Column(
@@ -2153,13 +1845,10 @@ fun ItemSold() {
             horizontalAlignment = Alignment.End
         ) {
             SemiBoldText(
-                text = "$21.72",
-                fontSize = 15.sp
+                text = "$21.72", fontSize = 15.sp
             )
             SemiBoldText(
-                text = "3 articulos",
-                fontSize = 12.sp,
-                color = GraySinceTo
+                text = "3 articulos", fontSize = 12.sp, color = GraySinceTo
             )
         }
     }
@@ -2170,49 +1859,34 @@ fun ItemSold() {
 @Composable
 fun BottomBuyCartItem() {
     Card(
-        modifier = Modifier
-            .fillMaxWidth(),
-        shape = RectangleShape,
-        elevation = 15.dp
+        modifier = Modifier.fillMaxWidth(), shape = RectangleShape, elevation = 15.dp
     ) {
         Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 10.dp)
-                .background(White),
+            modifier = Modifier.fillMaxWidth().padding(top = 10.dp).background(White),
             verticalAlignment = Alignment.Bottom,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Column(
                 modifier = Modifier.padding(
-                    start = 30.dp, end = 30.dp,
-                    bottom = 18.dp
+                    start = 30.dp, end = 30.dp, bottom = 18.dp
                 ),
                 verticalArrangement = Arrangement.SpaceBetween,
                 horizontalAlignment = Alignment.Start
             ) {
                 Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 15.dp, bottom = 15.dp),
+                    modifier = Modifier.fillMaxWidth().padding(top = 15.dp, bottom = 15.dp),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     MediumText(
-                        text = "Descuento de tienda",
-                        color = GrayLetterSeeAll,
-                        fontSize = 13.sp
+                        text = "Descuento de tienda", color = GrayLetterSeeAll, fontSize = 13.sp
                     )
                     SemiBoldText(
-                        text = "8%",
-                        color = GrayLetterShipping,
-                        fontSize = 15.sp
+                        text = "8%", color = GrayLetterShipping, fontSize = 15.sp
                     )
                 }
 
                 Box(
-                    Modifier
-                        .height(1.dp)
-                        .fillMaxWidth()
+                    Modifier.height(1.dp).fillMaxWidth()
                         .background(Color.Gray, shape = DottedShape(step = 20.dp))
                 )
                 Row(
@@ -2227,67 +1901,32 @@ fun BottomBuyCartItem() {
                         fontSize = 18.sp
                     )
                     BoldText(
-                        modifier = Modifier
-                            .wrapContentWidth()
-                            .padding(bottom = 5.dp),
+                        modifier = Modifier.wrapContentWidth().padding(bottom = 5.dp),
                         text = "$100",
                         color = OrangeTransparent,
                         fontSize = 12.sp
                     )
                     BoldText(
-                        modifier = Modifier
-                            .wrapContentWidth()
-                            .padding(start = 21.dp),
+                        modifier = Modifier.wrapContentWidth().padding(start = 21.dp),
                         text = "$92",
                         color = GreenStrong,
                         fontSize = 30.sp,
                         textAlign = TextAlign.End
                     )
                 }
-                ShadowButton(
-                    modifier = Modifier
-                        .padding(bottom = 18.dp, top = 24.dp)
-                        .fillMaxWidth()
+                BlueButton(
+                    modifier = Modifier.padding(bottom = 18.dp, top = 24.dp).fillMaxWidth()
                         .drawColoredShadow(
-                            color = BlueTransparent, alpha = 1f, borderRadius = 10.dp,
-                            offsetY = 6.dp, offsetX = 5.dp, blurRadius = 10.dp
-                        ),
-                    text = "Continuar"
+                            color = BlueTransparent,
+                            alpha = 1f,
+                            borderRadius = 10.dp,
+                            offsetY = 6.dp,
+                            offsetX = 5.dp,
+                            blurRadius = 10.dp
+                        ), text = "Continuar"
                 ) {
 //                            navController?.navigate(SHOPPING_DETAIL_GRAPH)
                 }
-            }
-        }
-    }
-}
-
-@Composable
-fun BottomContinueItem() {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth(),
-        shape = RectangleShape,
-        elevation = 15.dp
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(White).padding(
-                    top = 10.dp,
-                    start = 30.dp,
-                    end = 30.dp,
-                    bottom = 18.dp
-                ),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center
-        ) {
-            BlueButton(
-                modifier = Modifier
-                    .padding(bottom = 18.dp, top = 24.dp)
-                    .fillMaxWidth(),
-                text = "Continuar"
-            ) {
-//                            navController?.navigate(SHOPPING_DETAIL_GRAPH)
             }
         }
     }
@@ -2298,41 +1937,58 @@ fun ResumeItem(
     modifier: Modifier = Modifier,
     title: String,
     hideIcon: Boolean = true,
+    middleItem: Boolean = false,
+    topContent: @Composable (() -> Unit?)? = null,
+    endPadding: Dp = 20.dp,
+    bottomPadding: Dp = 0.dp,
+    startPadding: Dp = 30.dp,
+    innerStartPadding: Dp = 0.dp,
+    innerEndPadding: Dp = 0.dp,
+    innerTopPadding: Dp = 10.dp,
+    innerBottomPadding: Dp = 20.dp,
     content: @Composable () -> Unit
 ) {
 
     val showItems = rememberSaveable { mutableStateOf(true) }
     Card(
-        modifier = modifier
-            .fillMaxWidth()
+        modifier = modifier.fillMaxWidth()
             .padding(bottom = 30.dp),
         shape = RectangleShape,
         elevation = 5.dp
     ) {
         Column(
-            modifier = Modifier
-                .background(White)
-                .padding(horizontal = 30.dp)
-                .wrapContentHeight()
-                .fillMaxWidth()
+            modifier = Modifier.background(White)
+                .padding(
+                    start = startPadding,
+                    bottom = bottomPadding,
+                    end = endPadding,
+                    top = innerTopPadding
+                ).wrapContentHeight().fillMaxWidth()
         ) {
             Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 20.dp, bottom = 30.dp),
+                modifier = Modifier.fillMaxWidth().padding(
+                    bottom = innerBottomPadding
+                ),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 SemiBoldText(
-                    text = title,
-                    fontSize = 15.sp
+                    modifier = Modifier.padding(
+                        if (startPadding > 0.dp)
+                            0.dp else innerStartPadding
+                    ),
+                    text = title, fontSize = 15.sp
                 )
+                if (middleItem) {
+                    topContent?.invoke()
+                }
                 if (hideIcon) {
-                    CircularIcon(
-                        modifier = Modifier
-                            .size(35.dp).wrapContentSize()
-                            .rotate(if (showItems.value) 0f else 180f), icon = "ic_arrow_down.xml",
-                        contentDescription = "arrow", onClick = {
+                    CircularIcon(modifier = Modifier.padding(end = if (endPadding > 0.dp)
+                        0.dp else innerEndPadding).size(35.dp).wrapContentSize()
+                        .rotate(if (showItems.value) 0f else 180f),
+                        icon = "ic_arrow_down.xml",
+                        contentDescription = "arrow",
+                        onClick = {
                             showItems.value = (!showItems.value)
                         })
 
@@ -2343,6 +1999,140 @@ fun ResumeItem(
                 content()
             }
 
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun AddButton(
+    modifier: Modifier = Modifier, text: String, onClicked: (() -> Unit)? = null
+) {
+    Row(
+        modifier = modifier.wrapContentSize(), verticalAlignment = Alignment.CenterVertically
+    ) {
+        MediumText(
+            text = text, fontSize = 15.sp, color = GraySinceTo
+        )
+        Surface(modifier = Modifier.padding(start = 9.dp).size(35.dp),
+            color = GreenStrong,
+            shape = RoundedCornerShape(5.dp),
+            onClick = { onClicked?.invoke() }) {
+            Icon(
+                modifier = Modifier.padding(12.dp),
+                painter = painterResource(res = "ic_more_icon.xml"),
+                contentDescription = "more_icon",
+                tint = White
+            )
+        }
+    }
+}
+
+
+@Composable
+fun BottomContinueItem() {
+    Card(
+        modifier = Modifier.fillMaxWidth(), shape = RectangleShape, elevation = 15.dp
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth().background(White).padding(
+                top = 10.dp, start = 30.dp, end = 30.dp, bottom = 18.dp
+            ),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ) {
+            BlueButton(
+                modifier = Modifier.padding(bottom = 18.dp, top = 24.dp).fillMaxWidth(),
+                text = "Continuar"
+            ) {
+//                            navController?.navigate(SHOPPING_DETAIL_GRAPH)
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun CardFilled(
+    modifier: Modifier = Modifier,
+    model: CardModel
+) {
+    Card(//RICC001
+        modifier = modifier.width(300.dp).height(175.dp),
+        elevation = 5.dp,
+        shape = RoundedCornerShape(15.dp),
+        onClick = {
+
+        }) {
+        Box(
+            Modifier.background(
+                brush = Brush.horizontalGradient(
+                    colors = getGradient()
+                )
+            )
+        ) {
+            Column(
+                modifier = Modifier.fillMaxSize().padding(all = 15.dp),
+                verticalArrangement = Arrangement.SpaceBetween
+            ) {
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    BoldText(
+                        text = model.holderName, color = White, fontSize = 12.sp
+                    )
+                    Image(
+                        painterResource(res = if (model.type == TypeCard.VISA) "ic_visa.xml" else if (model.type == TypeCard.MASTERCARD) "ic_mastercard.xml" else "ic_mastercard.xml"),
+                        contentDescription = "type card"
+                    )
+                }
+                Row(
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+
+                    Image(
+                        modifier = Modifier.padding(end = 10.dp),
+                        painter = painterResource(res = "ic_chip.xml"),
+                        contentDescription = "chip"
+                    )
+                    Icon(
+                        painter = painterResource(res = "ic_cashless.xml"),
+                        contentDescription = "cashless",
+                        tint = White
+                    )
+                }
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    repeat(3) {
+                        SemiBoldText(
+                            text = "****", fontSize = 30.sp, color = White
+                        )
+                    }
+
+                    SemiBoldText(
+                        text = model.lastFourNumber.toString(), fontSize = 30.sp, color = White
+                    )
+                }
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    SemiBoldText(
+                        modifier = Modifier.fillMaxWidth(0.5f),
+                        text = "${model.month} / ${model.year}",
+                        fontSize = 15.sp,
+                        color = White
+                    )
+                    SemiBoldText(
+                        text = model.aliasCard, fontSize = 13.sp, color = White
+                    )
+                }
+            }
         }
     }
 }

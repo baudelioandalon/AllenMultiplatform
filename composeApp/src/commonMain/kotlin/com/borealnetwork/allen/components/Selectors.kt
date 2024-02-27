@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
@@ -27,11 +28,14 @@ import androidx.compose.material.DropdownMenuItem
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.RadioButton
+import androidx.compose.material.RadioButtonDefaults
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
@@ -45,11 +49,13 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.borealnetwork.allen.theme.GrayBackgroundSearch
+import com.borealnetwork.allen.theme.GrayBackgroundSelector
 import com.borealnetwork.allen.theme.GrayBorder
 import com.borealnetwork.allen.theme.GrayBorderLight
 import com.borealnetwork.allen.theme.GrayBorderThin
 import com.borealnetwork.allen.theme.GrayHomeSellerLetter
 import com.borealnetwork.allen.theme.GrayLetterArrow
+import com.borealnetwork.allen.theme.GrayLetterHint
 import com.borealnetwork.allen.theme.GrayMedium
 import com.borealnetwork.allen.theme.GraySelector
 import com.borealnetwork.allen.theme.GraySinceTo
@@ -826,5 +832,51 @@ fun SelectorDetail(
             painter = painterResource(res = "ic_right_arrow_simbol.xml"),
             contentDescription = "comment icon"
         )
+    }
+}
+
+@Composable
+fun SelectorWithRadioButton(
+    modifier: Modifier = Modifier,
+    iconRes: String = "",
+    text: String,
+    iconDescription: String? = null,
+    selected: Boolean,
+    onClicked: ((String) -> Unit)? = null
+) {
+    Box(
+        modifier = modifier.background(
+            color = GrayBackgroundSelector,
+            shape = RoundedCornerShape(5.dp)
+        ),
+        contentAlignment = Alignment.Center
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth().requiredHeight(56.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Image(
+                modifier = Modifier.padding(horizontal = 20.dp),
+                painter = painterResource(iconRes),
+                contentDescription = iconDescription
+            )
+            SemiBoldText(
+                modifier = Modifier.weight(1f),
+                text = text,
+                fontSize = 15.sp,
+                textAlign = TextAlign.Justify
+            )
+            RadioButton(
+                modifier = Modifier.padding(start = 15.dp),
+                selected = selected,
+                onClick = {
+                    onClicked?.invoke(iconDescription.orEmpty())
+                },
+                colors = RadioButtonDefaults.colors(
+                    unselectedColor = GrayLetterHint,
+                    selectedColor = MaterialTheme.colors.primary
+                )
+            )
+        }
     }
 }

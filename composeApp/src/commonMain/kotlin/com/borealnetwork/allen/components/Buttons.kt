@@ -334,7 +334,7 @@ fun BlueButton(
         shape = RoundedCornerShape(corner = CornerSize(borderRadius)),
         onClick = { onClick?.invoke() },
     ) {
-        SemiBoldText(
+        BoldText(
             text = text,
             fontSize = fontSize,
             color = Color.White,

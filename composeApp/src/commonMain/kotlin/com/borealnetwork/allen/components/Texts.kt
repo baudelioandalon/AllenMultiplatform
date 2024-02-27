@@ -31,7 +31,8 @@ fun SemiBoldText(
     textAlign: TextAlign? = null,
     fontSize: TextUnit = 18.sp,
     textOverflow: TextOverflow = TextOverflow.Clip,
-    maxLines: Int = Int.MAX_VALUE
+    maxLines: Int = Int.MAX_VALUE,
+    minLines: Int = 1
 ) {
 
     Text(
@@ -44,6 +45,7 @@ fun SemiBoldText(
         textAlign = textAlign,
         overflow = textOverflow,
         maxLines = maxLines,
+        minLines = minLines,
         fontFamily = semiBoldTypo()
     )
 }

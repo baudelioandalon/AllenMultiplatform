@@ -38,6 +38,7 @@ internal val GrayHomeSellerLetter = Color(0xFF515259)
 internal val GrayBorderLight = Color(0xFFEFEFEF)
 internal val GrayBorderSearch = Color(0xFFD9D9DD)
 internal val GrayLetterHint = Color(0xFFA0A0A0)
+internal val GrayBackgroundSelector = Color(0xFFF7F7F7)
 internal val GraySubtitleBottom = Color(0xFF858585)
 internal val GrayLetterShipping = Color(0xFF909090)
 internal val GrayStrong = Color(0xFF707070)
@@ -79,4 +80,36 @@ internal val categorySelectorColors = listOf(
     CategoryBackgroundSelectorOne,
     CategoryBackgroundSelectorTwo,
     CategoryBackgroundSelectorThree
+)
+
+internal val startColors = arrayOf(
+    Color(0xFF39add1),  // light blue [0]
+    Color(0xFF3079ab),  // dark blue [1]
+    Color(0xFFc25975),  // mauve [2]
+    Color(0xFFe15258),  // red
+    Color(0xFFf9845b),  // orange
+    Color(0xFF838cc7),  // lavender
+    Color(0xFF7d669e),  // purple
+    Color(0xFF53bbb4),  // aqua
+    Color(0xFF51b46d),  // green
+    Color(0xFFe0ab18),  // mustard
+    Color(0xFF637a91),  // dark gray
+    Color(0xFFf092b0),  // pink
+    Color(0xFFb7c0c7) // light gray
+)
+
+internal val endColors = arrayOf(
+    Color(0xFF3079ab),  //dark blue  [0]
+    Color(0xFF39add1),  // light blue [1]
+    Color(0xFFe0ab18),  // mustard [2]
+    Color(0xFF637a91),  // dark gray
+    Color(0xFFf092b0),  // pink
+    Color(0xFFb7c0c7),  // light gray
+    Color(0xFFc25975),  // mauve
+    Color(0xFF51b46d),  // green
+    Color(0xFFe15258),  // red
+    Color(0xFFf9845b),  // orange
+    Color(0xFF838cc7),  // lavender
+    Color(0xFF7d669e), // purple
+    Color(0xFF53bbb4)
 )
