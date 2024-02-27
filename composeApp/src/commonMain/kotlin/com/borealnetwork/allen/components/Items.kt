@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.width
@@ -37,8 +38,10 @@ import androidx.compose.material.RadioButtonDefaults
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -1949,7 +1952,7 @@ fun ResumeItem(
     content: @Composable () -> Unit
 ) {
 
-    val showItems = rememberSaveable { mutableStateOf(true) }
+    var showItems by rememberSaveable { mutableStateOf(true) }
     Card(
         modifier = modifier.fillMaxWidth()
             .padding(bottom = 30.dp),
@@ -1983,19 +1986,21 @@ fun ResumeItem(
                     topContent?.invoke()
                 }
                 if (hideIcon) {
-                    CircularIcon(modifier = Modifier.padding(end = if (endPadding > 0.dp)
-                        0.dp else innerEndPadding).size(35.dp).wrapContentSize()
-                        .rotate(if (showItems.value) 0f else 180f),
+                    CircularIcon(modifier = Modifier.padding(
+                        end = if (endPadding > 0.dp)
+                            0.dp else innerEndPadding
+                    ).size(35.dp).wrapContentSize()
+                        .rotate(if (showItems) 0f else 180f),
                         icon = "ic_arrow_down.xml",
                         contentDescription = "arrow",
                         onClick = {
-                            showItems.value = (!showItems.value)
+                            showItems = (!showItems)
                         })
 
                 }
 
             }
-            AnimatedVisibility(visible = showItems.value) {
+            AnimatedVisibility(visible = showItems) {
                 content()
             }
 
@@ -2057,7 +2062,7 @@ fun CardFilled(
     modifier: Modifier = Modifier,
     model: CardModel
 ) {
-    Card(//RICC001
+    Card(
         modifier = modifier.width(300.dp).height(175.dp),
         elevation = 5.dp,
         shape = RoundedCornerShape(15.dp),
@@ -2065,7 +2070,7 @@ fun CardFilled(
 
         }) {
         Box(
-            Modifier.background(
+            Modifier.fillMaxSize().background(
                 brush = Brush.horizontalGradient(
                     colors = getGradient()
                 )
@@ -2130,6 +2135,105 @@ fun CardFilled(
                     )
                     SemiBoldText(
                         text = model.aliasCard, fontSize = 13.sp, color = White
+                    )
+                }
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun CardNoFilled(
+    modifier: Modifier = Modifier,
+    holderName: String,
+    number: String,
+    aliasCard: String,
+    month: String,
+    year: String
+) {
+    Card(
+        modifier = modifier.fillMaxWidth().requiredHeight(200.dp),
+        elevation = 5.dp,
+        shape = RoundedCornerShape(15.dp),
+        onClick = {
+
+        }) {
+        Box(
+            Modifier.fillMaxSize().background(
+                brush = Brush.horizontalGradient(
+                    colors = getGradient()
+                )
+            )
+        ) {
+            Column(
+                modifier = Modifier.fillMaxSize().padding(all = 15.dp),
+                verticalArrangement = Arrangement.SpaceBetween
+            ) {
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    BoldText(
+                        text = holderName, color = White, fontSize = 12.sp
+                    )
+                    Image(
+                        painterResource(
+                            res = if (number.startsWith("4") && number.length == 16) "ic_visa.xml" else if (number.startsWith(
+                                    "5"
+                                ) && number.length == 16
+                            ) "ic_mastercard.xml" else "ic_mastercard.xml"
+                        ),
+                        contentDescription = "type card"
+                    )
+                }
+                Row(
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+
+                    Image(
+                        modifier = Modifier.padding(end = 10.dp),
+                        painter = painterResource(res = "ic_chip.xml"),
+                        contentDescription = "chip"
+                    )
+                    Icon(
+                        painter = painterResource(res = "ic_cashless.xml"),
+                        contentDescription = "cashless",
+                        tint = White
+                    )
+                }
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    SemiBoldText(
+                        text = number.substring(0, 3), fontSize = 30.sp, color = White
+                    )
+                    SemiBoldText(
+                        text = number.substring(4, 7), fontSize = 30.sp, color = White
+                    )
+                    SemiBoldText(
+                        text = number.substring(8, 11), fontSize = 30.sp, color = White
+                    )
+
+                    SemiBoldText(
+                        text = number.substring(12), fontSize = 30.sp, color = White
+                    )
+                }
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    SemiBoldText(
+                        modifier = Modifier.fillMaxWidth(0.5f),
+                        text = "$month / $year",
+                        fontSize = 15.sp,
+                        color = White
+                    )
+                    SemiBoldText(
+                        text = aliasCard, fontSize = 13.sp, color = White
                     )
                 }
             }

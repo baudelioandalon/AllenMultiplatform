@@ -28,6 +28,7 @@ import com.borealnetwork.allen.domain.model.BirdImage
 import com.borealnetwork.allen.presentation.ui.client.address.AddressClientViewCompose
 import com.borealnetwork.allen.presentation.ui.client.address.NewAddressClientViewCompose
 import com.borealnetwork.allen.presentation.ui.general.logingraph.LoginViewCompose
+import com.borealnetwork.allen.presentation.ui.payments.NewCardViewCompose
 import com.borealnetwork.allen.presentation.ui.payments.PaymentMethodsViewCompose
 import com.borealnetwork.allen.presentation.ui.product.ProductViewCompose
 import com.borealnetwork.allen.presentation.ui.product.question.QuestionViewCompose
@@ -70,7 +71,8 @@ internal fun App() = AppTheme {
 //    RatingProductViewCompose()
 //    ShoppingCartViewCompose()
 //    DetailBuyCartStepOneViewCompose()
-    PaymentMethodsViewCompose()
+//    PaymentMethodsViewCompose()
+    NewCardViewCompose()
 //    AddressClientViewCompose()
 //    NewAddressClientViewCompose()
 //    ResumeCartStepTwoViewCompose()
