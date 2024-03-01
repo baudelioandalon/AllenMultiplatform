@@ -11,6 +11,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -23,6 +25,7 @@ import com.borealnetwork.allen.components.CardNoFilled
 import com.borealnetwork.allen.components.EditTextTopLabel
 import com.borealnetwork.allen.components.ToolbarTitle
 import com.borealnetwork.allen.theme.GrayBackgroundMain
+import com.borealnetwork.allen.tools.getGradient
 
 @Composable
 fun NewCardViewCompose() {
@@ -57,6 +60,8 @@ fun NewCardViewCompose() {
             ""
         )
     }
+
+    val colors = getGradient()
     Scaffold(topBar = {
         ToolbarTitle(
             titleText = "Nueva tarjeta", startClicked = {
@@ -77,13 +82,14 @@ fun NewCardViewCompose() {
                 Column(modifier = Modifier.fillMaxWidth()) {
                     CardNoFilled(
                         modifier = Modifier.padding(
-                            horizontal = 30.dp
+                            start = 30.dp, end = 30.dp, top = 30.dp
                         ),
                         holderName = holderName,
                         number = numberCard,
                         aliasCard = aliasCard,
                         month = monthCard,
-                        year = yearCard
+                        year = yearCard,
+                        list = colors
                     )
 
                     EditTextTopLabel(

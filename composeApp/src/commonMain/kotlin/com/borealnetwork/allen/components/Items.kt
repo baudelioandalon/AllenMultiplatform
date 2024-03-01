@@ -37,7 +37,9 @@ import androidx.compose.material.RadioButton
 import androidx.compose.material.RadioButtonDefaults
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -2060,7 +2062,8 @@ fun BottomContinueItem() {
 @Composable
 fun CardFilled(
     modifier: Modifier = Modifier,
-    model: CardModel
+    model: CardModel,
+    listColor: List<Color>
 ) {
     Card(
         modifier = modifier.width(300.dp).height(175.dp),
@@ -2072,7 +2075,7 @@ fun CardFilled(
         Box(
             Modifier.fillMaxSize().background(
                 brush = Brush.horizontalGradient(
-                    colors = getGradient()
+                    colors = listColor
                 )
             )
         ) {
@@ -2150,7 +2153,8 @@ fun CardNoFilled(
     number: String,
     aliasCard: String,
     month: String,
-    year: String
+    year: String,
+    list: List<Color>
 ) {
     Card(
         modifier = modifier.fillMaxWidth().requiredHeight(200.dp),
@@ -2162,7 +2166,7 @@ fun CardNoFilled(
         Box(
             Modifier.fillMaxSize().background(
                 brush = Brush.horizontalGradient(
-                    colors = getGradient()
+                    colors = list
                 )
             )
         ) {

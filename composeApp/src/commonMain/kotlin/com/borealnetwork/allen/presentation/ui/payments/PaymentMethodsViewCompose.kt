@@ -105,7 +105,8 @@ fun PaymentMethodsViewCompose() {
                                             start = 30.dp,
                                             end = if (index == cardList.limit()) 30.dp else 0.dp
                                         ),
-                                        model = card
+                                        model = card,
+                                        listColor = card.listColor
                                     )
                                 }
                             }

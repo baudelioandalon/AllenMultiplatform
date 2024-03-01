@@ -1,7 +1,5 @@
 package com.borealnetwork.allen.tools
 
-import androidx.compose.material.MaterialTheme
-import androidx.compose.runtime.Composable
 import com.borealnetwork.allen.theme.endColors
 import com.borealnetwork.allen.theme.startColors
 import kotlin.random.Random
@@ -25,7 +23,7 @@ fun String.isEmailValid() = if (trim { it <= ' ' }.isEmpty()) {
 fun <E> List<E>.limit() = size - 1
 
 
-fun getGradient() =listOf(
+fun getGradient() = listOf(
     startColors[Random.nextInt(startColors.lastIndex)],
     endColors[Random.nextInt(endColors.lastIndex)],
-    )
+)
