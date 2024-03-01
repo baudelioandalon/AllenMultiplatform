@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import com.borealnetwork.allen.domain.model.BirdImage
 import com.borealnetwork.allen.presentation.ui.client.address.AddressClientViewCompose
 import com.borealnetwork.allen.presentation.ui.client.address.NewAddressClientViewCompose
+import com.borealnetwork.allen.presentation.ui.client.search.SearchProductViewCompose
 import com.borealnetwork.allen.presentation.ui.general.logingraph.LoginViewCompose
 import com.borealnetwork.allen.presentation.ui.payments.NewCardViewCompose
 import com.borealnetwork.allen.presentation.ui.payments.PaymentMethodsViewCompose
@@ -72,10 +73,11 @@ internal fun App() = AppTheme {
 //    ShoppingCartViewCompose()
 //    DetailBuyCartStepOneViewCompose()
 //    PaymentMethodsViewCompose()
-    NewCardViewCompose()
+//    NewCardViewCompose()
 //    AddressClientViewCompose()
 //    NewAddressClientViewCompose()
 //    ResumeCartStepTwoViewCompose()
+    SearchProductViewCompose()
 }
 
 @Composable

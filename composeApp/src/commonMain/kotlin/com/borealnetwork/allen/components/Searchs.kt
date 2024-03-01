@@ -319,10 +319,9 @@ fun SearcherWithSettings(
                 interactionSource = interactionSource,
                 value = value,
                 onValueChange = {}, placeholder = {
-                    Text(
+                    SemiBoldText(
                         text = placeHolder,
                         color = GrayLetterHint,
-                        fontWeight = SemiBold,
                         fontSize = 16.sp
                     )
                 },
@@ -339,8 +338,7 @@ fun SearcherWithSettings(
         Card(
             modifier = Modifier
                 .padding(horizontal = 10.dp)
-                .width(35.dp)
-                .height(35.dp),
+                .size(35.dp),
             elevation = 0.dp,
             shape = CircleShape,
             onClick = { settingsClicked?.invoke() }) {

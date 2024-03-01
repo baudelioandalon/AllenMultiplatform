@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material.Card
@@ -157,61 +158,46 @@ fun ToolbarSearchHome(
 }
 
 //
-//@Composable
-//fun ToolbarSearch(
-//    modifier: Modifier = Modifier,
-//    backClicked: (() -> Unit)? = null,
-//    configClicked: (() -> Unit)? = null,
-//    searchClicked: (() -> Unit)? = null
-//) {
-//    Row(modifier = modifier) {
-//        Card(
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .height(80.dp)
-//                .layoutId("imageMenu"),
-//            elevation = 5.dp
-//        ) {
-//            ConstraintLayout(
-//                modifier = Modifier
-//                    .fillMaxSize(),
-//                constraintSet = ConstraintSet {
-//                    val backButton = createRefFor("backButton")
-//                    constrain(backButton) {
-//                        start.linkTo(parent.start, margin = 10.dp)
-//                        top.linkTo(parent.top)
-//                        bottom.linkTo(parent.bottom)
-//                    }
-//                    constrain(createRefFor("search")) {
-//                        start.linkTo(backButton.end, margin = 10.dp)
-//                        top.linkTo(parent.top)
-//                        end.linkTo(parent.end, margin = 10.dp)
-//                        bottom.linkTo(parent.bottom)
-//                        width = Dimension.fillToConstraints
-//                        height = Dimension.wrapContent
-//                    }
-//                }) {
-//                BackButton(
-//                    Modifier
-//                        .layoutId("backButton")
-//                        .width(35.dp)
-//                        .height(35.dp)
-//                ) {
-//                    backClicked?.invoke()
-//                }
-//                SearcherWithSettings(
-//                    modifier = Modifier.layoutId("search"),
-//                    value = "",
-//                    placeHolder = "Escribe el producto o marca...",
-//                    itemClicked = { searchClicked?.invoke() },
-//                    settingsClicked = {
-//                        configClicked?.invoke()
-//                    }
-//                )
-//            }
-//        }
-//    }
-//}
+@Composable
+fun ToolbarSearch(
+    modifier: Modifier = Modifier,
+    backClicked: (() -> Unit)? = null,
+    configClicked: (() -> Unit)? = null,
+    searchClicked: (() -> Unit)? = null
+) {
+
+    Card(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(80.dp),
+        shape = RectangleShape,
+        elevation = 5.dp
+    ) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            CircularIcon(
+                modifier = Modifier
+                    .padding(start = 10.dp)
+                    .size(35.dp),
+                icon = "ic_back_arrow.xml"
+            ) {
+                backClicked?.invoke()
+            }
+            SearcherWithSettings(
+                value = "",
+                placeHolder = "Escribe el producto o marca...",
+                itemClicked = { searchClicked?.invoke() },
+                settingsClicked = {
+                    configClicked?.invoke()
+                }
+            )
+            CircularIcon(
+                modifier = Modifier.weight(1f),
+                onClick = configClicked,
+                icon = "ic_settings_gray.xml"
+            )
+        }
+    }
+}
 //
 //@OptIn(ExperimentalMaterialApi::class)
 //@Composable
