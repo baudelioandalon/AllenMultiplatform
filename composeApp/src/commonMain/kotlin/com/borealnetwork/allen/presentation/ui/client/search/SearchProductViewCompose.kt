@@ -38,9 +38,11 @@ fun SearchProductViewCompose(
     Scaffold(topBar = {
         ToolbarSearch(backClicked = {
 //            navController?.navigateUp()
-        }, configClicked = {
+        }, endClicked = {
 
         }, searchClicked = {
+
+        }, settingsClicked = {
 
         })
     }) {

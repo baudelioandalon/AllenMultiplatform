@@ -6,12 +6,9 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.defaultMinSize
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredSize
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.CornerSize
@@ -22,7 +19,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Color.Companion.Red
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
@@ -33,6 +29,8 @@ import com.borealnetwork.allen.theme.GreenTransparent
 import com.borealnetwork.allen.theme.OrangeMedium
 import com.borealnetwork.allen.theme.OrangeTransparent
 import com.borealnetwork.allen.theme.StarColor
+import com.borealnetwork.allen.tools.discount
+import com.borealnetwork.allen.tools.round
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
@@ -101,6 +99,7 @@ fun Discount(modifier: Modifier = Modifier, discount: Int = 15) {
     )
 }
 
+
 @Composable
 fun PriceBeforeDiscount(
     modifier: Modifier = Modifier,
@@ -113,9 +112,9 @@ fun PriceBeforeDiscount(
             modifier = modifier
                 .wrapContentWidth()
                 .align(Alignment.Center),
-            text = "$${price.toInt()}",
+            text = "$${price.round(2)}",
             color = OrangeTransparent,
-            fontSize = 15.sp
+            fontSize = 12.sp
         )
         Canvas(
             modifier = Modifier
@@ -133,6 +132,40 @@ fun PriceBeforeDiscount(
         }
 
 
+    }
+}
+
+@Composable
+fun PriceWithDiscount(
+    modifier: Modifier = Modifier,
+    price: Double = 504.32786,
+    discount: Int = 16
+) {
+    Box(
+        modifier = modifier.wrapContentSize().fillMaxWidth()
+    ) {
+        PriceBeforeDiscount(
+            modifier = Modifier.wrapContentWidth().align(alignment = Alignment.CenterStart),
+            price = price
+        )
+        Row(
+            modifier = Modifier.wrapContentSize()
+                .align(alignment = Alignment.CenterEnd),
+            verticalAlignment = Alignment.Bottom
+        ) {
+            LightText(
+                modifier = Modifier.wrapContentWidth().padding(end = 2.dp),
+                text = "MXN", fontSize = 10.sp,
+                color = Color.Black
+            )
+            BoldText(
+                modifier = Modifier.wrapContentWidth(),
+                text = "$${price.discount(discount).round()}",
+                fontSize = 16.sp,
+                color = Color.Black,
+                textOverflow = TextOverflow.Visible
+            )
+        }
     }
 }
 

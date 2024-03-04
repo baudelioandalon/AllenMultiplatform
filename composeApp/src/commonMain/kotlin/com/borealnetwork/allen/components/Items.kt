@@ -37,9 +37,7 @@ import androidx.compose.material.RadioButton
 import androidx.compose.material.RadioButtonDefaults
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -83,12 +81,12 @@ import com.borealnetwork.allen.theme.GrayLetterShipping
 import com.borealnetwork.allen.theme.GrayMedium
 import com.borealnetwork.allen.theme.GraySinceTo
 import com.borealnetwork.allen.theme.GreenStrong
+import com.borealnetwork.allen.theme.OrangeMedium
 import com.borealnetwork.allen.theme.OrangeStrong
 import com.borealnetwork.allen.theme.OrangeTransparent
 import com.borealnetwork.allen.theme.RedEndColor
 import com.borealnetwork.allen.theme.RedStartColor
 import com.borealnetwork.allen.theme.StarColor
-import com.borealnetwork.allen.tools.getGradient
 import org.jetbrains.compose.resources.painterResource
 
 //@Composable
@@ -338,18 +336,18 @@ fun ProductResultItem(
         modifier = modifier.wrapContentHeight().fillMaxWidth(),
         onClick = { productClicked?.invoke() },
         elevation = 0.dp,
-        shape = RoundedCornerShape(topStart = 10.dp, topEnd = 10.dp),
-        backgroundColor = White
+        shape = RoundedCornerShape(10.dp),
+        backgroundColor = White,
     ) {
         Column(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier.fillMaxSize().padding(bottom = 10.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top
         ) {
             Box(
                 modifier = Modifier.background(
                     color = GrayBackgroundDrawerDismiss, shape = RoundedCornerShape(10.dp)
-                ).height(200.dp)
+                ).requiredHeight(200.dp)
             ) {
                 FavoriteButton(modifier = Modifier.padding(start = 7.dp, top = 7.dp))
                 Image(
@@ -359,38 +357,30 @@ fun ProductResultItem(
                 )
             }
 
-            Row {
-                SemiBoldText(
-                    modifier = Modifier.weight(1f),
-                    text = "Sensor Hc-sr04",
-                    textAlign = TextAlign.Start,
-                    fontSize = 13.sp
-                )
-                BoldText(
-                    modifier = Modifier.wrapContentSize(), text = "$54", fontSize = 14.sp
-                )
-            }
-
-            CategoryProductText(
-                modifier = Modifier.fillMaxWidth(),
-                text = "Electronica",
-                color = GrayLetterCategoryProduct,
-                textAlign = TextAlign.Start
+            SemiBoldText(
+                text = "Sensor Hc-sr04 Tipo C entrada De nombre inconmensurable",
+                textAlign = TextAlign.Start,
+                textOverflow = TextOverflow.Ellipsis,
+                fontSize = 13.sp,
+                maxLines = 2
             )
 
-            Row(
-                modifier = Modifier.fillMaxWidth().padding(top = 10.dp),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.Top
+            PriceWithDiscount()
+            Box(
+                modifier = Modifier.fillMaxWidth()
             ) {
-                Icon(
-                    modifier = Modifier.padding(top = 10.dp).size(20.dp),
-                    painter = painterResource("ic_thunder_icon.xml"),
-                    contentDescription = "free shipping",
-                    tint = StarColor
+                FreeShipping(
+                    modifier = Modifier.padding(top = 10.dp).fillMaxWidth(0.5f)
+                        .align(Alignment.CenterStart)
                 )
-                MinimumAddButton(modifier = Modifier.padding(bottom = 10.dp))
+                BoldText(
+                    modifier = Modifier.align(alignment = Alignment.BottomEnd),
+                    text = "15% OFF",
+                    color = OrangeMedium,
+                    fontSize = 12.sp
+                )
             }
+
         }
     }
 }

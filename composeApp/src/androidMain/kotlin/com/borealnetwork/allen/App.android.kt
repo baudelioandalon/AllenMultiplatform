@@ -12,6 +12,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import java.math.RoundingMode
+import java.text.DecimalFormat
 import java.util.UUID
 
 class AndroidApp : Application() {

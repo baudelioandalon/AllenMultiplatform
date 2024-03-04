@@ -14,10 +14,12 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.borealnetwork.allen.theme.GrayBorder
 import org.jetbrains.compose.resources.painterResource
 
 
@@ -124,7 +126,9 @@ fun TopTitleImg(
 fun ToolbarSearchHome(
     modifier: Modifier = Modifier,
     textPlaceHolder: String = "Buscar",
-    menuClicked: (() -> Unit)? = null,
+    startIconTint: Color = GrayBorder,
+    startIcon: String = "ic_menu_icon.xml",
+    startClicked: (() -> Unit)? = null,
     searchClicked: (() -> Unit)? = null,
     cartClicked: (() -> Unit)? = null
 ) {
@@ -138,8 +142,9 @@ fun ToolbarSearchHome(
         Row(verticalAlignment = Alignment.CenterVertically) {
             CircularIcon(
                 modifier = Modifier.weight(1f),
-                onClick = menuClicked,
-                icon = "ic_menu_icon.xml"
+                onClick = startClicked,
+                icon = startIcon,
+                iconTint = startIconTint
             )
             SearchOutlinedTextField(
                 value = "",
@@ -162,8 +167,9 @@ fun ToolbarSearchHome(
 fun ToolbarSearch(
     modifier: Modifier = Modifier,
     backClicked: (() -> Unit)? = null,
-    configClicked: (() -> Unit)? = null,
-    searchClicked: (() -> Unit)? = null
+    endClicked: (() -> Unit)? = null,
+    searchClicked: (() -> Unit)? = null,
+    settingsClicked: (() -> Unit)? = null
 ) {
 
     Card(
@@ -187,12 +193,12 @@ fun ToolbarSearch(
                 placeHolder = "Escribe el producto o marca...",
                 itemClicked = { searchClicked?.invoke() },
                 settingsClicked = {
-                    configClicked?.invoke()
+                    settingsClicked?.invoke()
                 }
             )
             CircularIcon(
                 modifier = Modifier.weight(1f),
-                onClick = configClicked,
+                onClick = endClicked,
                 icon = "ic_settings_gray.xml"
             )
         }
@@ -295,7 +301,7 @@ fun ToolbarTitle(
     startClicked: (() -> Unit)? = null,
     endClicked: (() -> Unit)? = null,
     showEndImage: Boolean = true,
-    firstIcon: String = "ic_back_arrow.xml",
+    startIcon: String = "ic_back_arrow.xml",
     endIcon: String = "ic_cart_icon.xml"
 ) {
     Card(
@@ -309,7 +315,7 @@ fun ToolbarTitle(
             if (showStartImage) {
                 CircularIcon(
                     modifier = Modifier.padding(start = 10.dp).align(Alignment.CenterStart),
-                    icon = firstIcon
+                    icon = startIcon
                 ) {
                     startClicked?.invoke()
                 }

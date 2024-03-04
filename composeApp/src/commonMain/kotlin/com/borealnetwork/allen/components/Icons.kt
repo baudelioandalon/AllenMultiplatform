@@ -19,6 +19,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.unit.dp
 import com.borealnetwork.allen.theme.GrayBackgroundDrawerDismiss
+import com.borealnetwork.allen.theme.GrayBorder
 import com.borealnetwork.allen.theme.GrayStrong
 import com.borealnetwork.allen.theme.OrangeStrong
 import com.borealnetwork.allen.theme.OrangeTransparentLow
@@ -97,6 +98,7 @@ fun GoalIcon(onClick: (() -> Unit)? = null) {
 fun CircularIcon(
     modifier: Modifier = Modifier,
     icon: String, contentDescription: String? = null,
+    iconTint: Color = GrayBorder,
     onClick: (() -> Unit)? = null
 ) {
     Box(
@@ -112,6 +114,7 @@ fun CircularIcon(
             Icon(
                 modifier = Modifier.wrapContentSize().padding(5.dp),
                 painter = painterResource(res = icon),
+                tint = iconTint,
                 contentDescription = contentDescription
             )
         }

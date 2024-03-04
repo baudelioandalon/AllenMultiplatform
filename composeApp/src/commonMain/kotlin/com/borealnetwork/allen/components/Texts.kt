@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 import com.borealnetwork.allen.theme.GrayLetterSeeAll
 import com.borealnetwork.allen.theme.boldTypo
+import com.borealnetwork.allen.theme.lightTypo
 import com.borealnetwork.allen.theme.mediumTypo
 import com.borealnetwork.allen.theme.regularTypo
 import com.borealnetwork.allen.theme.semiBoldTypo
@@ -138,6 +139,25 @@ fun RegularText(
         fontWeight = Normal,
         textAlign = textAlign,
         fontFamily = regularTypo()
+    )
+}
+
+@Composable
+fun LightText(
+    modifier: Modifier = Modifier,
+    text: String,
+    fontSize: TextUnit = 15.sp,
+    color: Color = Color.Black,
+    textAlign: TextAlign? = null
+) {
+    Text(
+        modifier = modifier,
+        text = text,// ?: stringResource(id = labelId ?: R.string.empty_string),
+        fontSize = fontSize,
+        color = color,
+        fontWeight = Normal,
+        textAlign = textAlign,
+        fontFamily = lightTypo()
     )
 }
 

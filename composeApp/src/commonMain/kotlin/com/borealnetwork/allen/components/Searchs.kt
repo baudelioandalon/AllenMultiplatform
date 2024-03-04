@@ -338,7 +338,8 @@ fun SearcherWithSettings(
         Card(
             modifier = Modifier
                 .padding(horizontal = 10.dp)
-                .size(35.dp),
+                .width(35.dp)
+                .height(35.dp),
             elevation = 0.dp,
             shape = CircleShape,
             onClick = { settingsClicked?.invoke() }) {

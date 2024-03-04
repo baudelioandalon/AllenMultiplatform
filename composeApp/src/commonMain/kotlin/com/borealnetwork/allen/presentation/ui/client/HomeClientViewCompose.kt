@@ -65,7 +65,7 @@ fun HomeClientViewCompose(closeApp: () -> Unit = {}) {
     ) {
         Scaffold(modifier = Modifier
             .fillMaxWidth(), drawerShape = RectangleShape, topBar = {
-            ToolbarSearchHome(menuClicked = {
+            ToolbarSearchHome(startClicked = {
                 scope.launch {
                     scaffoldState.drawerState.open()
                 }

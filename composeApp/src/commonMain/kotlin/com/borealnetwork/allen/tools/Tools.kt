@@ -6,6 +6,7 @@ import kotlinx.datetime.Clock
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
+import kotlin.math.round
 import kotlin.random.Random
 
 
@@ -38,4 +39,14 @@ fun todaysDate(): String {
     val now = Clock.System.now()
     val zone = TimeZone.currentSystemDefault()
     return now.toLocalDateTime(zone).format()
+}
+
+fun Double.round(decimals: Int = 2): Double {
+    var multiplier = 1.0
+    repeat(decimals) { multiplier *= 10 }
+    return round(this * multiplier) / multiplier
+}
+
+fun Double.discount(porcentage: Int): Double {
+    return this - (this * (porcentage/100.0))
 }
