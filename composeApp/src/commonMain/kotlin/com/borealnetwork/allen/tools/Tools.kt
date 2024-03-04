@@ -2,6 +2,10 @@ package com.borealnetwork.allen.tools
 
 import com.borealnetwork.allen.theme.endColors
 import com.borealnetwork.allen.theme.startColors
+import kotlinx.datetime.Clock
+import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
 import kotlin.random.Random
 
 
@@ -27,3 +31,11 @@ fun getGradient() = listOf(
     startColors[Random.nextInt(startColors.lastIndex)],
     endColors[Random.nextInt(endColors.lastIndex)],
 )
+
+fun todaysDate(): String {
+    fun LocalDateTime.format() = toString().substringBefore('T')
+
+    val now = Clock.System.now()
+    val zone = TimeZone.currentSystemDefault()
+    return now.toLocalDateTime(zone).format()
+}

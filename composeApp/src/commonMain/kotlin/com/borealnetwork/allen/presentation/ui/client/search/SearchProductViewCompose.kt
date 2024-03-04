@@ -28,8 +28,10 @@ import com.borealnetwork.allen.components.ToolbarSearch
 import com.borealnetwork.allen.theme.GrayBackgroundMain
 import com.borealnetwork.allen.theme.GrayLetterHint
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.ui.tooling.preview
 
 @OptIn(ExperimentalLayoutApi::class)
+@Preview
 @Composable
 fun SearchProductViewCompose(
     closeApp: () -> Unit = {}

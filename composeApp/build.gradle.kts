@@ -59,6 +59,7 @@ kotlin {
             implementation(libs.kstore)
             implementation(libs.apollo.runtime)
             implementation(libs.kamel.image)
+            implementation("org.jetbrains.compose.ui:ui-tooling-preview:1.6.0")
         }
 
         commonTest.dependencies {
