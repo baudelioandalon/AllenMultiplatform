@@ -24,23 +24,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import com.borealnetwork.allen.domain.enum.StatusEnum
 import com.borealnetwork.allen.domain.model.BirdImage
-import com.borealnetwork.allen.modules.auth.presentation.ui.login.LoginViewCompose
-import com.borealnetwork.allen.modules.auth.presentation.ui.register.RegisterViewCompose
-import com.borealnetwork.allen.modules.auth.presentation.ui.welcome.WelcomeViewCompose
 import com.borealnetwork.allen.modules.cart.presentation.ui.detail_buy_cart.DetailBuyCartStepOneViewCompose
-import com.borealnetwork.allen.modules.cart.presentation.ui.resume_cart.ResumeCartStepTwoViewCompose
-import com.borealnetwork.allen.modules.cart.presentation.ui.shopping_cart.ShoppingCartViewCompose
-import com.borealnetwork.allen.modules.home_client.presentation.ui.home.HomeClientViewCompose
-import com.borealnetwork.allen.modules.payments.presentation.ui.cards.NewCardViewCompose
-import com.borealnetwork.allen.modules.payments.presentation.ui.selector.PaymentMethodsViewCompose
-import com.borealnetwork.allen.modules.product.presentation.ui.detail_product.ProductViewCompose
-import com.borealnetwork.allen.modules.product.presentation.ui.question.QuestionViewCompose
-import com.borealnetwork.allen.modules.product.presentation.ui.rating.RatingProductViewCompose
-import com.borealnetwork.allen.modules.product.presentation.ui.result_client.ResultProductsViewCompose
-import com.borealnetwork.allen.modules.product.presentation.ui.search.SearchProductViewCompose
-import com.borealnetwork.allen.modules.profile.presentation.ui.address.AddressClientViewCompose
-import com.borealnetwork.allen.modules.profile.presentation.ui.new_address.NewAddressClientViewCompose
+import com.borealnetwork.allen.modules.notifications.presentation.ui.client.NotificationClientViewCompose
+import com.borealnetwork.allen.modules.payments.presentation.ui.status_purchase.StatusPurchaseViewCompose
 import com.borealnetwork.allen.theme.AppTheme
 import com.borealnetwork.allen.viewmodel.LoginViewModel
 import dev.icerock.moko.mvvm.compose.getViewModel
@@ -82,7 +70,9 @@ internal fun App() = AppTheme {
 //    NewAddressClientViewCompose()
 //    ResumeCartStepTwoViewCompose()
 //    SearchProductViewCompose()
-    ResultProductsViewCompose()
+//    ResultProductsViewCompose()
+//    StatusPurchaseViewCompose()
+    NotificationClientViewCompose()
 }
 
 @Composable

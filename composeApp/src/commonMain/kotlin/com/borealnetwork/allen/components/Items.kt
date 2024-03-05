@@ -1072,151 +1072,162 @@ fun FavoriteItem(
 
 @Composable
 fun NotificationItem(
+    modifier: Modifier = Modifier,
     step: Int = 0,
     default: Boolean = true,
     shippingType: String = "SHIPPING",
-    shippingStatus: String = "OK"
+    shippingStatus: String = "OK",
+    elevation: Dp = 5.dp,
 ) {
-    Column(
-        modifier = Modifier.fillMaxWidth().background(White)
-            .padding(start = 30.dp, end = 30.dp, top = 14.dp, bottom = 20.dp)
+    Card(
+        modifier = modifier.fillMaxWidth(),
+        shape = RectangleShape, elevation = elevation
     ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
+        Column(
+            modifier = Modifier.fillMaxWidth().background(White)
+                .padding(start = 30.dp, end = 30.dp, top = 14.dp, bottom = 20.dp)
         ) {
-
-            Column(
-                modifier = Modifier.wrapContentWidth()
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Card(
-                    modifier = Modifier.size(81.dp),
-                    backgroundColor = GrayBackgroundDrawerDismiss,
-                    elevation = 0.dp,
-                    shape = RoundedCornerShape(10.dp)
+
+                Column(
+                    modifier = Modifier.wrapContentWidth()
                 ) {
+                    Card(
+                        modifier = Modifier.size(81.dp),
+                        backgroundColor = GrayBackgroundDrawerDismiss,
+                        elevation = 0.dp,
+                        shape = RoundedCornerShape(10.dp)
+                    ) {
+
+                    }
 
                 }
-
-            }
-            if (default) {
-                Column(
-                    modifier = Modifier.wrapContentHeight().padding(start = 22.dp).fillMaxWidth()
-                        .background(White), verticalArrangement = Arrangement.Top
-                ) {
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        SemiBoldText(
-                            text = "Recibido el 1 de septiembre",
-                            fontSize = 15.sp,
-                            maxLines = 3,
-                            textOverflow = TextOverflow.Ellipsis
-                        )
-                        Image(
-                            modifier = Modifier.mirror(),
-                            painter = painterResource(res = "ic_on_way_traffic_circle.xml"),
-                            contentDescription = "on way"
-                        )
-                    }
-                    SemiBoldText(
-                        modifier = Modifier.wrapContentHeight(),
-                        text = "Camiseta",
-                        color = GrayLetterCategoryProduct,
-                        fontSize = 10.sp
-                    )
-
-                    StepIndicatorNotification(
-                        modifier = Modifier.padding(top = 20.dp), step = step
-                    )
-                    BoldText(
-                        modifier = Modifier.padding(top = 10.dp),
-                        text = "Calificar",
-                        fontSize = 12.sp,
-                        color = OrangeStrong
-                    ) {
-
-                    }
-                }
-            } else {
-                Column(
-                    modifier = Modifier.wrapContentHeight().padding(start = 22.dp).fillMaxWidth()
-                        .background(White), verticalArrangement = Arrangement.Top
-                ) {
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        SemiBoldText(
-                            text = if (shippingType == "SHIPPING" && shippingStatus == "OK") "Preparando pedido" else if (shippingType == "PICKUP" && shippingStatus == "OK") "Pedido listo" else if (shippingStatus == "CANCELLED_BY_SELLER") "Cancelado por el vendedor" else "Cancelado por el cliente",
-                            fontSize = 15.sp,
-                            maxLines = 3,
-                            textOverflow = TextOverflow.Ellipsis
-                        )
-                    }
-                    Box(
-                        modifier = Modifier.fillMaxWidth().padding(top = 7.dp).background(
-                            brush = Brush.horizontalGradient(
-                                colors = if (shippingStatus == "OK") listOf(
-                                    MaterialTheme.colors.primary, MaterialTheme.colors.onPrimary
-                                ) else listOf(
-                                    RedStartColor, RedEndColor
-                                )
-                            ), shape = RoundedCornerShape(10.dp)
-                        )
+                if (default) {
+                    Column(
+                        modifier = Modifier.wrapContentHeight().padding(start = 22.dp)
+                            .fillMaxWidth()
+                            .background(White), verticalArrangement = Arrangement.Top
                     ) {
                         Row(
-                            modifier = Modifier.padding(vertical = 9.dp),
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.Start
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Icon(
-                                modifier = Modifier.wrapContentHeight().padding(horizontal = 16.dp),
-                                painter = painterResource(res = if (shippingType == "PICKUP") "ic_on_way_walking.xml" else "ic_on_way_traffic.xml"),
-                                contentDescription = "on way",
-                                tint = White
+                            SemiBoldText(
+                                text = "Recibido el 1 de septiembre",
+                                fontSize = 15.sp,
+                                maxLines = 3,
+                                textOverflow = TextOverflow.Ellipsis
                             )
-                            Column(modifier = Modifier.wrapContentWidth()) {
-                                MediumText(
-                                    text = if (shippingType == "SHIPPING" && shippingStatus == "OK") "Preparando pedido" else if (shippingType == "PICKUP" && shippingStatus == "OK") "Pedido listo" else "Pedido cancelado",
-                                    color = White,
-                                    fontSize = 15.sp
+                            Image(
+                                modifier = Modifier.mirror(),
+                                painter = painterResource(res = "ic_on_way_traffic_circle.xml"),
+                                contentDescription = "on way"
+                            )
+                        }
+                        SemiBoldText(
+                            modifier = Modifier.wrapContentHeight(),
+                            text = "Camiseta",
+                            color = GrayLetterCategoryProduct,
+                            fontSize = 10.sp
+                        )
+
+                        StepIndicatorNotification(
+                            modifier = Modifier.padding(top = 20.dp), step = step
+                        )
+                        BoldText(
+                            modifier = Modifier.padding(top = 10.dp),
+                            text = "Calificar",
+                            fontSize = 12.sp,
+                            color = OrangeStrong
+                        ) {
+
+                        }
+                    }
+                } else {
+                    Column(
+                        modifier = Modifier.wrapContentHeight().padding(start = 22.dp)
+                            .fillMaxWidth()
+                            .background(White), verticalArrangement = Arrangement.Top
+                    ) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            SemiBoldText(
+                                text = if (shippingType == "SHIPPING" && shippingStatus == "OK") "Preparando pedido" else if (shippingType == "PICKUP" && shippingStatus == "OK") "Pedido listo" else if (shippingStatus == "CANCELLED_BY_SELLER") "Cancelado por el vendedor" else "Cancelado por el cliente",
+                                fontSize = 15.sp,
+                                maxLines = 3,
+                                textOverflow = TextOverflow.Ellipsis
+                            )
+                        }
+                        Box(
+                            modifier = Modifier.fillMaxWidth().padding(top = 7.dp).background(
+                                brush = Brush.horizontalGradient(
+                                    colors = if (shippingStatus == "OK") listOf(
+                                        MaterialTheme.colors.primary, MaterialTheme.colors.onPrimary
+                                    ) else listOf(
+                                        RedStartColor, RedEndColor
+                                    )
+                                ), shape = RoundedCornerShape(10.dp)
+                            )
+                        ) {
+                            Row(
+                                modifier = Modifier.padding(vertical = 9.dp),
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.Start
+                            ) {
+                                Icon(
+                                    modifier = Modifier.wrapContentHeight()
+                                        .padding(horizontal = 16.dp),
+                                    painter = painterResource(res = if (shippingType == "PICKUP") "ic_on_way_walking.xml" else "ic_on_way_traffic.xml"),
+                                    contentDescription = "on way",
+                                    tint = White
                                 )
-                                Row(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    horizontalArrangement = Arrangement.SpaceBetween
-                                ) {
+                                Column(modifier = Modifier.wrapContentWidth()) {
                                     MediumText(
-                                        text = if (shippingType == "SHIPPING") "Enviar" else "Recolectar",
+                                        text = if (shippingType == "SHIPPING" && shippingStatus == "OK") "Preparando pedido" else if (shippingType == "PICKUP" && shippingStatus == "OK") "Pedido listo" else "Pedido cancelado",
                                         color = White,
-                                        fontSize = 12.sp
+                                        fontSize = 15.sp
                                     )
-                                    MediumText(
-                                        modifier = Modifier.padding(end = 20.dp),
-                                        text = "Ene 8, 9:30 am",
-                                        color = White,
-                                        fontSize = 12.sp
-                                    )
+                                    Row(
+                                        modifier = Modifier.fillMaxWidth(),
+                                        horizontalArrangement = Arrangement.SpaceBetween
+                                    ) {
+                                        MediumText(
+                                            text = if (shippingType == "SHIPPING") "Enviar" else "Recolectar",
+                                            color = White,
+                                            fontSize = 12.sp
+                                        )
+                                        MediumText(
+                                            modifier = Modifier.padding(end = 20.dp),
+                                            text = "Ene 8, 9:30 am",
+                                            color = White,
+                                            fontSize = 12.sp
+                                        )
+                                    }
                                 }
                             }
                         }
-                    }
-                    BoldText(
-                        modifier = Modifier.padding(top = 10.dp),
-                        text = "Contactar",
-                        fontSize = 12.sp,
-                        color = OrangeStrong
-                    ) {
+                        BoldText(
+                            modifier = Modifier.padding(top = 10.dp),
+                            text = "Contactar",
+                            fontSize = 12.sp,
+                            color = OrangeStrong
+                        ) {
 
+                        }
                     }
                 }
             }
         }
     }
+
 }
 
 @Composable
