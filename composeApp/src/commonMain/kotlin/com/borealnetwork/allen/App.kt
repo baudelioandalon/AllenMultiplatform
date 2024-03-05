@@ -24,11 +24,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import com.borealnetwork.allen.domain.enum.StatusEnum
 import com.borealnetwork.allen.domain.model.BirdImage
-import com.borealnetwork.allen.modules.cart.presentation.ui.detail_buy_cart.DetailBuyCartStepOneViewCompose
-import com.borealnetwork.allen.modules.notifications.presentation.ui.client.NotificationClientViewCompose
-import com.borealnetwork.allen.modules.payments.presentation.ui.status_purchase.StatusPurchaseViewCompose
+import com.borealnetwork.allen.modules.cart.presentation.ui.resume_cart.ResumeCartStepTwoViewCompose
+import com.borealnetwork.allen.modules.orders.presentation.ui.order_resume.OrderResumeViewCompose
 import com.borealnetwork.allen.theme.AppTheme
 import com.borealnetwork.allen.viewmodel.LoginViewModel
 import dev.icerock.moko.mvvm.compose.getViewModel
@@ -72,7 +70,9 @@ internal fun App() = AppTheme {
 //    SearchProductViewCompose()
 //    ResultProductsViewCompose()
 //    StatusPurchaseViewCompose()
-    NotificationClientViewCompose()
+//    NotificationClientViewCompose()
+//    OrderDetailViewCompose()
+    OrderResumeViewCompose()
 }
 
 @Composable

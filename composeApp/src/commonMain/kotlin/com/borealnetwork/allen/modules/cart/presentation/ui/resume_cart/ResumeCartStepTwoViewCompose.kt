@@ -222,7 +222,7 @@ fun ResumeCartStepTwoViewCompose() {
                 )
             }
             item {
-                Spacer(modifier = Modifier.height(250.dp))
+                Spacer(modifier = Modifier.height(100.dp))
             }
         }
         it.calculateBottomPadding()

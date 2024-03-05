@@ -65,6 +65,7 @@ import com.borealnetwork.allen.components.extensions.mirror
 import com.borealnetwork.allen.domain.model.ItemCartModel
 import com.borealnetwork.allen.domain.model.ItemShoppingModel
 import com.borealnetwork.allen.domain.model.ProductShoppingCart
+import com.borealnetwork.allen.domain.model.order_resume.PinStatusHistoryModel
 import com.borealnetwork.allen.modules.payments.domain.models.CardModel
 import com.borealnetwork.allen.modules.payments.domain.models.TypeCard
 import com.borealnetwork.allen.theme.BlueStatusLineColor
@@ -80,6 +81,7 @@ import com.borealnetwork.allen.theme.GrayLetterSeeAll
 import com.borealnetwork.allen.theme.GrayLetterShipping
 import com.borealnetwork.allen.theme.GrayMedium
 import com.borealnetwork.allen.theme.GraySinceTo
+import com.borealnetwork.allen.theme.GrayStrong
 import com.borealnetwork.allen.theme.GreenStrong
 import com.borealnetwork.allen.theme.OrangeMedium
 import com.borealnetwork.allen.theme.OrangeStrong
@@ -87,6 +89,7 @@ import com.borealnetwork.allen.theme.OrangeTransparent
 import com.borealnetwork.allen.theme.RedEndColor
 import com.borealnetwork.allen.theme.RedStartColor
 import com.borealnetwork.allen.theme.StarColor
+import com.borealnetwork.allen.tools.limit
 import org.jetbrains.compose.resources.painterResource
 
 //@Composable
@@ -1863,7 +1866,9 @@ fun ItemSold() {
 
 //Items de Compra
 @Composable
-fun BottomBuyCartItem() {
+fun BottomBuyCartItem(
+    payed: Boolean = false
+) {
     Card(
         modifier = Modifier.fillMaxWidth(), shape = RectangleShape, elevation = 15.dp
     ) {
@@ -1902,7 +1907,7 @@ fun BottomBuyCartItem() {
                 ) {
                     SemiBoldText(
                         modifier = Modifier.weight(1f),
-                        text = "Pagar",
+                        text = if (payed) "Pagado" else "Pagar",
                         color = GrayLetterShipping,
                         fontSize = 18.sp
                     )
@@ -1920,19 +1925,22 @@ fun BottomBuyCartItem() {
                         textAlign = TextAlign.End
                     )
                 }
-                BlueButton(
-                    modifier = Modifier.padding(bottom = 18.dp, top = 24.dp).fillMaxWidth()
-                        .drawColoredShadow(
-                            color = BlueTransparent,
-                            alpha = 1f,
-                            borderRadius = 10.dp,
-                            offsetY = 6.dp,
-                            offsetX = 5.dp,
-                            blurRadius = 10.dp
-                        ), text = "Continuar"
-                ) {
+                if (!payed) {
+                    BlueButton(
+                        modifier = Modifier.padding(bottom = 18.dp, top = 24.dp).fillMaxWidth()
+                            .drawColoredShadow(
+                                color = BlueTransparent,
+                                alpha = 1f,
+                                borderRadius = 10.dp,
+                                offsetY = 6.dp,
+                                offsetX = 5.dp,
+                                blurRadius = 10.dp
+                            ), text = "Continuar"
+                    ) {
 //                            navController?.navigate(SHOPPING_DETAIL_GRAPH)
+                    }
                 }
+
             }
         }
     }
@@ -2244,4 +2252,73 @@ fun CardNoFilled(
             }
         }
     }
+}
+
+@Composable
+fun ResumeStatusTravelItem(
+    modifier: Modifier = Modifier,
+    pinStatusList: List<PinStatusHistoryModel>
+) {
+    Column(
+        modifier = modifier
+            .wrapContentWidth()
+            .padding(start = 30.dp, top = 40.dp, bottom = 30.dp),
+        verticalArrangement = Arrangement.SpaceBetween,
+        horizontalAlignment = Alignment.Start
+    ) {
+        pinStatusList.forEachIndexed { index, item ->
+            PinStatusLocationItem(
+                topText = item.origin,
+                bottomText = item.destiny
+            ) {
+                item.icon()
+            }
+            if (index < pinStatusList.limit()) {
+                DottedVerticalLine()
+            }
+        }
+
+    }
+}
+
+
+@Composable
+fun PinStatusLocationItem(
+    topText: String,
+    bottomText: String,
+    icon: @Composable () -> Unit
+) {
+    Row(horizontalArrangement = Arrangement.Start) {
+        icon()
+        Column(modifier = Modifier.padding(start = 13.dp)) {
+            MediumText(
+                text = topText,
+                color = GraySinceTo,
+                fontSize = 15.sp
+            )
+            MediumText(
+                modifier = Modifier
+                    .width(180.dp)
+                    .wrapContentHeight(),
+                text = bottomText,
+                textAlign = TextAlign.Start,
+                color = GrayMedium,
+                fontSize = 15.sp,
+                textOverflow = TextOverflow.Ellipsis,
+                maxLines = 1
+            )
+        }
+    }
+}
+
+@Composable
+fun DottedVerticalLine() {
+    Box(
+        Modifier
+            .padding(top = 20.dp)
+            .rotate(90f)
+            .width(50.dp)
+            .height(1.dp)
+            .background(GrayStrong, shape = DottedShape(step = 10.dp))
+    )
 }
