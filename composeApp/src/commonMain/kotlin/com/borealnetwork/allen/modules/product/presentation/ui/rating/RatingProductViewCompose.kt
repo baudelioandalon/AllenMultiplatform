@@ -28,7 +28,7 @@ import com.borealnetwork.allen.components.SemiBoldText
 import com.borealnetwork.allen.components.ShadowButton
 import com.borealnetwork.allen.components.ToolbarTitle
 import com.borealnetwork.allen.components.extensions.drawColoredShadow
-import com.borealnetwork.allen.domain.model.QuestionModel
+import com.borealnetwork.allen.modules.product.domain.models.QuestionModel
 import com.borealnetwork.allen.theme.BlueTransparent
 import com.borealnetwork.allen.theme.GrayBackgroundMain
 import com.borealnetwork.allen.theme.GraySubtitleBottom
