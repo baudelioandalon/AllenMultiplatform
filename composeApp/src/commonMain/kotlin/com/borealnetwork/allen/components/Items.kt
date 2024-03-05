@@ -65,8 +65,8 @@ import com.borealnetwork.allen.components.extensions.mirror
 import com.borealnetwork.allen.domain.model.ItemCartModel
 import com.borealnetwork.allen.domain.model.ItemShoppingModel
 import com.borealnetwork.allen.domain.model.ProductShoppingCart
-import com.borealnetwork.allen.domain.payments.CardModel
-import com.borealnetwork.allen.domain.payments.TypeCard
+import com.borealnetwork.allen.modules.payments.domain.models.CardModel
+import com.borealnetwork.allen.modules.payments.domain.models.TypeCard
 import com.borealnetwork.allen.theme.BlueStatusLineColor
 import com.borealnetwork.allen.theme.BlueTransparent
 import com.borealnetwork.allen.theme.CategoryBackgroundSelectorOne
