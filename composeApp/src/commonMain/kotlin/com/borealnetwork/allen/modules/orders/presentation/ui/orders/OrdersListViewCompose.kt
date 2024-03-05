@@ -1,23 +1,15 @@
 package com.borealnetwork.allen.modules.orders.presentation.ui.orders
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.Card
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color.Companion.Black
-import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.borealnetwork.allen.components.BoldText
 import com.borealnetwork.allen.components.ResumeItem
 import com.borealnetwork.allen.components.ShoppingCategoryHistoryItem
 import com.borealnetwork.allen.components.ToolbarTitle
@@ -125,28 +117,21 @@ fun OrdersListViewCompose() {
                     numberCounter = listInProgress.size,
                     innerBottomPadding = 5.dp
                 ) {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth(),
+                    FlowRow(
+                        modifier = Modifier.fillMaxWidth()
                     ) {
 
-                        FlowRow(
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-
-                            listInProgress.forEachIndexed { index, item ->
-                                ShoppingCategoryHistoryItem(
-                                    itemPayed = item,
-                                    counter = false,
-                                    deleteOptions = false,
-                                    selector = false,
-                                    hideArrow = false,
-                                    hideTopLine = index != listInProgress.lastIndex
-                                ) {
+                        listInProgress.forEachIndexed { index, item ->
+                            ShoppingCategoryHistoryItem(
+                                itemPayed = item,
+                                counter = false,
+                                deleteOptions = false,
+                                selector = false,
+                                hideArrow = false,
+                                hideTopLine = index != listInProgress.lastIndex
+                            ) {
 //                                    navController?.navigate(SHOPPING_DETAIL_CLIENT_GRAPH)
-                                }
                             }
-
                         }
                     }
                 }
@@ -158,30 +143,26 @@ fun OrdersListViewCompose() {
                     numberCounter = listDone.size,
                     innerBottomPadding = 5.dp
                 ) {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth(),
+
+                    FlowRow(
+                        modifier = Modifier.fillMaxWidth()
                     ) {
 
-                        FlowRow(
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-
-                            listDone.forEachIndexed { index, item ->
-                                ShoppingCategoryHistoryItem(
-                                    itemPayed = item,
-                                    counter = false,
-                                    deleteOptions = false,
-                                    selector = false,
-                                    hideArrow = false,
-                                    hideTopLine = index != listDone.lastIndex
-                                ) {
+                        listDone.forEachIndexed { index, item ->
+                            ShoppingCategoryHistoryItem(
+                                itemPayed = item,
+                                counter = false,
+                                deleteOptions = false,
+                                selector = false,
+                                hideArrow = false,
+                                hideTopLine = index != listDone.lastIndex
+                            ) {
 //                                    navController?.navigate(SHOPPING_DETAIL_CLIENT_GRAPH)
-                                }
                             }
-
                         }
+
                     }
+
                 }
             }
         }
