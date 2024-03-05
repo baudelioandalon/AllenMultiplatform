@@ -705,7 +705,8 @@ fun ShoppingCartStoreItem(
 ) {
 
     Card(
-        modifier = modifier.fillMaxWidth(), shape = RectangleShape, elevation = elevation
+        modifier = modifier.fillMaxWidth(),
+        shape = RectangleShape, elevation = elevation
     ) {
 
         val showItems = rememberSaveable { mutableStateOf(true) }
@@ -2261,8 +2262,7 @@ fun ResumeStatusTravelItem(
 ) {
     Column(
         modifier = modifier
-            .wrapContentWidth()
-            .padding(start = 30.dp, top = 40.dp, bottom = 30.dp),
+            .wrapContentWidth(),
         verticalArrangement = Arrangement.SpaceBetween,
         horizontalAlignment = Alignment.Start
     ) {
