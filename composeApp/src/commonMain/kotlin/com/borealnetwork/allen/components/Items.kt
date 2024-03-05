@@ -720,7 +720,11 @@ fun ShoppingCartStoreItem(
             }
             //TopStoreInformation
             StoreInformationItem(
-                deleteOptions, selector, item, showItems
+                deleteOptions = deleteOptions,
+                selector = selector,
+                itemNotPayed = item,
+                hideArrow = true,
+                showItems = showItems
             )
             AnimatedVisibility(visible = showItems.value) {
                 Divider(
@@ -751,7 +755,10 @@ fun ShoppingCartStoreItem(
 @Composable
 fun StoreInformationItem(
     deleteOptions: Boolean,
-    selector: Boolean, item: ItemCartModel,
+    selector: Boolean,
+    hideArrow: Boolean = true,
+    itemNotPayed: ItemCartModel? = null,
+    itemPayed: ItemShoppingModel? = null,
     showItems: MutableState<Boolean>,
 ) {
     Row(
@@ -781,28 +788,33 @@ fun StoreInformationItem(
         }
         BoldText(
             modifier = Modifier.weight(0.5f).padding(start = 6.dp, end = 10.dp),
-            text = item.nameStore,
+            text = itemNotPayed?.nameStore ?: itemPayed?.nameStore.orEmpty(),
             fontSize = 15.sp,
             textOverflow = TextOverflow.Ellipsis,
             maxLines = 2,
             color = Black
         )
         SemiBoldText(
-            modifier = Modifier.padding(end = 23.dp), text = "${item.listItems.size} articulo${
-                if (item.listItems.size > 1) {
+            modifier = Modifier.padding(end = 23.dp), text = "${
+                itemNotPayed?.listItems?.size ?: itemPayed?.numberProducts
+            } articulo${
+                if ((itemNotPayed?.listItems?.size ?: itemPayed?.numberProducts ?: 0) > 1) {
                     "s"
                 } else {
                     ""
                 }
             }", color = GrayMedium, fontSize = 13.sp
         )
-        CircularIcon(modifier = Modifier.size(35.dp).wrapContentSize()
-            .rotate(if (showItems.value) 0f else 180f),
-            icon = "ic_arrow_down.xml",
-            contentDescription = "arrow",
-            onClick = {
-                showItems.value = (!showItems.value)
-            })
+        if (hideArrow) {
+            CircularIcon(modifier = Modifier.size(35.dp).wrapContentSize()
+                .rotate(if (showItems.value) 0f else 180f),
+                icon = "ic_arrow_down.xml",
+                contentDescription = "arrow",
+                onClick = {
+                    showItems.value = (!showItems.value)
+                })
+        }
+
     }
 }
 
@@ -1570,7 +1582,7 @@ fun StepIndicatorNotification(
 @Composable
 fun ShoppingCategoryHistoryItem(
     modifier: Modifier = Modifier,
-    item: ItemShoppingModel = ItemShoppingModel(
+    itemPayed: ItemShoppingModel = ItemShoppingModel(
         nameStore = "Ferreteria La hormiga",
         idStore = "d2d232",
         imgStore = "dddd",
@@ -1586,14 +1598,17 @@ fun ShoppingCategoryHistoryItem(
     deleteOptions: Boolean = true,
     selector: Boolean = true,
     elevation: Dp = 0.dp,
+    hideArrow: Boolean = true,
     hideTopLine: Boolean = false,
     onClicked: (() -> Unit)? = null
 ) {
 
     Card(
-        modifier = Modifier.fillMaxWidth(), elevation = elevation
+        modifier = Modifier.fillMaxWidth(),
+        shape = RectangleShape,
+        elevation = elevation
     ) {
-
+        val showItems = rememberSaveable { mutableStateOf(true) }
         Column(
             modifier = modifier.fillMaxWidth().background(White)
         ) {
@@ -1602,51 +1617,22 @@ fun ShoppingCategoryHistoryItem(
                     thickness = 1.5.dp, color = GrayBorderLight
                 )
             }
-            Row(
-                modifier = Modifier.fillMaxWidth()
-                    .padding(top = 12.dp, bottom = 14.dp, end = if (deleteOptions) 30.dp else 0.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceAround
-            ) {
-                if (selector) {
-                    RadioButton(
-                        selected = false, onClick = { }, colors = RadioButtonDefaults.colors(
-                            unselectedColor = GrayLetterHint,
-                            selectedColor = MaterialTheme.colors.primary
-                        )
-                    )
-                }
-
-                Card(
-                    modifier = Modifier.size(30.dp),
-                    backgroundColor = GrayBackgroundDrawerDismiss,
-                    elevation = 0.dp,
-                    shape = RoundedCornerShape(10.dp)
-                ) {
-
-                }
-                BoldText(
-                    modifier = Modifier.weight(0.5f).padding(start = 6.dp, end = 10.dp),
-                    text = item.nameStore,
-                    fontSize = 15.sp,
-                    textOverflow = TextOverflow.Ellipsis,
-                    maxLines = 2
-                )
-                SemiBoldText(
-                    modifier = Modifier.padding(end = 23.dp),
-                    text = "${item.numberProducts} articulos",
-                    color = GrayMedium,
-                    fontSize = 13.sp
-                )
-
-            }
-            Divider(
-                thickness = 1.5.dp, color = GrayBorderLight
+            StoreInformationItem(
+                deleteOptions, selector,
+                hideArrow = hideArrow,
+                itemPayed = itemPayed,
+                showItems = showItems
             )
-            ShoppingHistoryItem(
-                counter = counter, deleteOptions = deleteOptions, historyModel = item
-            ) {
-                onClicked?.invoke()
+            AnimatedVisibility(visible = showItems.value) {
+                Divider(
+                    thickness = 1.5.dp, color = GrayBorderLight
+                )
+                ShoppingHistoryItem(
+                    counter = counter, deleteOptions = deleteOptions, historyModel = itemPayed
+                ) {
+                    onClicked?.invoke()
+                }
+
             }
         }
     }
@@ -1951,6 +1937,8 @@ fun BottomBuyCartItem(
 fun ResumeItem(
     modifier: Modifier = Modifier,
     title: String,
+    topCounter: Boolean = false,
+    numberCounter: Int = 0,
     hideIcon: Boolean = true,
     middleItem: Boolean = false,
     topContent: @Composable (() -> Unit?)? = null,
@@ -1987,13 +1975,35 @@ fun ResumeItem(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                SemiBoldText(
-                    modifier = Modifier.padding(
-                        if (startPadding > 0.dp)
-                            0.dp else innerStartPadding
-                    ),
-                    text = title, fontSize = 15.sp
-                )
+                Row {
+                    SemiBoldText(
+                        modifier = Modifier.padding(
+                            if (startPadding > 0.dp)
+                                0.dp else innerStartPadding
+                        ),
+                        text = title, fontSize = 15.sp
+                    )
+                    if (topCounter) {
+                        Card(
+                            modifier = Modifier.padding(start = 10.dp).size(25.dp),
+                            shape = CircleShape,
+                            backgroundColor = MaterialTheme.colors.primary
+                        ) {
+                            Row(
+                                horizontalArrangement = Arrangement.Center,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                SemiBoldText(
+                                    text = numberCounter.toString(),
+                                    color = White
+                                )
+                            }
+                        }
+                    }
+                }
+
+
+
                 if (middleItem) {
                     topContent?.invoke()
                 }

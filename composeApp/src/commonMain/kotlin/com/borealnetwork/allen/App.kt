@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import com.borealnetwork.allen.domain.model.BirdImage
 import com.borealnetwork.allen.modules.orders.presentation.ui.order_detail.OrderDetailViewCompose
 import com.borealnetwork.allen.modules.orders.presentation.ui.order_status.OrderStatusViewCompose
+import com.borealnetwork.allen.modules.orders.presentation.ui.orders.OrdersListViewCompose
 import com.borealnetwork.allen.theme.AppTheme
 import com.borealnetwork.allen.viewmodel.LoginViewModel
 import dev.icerock.moko.mvvm.compose.getViewModel
@@ -72,8 +73,9 @@ internal fun App() = AppTheme {
 //    StatusPurchaseViewCompose()
 //    NotificationClientViewCompose()
 //    OrderDetailViewCompose()
-    OrderStatusViewCompose()
+//    OrderStatusViewCompose()
 //    OrderDetailViewCompose()
+    OrdersListViewCompose()
 }
 
 @Composable
