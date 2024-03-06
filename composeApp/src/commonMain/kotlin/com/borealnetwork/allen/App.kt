@@ -25,7 +25,6 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.borealnetwork.allen.domain.model.BirdImage
-import com.borealnetwork.allen.modules.orders.presentation.ui.order_detail.OrderDetailViewCompose
 import com.borealnetwork.allen.modules.orders.presentation.ui.order_status.OrderStatusViewCompose
 import com.borealnetwork.allen.modules.orders.presentation.ui.orders.OrdersListViewCompose
 import com.borealnetwork.allen.theme.AppTheme
@@ -34,6 +33,10 @@ import dev.icerock.moko.mvvm.compose.getViewModel
 import dev.icerock.moko.mvvm.compose.viewModelFactory
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
+import moe.tlaster.precompose.PreComposeApp
+import moe.tlaster.precompose.navigation.NavHost
+import moe.tlaster.precompose.navigation.rememberNavigator
+import moe.tlaster.precompose.navigation.transition.NavTransition
 
 @Composable
 fun BirdAppTheme(
@@ -52,8 +55,38 @@ fun BirdAppTheme(
 }
 
 @Composable
-internal fun App() = AppTheme {
-    val loginViewModel = getViewModel(Unit, viewModelFactory { LoginViewModel() })
+internal fun App() = PreComposeApp {
+
+    val navigator = rememberNavigator()
+    NavHost(
+        // Assign the navigator to the NavHost
+        navigator = navigator,
+        // Navigation transition for the scenes in this NavHost, this is optional
+        navTransition = NavTransition(),
+        // The start destination
+        initialRoute = "/home",
+    ) {
+        // Define a scene to the navigation graph
+        scene(
+            // Scene's route path
+            route = "/home",
+            // Navigation transition for this scene, this is optional
+            navTransition = NavTransition(),
+        ) {
+            OrdersListViewCompose(navigator)
+        }
+        scene(
+            // Scene's route path
+            route = "/home2",
+            // Navigation transition for this scene, this is optional
+            navTransition = NavTransition(),
+        ) {
+            OrderStatusViewCompose(navigator)
+        }
+    }
+
+    AppTheme {
+        val loginViewModel = getViewModel(Unit, viewModelFactory { LoginViewModel() })
 //    WelcomeViewCompose()
 //    RegisterViewCompose()
 //    LoginViewCompose(loginViewModel)
@@ -75,7 +108,8 @@ internal fun App() = AppTheme {
 //    OrderDetailViewCompose()
 //    OrderStatusViewCompose()
 //    OrderDetailViewCompose()
-    OrdersListViewCompose()
+//        OrdersListViewCompose()
+    }
 }
 
 @Composable

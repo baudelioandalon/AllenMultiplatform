@@ -59,6 +59,16 @@ kotlin {
             implementation(libs.kstore)
             implementation(libs.apollo.runtime)
             implementation(libs.kamel.image)
+            api(compose.foundation)
+            api(compose.animation)
+//...
+            api(libs.precompose)
+
+// api("moe.tlaster:precompose-molecule:$precompose_version") // For Molecule intergration
+
+// api("moe.tlaster:precompose-viewmodel:$precompose_version") // For ViewModel intergration
+
+// api("moe.tlaster:precompose-koin:$precompose_version")
         }
 
         commonTest.dependencies {

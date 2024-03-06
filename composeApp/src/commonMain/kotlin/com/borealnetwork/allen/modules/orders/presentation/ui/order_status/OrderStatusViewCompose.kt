@@ -33,15 +33,17 @@ import com.borealnetwork.allen.domain.model.ItemCartModel
 import com.borealnetwork.allen.domain.model.ProductShoppingCart
 import com.borealnetwork.allen.theme.GrayBackgroundDrawerDismiss
 import com.borealnetwork.allen.theme.GrayBackgroundMain
+import moe.tlaster.precompose.navigation.Navigator
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun OrderStatusViewCompose() {
+fun OrderStatusViewCompose(navigator: Navigator) {
 
     Scaffold(topBar = {
         ToolbarTitle(
             titleText = "Estado del pedido",
             startClicked = {
+                navigator.goBack()
             },
             showEndImage = false,
             endIcon = "ic_coupon.xml",

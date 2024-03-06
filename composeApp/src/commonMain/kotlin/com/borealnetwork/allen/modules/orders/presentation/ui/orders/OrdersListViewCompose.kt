@@ -15,10 +15,11 @@ import com.borealnetwork.allen.components.ShoppingCategoryHistoryItem
 import com.borealnetwork.allen.components.ToolbarTitle
 import com.borealnetwork.allen.domain.model.ItemShoppingModel
 import com.borealnetwork.allen.theme.GrayBackgroundMain
+import moe.tlaster.precompose.navigation.Navigator
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun OrdersListViewCompose() {
+fun OrdersListViewCompose(navigator: Navigator) {
 
     val listInProgress = listOf(
         ItemShoppingModel(
@@ -98,6 +99,7 @@ fun OrdersListViewCompose() {
         ToolbarTitle(
             titleText = "Mis compras",
             startClicked = {
+                navigator.navigate("/home2")
             },
             showEndImage = false,
             endIcon = "ic_coupon.xml",
