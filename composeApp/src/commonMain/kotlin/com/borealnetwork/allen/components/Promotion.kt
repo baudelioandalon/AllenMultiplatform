@@ -31,6 +31,7 @@ import com.borealnetwork.allen.theme.OrangeTransparent
 import com.borealnetwork.allen.theme.StarColor
 import com.borealnetwork.allen.tools.discount
 import com.borealnetwork.allen.tools.round
+import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
@@ -54,7 +55,7 @@ fun FreeShipping(modifier: Modifier = Modifier) {
         )
         Icon(
             modifier = Modifier.requiredSize(20.dp).padding(start = 4.dp, end = 10.dp),
-            painter = painterResource(res = "ic_thunder_icon.xml"),
+            painter = painterResource(resource = DrawableResource(  "ic_thunder_icon.xml")),
             contentDescription = "free shipping",
             tint = StarColor
         )

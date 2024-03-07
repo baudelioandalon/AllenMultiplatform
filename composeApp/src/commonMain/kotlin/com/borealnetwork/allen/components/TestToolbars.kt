@@ -22,6 +22,7 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 
 
@@ -102,7 +103,7 @@ fun TopTitleImg(
             Image(
                 modifier = Modifier.width(53.dp)
                     .height(23.dp).align(Alignment.Center),
-                painter = painterResource(res = "allen_blue_logo.xml"),
+                painter = painterResource(resource = DrawableResource(  "allen_blue_logo.xml")),
                 contentDescription = "logo"
             )
         }

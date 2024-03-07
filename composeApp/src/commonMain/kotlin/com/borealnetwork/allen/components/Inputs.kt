@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.sp
 import com.borealnetwork.allen.theme.GrayLetterHint
 import com.borealnetwork.allen.theme.robotoMediumTypo
 import com.borealnetwork.allen.theme.semiBoldTypo
+import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 
 
@@ -61,9 +62,9 @@ fun EditText(
     val interactionSource = remember { MutableInteractionSource() }
     var passwordVisibility by remember { mutableStateOf(isPassword) }
     val icon = if (passwordVisibility)
-        painterResource(res = "ic_design_visibility_off.xml")
+        painterResource(resource = DrawableResource(  "ic_design_visibility_off.xml"))
     else
-        painterResource(res = "ic_design_visibility.xml")
+        painterResource(resource = DrawableResource( "ic_design_visibility.xml"))
 
     Column(modifier = modifier) {
 
@@ -153,9 +154,9 @@ fun EditTextTopLabel(
     val interactionSource = remember { MutableInteractionSource() }
     var passwordVisibility by remember { mutableStateOf(isPassword) }
     val icon = if (passwordVisibility)
-        painterResource(res = "ic_design_visibility_off.xml")
+        painterResource(resource = DrawableResource( "ic_design_visibility_off.xml"))
     else
-        painterResource(res = "ic_design_visibility.xml")
+        painterResource(resource = DrawableResource(  "ic_design_visibility.xml"))
 
     Column(modifier = modifier) {
 

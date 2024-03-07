@@ -35,6 +35,7 @@ import com.borealnetwork.allen.theme.GrayBackgroundMain
 import com.borealnetwork.allen.theme.GrayLetterDrawer
 import com.borealnetwork.allen.theme.OrangeBackground
 import com.borealnetwork.allen.theme.OrangeStrong
+import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 
 
@@ -118,7 +119,7 @@ fun DrawerHeaderSeller(closeClicked: (() -> Unit)? = null) {
                             top = 12.dp, bottom = 15.dp,
                             start = 8.dp, end = 8.dp
                         ),
-                    painter = painterResource(res = "ic_arrow_right.xml"),
+                    painter = painterResource(resource = DrawableResource(  "ic_arrow_right.xml")),
                     contentDescription = ""
                 )
             }
@@ -138,7 +139,7 @@ fun DrawerHeaderSeller(closeClicked: (() -> Unit)? = null) {
                 shape = CircleShape, onClick = { }) {
                 Image(
                     modifier = Modifier.height(50.dp),
-                    painter = painterResource(res = "person_test.png"),
+                    painter = painterResource(resource = DrawableResource(  "person_test.png")),
                     contentDescription = ""
                 )
             }

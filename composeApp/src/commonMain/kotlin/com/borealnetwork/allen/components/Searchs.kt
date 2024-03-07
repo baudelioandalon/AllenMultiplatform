@@ -44,6 +44,7 @@ import androidx.compose.ui.unit.sp
 import com.borealnetwork.allen.theme.GrayBackgroundSearch
 import com.borealnetwork.allen.theme.GrayBorderSearch
 import com.borealnetwork.allen.theme.GrayLetterHint
+import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
@@ -146,7 +147,7 @@ fun SearchOutlinedTextField(
                 ) {
                     Image(
                         modifier = Modifier.wrapContentSize(),
-                        painter = painterResource(res = "ic_search_icon.xml"),
+                        painter = painterResource(resource = DrawableResource(  "ic_search_icon.xml")),
                         contentDescription = "settingsIcon"
                     )
                 }
@@ -161,7 +162,7 @@ fun SearchOutlinedTextField(
                     onClick = { settingsClicked?.invoke() }) {
                     Icon(
                         modifier = Modifier.wrapContentSize(),
-                        painter = painterResource(res = "ic_settings_gray.xml"),
+                        painter = painterResource(resource = DrawableResource(  "ic_settings_gray.xml")),
                         contentDescription = "settingsIcon"
                     )
                 }
@@ -237,7 +238,7 @@ fun SearcherWithButton(
                     ) {
                         Icon(
                             modifier = Modifier.wrapContentSize(),
-                            painter = painterResource(res = "ic_search_icon.xml"),
+                            painter = painterResource(resource = DrawableResource( "ic_search_icon.xml")),
                             contentDescription = "settingsIcon"
                         )
                     }
@@ -253,7 +254,7 @@ fun SearcherWithButton(
                         onClick = { settingsClicked?.invoke() }) {
                         Icon(
                             modifier = Modifier.wrapContentSize(),
-                            painter = painterResource(res = "ic_settings_gray.xml"),
+                            painter = painterResource(resource = DrawableResource(  "ic_settings_gray.xml")),
                             contentDescription = "settingsIcon",
                             tint = Black
                         )
@@ -345,7 +346,7 @@ fun SearcherWithSettings(
             onClick = { settingsClicked?.invoke() }) {
             Icon(
                 modifier = Modifier.wrapContentSize(),
-                painter = painterResource(res = "ic_settings_gray.xml"),
+                painter = painterResource(resource = DrawableResource( "ic_settings_gray.xml")),
                 contentDescription = "settingsIcon",
                 tint = Black
             )

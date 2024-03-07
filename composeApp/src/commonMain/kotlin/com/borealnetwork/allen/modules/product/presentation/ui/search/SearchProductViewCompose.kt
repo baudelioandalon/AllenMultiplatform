@@ -32,6 +32,7 @@ import com.borealnetwork.allen.theme.GrayLetterHint
 import moe.tlaster.precompose.navigation.NavOptions
 import moe.tlaster.precompose.navigation.Navigator
 import moe.tlaster.precompose.navigation.PopUpTo
+import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 
 @OptIn(ExperimentalLayoutApi::class)
@@ -92,7 +93,7 @@ fun SearchProductViewCompose(
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
                                 Image(
-                                    painter = painterResource(res = "ic_clock_gray.xml"),
+                                    painter = painterResource(resource = DrawableResource(  "ic_clock_gray.xml")),
                                     contentDescription = ""
                                 )
                                 RegularText(
@@ -108,7 +109,7 @@ fun SearchProductViewCompose(
                                     fontSize = 15.sp
                                 )
                                 Icon(
-                                    painter = painterResource(res = "ic_search_icon.xml"),
+                                    painter = painterResource(resource = DrawableResource(  "ic_search_icon.xml")),
                                     contentDescription = "",
                                     tint = GrayLetterHint
                                 )

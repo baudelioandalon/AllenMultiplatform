@@ -52,6 +52,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.yield
 import moe.tlaster.precompose.navigation.Navigator
+import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
@@ -386,7 +387,7 @@ fun AutoSliding() {
         verticalArrangement = Arrangement.Center
     ) {
         Image(
-            painter = painterResource(res = promotion[0].imgUrl),
+            painter = painterResource(resource = DrawableResource( promotion[0].imgUrl)),
             contentDescription = promotion[page.value].title,
             contentScale = ContentScale.Crop,
             modifier = Modifier

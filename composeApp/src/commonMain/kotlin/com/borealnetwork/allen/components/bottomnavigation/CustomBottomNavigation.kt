@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.sp
 import com.borealnetwork.allen.components.BoldText
 import com.borealnetwork.allen.domain.screen.SellerScreen
 import com.borealnetwork.allen.theme.GrayLetterShipping
+import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
@@ -83,7 +84,7 @@ fun CustomBottomNavigationItem(item: SellerScreen, isSelected: Boolean, onClick:
         ) {
 
             Icon(
-                painter = painterResource(res = item.icon),
+                painter = painterResource(resource = DrawableResource( item.icon)),
                 contentDescription = null,
                 tint = contentColor
             )

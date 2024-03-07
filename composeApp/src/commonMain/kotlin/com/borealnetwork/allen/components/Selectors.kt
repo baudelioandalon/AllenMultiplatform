@@ -61,6 +61,7 @@ import com.borealnetwork.allen.theme.GraySelector
 import com.borealnetwork.allen.theme.GraySinceTo
 import com.borealnetwork.allen.theme.GreenStrong
 import com.borealnetwork.allen.theme.robotoMediumTypo
+import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 
 //@Preview(showBackground = true)
@@ -101,7 +102,7 @@ fun SelectorCounter(
         ) {
             Icon(
                 modifier = Modifier.padding(13.dp),
-                painter = painterResource(res = "ic_less_icon.xml"),
+                painter = painterResource(resource = DrawableResource(  "ic_less_icon.xml")),
                 contentDescription = "less_icon",
                 tint = GreenStrong
             )
@@ -119,7 +120,7 @@ fun SelectorCounter(
         ) {
             Icon(
                 modifier = Modifier.padding(12.dp),
-                painter = painterResource(res = "ic_more_icon.xml"),
+                painter = painterResource(resource = DrawableResource(  "ic_more_icon.xml")),
                 contentDescription = "more_icon",
                 tint = White
             )
@@ -151,7 +152,7 @@ fun ShippingSelector(
         ) {
             Icon(
                 modifier = Modifier.padding(end = 13.dp),
-                painter = painterResource(res = if (shipping) "ic_house.xml" else "ic_walking.xml"),
+                painter = painterResource(resource = DrawableResource(  if (shipping) "ic_house.xml" else "ic_walking.xml")),
                 contentDescription = "hide shipping options",
                 tint = if (shipping) MaterialTheme.colors.primary else GrayMedium
             )
@@ -194,7 +195,7 @@ fun AddressSelector(
         ) {
             Icon(
                 modifier = Modifier.padding(end = 13.dp, start = 16.dp),
-                painter = painterResource(res = iconRes),
+                painter = painterResource(resource = DrawableResource(  iconRes)),
                 contentDescription = "hide shipping options",
                 tint = if (selected) MaterialTheme.colors.primary else GraySinceTo
             )
@@ -221,7 +222,7 @@ fun AddressSelector(
                 modifier = Modifier
                     .wrapContentSize()
                     .padding(end = 15.dp),
-                painter = painterResource(res = "ic_selector_right.xml"),
+                painter = painterResource(resource = DrawableResource(  "ic_selector_right.xml")),
                 contentDescription = "right selector"
             )
         }
@@ -258,7 +259,7 @@ fun PaymentMethodSelector(
                 modifier = Modifier
                     .padding(end = 13.dp, start = 16.dp)
                     .size(20.dp),
-                painter = painterResource(res = iconRes),
+                painter = painterResource(resource = DrawableResource( iconRes)),
                 contentDescription = "hide shipping options",
                 tint = if (selected) MaterialTheme.colors.primary else GraySinceTo
             )
@@ -277,7 +278,7 @@ fun PaymentMethodSelector(
                 modifier = Modifier
                     .wrapContentSize()
                     .padding(end = 15.dp),
-                painter = painterResource(res = "ic_check.xml"),
+                painter = painterResource(resource = DrawableResource(  "ic_check.xml")),
                 contentDescription = "right selector"
             )
         }
@@ -331,7 +332,7 @@ fun ResumeSelector(
                 modifier = Modifier
                     .wrapContentSize()
                     .rotate(90f),
-                painter = painterResource(res = "ic_selector_right.xml"),
+                painter = painterResource(resource = DrawableResource(  "ic_selector_right.xml")),
                 contentDescription = "right selector"
             )
         }
@@ -385,7 +386,7 @@ fun NewAddressSelector(
             ) {
                 Icon(
                     modifier = Modifier.padding(end = 13.dp, start = 16.dp),
-                    painter = painterResource(res = "ic_more_icon.xml"),
+                    painter = painterResource(resource = DrawableResource(  "ic_more_icon.xml")),
                     contentDescription = "hide shipping options",
                     tint = GraySinceTo
                 )
@@ -400,7 +401,7 @@ fun NewAddressSelector(
                     modifier = Modifier
                         .wrapContentSize()
                         .padding(end = 15.dp),
-                    painter = painterResource(res = "ic_selector_right.xml"),
+                    painter = painterResource(resource = DrawableResource(  "ic_selector_right.xml")),
                     contentDescription = "right selector"
                 )
             }
@@ -449,7 +450,7 @@ fun NewCouponSelector(
             ) {
                 Image(
                     modifier = Modifier.padding(end = 13.dp, start = 16.dp),
-                    painter = painterResource(res = "ic_coupon.xml"),
+                    painter = painterResource(resource = DrawableResource(  "ic_coupon.xml")),
                     contentDescription = "coupon",
                 )
                 MediumText(
@@ -512,7 +513,7 @@ fun BussinessImageSelector(
             ) {
                 Icon(
                     modifier = Modifier.size(25.dp),
-                    painter = painterResource(res = "ic_more_icon.xml"),
+                    painter = painterResource(resource = DrawableResource(  "ic_more_icon.xml")),
                     contentDescription = "hide shipping options",
                     tint = GraySinceTo
                 )
@@ -574,7 +575,7 @@ fun ColorSelector(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Icon(
-                        painter = painterResource(res = "ic_more_icon.xml"),
+                        painter = painterResource(resource = DrawableResource(  "ic_more_icon.xml")),
                         contentDescription = "hide shipping options",
                         tint = GraySinceTo
                     )
@@ -618,7 +619,7 @@ fun UserSelector(
         ) {
             Icon(
                 modifier = Modifier.padding(end = 13.dp, start = 16.dp),
-                painter = painterResource(res = "ic_user.xml"),
+                painter = painterResource(resource = DrawableResource(  "ic_user.xml")),
                 contentDescription = "hide shipping options",
                 tint = GraySinceTo
             )
@@ -640,7 +641,7 @@ fun UserSelector(
                 modifier = Modifier
                     .wrapContentSize()
                     .padding(end = 15.dp),
-                painter = painterResource(res = "ic_selector_right.xml"),
+                painter = painterResource(resource = DrawableResource( "ic_selector_right.xml")),
                 contentDescription = "right selector"
             )
         }
@@ -731,7 +732,7 @@ fun SelectorSpinner(
                         )
 
                         Icon(
-                            painter = painterResource(res = "ic_arrow_down.xml"),
+                            painter = painterResource(resource = DrawableResource( "ic_arrow_down.xml")),
                             contentDescription = "drop down arrow"
                         )
                     }
@@ -774,7 +775,7 @@ fun SelectorStoreSpinner(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Icon(
-                        painter = painterResource(res = "ic_dot"),
+                        painter = painterResource(resource = DrawableResource(  "ic_dot")),
                         contentDescription = "status store",
                         tint = GreenStrong
                     )
@@ -784,7 +785,7 @@ fun SelectorStoreSpinner(
                     )
 
                     Icon(
-                        painter = painterResource(res = "ic_arrow_down.xml"),
+                        painter = painterResource(resource = DrawableResource(  "ic_arrow_down.xml")),
                         contentDescription = "drop down arrow"
                     )
                 }
@@ -813,7 +814,7 @@ fun SelectorDetail(
         verticalAlignment = Alignment.CenterVertically
     ) {
         Image(
-            painter = painterResource(res = iconRes),
+            painter = painterResource(resource = DrawableResource(  iconRes)),
             contentDescription = "comment icon"
         )
         BoldText(
@@ -829,7 +830,7 @@ fun SelectorDetail(
                 .width(21.dp)
                 .height(12.dp),
             tint = GrayLetterArrow,
-            painter = painterResource(res = "ic_right_arrow_simbol.xml"),
+            painter = painterResource(resource = DrawableResource(  "ic_right_arrow_simbol.xml")),
             contentDescription = "comment icon"
         )
     }
@@ -857,7 +858,7 @@ fun SelectorWithRadioButton(
         ) {
             Image(
                 modifier = Modifier.padding(horizontal = 20.dp),
-                painter = painterResource(iconRes),
+                painter = painterResource(resource = DrawableResource( iconRes)),
                 contentDescription = iconDescription
             )
             SemiBoldText(

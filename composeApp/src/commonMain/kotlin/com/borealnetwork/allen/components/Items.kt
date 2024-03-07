@@ -92,6 +92,7 @@ import com.borealnetwork.allen.theme.RedEndColor
 import com.borealnetwork.allen.theme.RedStartColor
 import com.borealnetwork.allen.theme.StarColor
 import com.borealnetwork.allen.tools.limit
+import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 
 //@Composable
@@ -138,7 +139,7 @@ fun CategoryItem() {
             ) {
                 Image(
                     modifier = Modifier.width(32.dp),
-                    painter = painterResource(res = "tools_icon.png"),
+                    painter = painterResource(resource = DrawableResource(  "tools_icon.png")),
                     contentDescription = "item"
                 )
             }
@@ -181,7 +182,7 @@ fun BrandingItem(
             ) {
                 Image(
                     modifier = Modifier.padding(horizontal = 10.dp).fillMaxSize(),
-                    painter = painterResource(res = image),
+                    painter = painterResource(resource = DrawableResource(  image)),
                     contentDescription = "item"
                 )
             }
@@ -227,7 +228,7 @@ fun CategorySelectorItem(
             ) {
                 Image(
                     modifier = Modifier.padding(top = 10.dp).fillMaxWidth().height(80.dp),
-                    painter = painterResource(res = "laptop_test.png"),
+                    painter = painterResource(resource = DrawableResource(  "laptop_test.png")),
                     contentDescription = "item"
                 )
                 BoldText(
@@ -314,7 +315,7 @@ fun ProductItem(
                 FavoriteButton()
                 Image(
                     modifier = Modifier.padding(top = 10.dp).fillMaxWidth().height(130.dp),
-                    painter = painterResource("tools_icon.png"),
+                    painter = painterResource(resource = DrawableResource( "tools_icon.png")),
                     contentDescription = "item"
                 )
             }
@@ -371,7 +372,7 @@ fun ProductResultItem(
                 FavoriteButton(modifier = Modifier.padding(start = 7.dp, top = 7.dp))
                 Image(
                     modifier = Modifier.fillMaxSize(),
-                    painter = painterResource("tools_icon.png"),
+                    painter = painterResource(resource = DrawableResource( "tools_icon.png")),
                     contentDescription = "item"
                 )
             }
@@ -473,7 +474,7 @@ fun QuestionItem(
                     verticalArrangement = Arrangement.Center
                 ) {
                     Image(
-                        painter = painterResource("tools_icon.png"), contentDescription = "item"
+                        painter = painterResource(resource = DrawableResource( "tools_icon.png")), contentDescription = "item"
                     )
                 }
             }
@@ -529,7 +530,7 @@ fun RatingByUserItem(
                     verticalArrangement = Arrangement.Center
                 ) {
                     Image(
-                        painter = painterResource("tools_icon.png"), contentDescription = "item"
+                        painter = painterResource(resource = DrawableResource( "tools_icon.png")), contentDescription = "item"
                     )
                 }
             }
@@ -577,7 +578,7 @@ fun AnswerItem(modifier: Modifier = Modifier, text: String = "") {
             ) {
                 Image(
                     modifier = Modifier.fillMaxSize(),
-                    painter = painterResource(res = "tools_icon.png"),
+                    painter = painterResource(resource = DrawableResource(  "tools_icon.png")),
                     contentDescription = "item"
                 )
             }
@@ -845,7 +846,7 @@ fun ShoppingCartItem(
             if (check) {
                 Image(
                     modifier = Modifier.padding(start = 30.dp),
-                    painter = painterResource(res = "ic_checked.xml"),
+                    painter = painterResource(resource = DrawableResource(  "ic_checked.xml")),
                     contentDescription = "check"
                 )
             }
@@ -964,7 +965,7 @@ fun FavoriteItem(
                         }
                         if (productShoppingCart.fastOrder) {
                             Icon(
-                                painter = painterResource(res = "ic_thunder_icon.xml"),
+                                painter = painterResource(resource = DrawableResource(  "ic_thunder_icon.xml")),
                                 contentDescription = "free shipping",
                                 tint = StarColor
                             )
@@ -1042,7 +1043,7 @@ fun NotificationItem(
                             )
                             Image(
                                 modifier = Modifier.mirror(),
-                                painter = painterResource(res = "ic_on_way_traffic_circle.xml"),
+                                painter = painterResource(resource = DrawableResource(  "ic_on_way_traffic_circle.xml")),
                                 contentDescription = "on way"
                             )
                         }
@@ -1101,7 +1102,7 @@ fun NotificationItem(
                                 Icon(
                                     modifier = Modifier.wrapContentHeight()
                                         .padding(horizontal = 16.dp),
-                                    painter = painterResource(res = if (shippingType == "PICKUP") "ic_on_way_walking.xml" else "ic_on_way_traffic.xml"),
+                                    painter = painterResource(resource = DrawableResource( if (shippingType == "PICKUP") "ic_on_way_walking.xml" else "ic_on_way_traffic.xml")),
                                     contentDescription = "on way",
                                     tint = White
                                 )
@@ -1209,7 +1210,7 @@ fun NotificationNewSaleItem(
                     ) {
                         Icon(
                             modifier = Modifier.wrapContentHeight().padding(horizontal = 16.dp),
-                            painter = painterResource(res = if (shippingType == "PICKUP") "ic_on_way_walking.xml" else "ic_on_way_traffic.xml"),
+                            painter = painterResource(resource = DrawableResource( if (shippingType == "PICKUP") "ic_on_way_walking.xml" else "ic_on_way_traffic.xml")),
                             contentDescription = "on way",
                             tint = White
                         )
@@ -1276,7 +1277,7 @@ fun StatusPackageItem(
                 )
                 Image(
                     modifier = Modifier.mirror(),
-                    painter = painterResource(res = "ic_on_way_traffic_circle.xml"),
+                    painter = painterResource(resource = DrawableResource(  "ic_on_way_traffic_circle.xml")),
                     contentDescription = "on way"
                 )
             }
@@ -1318,7 +1319,7 @@ fun StatusPackageItem(
             ) {
                 Icon(
                     modifier = Modifier.wrapContentHeight().padding(horizontal = 16.dp),
-                    painter = painterResource(res = if (shippingType == "PICKUP") "ic_on_way_walking.xml" else "ic_on_way_traffic.xml"),
+                    painter = painterResource(resource = DrawableResource(  if (shippingType == "PICKUP") "ic_on_way_walking.xml" else "ic_on_way_traffic.xml")),
                     contentDescription = "on way",
                     tint = White
                 )
@@ -1378,7 +1379,7 @@ fun StatusPreviouPackageItem(
                 Icon(
                     modifier = Modifier.wrapContentHeight()
                         .padding(horizontal = 16.dp, vertical = 5.dp),
-                    painter = painterResource(res = "ic_dot.xml"),
+                    painter = painterResource(resource = DrawableResource(  "ic_dot.xml")),
                     contentDescription = "on way",
                     tint = MaterialTheme.colors.primary
                 )
@@ -1459,17 +1460,17 @@ fun StepIndicatorNotification(
                 modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Icon(
-                    painter = painterResource(res = "ic_circle.xml"),
+                    painter = painterResource(resource = DrawableResource(  "ic_circle.xml")),
                     contentDescription = "on way",
                     tint = if (step >= 0) MaterialTheme.colors.primary else GrayBackgroundDrawerDismiss
                 )
                 Icon(
-                    painter = painterResource(res = "ic_circle.xml"),
+                    painter = painterResource(resource = DrawableResource( "ic_circle.xml")),
                     contentDescription = "on way",
                     tint = if (step > 2) MaterialTheme.colors.primary else GrayBackgroundDrawerDismiss
                 )
                 Icon(
-                    painter = painterResource(res = "ic_circle.xml"),
+                    painter = painterResource(resource = DrawableResource(  "ic_circle.xml")),
                     contentDescription = "on way",
                     tint = if (step > 4) MaterialTheme.colors.primary else GrayBackgroundDrawerDismiss
                 )
@@ -1684,7 +1685,7 @@ fun ShoppingHistoryItem(
                                 )
                                 Image(
                                     modifier = Modifier.size(25.dp).alpha(0.39f),
-                                    painter = painterResource(res = "ic_gift.png"),
+                                    painter = painterResource(resource = DrawableResource( "ic_gift.png")),
                                     contentDescription = "gift"
                                 )
                             }
@@ -1704,7 +1705,7 @@ fun ShoppingHistoryItem(
                                 )
                                 Image(
                                     modifier = Modifier.size(25.dp),
-                                    painter = painterResource(res = "ic_gift.png"),
+                                    painter = painterResource(resource = DrawableResource(  "ic_gift.png")),
                                     contentDescription = "gift"
                                 )
                             }
@@ -1939,7 +1940,7 @@ fun AddButton(
             onClick = { onClicked?.invoke() }) {
             Icon(
                 modifier = Modifier.padding(12.dp),
-                painter = painterResource(res = "ic_more_icon.xml"),
+                painter = painterResource(resource = DrawableResource(  "ic_more_icon.xml")),
                 contentDescription = "more_icon",
                 tint = White
             )
@@ -2003,7 +2004,7 @@ fun CardFilled(
                         text = model.holderName, color = White, fontSize = 12.sp
                     )
                     Image(
-                        painterResource(res = if (model.type == TypeCard.VISA) "ic_visa.xml" else if (model.type == TypeCard.MASTERCARD) "ic_mastercard.xml" else "ic_mastercard.xml"),
+                        painterResource(resource = DrawableResource(if (model.type == TypeCard.VISA) "ic_visa.xml" else if (model.type == TypeCard.MASTERCARD) "ic_mastercard.xml" else "ic_mastercard.xml")),
                         contentDescription = "type card"
                     )
                 }
@@ -2013,11 +2014,11 @@ fun CardFilled(
 
                     Image(
                         modifier = Modifier.padding(end = 10.dp),
-                        painter = painterResource(res = "ic_chip.xml"),
+                        painter = painterResource(resource = DrawableResource( "ic_chip.xml")),
                         contentDescription = "chip"
                     )
                     Icon(
-                        painter = painterResource(res = "ic_cashless.xml"),
+                        painter = painterResource(resource = DrawableResource(  "ic_cashless.xml")),
                         contentDescription = "cashless",
                         tint = White
                     )
@@ -2094,11 +2095,11 @@ fun CardNoFilled(
                     )
                     Image(
                         painterResource(
-                            res = if (number.startsWith("4") && number.length == 16) "ic_visa.xml" else if (number.startsWith(
+                            resource = DrawableResource(  if (number.startsWith("4") && number.length == 16) "ic_visa.xml" else if (number.startsWith(
                                     "5"
                                 ) && number.length == 16
                             ) "ic_mastercard.xml" else "ic_mastercard.xml"
-                        ), contentDescription = "type card"
+                        )), contentDescription = "type card"
                     )
                 }
                 Row(
@@ -2107,11 +2108,11 @@ fun CardNoFilled(
 
                     Image(
                         modifier = Modifier.padding(end = 10.dp),
-                        painter = painterResource(res = "ic_chip.xml"),
+                        painter = painterResource(resource = DrawableResource(  "ic_chip.xml")),
                         contentDescription = "chip"
                     )
                     Icon(
-                        painter = painterResource(res = "ic_cashless.xml"),
+                        painter = painterResource(resource = DrawableResource(  "ic_cashless.xml")),
                         contentDescription = "cashless",
                         tint = White
                     )

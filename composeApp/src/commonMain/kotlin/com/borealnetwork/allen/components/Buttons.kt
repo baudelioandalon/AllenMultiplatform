@@ -46,6 +46,7 @@ import com.borealnetwork.allen.theme.GrayLetterSeeAll
 import com.borealnetwork.allen.theme.GreenStrong
 import com.borealnetwork.allen.theme.GreenTransparent
 import com.borealnetwork.allen.theme.StarColor
+import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -57,7 +58,7 @@ fun FavoriteButton(modifier: Modifier = Modifier, clicked: (() -> Unit)? = null)
         onClick = { clicked?.invoke() }) {
         Image(
             modifier = Modifier.fillMaxSize(),
-            painter = painterResource(res = "ic_favorite_unselected.xml"),
+            painter = painterResource(resource = DrawableResource("ic_favorite_unselected.xml")),
             contentDescription = ""
         )
     }
@@ -85,7 +86,7 @@ fun FavoriteCounterButton(
         ) {
             Image(
                 modifier = Modifier.size(35.dp),
-                painter = painterResource(res = "ic_favorite_unselected.xml"),
+                painter = painterResource(resource = DrawableResource( "ic_favorite_unselected.xml")),
                 contentDescription = ""
             )
             BoldText(
@@ -113,7 +114,7 @@ fun ShareButton(modifier: Modifier = Modifier, clicked: (() -> Unit)? = null) {
         shape = CircleShape, onClick = { clicked?.invoke() }) {
         Image(
             modifier = Modifier.fillMaxSize(),
-            painter = painterResource("ic_share_icon.xml"),
+            painter = painterResource(resource = DrawableResource( "ic_share_icon.xml")),
             contentDescription = ""
         )
     }
@@ -165,7 +166,7 @@ fun RightRoundedButton(modifier: Modifier = Modifier, clicked: (() -> Unit)) {
             shape = CircleShape, onClick = { clicked?.invoke() }) {
             Image(
                 modifier = Modifier.fillMaxSize(),
-                painter = painterResource("ic_rounded_arrow_right.xml"),
+                painter = painterResource(resource = DrawableResource( "ic_rounded_arrow_right.xml")),
                 contentDescription = ""
             )
         }
@@ -225,7 +226,7 @@ fun MinimumAddButton(
         ) {
             Icon(
                 modifier = Modifier.size(13.dp),
-                painter = painterResource(res = "ic_more_icon.xml"),
+                painter = painterResource(resource = DrawableResource( "ic_more_icon.xml")),
                 contentDescription = "moreIcon",
                 tint = Color.White
             )
@@ -258,7 +259,7 @@ fun LittleAddButton(
         ) {
             Icon(
                 modifier = Modifier.size(15.dp),
-                painter = painterResource(res = "ic_more_icon.xml"),
+                painter = painterResource(resource = DrawableResource( "ic_more_icon.xml")),
                 contentDescription = "moreIcon",
                 tint = Color.White
             )
@@ -299,7 +300,7 @@ fun StarRatingSelector(modifier: Modifier = Modifier) {
             modifier = Modifier
                 .clickable { }
                 .size(30.dp),
-            painter = painterResource("ic_star_icon.xml"),
+            painter = painterResource(resource = DrawableResource( "ic_star_icon.xml")),
             contentDescription = "star one",
             tint = StarColor
         )
@@ -308,7 +309,7 @@ fun StarRatingSelector(modifier: Modifier = Modifier) {
                 .padding(horizontal = 2.dp)
                 .clickable { }
                 .size(30.dp),
-            painter = painterResource("ic_star_icon.xml"),
+            painter = painterResource(resource = DrawableResource( "ic_star_icon.xml")),
             contentDescription = "star two",
             tint = StarColor
         )
@@ -317,7 +318,7 @@ fun StarRatingSelector(modifier: Modifier = Modifier) {
                 .padding(horizontal = 2.dp)
                 .clickable { }
                 .size(30.dp),
-            painter = painterResource("ic_star_icon.xml"),
+            painter = painterResource(resource = DrawableResource( "ic_star_icon.xml")),
             contentDescription = "star three",
             tint = StarColor
         )
@@ -326,7 +327,7 @@ fun StarRatingSelector(modifier: Modifier = Modifier) {
                 .padding(horizontal = 2.dp)
                 .clickable { }
                 .size(30.dp),
-            painter = painterResource("ic_star_icon.xml"),
+            painter = painterResource(resource = DrawableResource( "ic_star_icon.xml")),
             contentDescription = "star four",
             tint = StarColor
         )
@@ -335,7 +336,7 @@ fun StarRatingSelector(modifier: Modifier = Modifier) {
                 .padding(start = 2.dp)
                 .clickable { }
                 .size(30.dp),
-            painter = painterResource("ic_star_icon.xml"),
+            painter = painterResource(resource = DrawableResource( "ic_star_icon.xml")),
             contentDescription = "star five",
             tint = StarColor
         )
@@ -440,7 +441,7 @@ fun CornerImgButton(
                 horizontalArrangement = Arrangement.SpaceAround
             ) {
                 Image(
-                    painter = painterResource(res = imgRes),
+                    painter = painterResource(resource = DrawableResource( imgRes)),
                     contentDescription = "Login"
                 )
                 SemiBoldText(
@@ -483,7 +484,7 @@ fun ScannerButton(
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(
                     modifier = Modifier.padding(end = 10.dp),
-                    painter = painterResource("bar_code.xml"),
+                    painter = painterResource(resource = DrawableResource( "bar_code.xml")),
                     contentDescription = "bar code"
                 )
                 Text(
@@ -497,7 +498,7 @@ fun ScannerButton(
                 )
                 Icon(
                     modifier = Modifier.padding(start = 10.dp),
-                    painter = painterResource("qr_code.xml"),
+                    painter = painterResource(resource = DrawableResource( "qr_code.xml")),
                     contentDescription = "qr code"
                 )
             }

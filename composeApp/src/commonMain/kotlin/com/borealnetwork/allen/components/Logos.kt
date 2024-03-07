@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 
 
@@ -13,6 +14,6 @@ import org.jetbrains.compose.resources.painterResource
 fun LogoBlue(modifier: Modifier = Modifier) {
     Image(
         modifier = modifier.width(75.dp).fillMaxWidth(),
-        painter = painterResource(res = "allen_blue_logo.xml"), contentDescription = "allenIcon"
+        painter = painterResource(resource = DrawableResource(  "allen_blue_logo.xml")), contentDescription = "allenIcon"
     )
 }

@@ -33,6 +33,7 @@ import com.borealnetwork.allen.theme.BlueTransparent
 import com.borealnetwork.allen.theme.GrayBackgroundMain
 import com.borealnetwork.allen.theme.GraySubtitleBottom
 import moe.tlaster.precompose.navigation.Navigator
+import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -186,7 +187,7 @@ fun RatingProductViewCompose(navigator: Navigator) {
                             fontSize = 18.sp
                         )
                         Icon(
-                            painter = painterResource(res = "ic_arrow_down.xml"),
+                            painter = painterResource(resource = DrawableResource(  "ic_arrow_down.xml")),
                             contentDescription = "options"
                         )
                     }

@@ -20,6 +20,7 @@ import com.borealnetwork.allen.domain.enum.StatusEnum
 import com.borealnetwork.allen.theme.ErrorColor
 import com.borealnetwork.allen.theme.SuccessColor
 import com.borealnetwork.allen.theme.WarningColor
+import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
@@ -55,12 +56,12 @@ fun StatusPurchaseViewCompose(
         Image(
             modifier = Modifier.padding(vertical = 150.dp),
             painter = painterResource(
-                res = when (type) {
+                resource = DrawableResource(  when (type) {
                     StatusEnum.SUCCESS -> "ic_success_status.xml"
                     StatusEnum.WARNING -> "ic_warning_status.xml"
                     else -> "ic_error_status.xml"
                 }
-            ),
+            )),
             contentDescription = "imgType"
         )
         SemiBoldText(

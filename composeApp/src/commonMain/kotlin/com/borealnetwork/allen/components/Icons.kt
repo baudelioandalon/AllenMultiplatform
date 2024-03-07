@@ -26,6 +26,7 @@ import com.borealnetwork.allen.theme.GrayBorder
 import com.borealnetwork.allen.theme.GrayStrong
 import com.borealnetwork.allen.theme.OrangeStrong
 import com.borealnetwork.allen.theme.OrangeTransparentLow
+import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -57,7 +58,7 @@ fun LocationIcon(onClick: (() -> Unit)? = null) {
             Box(contentAlignment = Alignment.Center) {
                 Icon(
                     modifier = Modifier.size(15.dp),
-                    painter = painterResource(res = "ic_location.xml"),
+                    painter = painterResource(resource = DrawableResource(  "ic_location.xml")),
                     contentDescription = "moreIcon",
                     tint = White
                 )
@@ -86,7 +87,7 @@ fun GoalIcon(onClick: (() -> Unit)? = null) {
             Box(contentAlignment = Alignment.Center) {
                 Icon(
                     modifier = Modifier.size(15.dp),
-                    painter = painterResource("ic_goal.xml"),
+                    painter = painterResource(resource = DrawableResource( "ic_goal.xml")),
                     contentDescription = "moreIcon",
                     tint = GrayStrong
                 )
@@ -118,7 +119,7 @@ fun CircularIcon(
             shape = CircleShape, onClick = { onClick?.invoke() }) {
             Icon(
                 modifier = Modifier.wrapContentSize().padding(5.dp),
-                painter = painterResource(res = icon),
+                painter = painterResource(resource = DrawableResource(  icon)),
                 tint = iconTint,
                 contentDescription = contentDescription
             )
@@ -147,7 +148,7 @@ fun CircularImage(
             shape = CircleShape, onClick = { onClick?.invoke() }) {
             Image(
                 modifier = Modifier.wrapContentSize().padding(5.dp),
-                painter = painterResource(res = icon),
+                painter = painterResource(resource = DrawableResource( icon)),
                 contentDescription = "",
                 colorFilter = iconTint
             )

@@ -35,6 +35,7 @@ import com.borealnetwork.allen.platform
 import com.borealnetwork.allen.theme.GrayBackgroundMain
 import com.borealnetwork.allen.theme.GrayBorder
 import com.borealnetwork.allen.theme.StarColor
+import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 
 
@@ -56,7 +57,7 @@ fun DrawerHeaderClient(closeClicked: (() -> Unit)? = null) {
             shape = CircleShape, onClick = { }) {
             Image(
                 modifier = Modifier.height(50.dp),
-                painter = painterResource(res = "person_test.png"),
+                painter = painterResource(resource = DrawableResource(  "person_test.png")),
                 contentDescription = ""
             )
         }
@@ -98,7 +99,7 @@ fun StarStatus(
             .fillMaxSize(), verticalAlignment = CenterVertically
     ) {
         Icon(
-            painter = painterResource(res = "ic_star_icon.xml"),
+            painter = painterResource(resource = DrawableResource(  "ic_star_icon.xml")),
             contentDescription = "star User",
             tint = StarColor
         )
@@ -156,7 +157,7 @@ fun DrawerBodyClient(
 
                 Icon(
                     modifier = Modifier.size(22.dp),
-                    painter = painterResource(res = item.icon),
+                    painter = painterResource(resource = DrawableResource(  item.icon)),
                     contentDescription = item.contentDescription,
                     tint = GrayBorder
                 )
@@ -169,7 +170,7 @@ fun DrawerBodyClient(
                 )
                 Image(
                     modifier = Modifier.size(30.dp),
-                    painter = painterResource("ic_rounded_arrow_right.xml"),
+                    painter = painterResource(resource = DrawableResource( "ic_rounded_arrow_right.xml")),
                     contentDescription = ""
                 )
             }
