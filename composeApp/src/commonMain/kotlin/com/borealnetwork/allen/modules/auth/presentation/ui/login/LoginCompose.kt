@@ -162,7 +162,9 @@ internal fun LoginUI() = AppTheme {
         ) {
             LocationIcon()
             GoalIcon()
-            RightRoundedButton()
+            RightRoundedButton{
+
+            }
         }
 
         BlueButton(modifier = Modifier.padding(10.dp), text = "Bienvenido")

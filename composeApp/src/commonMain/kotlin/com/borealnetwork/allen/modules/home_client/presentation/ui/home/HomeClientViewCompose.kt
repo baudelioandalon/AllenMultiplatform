@@ -34,7 +34,6 @@ import com.borealnetwork.allen.components.CategoryItem
 import com.borealnetwork.allen.components.CategorySelectorItem
 import com.borealnetwork.allen.components.HorizontalContainerListItem
 import com.borealnetwork.allen.components.ProductItem
-import com.borealnetwork.allen.components.SeeAll
 import com.borealnetwork.allen.components.ToolbarSearchHome
 import com.borealnetwork.allen.components.drawer.DrawerBodyClient
 import com.borealnetwork.allen.components.drawer.DrawerHeaderClient
@@ -230,10 +229,10 @@ fun HomeClientViewCompose(navigator: Navigator) {
                                 elevation = 5.dp
                             ) {
                                 HorizontalContainerListItem(
-                                    title = "Ultimos articulos",
+                                    startText = "Ultimos articulos",
                                     endText = "Ver todos",
                                     listItem = lastProductsList
-                                ) { minimalProductModel,index ->
+                                ) { minimalProductModel, index ->
                                     ProductItem(minimalProductModel) {
                                         navigator.navigate(PRODUCT_DETAIL_CLIENT_GRAPH)
                                     }
@@ -260,10 +259,10 @@ fun HomeClientViewCompose(navigator: Navigator) {
                                 elevation = 5.dp
                             ) {
                                 HorizontalContainerListItem(
-                                    title = "Ofertas",
+                                    startText = "Ofertas",
                                     endText = "Ver todos",
                                     listItem = lastProductsList
-                                ) { minimalProductModel,index ->
+                                ) { minimalProductModel, index ->
                                     ProductItem(minimalProductModel) {
                                         navigator.navigate(PRODUCT_DETAIL_CLIENT_GRAPH)
                                     }

@@ -6,14 +6,14 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.CornerSize
@@ -42,6 +42,7 @@ import com.borealnetwork.allen.theme.FavoriteSelectedColor
 import com.borealnetwork.allen.theme.FavoriteUnselectedColor
 import com.borealnetwork.allen.theme.GrayBackgroundDrawerDismiss
 import com.borealnetwork.allen.theme.GrayBorder
+import com.borealnetwork.allen.theme.GrayLetterSeeAll
 import com.borealnetwork.allen.theme.GreenStrong
 import com.borealnetwork.allen.theme.GreenTransparent
 import com.borealnetwork.allen.theme.StarColor
@@ -118,9 +119,38 @@ fun ShareButton(modifier: Modifier = Modifier, clicked: (() -> Unit)? = null) {
     }
 }
 
+@Composable
+fun StartIcon(
+    modifier: Modifier = Modifier,
+    topText: String, bottomText: String
+) {
+    Row(
+        modifier = modifier.wrapContentHeight().clickable { },
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Card(
+            modifier = Modifier.size(53.dp),
+            backgroundColor = GrayBackgroundDrawerDismiss,
+            elevation = 0.dp,
+            shape = RoundedCornerShape(10.dp)
+        ) {
+
+        }
+        Column(
+            modifier = Modifier.padding(start = 19.dp).weight(1f)
+        ) {
+            MediumText(
+                text = topText, color = GrayLetterSeeAll, fontSize = 15.sp
+            )
+            BoldText(text = bottomText, fontSize = 15.sp, color = Color.Black)
+        }
+    }
+}
+
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun RightRoundedButton(modifier: Modifier = Modifier, clicked: (() -> Unit)? = null) {
+fun RightRoundedButton(modifier: Modifier = Modifier, clicked: (() -> Unit)) {
     Box(
         modifier = modifier
             .size(52.dp)

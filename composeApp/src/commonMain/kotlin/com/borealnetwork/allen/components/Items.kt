@@ -68,7 +68,6 @@ import com.borealnetwork.allen.domain.model.ItemShoppingModel
 import com.borealnetwork.allen.domain.model.MinimalProductModel
 import com.borealnetwork.allen.domain.model.ProductShoppingCart
 import com.borealnetwork.allen.domain.model.order_resume.PinStatusHistoryModel
-import com.borealnetwork.allen.domain.screen.PRODUCT_DETAIL_CLIENT_GRAPH
 import com.borealnetwork.allen.modules.payments.domain.models.CardModel
 import com.borealnetwork.allen.modules.payments.domain.models.TypeCard
 import com.borealnetwork.allen.theme.BlueStatusLineColor
@@ -158,7 +157,11 @@ fun CategoryItem() {
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun BrandingItem(itemSize: Dp = 60.dp) {
+fun BrandingItem(
+    image: String,
+    itemSize: Dp = 60.dp,
+    onClicked: (() -> Unit)?
+) {
     Column(
         modifier = Modifier.wrapContentSize().padding(start = 30.dp, end = 4.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -166,7 +169,7 @@ fun BrandingItem(itemSize: Dp = 60.dp) {
     ) {
         Card(
             modifier = Modifier.size(itemSize),
-            onClick = {},
+            onClick = { onClicked?.invoke() },
             elevation = 0.dp,
             shape = RoundedCornerShape(corner = CornerSize(10.dp)),
             backgroundColor = GrayBrandingBackground
@@ -178,7 +181,7 @@ fun BrandingItem(itemSize: Dp = 60.dp) {
             ) {
                 Image(
                     modifier = Modifier.padding(horizontal = 10.dp).fillMaxSize(),
-                    painter = painterResource(res = "tools_icon.png"),
+                    painter = painterResource(res = image),
                     contentDescription = "item"
                 )
             }
@@ -244,41 +247,41 @@ fun CategorySelectorItem(
 
 @Composable
 fun SellerItem(
+    modifier: Modifier,
+    topText: String,
+    bottomText: String,
     onClicked: (() -> Unit)? = null
 ) {
     Row(
-        modifier = Modifier.fillMaxWidth().background(White),
-        verticalAlignment = Alignment.Bottom,
+        modifier = modifier.wrapContentHeight().clickable {
+                onClicked?.invoke()
+            },
+        verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        Column(
-            modifier = Modifier.fillMaxSize().padding(top = 20.dp, start = 30.dp, end = 30.dp)
+        Card(
+            modifier = Modifier.size(53.dp),
+            backgroundColor = GrayBackgroundDrawerDismiss,
+            elevation = 0.dp,
+            shape = RoundedCornerShape(10.dp)
         ) {
-            BoldText(text = "Vendedor", fontSize = 18.sp, color = Black)
-            Row(
-                modifier = Modifier.fillMaxWidth().padding(bottom = 35.dp, top = 22.dp)
-                    .wrapContentHeight().clickable { onClicked?.invoke() },
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Card(
-                    modifier = Modifier.size(53.dp),
-                    backgroundColor = GrayBackgroundDrawerDismiss,
-                    elevation = 0.dp,
-                    shape = RoundedCornerShape(10.dp)
-                ) {
 
-                }
-                Column(
-                    modifier = Modifier.padding(start = 19.dp).weight(1f).fillMaxHeight()
-                ) {
-                    BoldText(text = "Ferreteria La Hormiga", fontSize = 15.sp)
-                    MediumText(
-                        text = "Para Casa y Hogar", color = GrayLetterSeeAll, fontSize = 15.sp
-                    )
-                }
-                RightRoundedButton()
-            }
+        }
+        Column(
+            modifier = Modifier.padding(start = 19.dp).weight(1f).fillMaxHeight()
+        ) {
+            BoldText(
+                text = topText, color = Black,
+                fontSize = 15.sp
+            )
+            MediumText(
+                text = bottomText, color = GrayLetterSeeAll, fontSize = 15.sp
+            )
+        }
+        RightRoundedButton(
+            modifier = Modifier.padding( end = 30.dp),
+        ) {
+
         }
     }
 }
@@ -286,16 +289,14 @@ fun SellerItem(
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun ProductItem(
-    model: MinimalProductModel =
-        MinimalProductModel(
-            skuProduct = "dd323234",
-            nameProduct = "Sensor Dummy",
-            imgProduct = "imagen",
-            categoryItem = "Electronica",
-            price = 34.0,
-            discountPercentage = 0.0
-        ),
-    onClicked: (() -> Unit)? = null
+    model: MinimalProductModel = MinimalProductModel(
+        skuProduct = "dd323234",
+        nameProduct = "Sensor Dummy",
+        imgProduct = "imagen",
+        categoryItem = "Electronica",
+        price = 34.0,
+        discountPercentage = 0.0
+    ), onClicked: (() -> Unit)? = null
 ) {
     Card(
         modifier = Modifier.padding(start = 30.dp, end = 4.dp).height(240.dp).width(178.dp),
@@ -406,41 +407,16 @@ fun ProductResultItem(
 @Composable
 fun BrandingHorizontal(
     modifier: Modifier = Modifier, itemSize: Dp = 60.dp
-) {
+) {//TODO CAMBIAR POR HorizontalContainerListItem
     LazyRow(
         modifier = modifier
     ) {
         items(10) {
-            BrandingItem(itemSize)
-        }
-    }
-}
+            BrandingItem("tools_icon.png", itemSize) {
 
-@Composable
-fun SellerItemsItem(
-    modifier: Modifier = Modifier,
-    title: String,
-    list: List<MinimalProductModel>,
-    onClicked: ((MinimalProductModel,Int) -> Unit)? = null
-) {
-    Column(
-        modifier = modifier.fillMaxWidth().background(White),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceBetween
-    ) {
-        HorizontalContainerListItem(
-            title = title,
-            endIcon = { RightRoundedButton(
-                modifier = Modifier.padding(top = 20.dp,end = 30.dp)
-            ) },
-            listItem = list
-        ) { minimalProductModel, index ->
-            ProductItem(model = minimalProductModel) {
-                onClicked?.invoke(minimalProductModel,index)
             }
         }
     }
-
 }
 
 @Composable
@@ -469,86 +445,6 @@ fun ShowSellerItem(modifier: Modifier = Modifier) {
     }
 }
 
-@Composable
-fun CategorySeller(
-    modifier: Modifier = Modifier,
-    innerModifier: Modifier = Modifier,
-    onClicked: (() -> Unit)? = null
-) {
-    Row(
-        modifier = modifier.fillMaxWidth().wrapContentHeight().background(White).clickable {
-            onClicked?.invoke()
-        },
-        verticalAlignment = Alignment.Bottom,
-        horizontalArrangement = Arrangement.SpaceBetween
-    ) {
-        Column(
-            modifier = innerModifier.fillMaxWidth()
-        ) {
-            Row(
-                modifier = Modifier.fillMaxWidth().padding(
-                    start = 30.dp
-                ).wrapContentHeight().clickable { },
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Card(
-                    modifier = Modifier.size(53.dp),
-                    backgroundColor = GrayBackgroundDrawerDismiss,
-                    elevation = 0.dp,
-                    shape = RoundedCornerShape(10.dp)
-                ) {
-
-                }
-                Column(
-                    modifier = Modifier.padding(start = 19.dp).weight(1f)
-                ) {
-                    MediumText(
-                        text = "Para", color = GrayLetterSeeAll, fontSize = 15.sp
-                    )
-                    BoldText(text = "Casa y Hogar", fontSize = 15.sp, color = Black)
-                }
-                RightRoundedButton()
-            }
-            LazyRow(
-                modifier = Modifier.background(White).fillMaxWidth().padding(top = 36.dp)
-            ) {
-                items(10) {
-                    ProductItem()
-                }
-            }
-        }
-    }
-
-}
-
-@Composable
-fun SellersItem(modifier: Modifier = Modifier) {
-    Column(
-        modifier = modifier.fillMaxWidth().background(White)
-    ) {
-        Row(
-            modifier = Modifier.padding(end = 30.dp, start = 30.dp, top = 20.dp).fillMaxWidth()
-                .clickable { },
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            MediumTextBold(
-                text = "Más vendedores"
-            )
-            RightRoundedButton()
-        }
-        LazyRow(
-            modifier = Modifier.padding(
-                top = 30.dp, bottom = 35.dp
-            )
-        ) {
-            items(10) {
-                BrandingItem()
-            }
-        }
-    }
-}
 
 @OptIn(ExperimentalMaterialApi::class, ExperimentalLayoutApi::class)
 @Composable
@@ -713,8 +609,7 @@ fun ShoppingCartStoreItem(
 ) {
 
     Card(
-        modifier = modifier.fillMaxWidth(),
-        shape = RectangleShape, elevation = elevation
+        modifier = modifier.fillMaxWidth(), shape = RectangleShape, elevation = elevation
     ) {
 
         val showItems = rememberSaveable { mutableStateOf(true) }
@@ -1104,8 +999,7 @@ fun NotificationItem(
     elevation: Dp = 5.dp,
 ) {
     Card(
-        modifier = modifier.fillMaxWidth(),
-        shape = RectangleShape, elevation = elevation
+        modifier = modifier.fillMaxWidth(), shape = RectangleShape, elevation = elevation
     ) {
         Column(
             modifier = Modifier.fillMaxWidth().background(White)
@@ -1133,8 +1027,7 @@ fun NotificationItem(
                 if (default) {
                     Column(
                         modifier = Modifier.wrapContentHeight().padding(start = 22.dp)
-                            .fillMaxWidth()
-                            .background(White), verticalArrangement = Arrangement.Top
+                            .fillMaxWidth().background(White), verticalArrangement = Arrangement.Top
                     ) {
                         Row(
                             modifier = Modifier.fillMaxWidth(),
@@ -1175,8 +1068,7 @@ fun NotificationItem(
                 } else {
                     Column(
                         modifier = Modifier.wrapContentHeight().padding(start = 22.dp)
-                            .fillMaxWidth()
-                            .background(White), verticalArrangement = Arrangement.Top
+                            .fillMaxWidth().background(White), verticalArrangement = Arrangement.Top
                     ) {
                         Row(
                             modifier = Modifier.fillMaxWidth(),
@@ -1612,9 +1504,7 @@ fun ShoppingCategoryHistoryItem(
 ) {
 
     Card(
-        modifier = Modifier.fillMaxWidth(),
-        shape = RectangleShape,
-        elevation = elevation
+        modifier = Modifier.fillMaxWidth(), shape = RectangleShape, elevation = elevation
     ) {
         val showItems = rememberSaveable { mutableStateOf(true) }
         Column(
@@ -1626,7 +1516,8 @@ fun ShoppingCategoryHistoryItem(
                 )
             }
             StoreInformationItem(
-                deleteOptions, selector,
+                deleteOptions,
+                selector,
                 hideArrow = hideArrow,
                 itemPayed = itemPayed,
                 showItems = showItems
@@ -1862,12 +1753,10 @@ fun ItemSold() {
 //Items de Compra
 @Composable
 fun BottomBuyCartItem(
-    payed: Boolean = false,
-    nextClicked: (() -> Unit)? = null
+    payed: Boolean = false, nextClicked: (() -> Unit)? = null
 ) {
     Card(
-        modifier = Modifier.fillMaxWidth(),
-        shape = RectangleShape, elevation = 15.dp
+        modifier = Modifier.fillMaxWidth(), shape = RectangleShape, elevation = 15.dp
     ) {
         Row(
             modifier = Modifier.fillMaxWidth().padding(top = 10.dp).background(White),
@@ -1964,19 +1853,17 @@ fun ResumeItem(
 
     var showItems by rememberSaveable { mutableStateOf(true) }
     Card(
-        modifier = modifier.fillMaxWidth()
-            .padding(bottom = 30.dp),
+        modifier = modifier.fillMaxWidth().padding(bottom = 30.dp),
         shape = RectangleShape,
         elevation = 5.dp
     ) {
         Column(
-            modifier = Modifier.background(White)
-                .padding(
-                    start = startPadding,
-                    bottom = bottomPadding,
-                    end = endPadding,
-                    top = innerTopPadding
-                ).wrapContentHeight().fillMaxWidth()
+            modifier = Modifier.background(White).padding(
+                start = startPadding,
+                bottom = bottomPadding,
+                end = endPadding,
+                top = innerTopPadding
+            ).wrapContentHeight().fillMaxWidth()
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth().padding(
@@ -1988,10 +1875,8 @@ fun ResumeItem(
                 Row {
                     SemiBoldText(
                         modifier = Modifier.padding(
-                            if (startPadding > 0.dp)
-                                0.dp else innerStartPadding
-                        ),
-                        text = title, fontSize = 15.sp
+                            if (startPadding > 0.dp) 0.dp else innerStartPadding
+                        ), text = title, fontSize = 15.sp
                     )
                     if (topCounter) {
                         Card(
@@ -2004,8 +1889,7 @@ fun ResumeItem(
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
                                 SemiBoldText(
-                                    text = numberCounter.toString(),
-                                    color = White
+                                    text = numberCounter.toString(), color = White
                                 )
                             }
                         }
@@ -2019,10 +1903,8 @@ fun ResumeItem(
                 }
                 if (hideIcon) {
                     CircularIcon(modifier = Modifier.padding(
-                        end = if (endPadding > 0.dp)
-                            0.dp else innerEndPadding
-                    ).size(35.dp).wrapContentSize()
-                        .rotate(if (showItems) 0f else 180f),
+                        end = if (endPadding > 0.dp) 0.dp else innerEndPadding
+                    ).size(35.dp).wrapContentSize().rotate(if (showItems) 0f else 180f),
                         icon = "ic_arrow_down.xml",
                         contentDescription = "arrow",
                         onClick = {
@@ -2068,8 +1950,7 @@ fun AddButton(
 
 @Composable
 fun BottomContinueItem(
-    textButton: String = "Continuar",
-    onClicked: (() -> Unit)? = null
+    textButton: String = "Continuar", onClicked: (() -> Unit)? = null
 ) {
     Card(
         modifier = Modifier.fillMaxWidth(), shape = RectangleShape, elevation = 15.dp
@@ -2094,12 +1975,9 @@ fun BottomContinueItem(
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun CardFilled(
-    modifier: Modifier = Modifier,
-    model: CardModel,
-    listColor: List<Color>
+    modifier: Modifier = Modifier, model: CardModel, listColor: List<Color>
 ) {
-    Card(
-        modifier = modifier.width(300.dp).height(175.dp),
+    Card(modifier = modifier.width(300.dp).height(175.dp),
         elevation = 5.dp,
         shape = RoundedCornerShape(15.dp),
         onClick = {
@@ -2189,8 +2067,7 @@ fun CardNoFilled(
     year: String,
     list: List<Color>
 ) {
-    Card(
-        modifier = modifier.fillMaxWidth().requiredHeight(200.dp),
+    Card(modifier = modifier.fillMaxWidth().requiredHeight(200.dp),
         elevation = 5.dp,
         shape = RoundedCornerShape(15.dp),
         onClick = {
@@ -2221,8 +2098,7 @@ fun CardNoFilled(
                                     "5"
                                 ) && number.length == 16
                             ) "ic_mastercard.xml" else "ic_mastercard.xml"
-                        ),
-                        contentDescription = "type card"
+                        ), contentDescription = "type card"
                     )
                 }
                 Row(
@@ -2280,19 +2156,16 @@ fun CardNoFilled(
 
 @Composable
 fun ResumeStatusTravelItem(
-    modifier: Modifier = Modifier,
-    pinStatusList: List<PinStatusHistoryModel>
+    modifier: Modifier = Modifier, pinStatusList: List<PinStatusHistoryModel>
 ) {
     Column(
-        modifier = modifier
-            .wrapContentWidth(),
+        modifier = modifier.wrapContentWidth(),
         verticalArrangement = Arrangement.SpaceBetween,
         horizontalAlignment = Alignment.Start
     ) {
         pinStatusList.forEachIndexed { index, item ->
             PinStatusLocationItem(
-                topText = item.origin,
-                bottomText = item.destiny
+                topText = item.origin, bottomText = item.destiny
             ) {
                 item.icon()
             }
@@ -2307,68 +2180,68 @@ fun ResumeStatusTravelItem(
 
 @Composable
 fun <T> HorizontalContainerListItem(
-    title: String,
+    startText: String? = null,
+    startIcon: @Composable (() -> Unit)? = null,
     endText: String? = null,
     endIcon: @Composable (() -> Unit)? = null,
-    listItem: List<T>,
-    composeItem: @Composable (T, Int) -> Unit
+    listItem: List<T> = emptyList(),
+    bottomCompose: @Composable (() -> Unit)? = null,
+    composeItem: @Composable ((T, Int) -> Unit)? = null
 ) {
     Column(
-        modifier = Modifier
-            .background(White)
+        modifier = Modifier.background(White)
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            BoldText(
-                modifier = Modifier.padding(start = 30.dp, top = 20.dp),
-                text = title, color = Black,
-                fontSize = 20.sp
-            )
+            if (startIcon != null) {
+                startIcon()
+            } else {
+                BoldText(
+                    modifier = Modifier.padding(start = 30.dp, top = 20.dp),
+                    text = startText.orEmpty(),
+                    color = Black,
+                    fontSize = 20.sp
+                )
+            }
             if (endIcon != null) {
                 endIcon()
             } else {
                 SeeAll(
-                    modifier = Modifier.padding(top = 20.dp, end = 9.dp),
-                    text = endText.orEmpty()
+                    modifier = Modifier.padding(top = 20.dp, end = 9.dp), text = endText.orEmpty()
                 )
             }
         }
-        LazyRow(
-            modifier = Modifier
-                .padding(
-                    top = 30.dp,
-                    bottom = 35.dp
+        if (listItem.isNotEmpty()) {
+            LazyRow(
+                modifier = Modifier.padding(
+                    top = 30.dp, bottom = 35.dp
                 )
-        ) {
-            itemsIndexed(items = listItem) { index, item ->
-                composeItem(item, index)
+            ) {
+                itemsIndexed(items = listItem) { index, item ->
+                    composeItem?.invoke(item, index)
+                }
             }
         }
+        bottomCompose?.invoke()
     }
 }
 
 
 @Composable
 fun PinStatusLocationItem(
-    topText: String,
-    bottomText: String,
-    icon: @Composable () -> Unit
+    topText: String, bottomText: String, icon: @Composable () -> Unit
 ) {
     Row(horizontalArrangement = Arrangement.Start) {
         icon()
         Column(modifier = Modifier.padding(start = 13.dp)) {
             MediumText(
-                text = topText,
-                color = GraySinceTo,
-                fontSize = 15.sp
+                text = topText, color = GraySinceTo, fontSize = 15.sp
             )
             MediumText(
-                modifier = Modifier
-                    .width(180.dp)
-                    .wrapContentHeight(),
+                modifier = Modifier.width(180.dp).wrapContentHeight(),
                 text = bottomText,
                 textAlign = TextAlign.Start,
                 color = GrayMedium,
@@ -2383,11 +2256,7 @@ fun PinStatusLocationItem(
 @Composable
 fun DottedVerticalLine() {
     Box(
-        Modifier
-            .padding(top = 20.dp)
-            .rotate(90f)
-            .width(50.dp)
-            .height(1.dp)
+        Modifier.padding(top = 20.dp).rotate(90f).width(50.dp).height(1.dp)
             .background(GrayStrong, shape = DottedShape(step = 10.dp))
     )
 }

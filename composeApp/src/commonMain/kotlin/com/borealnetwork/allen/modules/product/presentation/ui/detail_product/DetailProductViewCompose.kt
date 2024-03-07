@@ -31,25 +31,28 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.borealnetwork.allen.components.BoldText
-import com.borealnetwork.allen.components.CategorySeller
+import com.borealnetwork.allen.components.BrandingItem
 import com.borealnetwork.allen.components.Discount
 import com.borealnetwork.allen.components.FavoriteButton
 import com.borealnetwork.allen.components.FreeShipping
+import com.borealnetwork.allen.components.HorizontalContainerListItem
 import com.borealnetwork.allen.components.MediumText
+import com.borealnetwork.allen.components.ProductItem
+import com.borealnetwork.allen.components.RightRoundedButton
 import com.borealnetwork.allen.components.SelectorCounter
 import com.borealnetwork.allen.components.SelectorDetail
 import com.borealnetwork.allen.components.SellerItem
-import com.borealnetwork.allen.components.SellerItemsItem
-import com.borealnetwork.allen.components.SellersItem
 import com.borealnetwork.allen.components.SemiBoldText
 import com.borealnetwork.allen.components.SeparatorGray
 import com.borealnetwork.allen.components.ShadowButton
 import com.borealnetwork.allen.components.ShareButton
 import com.borealnetwork.allen.components.SmallText
+import com.borealnetwork.allen.components.StartIcon
 import com.borealnetwork.allen.components.ToolbarTitle
 import com.borealnetwork.allen.components.drawer.StarStatus
 import com.borealnetwork.allen.components.extensions.drawColoredShadow
 import com.borealnetwork.allen.domain.model.MinimalProductModel
+import com.borealnetwork.allen.domain.screen.PRODUCT_DETAIL_CLIENT_GRAPH
 import com.borealnetwork.allen.domain.screen.QUESTION_PRODUCT_CLIENT_GRAPH
 import com.borealnetwork.allen.domain.screen.RATING_PRODUCT_CLIENT_GRAPH
 import com.borealnetwork.allen.domain.screen.SHOPPING_CART_CLIENT_GRAPH
@@ -158,6 +161,7 @@ fun DetailProductViewCompose(navigator: Navigator) {
                 Card(
                     modifier = Modifier
                         .fillMaxWidth(),
+                    shape = RectangleShape,
                     elevation = 5.dp
                 ) {
                     Column {
@@ -353,10 +357,47 @@ fun DetailProductViewCompose(navigator: Navigator) {
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 45.dp),
+                    shape = RectangleShape,
                     elevation = 5.dp
                 ) {
-                    SellerItem {
-//                    navController?.navigate(RESULT_BY_SELLER_CLIENT_GRAPH)
+                    HorizontalContainerListItem<Unit>(
+                        startText = "Vendedor",
+                        bottomCompose = {
+                            SellerItem(
+                                modifier = Modifier.fillMaxWidth()
+                                    .padding(start = 30.dp, bottom = 35.dp, top = 22.dp),
+                                topText = "Ferreteria La Hormiga",
+                                bottomText = "Para Casa y Hogar"
+                            ) {
+
+                            }
+                        }
+                    )
+                }
+            }
+            item {
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 45.dp),
+                    shape = RectangleShape,
+                    elevation = 5.dp
+                ) {
+
+                    HorizontalContainerListItem(
+                        startText = "Más productos del\nvendedor",
+                        endIcon = {
+                            RightRoundedButton(
+                                modifier = Modifier.padding(top = 20.dp, end = 30.dp),
+                                clicked = {
+
+                                }
+                            )
+                        }, listItem = lastProductsList
+                    ) { minimalProductModel, index ->
+                        ProductItem(model = minimalProductModel) {
+                            navigator.navigate(PRODUCT_DETAIL_CLIENT_GRAPH)
+                        }
                     }
                 }
             }
@@ -368,27 +409,29 @@ fun DetailProductViewCompose(navigator: Navigator) {
                     shape = RectangleShape,
                     elevation = 5.dp
                 ) {
-                    SellerItemsItem(
-                        title = "Más productos del\nvendedor",
-                        list = lastProductsList
-                    )
-                }
-            }
-            item {
-                Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(bottom = 45.dp),
-                    elevation = 5.dp
-                ) {
-                    CategorySeller(
-                        innerModifier = Modifier
-                            .padding(
-                                top = 20.dp,
-                                end = 30.dp,
-                                bottom = 30.dp
+                    HorizontalContainerListItem(
+                        startIcon = {
+                            StartIcon(
+                                modifier = Modifier.fillMaxWidth(0.7f).padding(
+                                    top = 20.dp, start = 30.dp
+                                ),
+                                topText = "Para",
+                                bottomText = "Casa y Hogar"
                             )
-                    )
+                        },
+                        endIcon = {
+                            RightRoundedButton(
+                                modifier = Modifier.padding(top = 20.dp, end = 30.dp),
+                                clicked = {
+
+                                }
+                            )
+                        }, listItem = lastProductsList
+                    ) { minimalProductModel, index ->
+                        ProductItem(model = minimalProductModel) {
+                            navigator.navigate(PRODUCT_DETAIL_CLIENT_GRAPH)
+                        }
+                    }
                 }
 
             }
@@ -399,7 +442,29 @@ fun DetailProductViewCompose(navigator: Navigator) {
                         .padding(bottom = 100.dp),
                     elevation = 5.dp
                 ) {
-                    SellersItem()
+                    HorizontalContainerListItem(
+                        startText = "Más vendedores",
+                        endIcon = {
+                            RightRoundedButton(
+                                modifier = Modifier.padding(top = 20.dp, end = 30.dp),
+                                clicked = {
+
+                                }
+                            )
+                        },
+                        listItem = listOf(
+                            "tools_icon.png",
+                            "tools_icon.png",
+                            "tools_icon.png",
+                            "tools_icon.png",
+                            "tools_icon.png",
+                            "tools_icon.png"
+                        )
+                    ) { model, index ->
+                        BrandingItem(image = model) {
+//                            navigator.navigate(PRODUCT_DETAIL_CLIENT_GRAPH)
+                        }
+                    }
                 }
             }
         }
