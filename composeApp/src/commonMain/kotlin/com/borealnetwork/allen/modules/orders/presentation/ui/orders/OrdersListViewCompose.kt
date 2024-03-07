@@ -14,6 +14,7 @@ import com.borealnetwork.allen.components.ResumeItem
 import com.borealnetwork.allen.components.ShoppingCategoryHistoryItem
 import com.borealnetwork.allen.components.ToolbarTitle
 import com.borealnetwork.allen.domain.model.ItemShoppingModel
+import com.borealnetwork.allen.domain.screen.ORDER_CLIENT_DETAIL_GRAPH
 import com.borealnetwork.allen.theme.GrayBackgroundMain
 import moe.tlaster.precompose.navigation.Navigator
 
@@ -99,7 +100,7 @@ fun OrdersListViewCompose(navigator: Navigator) {
         ToolbarTitle(
             titleText = "Mis compras",
             startClicked = {
-                navigator.navigate("/home2")
+                navigator.goBack()
             },
             showEndImage = false,
             endIcon = "ic_coupon.xml",
@@ -132,7 +133,9 @@ fun OrdersListViewCompose(navigator: Navigator) {
                                 hideArrow = false,
                                 hideTopLine = index != listInProgress.lastIndex
                             ) {
-//                                    navController?.navigate(SHOPPING_DETAIL_CLIENT_GRAPH)
+                                navigator.navigate(
+                                    ORDER_CLIENT_DETAIL_GRAPH
+                                )
                             }
                         }
                     }

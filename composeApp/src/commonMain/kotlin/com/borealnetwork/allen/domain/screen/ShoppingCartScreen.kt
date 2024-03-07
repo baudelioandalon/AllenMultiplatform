@@ -1,4 +1,4 @@
-package com.boreal.allen.domain
+package com.borealnetwork.allen.domain.screen
 
 const val SHOPPING_CART_GRAPH = "SHOPPING_CART_GRAPH"
 const val SHOPPING_DETAIL_GRAPH = "SHOPPING_DETAIL_GRAPH"

@@ -43,7 +43,6 @@ kotlin {
             implementation(compose.materialIconsExtended)
             @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
             implementation(compose.components.resources)
-            implementation(libs.voyager.navigator)
             implementation(libs.composeImageLoader)
             implementation(libs.kotlinx.coroutines.core)
             api(libs.moko.core)
@@ -62,6 +61,7 @@ kotlin {
             api(compose.foundation)
             api(compose.animation)
 //...
+//            implementation(libs.voyager.navigator)
             api(libs.precompose)
 
 // api("moe.tlaster:precompose-molecule:$precompose_version") // For Molecule intergration

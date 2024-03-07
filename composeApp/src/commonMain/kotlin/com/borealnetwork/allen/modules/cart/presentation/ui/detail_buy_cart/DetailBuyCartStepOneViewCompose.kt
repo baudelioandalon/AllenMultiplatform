@@ -21,15 +21,18 @@ import com.borealnetwork.allen.components.SelectorSpinner
 import com.borealnetwork.allen.components.ShippingSelector
 import com.borealnetwork.allen.components.ToolbarTitle
 import com.borealnetwork.allen.components.UserSelector
+import com.borealnetwork.allen.domain.screen.ADDRESS_CLIENT_GRAPH
 import com.borealnetwork.allen.theme.GrayBackgroundMain
+import moe.tlaster.precompose.navigation.Navigator
 
 @Composable
-fun DetailBuyCartStepOneViewCompose() {
+fun DetailBuyCartStepOneViewCompose(navigator: Navigator) {
 
     Scaffold(topBar = {
         ToolbarTitle(
-            titleText = "Detalles de compra", startClicked = {
-//                navController?.navigateUp()
+            titleText = "Detalles de compra",
+            startClicked = {
+                navigator.goBack()
             }, showEndImage = false
         )
     },
@@ -65,8 +68,8 @@ fun DetailBuyCartStepOneViewCompose() {
                 }
 
                 ResumeItem(
-                    title ="Dirección"
-                ){
+                    title = "Dirección"
+                ) {
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -80,7 +83,7 @@ fun DetailBuyCartStepOneViewCompose() {
                             textTop = "Para",
                             iconRes = "ic_goal.xml"
                         ) {
-//                                navController?.navigate(ADDRESS_CLIENT_GRAPH)
+                            navigator.navigate(ADDRESS_CLIENT_GRAPH)
                         }
                         UserSelector(
                             modifier = Modifier.padding(top = 20.dp)
@@ -101,11 +104,9 @@ fun DetailBuyCartStepOneViewCompose() {
                 }
             }
             item {
-                Spacer(modifier = Modifier.height(150.dp))
+                Spacer(modifier = Modifier.height(250.dp))
             }
         }
-
-
         it.calculateBottomPadding()
     }
 

@@ -24,11 +24,14 @@ import com.borealnetwork.allen.components.BrandingHorizontal
 import com.borealnetwork.allen.components.ProductResultItem
 import com.borealnetwork.allen.components.SemiBoldText
 import com.borealnetwork.allen.components.ToolbarSearchHome
+import com.borealnetwork.allen.domain.screen.PRODUCT_DETAIL_CLIENT_GRAPH
 import com.borealnetwork.allen.theme.GrayBorder
+import moe.tlaster.precompose.navigation.NavOptions
+import moe.tlaster.precompose.navigation.Navigator
 
 @Composable
 fun ResultProductsViewCompose(
-    closeApp: () -> Unit = {}
+    navigator: Navigator,
 ) {
 
     Scaffold(topBar = {
@@ -37,6 +40,7 @@ fun ResultProductsViewCompose(
             startIcon = "ic_back_arrow.xml",
             textPlaceHolder = "Ropa",
             startClicked = {
+                navigator.goBack()
             }, cartClicked = {
             }, searchClicked = {
             })
@@ -47,9 +51,6 @@ fun ResultProductsViewCompose(
                 .background(White),
             columns = GridCells.Fixed(2)
         ) {
-
-//            val numberOfItemsByRow =
-//                LocalConfiguration.current.screenWidthDp / 200 // you can replace 200 by the minimum size you want your cells to have.
 
             item(span = { GridItemSpan(2) }) {
                 Row(
@@ -90,7 +91,10 @@ fun ResultProductsViewCompose(
                         start = if (index % 2 == 0) 30.dp else 10.dp,
                         end = if (index % 2 == 0) 10.dp else 30.dp,
                         top = if (index % 2 != 0) 20.dp else 0.dp
-                    )
+                    ),
+                    productClicked = {
+                        navigator.navigate(PRODUCT_DETAIL_CLIENT_GRAPH)
+                    }
                 )
             }
         }

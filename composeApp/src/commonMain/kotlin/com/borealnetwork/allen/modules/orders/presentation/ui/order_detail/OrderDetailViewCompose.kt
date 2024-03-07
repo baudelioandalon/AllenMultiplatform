@@ -27,10 +27,11 @@ import com.borealnetwork.allen.domain.model.ItemCartModel
 import com.borealnetwork.allen.domain.model.ProductShoppingCart
 import com.borealnetwork.allen.domain.model.order_resume.PinStatusHistoryModel
 import com.borealnetwork.allen.theme.GrayBackgroundMain
+import moe.tlaster.precompose.navigation.Navigator
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun OrderDetailViewCompose() {
+fun OrderDetailViewCompose(navigator: Navigator) {
 
     val listItems = listOf(
         ItemCartModel(
@@ -87,7 +88,7 @@ fun OrderDetailViewCompose() {
             ToolbarTitle(
                 titleText = "Detalles del pedido",
                 startClicked = {
-//                    navController?.navigateUp()
+                    navigator.goBack()
                 },
                 showEndImage = false,
                 endIcon = "ic_coupon.xml",

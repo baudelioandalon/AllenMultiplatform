@@ -11,8 +11,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Immutable
-import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -26,9 +24,10 @@ import com.borealnetwork.allen.components.EditTextTopLabel
 import com.borealnetwork.allen.components.ToolbarTitle
 import com.borealnetwork.allen.theme.GrayBackgroundMain
 import com.borealnetwork.allen.tools.getGradient
+import moe.tlaster.precompose.navigation.Navigator
 
 @Composable
-fun NewCardViewCompose() {
+fun NewCardViewCompose(navigator: Navigator) {
 
     var holderName by rememberSaveable {
         mutableStateOf(
@@ -64,8 +63,9 @@ fun NewCardViewCompose() {
     val colors = getGradient()
     Scaffold(topBar = {
         ToolbarTitle(
-            titleText = "Nueva tarjeta", startClicked = {
-//                navController?.navigateUp()
+            titleText = "Nueva tarjeta",
+            startClicked = {
+                navigator.goBack()
             }, showEndImage = false
         )
     },
@@ -150,7 +150,6 @@ fun NewCardViewCompose() {
                 Spacer(modifier = Modifier.height(150.dp))
             }
         }
-
 
         it.calculateBottomPadding()
     }

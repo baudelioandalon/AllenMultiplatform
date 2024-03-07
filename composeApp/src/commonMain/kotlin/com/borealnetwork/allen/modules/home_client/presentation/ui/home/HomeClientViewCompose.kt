@@ -4,19 +4,16 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material.Card
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -29,13 +26,13 @@ import androidx.compose.ui.graphics.Color.Companion.Black
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.borealnetwork.allen.components.BoldText
 import com.borealnetwork.allen.components.BrandingHorizontal
 import com.borealnetwork.allen.components.CategoryItem
 import com.borealnetwork.allen.components.CategorySelectorItem
+import com.borealnetwork.allen.components.HorizontalContainerListItem
 import com.borealnetwork.allen.components.ProductItem
 import com.borealnetwork.allen.components.SeeAll
 import com.borealnetwork.allen.components.ToolbarSearchHome
@@ -43,18 +40,45 @@ import com.borealnetwork.allen.components.drawer.DrawerBodyClient
 import com.borealnetwork.allen.components.drawer.DrawerHeaderClient
 import com.borealnetwork.allen.components.drawer.model.DrawerOptions
 import com.borealnetwork.allen.components.drawer.model.MenuItem
+import com.borealnetwork.allen.domain.model.MinimalProductModel
 import com.borealnetwork.allen.domain.model.PromotionItem
+import com.borealnetwork.allen.domain.screen.NOTIFICATION_CLIENT_GRAPH
+import com.borealnetwork.allen.domain.screen.ORDERS_CLIENT_GRAPH
+import com.borealnetwork.allen.domain.screen.PRODUCT_DETAIL_CLIENT_GRAPH
+import com.borealnetwork.allen.domain.screen.SEARCH_CLIENT_GRAPH
+import com.borealnetwork.allen.domain.screen.SHOPPING_CART_CLIENT_GRAPH
 import com.borealnetwork.allen.theme.GrayBackgroundMain
 import com.borealnetwork.allen.theme.categorySelectorColors
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.yield
+import moe.tlaster.precompose.navigation.Navigator
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
-fun HomeClientViewCompose(closeApp: () -> Unit = {}) {
+fun HomeClientViewCompose(navigator: Navigator) {
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
+
+    val lastProductsList = listOf(
+        MinimalProductModel(
+            skuProduct = "dd323234",
+            nameProduct = "Sensor Dummy",
+            imgProduct = "imagen",
+            categoryItem = "Electronica",
+            price = 34.0,
+            discountPercentage = 0.0
+        ),
+        MinimalProductModel(
+            skuProduct = "dd323234",
+            nameProduct = "Sensor Dummy",
+            imgProduct = "imagen",
+            categoryItem = "Electronica",
+            price = 34.0,
+            discountPercentage = 0.0
+        )
+    )
+
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
@@ -67,9 +91,12 @@ fun HomeClientViewCompose(closeApp: () -> Unit = {}) {
                 }
 
             }, cartClicked = {
+                navigator.navigate(
+                    route = SHOPPING_CART_CLIENT_GRAPH
+                )
 //                            navController?.navigate(SHOPPING_CART_GRAPH)
             }, searchClicked = {
-//                            navController?.navigate(SEARCH_CLIENT_GRAPH)
+                navigator.navigate(SEARCH_CLIENT_GRAPH)
             })
 
         },
@@ -125,18 +152,17 @@ fun HomeClientViewCompose(closeApp: () -> Unit = {}) {
                     println("Clicked on ${it.option.name}")
                     when (it.option) {
                         DrawerOptions.Exit -> {
-                            closeApp()
+
                         }
 
                         DrawerOptions.Buys -> {
-//                            navController?.navigate(SHOPPING_CLIENT_GRAPH)
                             scope.launch {
                                 scaffoldState.drawerState.close()
                             }
+                            navigator.navigate(route = ORDERS_CLIENT_GRAPH)
                         }
 
                         DrawerOptions.Favorites -> {
-//                            navController?.navigate(FAVORITES_GRAPH)
                             scope.launch {
                                 scaffoldState.drawerState.close()
                             }
@@ -150,10 +176,10 @@ fun HomeClientViewCompose(closeApp: () -> Unit = {}) {
                         }
 
                         DrawerOptions.Notifications -> {
-//                            navController?.navigate(NOTIFICATION_CLIENT_GRAPH)
                             scope.launch {
                                 scaffoldState.drawerState.close()
                             }
+                            navigator.navigate(route = NOTIFICATION_CLIENT_GRAPH)
                         }
 
                         else -> {
@@ -203,7 +229,15 @@ fun HomeClientViewCompose(closeApp: () -> Unit = {}) {
                                 shape = RectangleShape,
                                 elevation = 5.dp
                             ) {
-                                LastItemsContainer("navController")
+                                HorizontalContainerListItem(
+                                    title = "Ultimos articulos",
+                                    endText = "Ver todos",
+                                    listItem = lastProductsList
+                                ) { minimalProductModel,index ->
+                                    ProductItem(minimalProductModel) {
+                                        navigator.navigate(PRODUCT_DETAIL_CLIENT_GRAPH)
+                                    }
+                                }
                             }
                         }
                         item {
@@ -225,21 +259,19 @@ fun HomeClientViewCompose(closeApp: () -> Unit = {}) {
                                 shape = RectangleShape,
                                 elevation = 5.dp
                             ) {
-                                OffersItemsContainer()
+                                HorizontalContainerListItem(
+                                    title = "Ofertas",
+                                    endText = "Ver todos",
+                                    listItem = lastProductsList
+                                ) { minimalProductModel,index ->
+                                    ProductItem(minimalProductModel) {
+                                        navigator.navigate(PRODUCT_DETAIL_CLIENT_GRAPH)
+                                    }
+                                }
                             }
                         }
                     }
                 }
-
-//                ToolbarSearchHome(menuClicked = {
-//                    scope.launch {
-//                        scaffoldState.drawerState.open()
-//                    }
-//                }, cartClicked = {
-////                            navController?.navigate(SHOPPING_CART_GRAPH)
-//                }, searchClicked = {
-////                            navController?.navigate(SEARCH_CLIENT_GRAPH)
-//                })
 
                 it.calculateBottomPadding()
             })
@@ -293,44 +325,6 @@ fun BrandingContainer(
     }
 }
 
-
-@Composable
-fun LastItemsContainer(navController: String) {
-    Column(
-        modifier = Modifier
-            .background(White)
-    ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            BoldText(
-                modifier = Modifier.padding(start = 30.dp, top = 20.dp),
-                text = "Ultimos articulos", color = Black,
-                fontSize = 20.sp
-            )
-            SeeAll(
-                modifier = Modifier.padding(top = 20.dp, end = 9.dp),
-                text = "Ver todos"
-            )
-        }
-        LazyRow(
-            modifier = Modifier
-                .padding(
-                    top = 30.dp,
-                    bottom = 35.dp
-                )
-        ) {
-            items(10) {
-                ProductItem {
-//                    navController?.navigate(PRODUCT_GRAPH)
-                }
-            }
-        }
-    }
-}
-
 @Composable
 fun CategoryListContainer() {
     Column(
@@ -360,41 +354,6 @@ fun CategoryListContainer() {
                     index % 2 != 0,
                     categorySelectorColors[index % categorySelectorColors.size]
                 )
-            }
-        }
-    }
-}
-
-@Composable
-fun OffersItemsContainer() {
-    Column(
-        modifier = Modifier
-            .background(White)
-    ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            BoldText(
-                modifier = Modifier.padding(start = 30.dp, top = 20.dp),
-                text = "Ofertas", color = Black,
-                fontSize = 20.sp
-            )
-            SeeAll(
-                modifier = Modifier.padding(top = 20.dp, end = 9.dp),
-                text = "Ver todos"
-            )
-        }
-        LazyRow(
-            modifier = Modifier
-                .padding(
-                    top = 30.dp,
-                    bottom = 35.dp
-                )
-        ) {
-            items(10) {
-                ProductItem()
             }
         }
     }
@@ -435,38 +394,5 @@ fun AutoSliding() {
                 .fillMaxSize()
 
         )
-    }
-}
-
-
-@Composable
-fun BoxWithConstraintsDemo() {
-    Column {
-        Column {
-            MyBoxWithConstraintsDemo()
-        }
-
-        Text("Here we set the size to 150.dp", modifier = Modifier.padding(top = 20.dp))
-        Column(modifier = Modifier.size(450.dp)) {
-            MyBoxWithConstraintsDemo()
-        }
-    }
-}
-
-@Composable
-private fun MyBoxWithConstraintsDemo() {
-    BoxWithConstraints {
-        val boxWithConstraintsScope = this
-        //You can use this scope to get the minWidth, maxWidth, minHeight, maxHeight in dp and constraints
-
-        Column {
-            if (boxWithConstraintsScope.maxHeight >= 200.dp) {
-                Text(
-                    "This is only visible when the maxHeight is >= 200.dp",
-                    style = TextStyle(fontSize = 20.sp)
-                )
-            }
-            Text("minHeight: ${boxWithConstraintsScope.minHeight}, maxHeight: ${boxWithConstraintsScope.maxHeight},  minWidth: ${boxWithConstraintsScope.minWidth} maxWidth: ${boxWithConstraintsScope.maxWidth}")
-        }
     }
 }

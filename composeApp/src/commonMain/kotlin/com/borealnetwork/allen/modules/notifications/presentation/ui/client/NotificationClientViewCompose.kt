@@ -10,14 +10,15 @@ import androidx.compose.ui.Modifier
 import com.borealnetwork.allen.components.NotificationItem
 import com.borealnetwork.allen.components.ToolbarTitle
 import com.borealnetwork.allen.theme.GrayBackgroundMain
+import moe.tlaster.precompose.navigation.Navigator
 
 @Composable
-fun NotificationClientViewCompose() {
+fun NotificationClientViewCompose(navigator: Navigator) {
     Scaffold(modifier = Modifier.fillMaxSize(),
         topBar = {
             ToolbarTitle(
                 titleText = "Notificaciones", startClicked = {
-//                navController?.navigateUp()
+                    navigator.goBack()
                 },
                 endIcon = "ic_bell_icon.xml"
             )

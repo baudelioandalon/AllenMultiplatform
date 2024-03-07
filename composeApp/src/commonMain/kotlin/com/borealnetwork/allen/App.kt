@@ -25,8 +25,23 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.borealnetwork.allen.domain.model.BirdImage
-import com.borealnetwork.allen.modules.orders.presentation.ui.order_status.OrderStatusViewCompose
-import com.borealnetwork.allen.modules.orders.presentation.ui.orders.OrdersListViewCompose
+import com.borealnetwork.allen.domain.screen.HOME_CLIENT_GRAPH
+import com.borealnetwork.allen.modules.cart.domain.navigation.detailBuyCartClientNavigationGraph
+import com.borealnetwork.allen.modules.cart.domain.navigation.resumeBuyCartClientNavigationGraph
+import com.borealnetwork.allen.modules.cart.domain.navigation.shoppingCartClientNavigationGraph
+import com.borealnetwork.allen.modules.home_client.domain.navigation.homeClientNavigationGraph
+import com.borealnetwork.allen.modules.notifications.domain.navigation.notificationClientNavigationGraph
+import com.borealnetwork.allen.modules.orders.domain.navigation.orderClientDetailNavigationGraph
+import com.borealnetwork.allen.modules.orders.domain.navigation.ordersClientNavigationGraph
+import com.borealnetwork.allen.modules.payments.domain.navigation.newCardClientNavigationGraph
+import com.borealnetwork.allen.modules.payments.domain.navigation.paymentsMethodClientNavigationGraph
+import com.borealnetwork.allen.modules.product.domain.navigation.detailProductClientNavigationGraph
+import com.borealnetwork.allen.modules.product.domain.navigation.questionsProductClientNavigationGraph
+import com.borealnetwork.allen.modules.product.domain.navigation.ratingProductClientNavigationGraph
+import com.borealnetwork.allen.modules.product.domain.navigation.resultProductsClientNavigationGraph
+import com.borealnetwork.allen.modules.product.domain.navigation.searchClientNavigationGraph
+import com.borealnetwork.allen.modules.profile.domain.navigation.addressClientNavigationGraph
+import com.borealnetwork.allen.modules.profile.domain.navigation.newAddressClientNavigationGraph
 import com.borealnetwork.allen.theme.AppTheme
 import com.borealnetwork.allen.viewmodel.LoginViewModel
 import dev.icerock.moko.mvvm.compose.getViewModel
@@ -36,7 +51,6 @@ import io.kamel.image.asyncPainterResource
 import moe.tlaster.precompose.PreComposeApp
 import moe.tlaster.precompose.navigation.NavHost
 import moe.tlaster.precompose.navigation.rememberNavigator
-import moe.tlaster.precompose.navigation.transition.NavTransition
 
 @Composable
 fun BirdAppTheme(
@@ -56,37 +70,36 @@ fun BirdAppTheme(
 
 @Composable
 internal fun App() = PreComposeApp {
-
-    val navigator = rememberNavigator()
-    NavHost(
-        // Assign the navigator to the NavHost
-        navigator = navigator,
-        // Navigation transition for the scenes in this NavHost, this is optional
-        navTransition = NavTransition(),
-        // The start destination
-        initialRoute = "/home",
-    ) {
-        // Define a scene to the navigation graph
-        scene(
-            // Scene's route path
-            route = "/home",
-            // Navigation transition for this scene, this is optional
-            navTransition = NavTransition(),
-        ) {
-            OrdersListViewCompose(navigator)
-        }
-        scene(
-            // Scene's route path
-            route = "/home2",
-            // Navigation transition for this scene, this is optional
-            navTransition = NavTransition(),
-        ) {
-            OrderStatusViewCompose(navigator)
-        }
-    }
-
     AppTheme {
         val loginViewModel = getViewModel(Unit, viewModelFactory { LoginViewModel() })
+        val navigator = rememberNavigator()
+        NavHost(
+            navigator = navigator,
+            initialRoute = HOME_CLIENT_GRAPH,
+        ) {
+            // Define a scene to the navigation graph
+            homeClientNavigationGraph(navigator)
+            notificationClientNavigationGraph(navigator)
+            ordersClientNavigationGraph(navigator)
+            orderClientDetailNavigationGraph(navigator)
+
+            //Product
+            searchClientNavigationGraph(navigator)
+            resultProductsClientNavigationGraph(navigator)
+            detailProductClientNavigationGraph(navigator)
+            ratingProductClientNavigationGraph(navigator)
+            questionsProductClientNavigationGraph(navigator)
+
+            shoppingCartClientNavigationGraph(navigator)
+            resumeBuyCartClientNavigationGraph(navigator)
+            detailBuyCartClientNavigationGraph(navigator)
+            addressClientNavigationGraph(navigator)
+            newAddressClientNavigationGraph(navigator)
+            newCardClientNavigationGraph(navigator)
+            paymentsMethodClientNavigationGraph(navigator)
+        }
+
+
 //    WelcomeViewCompose()
 //    RegisterViewCompose()
 //    LoginViewCompose(loginViewModel)

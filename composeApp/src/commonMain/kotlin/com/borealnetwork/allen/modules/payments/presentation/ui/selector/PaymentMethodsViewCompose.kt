@@ -30,9 +30,10 @@ import com.borealnetwork.allen.modules.payments.domain.models.TypeCard
 import com.borealnetwork.allen.modules.payments.domain.models.paymentList
 import com.borealnetwork.allen.theme.GrayBackgroundMain
 import com.borealnetwork.allen.tools.limit
+import moe.tlaster.precompose.navigation.Navigator
 
 @Composable
-fun PaymentMethodsViewCompose() {
+fun PaymentMethodsViewCompose(navigator: Navigator) {
     var selectedOption by rememberSaveable { mutableStateOf(paymentList[0].iconDescription) }
 
     val cardList = listOf(
@@ -63,8 +64,9 @@ fun PaymentMethodsViewCompose() {
     )
     Scaffold(topBar = {
         ToolbarTitle(
-            titleText = "Metodos de pago", startClicked = {
-//                navController?.navigateUp()
+            titleText = "Metodos de pago",
+            startClicked = {
+                navigator.goBack()
             }, showEndImage = false
         )
     },

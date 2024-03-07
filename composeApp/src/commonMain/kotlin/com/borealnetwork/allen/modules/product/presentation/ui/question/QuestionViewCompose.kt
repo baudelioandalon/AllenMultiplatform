@@ -31,10 +31,11 @@ import com.borealnetwork.allen.modules.product.domain.models.QuestionModel
 import com.borealnetwork.allen.theme.BlueTransparent
 import com.borealnetwork.allen.theme.GrayBackgroundMain
 import com.borealnetwork.allen.theme.GraySubtitleBottom
+import moe.tlaster.precompose.navigation.Navigator
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun QuestionViewCompose() {
+fun QuestionViewCompose(navigator: Navigator) {
 
     Scaffold(
         modifier = Modifier.fillMaxSize(), topBar = {

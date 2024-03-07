@@ -25,6 +25,7 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -64,6 +65,7 @@ import com.borealnetwork.allen.components.extensions.drawColoredShadow
 import com.borealnetwork.allen.components.extensions.mirror
 import com.borealnetwork.allen.domain.model.ItemCartModel
 import com.borealnetwork.allen.domain.model.ItemShoppingModel
+import com.borealnetwork.allen.domain.model.MinimalProductModel
 import com.borealnetwork.allen.domain.model.ProductShoppingCart
 import com.borealnetwork.allen.domain.model.order_resume.PinStatusHistoryModel
 import com.borealnetwork.allen.modules.payments.domain.models.CardModel
@@ -282,10 +284,21 @@ fun SellerItem(
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun ProductItem(productClicked: (() -> Unit)? = null) {
+fun ProductItem(
+    model: MinimalProductModel =
+        MinimalProductModel(
+            skuProduct = "dd323234",
+            nameProduct = "Sensor Dummy",
+            imgProduct = "imagen",
+            categoryItem = "Electronica",
+            price = 34.0,
+            discountPercentage = 0.0
+        ),
+    onClicked: (() -> Unit)? = null
+) {
     Card(
         modifier = Modifier.padding(start = 30.dp, end = 4.dp).height(240.dp).width(178.dp),
-        onClick = { productClicked?.invoke() },
+        onClick = { onClicked?.invoke() },
         elevation = 6.dp,
         shape = RoundedCornerShape(corner = CornerSize(10.dp)),
         backgroundColor = White
@@ -306,12 +319,12 @@ fun ProductItem(productClicked: (() -> Unit)? = null) {
 
             NameProductText(
                 modifier = Modifier.padding(start = 14.dp).fillMaxWidth(),
-                text = "Sensor Hc-sr04",
+                text = model.nameProduct,
                 textAlign = TextAlign.Start
             )
             CategoryProductText(
                 modifier = Modifier.padding(start = 14.dp).fillMaxWidth(),
-                text = "Electronica",
+                text = model.categoryItem,
                 color = GrayLetterCategoryProduct,
                 textAlign = TextAlign.Start
             )
@@ -322,7 +335,8 @@ fun ProductItem(productClicked: (() -> Unit)? = null) {
                 verticalAlignment = Alignment.Bottom
             ) {
                 BoldText(
-                    modifier = Modifier.padding(bottom = 5.dp).wrapContentSize(), text = "$54"
+                    modifier = Modifier.padding(bottom = 5.dp).wrapContentSize(),
+                    text = "$${model.price}"
                 )
                 LittleAddButton()
             }
@@ -1854,10 +1868,12 @@ fun ItemSold() {
 //Items de Compra
 @Composable
 fun BottomBuyCartItem(
-    payed: Boolean = false
+    payed: Boolean = false,
+    nextClicked: (() -> Unit)? = null
 ) {
     Card(
-        modifier = Modifier.fillMaxWidth(), shape = RectangleShape, elevation = 15.dp
+        modifier = Modifier.fillMaxWidth(),
+        shape = RectangleShape, elevation = 15.dp
     ) {
         Row(
             modifier = Modifier.fillMaxWidth().padding(top = 10.dp).background(White),
@@ -1924,7 +1940,7 @@ fun BottomBuyCartItem(
                                 blurRadius = 10.dp
                             ), text = "Continuar"
                     ) {
-//                            navController?.navigate(SHOPPING_DETAIL_GRAPH)
+                        nextClicked?.invoke()
                     }
                 }
 
@@ -2288,6 +2304,47 @@ fun ResumeStatusTravelItem(
             }
         }
 
+    }
+}
+
+
+@Composable
+fun <T> HorizontalContainerListItem(
+    title: String,
+    endText: String,
+    listItem: List<T>,
+    composeItem: @Composable (T, Int) -> Unit
+) {
+    Column(
+        modifier = Modifier
+            .background(White)
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            BoldText(
+                modifier = Modifier.padding(start = 30.dp, top = 20.dp),
+                text = title, color = Black,
+                fontSize = 20.sp
+            )
+            SeeAll(
+                modifier = Modifier.padding(top = 20.dp, end = 9.dp),
+                text = endText
+            )
+        }
+        LazyRow(
+            modifier = Modifier
+                .padding(
+                    top = 30.dp,
+                    bottom = 35.dp
+                )
+        ) {
+            itemsIndexed(items = listItem) { index, item ->
+                composeItem(item,index)
+            }
+        }
     }
 }
 

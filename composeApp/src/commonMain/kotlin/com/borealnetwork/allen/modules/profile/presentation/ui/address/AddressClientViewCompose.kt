@@ -18,14 +18,16 @@ import com.borealnetwork.allen.components.NewAddressSelector
 import com.borealnetwork.allen.components.ResumeItem
 import com.borealnetwork.allen.components.ToolbarTitle
 import com.borealnetwork.allen.theme.GrayBackgroundMain
+import moe.tlaster.precompose.navigation.Navigator
 
 @Composable
-fun AddressClientViewCompose() {
+fun AddressClientViewCompose(navigator: Navigator) {
     Scaffold(
         topBar = {
             ToolbarTitle(
-                titleText = "Mis direcciónes", startClicked = {
-//                    navController?.navigateUp()
+                titleText = "Mis direcciónes",
+                startClicked = {
+                    navigator.goBack()
                 }, showEndImage = false
             )
         },

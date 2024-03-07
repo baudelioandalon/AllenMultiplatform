@@ -25,19 +25,24 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.borealnetwork.allen.components.RegularText
 import com.borealnetwork.allen.components.ToolbarSearch
+import com.borealnetwork.allen.domain.screen.HOME_CLIENT_GRAPH
+import com.borealnetwork.allen.domain.screen.RESULT_PRODUCTS_CLIENT_GRAPH
 import com.borealnetwork.allen.theme.GrayBackgroundMain
 import com.borealnetwork.allen.theme.GrayLetterHint
+import moe.tlaster.precompose.navigation.NavOptions
+import moe.tlaster.precompose.navigation.Navigator
+import moe.tlaster.precompose.navigation.PopUpTo
 import org.jetbrains.compose.resources.painterResource
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun SearchProductViewCompose(
-    closeApp: () -> Unit = {}
+    navigator: Navigator
 ) {
 
     Scaffold(topBar = {
         ToolbarSearch(backClicked = {
-//            navController?.navigateUp()
+            navigator.goBack()
         }, endClicked = {
 
         }, searchClicked = {
@@ -70,16 +75,14 @@ fun SearchProductViewCompose(
                                             color = GrayLetterHint.copy(alpha = 0.1f)
                                         )
                                     ) {
-//                                        navController?.navigate(
-//                                            route = RESULT_CLIENT_GRAPH,
-//                                            navOptions = NavOptions
-//                                                .Builder()
-//                                                .setPopUpTo(
-//                                                    route = ClientScreen.HomeClientScreen.route,
-//                                                    inclusive = false
-//                                                )
-//                                                .build()
-//                                        )
+                                        navigator.navigate(
+                                            route = RESULT_PRODUCTS_CLIENT_GRAPH,
+                                            options = NavOptions(
+                                                popUpTo = PopUpTo(
+                                                    HOME_CLIENT_GRAPH
+                                                )
+                                            )
+                                        )
                                     }
                                     .padding(
                                         start = 30.dp,

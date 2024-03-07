@@ -1,60 +1,42 @@
 package com.borealnetwork.allen.modules.cart.presentation.ui.shopping_cart
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.material.Card
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Color.Companion.White
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.borealnetwork.allen.components.BoldText
 import com.borealnetwork.allen.components.BottomBuyCartItem
-import com.borealnetwork.allen.components.MediumText
-import com.borealnetwork.allen.components.SemiBoldText
-import com.borealnetwork.allen.components.ShadowButton
 import com.borealnetwork.allen.components.ShoppingCartStoreItem
 import com.borealnetwork.allen.components.ToolbarTitle
-import com.borealnetwork.allen.components.extensions.DottedShape
-import com.borealnetwork.allen.components.extensions.drawColoredShadow
 import com.borealnetwork.allen.domain.model.ItemCartModel
 import com.borealnetwork.allen.domain.model.ProductShoppingCart
-import com.borealnetwork.allen.theme.BlueTransparent
+import com.borealnetwork.allen.domain.screen.RESUME_BUY_CART_CLIENT_GRAPH
 import com.borealnetwork.allen.theme.GrayBackgroundMain
-import com.borealnetwork.allen.theme.GrayLetterSeeAll
-import com.borealnetwork.allen.theme.GrayLetterShipping
-import com.borealnetwork.allen.theme.GreenStrong
-import com.borealnetwork.allen.theme.OrangeTransparent
+import moe.tlaster.precompose.navigation.Navigator
 
 @Composable
-fun ShoppingCartViewCompose() {
+fun ShoppingCartViewCompose(navigator: Navigator) {
 
     Scaffold(topBar = {
 
         ToolbarTitle(
-            titleText = "Mi carrito", startClicked = {
-//                navController?.navigateUp()
+            titleText = "Mi carrito",
+            startClicked = {
+                navigator.goBack()
             },
             endIcon = "ic_coupon.xml"
         )
     },
         bottomBar = {
-            BottomBuyCartItem()
+            BottomBuyCartItem{
+                navigator.navigate(RESUME_BUY_CART_CLIENT_GRAPH)
+            }
         }) {
         val sellersList = listOf(
             ItemCartModel(

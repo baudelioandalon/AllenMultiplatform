@@ -24,3 +24,12 @@ data class ProductShoppingCart(
         price
     }
 }
+
+data class MinimalProductModel(
+    val skuProduct: String,
+    val nameProduct: String,
+    val imgProduct: String,
+    val categoryItem: String,
+    val price: Double,
+    val discountPercentage: Double
+)

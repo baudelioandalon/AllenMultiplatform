@@ -38,14 +38,17 @@ import com.borealnetwork.allen.components.ToolbarTitle
 import com.borealnetwork.allen.components.extensions.DottedShape
 import com.borealnetwork.allen.domain.model.ItemCartModel
 import com.borealnetwork.allen.domain.model.ProductShoppingCart
+import com.borealnetwork.allen.domain.screen.DETAIL_BUY_CART_CLIENT_GRAPH
+import com.borealnetwork.allen.domain.screen.RESUME_BUY_CART_CLIENT_GRAPH
 import com.borealnetwork.allen.theme.GrayBackgroundMain
 import com.borealnetwork.allen.theme.GrayMedium
 import com.borealnetwork.allen.theme.GraySinceTo
 import com.borealnetwork.allen.theme.GrayStrong
+import moe.tlaster.precompose.navigation.Navigator
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun ResumeCartStepTwoViewCompose() {
+fun ResumeCartStepTwoViewCompose(navigator: Navigator) {
 
     val listItems = listOf(
         ItemCartModel(
@@ -102,14 +105,16 @@ fun ResumeCartStepTwoViewCompose() {
             ToolbarTitle(
                 titleText = "Resumen de compra",
                 startClicked = {
-//                    navController?.navigateUp()
+                    navigator.goBack()
                 },
                 showEndImage = false,
                 endIcon = "ic_coupon.xml",
             )
         },
         bottomBar = {
-            BottomBuyCartItem()
+            BottomBuyCartItem{
+                navigator.navigate(DETAIL_BUY_CART_CLIENT_GRAPH)
+            }
         }
     ) {
         LazyColumn(
@@ -222,7 +227,7 @@ fun ResumeCartStepTwoViewCompose() {
                 )
             }
             item {
-                Spacer(modifier = Modifier.height(100.dp))
+                Spacer(modifier = Modifier.height(250.dp))
             }
         }
         it.calculateBottomPadding()

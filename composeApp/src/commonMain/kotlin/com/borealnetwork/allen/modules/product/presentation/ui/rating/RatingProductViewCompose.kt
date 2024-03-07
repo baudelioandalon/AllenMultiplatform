@@ -32,11 +32,12 @@ import com.borealnetwork.allen.modules.product.domain.models.QuestionModel
 import com.borealnetwork.allen.theme.BlueTransparent
 import com.borealnetwork.allen.theme.GrayBackgroundMain
 import com.borealnetwork.allen.theme.GraySubtitleBottom
+import moe.tlaster.precompose.navigation.Navigator
 import org.jetbrains.compose.resources.painterResource
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun RatingProductViewCompose() {
+fun RatingProductViewCompose(navigator: Navigator) {
 
     Scaffold(topBar = {
         ToolbarTitle(
