@@ -76,6 +76,7 @@ fun DetailBuyCartStepOneViewCompose(navigator: Navigator) {
                             .padding(bottom = 30.dp),
                     ) {
                         AddressSelector(
+                            textTop = "Desde",
                             iconRes = "ic_location.xml"
                         )
                         AddressSelector(

@@ -162,7 +162,9 @@ fun OrdersListViewCompose(navigator: Navigator) {
                                 hideArrow = false,
                                 hideTopLine = index != listDone.lastIndex
                             ) {
-//                                    navController?.navigate(SHOPPING_DETAIL_CLIENT_GRAPH)
+                                navigator.navigate(
+                                    ORDER_CLIENT_DETAIL_GRAPH
+                                )
                             }
                         }
 

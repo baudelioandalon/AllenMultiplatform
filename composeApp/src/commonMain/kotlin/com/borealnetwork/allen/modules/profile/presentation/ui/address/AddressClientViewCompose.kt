@@ -17,6 +17,7 @@ import com.borealnetwork.allen.components.BottomContinueItem
 import com.borealnetwork.allen.components.NewAddressSelector
 import com.borealnetwork.allen.components.ResumeItem
 import com.borealnetwork.allen.components.ToolbarTitle
+import com.borealnetwork.allen.domain.screen.NEW_ADDRESS_CLIENT_GRAPH
 import com.borealnetwork.allen.theme.GrayBackgroundMain
 import moe.tlaster.precompose.navigation.Navigator
 
@@ -32,7 +33,9 @@ fun AddressClientViewCompose(navigator: Navigator) {
             )
         },
         bottomBar = {
-            BottomContinueItem()
+            BottomContinueItem {
+                navigator.goBack()
+            }
         }
     ) {
         LazyColumn(
@@ -59,7 +62,9 @@ fun AddressClientViewCompose(navigator: Navigator) {
                         )
                         NewAddressSelector(
                             modifier = Modifier.padding(top = 20.dp)
-                        )
+                        ) {
+                            navigator.navigate(NEW_ADDRESS_CLIENT_GRAPH)
+                        }
                     }
                 }
             }

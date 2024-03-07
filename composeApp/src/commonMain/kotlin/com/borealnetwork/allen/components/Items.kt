@@ -68,6 +68,7 @@ import com.borealnetwork.allen.domain.model.ItemShoppingModel
 import com.borealnetwork.allen.domain.model.MinimalProductModel
 import com.borealnetwork.allen.domain.model.ProductShoppingCart
 import com.borealnetwork.allen.domain.model.order_resume.PinStatusHistoryModel
+import com.borealnetwork.allen.domain.screen.PRODUCT_DETAIL_CLIENT_GRAPH
 import com.borealnetwork.allen.modules.payments.domain.models.CardModel
 import com.borealnetwork.allen.modules.payments.domain.models.TypeCard
 import com.borealnetwork.allen.theme.BlueStatusLineColor
@@ -416,33 +417,26 @@ fun BrandingHorizontal(
 }
 
 @Composable
-fun SellerItemsItem(modifier: Modifier = Modifier) {
+fun SellerItemsItem(
+    modifier: Modifier = Modifier,
+    title: String,
+    list: List<MinimalProductModel>,
+    onClicked: ((MinimalProductModel,Int) -> Unit)? = null
+) {
     Column(
         modifier = modifier.fillMaxWidth().background(White),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween
     ) {
-        Row(
-            modifier = Modifier.fillMaxWidth().padding(start = 30.dp, end = 30.dp).clickable { },
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            BoldText(
-                fontSize = 18.sp,
-                modifier = Modifier.padding(top = 20.dp),
-                textAlign = TextAlign.Start,
-                text = "Más productos del\nvendedor",
-                color = Black
-            )
-            RightRoundedButton()
-        }
-        LazyRow(
-            modifier = Modifier.padding(
-                top = 30.dp, bottom = 35.dp
-            )
-        ) {
-            items(10) {
-                ProductItem()
+        HorizontalContainerListItem(
+            title = title,
+            endIcon = { RightRoundedButton(
+                modifier = Modifier.padding(top = 20.dp,end = 30.dp)
+            ) },
+            listItem = list
+        ) { minimalProductModel, index ->
+            ProductItem(model = minimalProductModel) {
+                onClicked?.invoke(minimalProductModel,index)
             }
         }
     }
@@ -2073,7 +2067,10 @@ fun AddButton(
 
 
 @Composable
-fun BottomContinueItem() {
+fun BottomContinueItem(
+    textButton: String = "Continuar",
+    onClicked: (() -> Unit)? = null
+) {
     Card(
         modifier = Modifier.fillMaxWidth(), shape = RectangleShape, elevation = 15.dp
     ) {
@@ -2086,9 +2083,9 @@ fun BottomContinueItem() {
         ) {
             BlueButton(
                 modifier = Modifier.padding(bottom = 18.dp, top = 24.dp).fillMaxWidth(),
-                text = "Continuar"
+                text = textButton
             ) {
-//                            navController?.navigate(SHOPPING_DETAIL_GRAPH)
+                onClicked?.invoke()
             }
         }
     }
@@ -2311,7 +2308,8 @@ fun ResumeStatusTravelItem(
 @Composable
 fun <T> HorizontalContainerListItem(
     title: String,
-    endText: String,
+    endText: String? = null,
+    endIcon: @Composable (() -> Unit)? = null,
     listItem: List<T>,
     composeItem: @Composable (T, Int) -> Unit
 ) {
@@ -2329,10 +2327,14 @@ fun <T> HorizontalContainerListItem(
                 text = title, color = Black,
                 fontSize = 20.sp
             )
-            SeeAll(
-                modifier = Modifier.padding(top = 20.dp, end = 9.dp),
-                text = endText
-            )
+            if (endIcon != null) {
+                endIcon()
+            } else {
+                SeeAll(
+                    modifier = Modifier.padding(top = 20.dp, end = 9.dp),
+                    text = endText.orEmpty()
+                )
+            }
         }
         LazyRow(
             modifier = Modifier
@@ -2342,7 +2344,7 @@ fun <T> HorizontalContainerListItem(
                 )
         ) {
             itemsIndexed(items = listItem) { index, item ->
-                composeItem(item,index)
+                composeItem(item, index)
             }
         }
     }

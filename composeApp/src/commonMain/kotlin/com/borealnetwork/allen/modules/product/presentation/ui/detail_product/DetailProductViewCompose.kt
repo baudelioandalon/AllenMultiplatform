@@ -49,6 +49,9 @@ import com.borealnetwork.allen.components.SmallText
 import com.borealnetwork.allen.components.ToolbarTitle
 import com.borealnetwork.allen.components.drawer.StarStatus
 import com.borealnetwork.allen.components.extensions.drawColoredShadow
+import com.borealnetwork.allen.domain.model.MinimalProductModel
+import com.borealnetwork.allen.domain.screen.QUESTION_PRODUCT_CLIENT_GRAPH
+import com.borealnetwork.allen.domain.screen.RATING_PRODUCT_CLIENT_GRAPH
 import com.borealnetwork.allen.domain.screen.SHOPPING_CART_CLIENT_GRAPH
 import com.borealnetwork.allen.theme.BlueTransparent
 import com.borealnetwork.allen.theme.GrayBackgroundDrawerDismiss
@@ -61,6 +64,25 @@ import moe.tlaster.precompose.navigation.Navigator
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun DetailProductViewCompose(navigator: Navigator) {
+
+    val lastProductsList = listOf(
+        MinimalProductModel(
+            skuProduct = "dd323234",
+            nameProduct = "Sensor Dummy",
+            imgProduct = "imagen",
+            categoryItem = "Electronica",
+            price = 34.0,
+            discountPercentage = 0.0
+        ),
+        MinimalProductModel(
+            skuProduct = "dd323234",
+            nameProduct = "Sensor Dummy",
+            imgProduct = "imagen",
+            categoryItem = "Electronica",
+            price = 34.0,
+            discountPercentage = 0.0
+        )
+    )
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -304,7 +326,7 @@ fun DetailProductViewCompose(navigator: Navigator) {
                             text = "Calificaciones",
                             iconRes = "ic_comment_icon.xml"
                         ) {
-//                        navController?.navigate(RATING_PRODUCT_GRAPH)
+                            navigator.navigate(RATING_PRODUCT_CLIENT_GRAPH)
                         }
                         SeparatorGray(
                             modifier = Modifier
@@ -320,7 +342,7 @@ fun DetailProductViewCompose(navigator: Navigator) {
                             text = "Preguntas",
                             iconRes = "ic_questions_icon.xml"
                         ) {
-//                        navController?.navigate(QUESTION_GRAPH)
+                            navigator.navigate(QUESTION_PRODUCT_CLIENT_GRAPH)
                         }
                     }
                 }
@@ -343,9 +365,13 @@ fun DetailProductViewCompose(navigator: Navigator) {
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(bottom = 45.dp),
+                    shape = RectangleShape,
                     elevation = 5.dp
                 ) {
-                    SellerItemsItem()
+                    SellerItemsItem(
+                        title = "Más productos del\nvendedor",
+                        list = lastProductsList
+                    )
                 }
             }
             item {

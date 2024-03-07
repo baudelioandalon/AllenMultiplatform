@@ -122,13 +122,13 @@ fun ShareButton(modifier: Modifier = Modifier, clicked: (() -> Unit)? = null) {
 @Composable
 fun RightRoundedButton(modifier: Modifier = Modifier, clicked: (() -> Unit)? = null) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .size(52.dp)
             .padding(bottom = 4.dp),
         contentAlignment = Alignment.Center
     ) {
         Card(
-            modifier = modifier
+            modifier = Modifier
                 .layoutId("rounded_selector")
                 .size(40.dp),
             elevation = 0.dp,
