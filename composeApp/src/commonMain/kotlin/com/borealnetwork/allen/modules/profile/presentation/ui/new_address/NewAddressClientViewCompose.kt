@@ -35,7 +35,9 @@ fun NewAddressClientViewCompose(navigator: Navigator) {
             )
         },
         bottomBar = {
-            BottomContinueItem()
+            BottomContinueItem{
+                navigator.goBack()
+            }
         }
     ) {
         LazyColumn(
