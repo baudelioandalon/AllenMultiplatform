@@ -19,22 +19,21 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Card
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color.Companion.Black
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.borealnetwork.allen.components.BoldText
+import com.borealnetwork.allen.components.CircularIcon
 import com.borealnetwork.allen.components.LogoBlue
 import com.borealnetwork.allen.components.MediumText
 import com.borealnetwork.allen.components.drawer.model.MenuItem
 import com.borealnetwork.allen.platform
-import com.borealnetwork.allen.theme.GrayBackgroundDrawerDismiss
 import com.borealnetwork.allen.theme.GrayBackgroundMain
 import com.borealnetwork.allen.theme.GrayBorder
-import com.borealnetwork.allen.theme.GrayLetterDrawer
 import com.borealnetwork.allen.theme.StarColor
 import org.jetbrains.compose.resources.painterResource
 
@@ -42,65 +41,48 @@ import org.jetbrains.compose.resources.painterResource
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun DrawerHeaderClient(closeClicked: (() -> Unit)? = null) {
-    Column(
+    Row(
         modifier = Modifier
+            .background(MaterialTheme.colors.primary)
+            .wrapContentHeight(unbounded = true)
             .fillMaxWidth()
-            .wrapContentHeight()
-            .background(GrayBackgroundMain)
+            .padding(top = 20.dp, start = 30.dp, end = 15.dp, bottom = 20.dp),
+        horizontalArrangement = Arrangement.SpaceBetween
     ) {
-
-        Row(
+        Card(
             modifier = Modifier
-                .background(White)
-                .height(110.dp)
-                .fillMaxWidth()
-                .padding(top = 13.dp, start = 30.dp, end = 15.dp),
-            horizontalArrangement = Arrangement.SpaceBetween
+                .size(68.dp),
+            elevation = 0.dp,
+            shape = CircleShape, onClick = { }) {
+            Image(
+                modifier = Modifier.height(50.dp),
+                painter = painterResource(res = "person_test.png"),
+                contentDescription = ""
+            )
+        }
+        Column(
+            modifier = Modifier
+                .wrapContentHeight()
+                .fillMaxWidth(0.7f)
+                .padding(start = 15.dp)
         ) {
-            Card(
-                modifier = Modifier
-                    .size(68.dp),
-                elevation = 0.dp,
-                shape = CircleShape, onClick = { }) {
-                Image(
-                    modifier = Modifier.height(50.dp),
-                    painter = painterResource(res = "person_test.png"),
-                    contentDescription = ""
-                )
-            }
-            Column(
-                modifier = Modifier
-                    .wrapContentHeight()
-                    .fillMaxWidth(0.7f)
-                    .padding(start = 15.dp)
-            ) {
-                BoldText(
-                    text = "Hola, buen dia",
-                    color = GrayLetterDrawer,
-                    fontSize = 15.sp
-                )
-                BoldText(text = "Luna", color = Black)
-                StarStatus()
-
-            }
-            Card(
-                modifier = Modifier
-                    .size(40.dp),
-                backgroundColor = GrayBackgroundDrawerDismiss,
-                elevation = 0.dp,
-                shape = CircleShape, onClick = { closeClicked?.invoke() }) {
-                Image(
-                    modifier = Modifier
-                        .padding(
-                            top = 12.dp, bottom = 15.dp,
-                            start = 8.dp, end = 8.dp
-                        ),
-                    painter = painterResource(res = "ic_arrow_right.xml"),
-                    contentDescription = ""
-                )
-            }
+            BoldText(
+                text = "Hola, buen dia",
+                color = White,
+                fontSize = 15.sp,
+            )
+            BoldText(text = "Luna", color = White)
+            StarStatus()
 
         }
+
+        CircularIcon(
+            modifier = Modifier
+                .size(40.dp),
+            icon = "ic_arrow_right.xml",
+            onClick = closeClicked
+        )
+
     }
 }
 
@@ -124,12 +106,12 @@ fun StarStatus(
             modifier = Modifier.padding(start = 5.dp),
             fontSize = 15.sp,
             text = stars,
-            color = Black
+            color = White
         )
         BoldText(
             modifier = Modifier.padding(start = 10.dp),
             text = text,
-            color = GrayLetterDrawer,
+            color = White,
             fontSize = 15.sp
         )
     }
