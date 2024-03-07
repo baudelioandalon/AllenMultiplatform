@@ -1,13 +1,19 @@
 package com.borealnetwork.allen.tools
 
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import com.borealnetwork.allen.theme.endColors
 import com.borealnetwork.allen.theme.startColors
 import kotlinx.datetime.Clock
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
+import moe.tlaster.precompose.navigation.transition.NavTransition
 import kotlin.math.round
 import kotlin.random.Random
+import kotlin.time.Duration
 
 
 fun String.isEmailValid() = if (trim { it <= ' ' }.isEmpty()) {
@@ -48,5 +54,36 @@ fun Double.round(decimals: Int = 2): Double {
 }
 
 fun Double.discount(porcentage: Int): Double {
-    return this - (this * (porcentage/100.0))
+    return this - (this * (porcentage / 100.0))
 }
+
+fun defaultTransition(duration: Int = 150) = NavTransition(
+    createTransition = slideInHorizontally(
+        initialOffsetX = { -300 }, // small slide 300px
+        animationSpec = tween(
+            durationMillis = duration,
+            easing = LinearEasing // interpolator
+        )
+    ),
+    destroyTransition = slideOutHorizontally(
+        targetOffsetX = { -300 },
+        animationSpec = tween(
+            durationMillis = duration,
+            easing = LinearEasing
+        )
+    ),
+    pauseTransition = slideOutHorizontally(
+        targetOffsetX = { -300 },
+        animationSpec = tween(
+            durationMillis = duration,
+            easing = LinearEasing
+        )
+    ),
+    resumeTransition = slideInHorizontally(
+        initialOffsetX = { -300 }, // small slide 300px
+        animationSpec = tween(
+            durationMillis = duration,
+            easing = LinearEasing // interpolator
+        )
+    )
+)
