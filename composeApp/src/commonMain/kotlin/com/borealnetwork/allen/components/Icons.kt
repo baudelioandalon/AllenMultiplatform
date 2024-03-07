@@ -11,12 +11,15 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Red
 import androidx.compose.ui.graphics.Color.Companion.White
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.unit.dp
 import com.borealnetwork.allen.theme.GrayBackgroundDrawerDismiss
 import com.borealnetwork.allen.theme.GrayBorder
@@ -98,7 +101,8 @@ fun GoalIcon(onClick: (() -> Unit)? = null) {
 fun CircularIcon(
     modifier: Modifier = Modifier,
     icon: String, contentDescription: String? = null,
-    iconTint: Color = GrayBorder,
+    iconTint: Color = White,
+    backgroundColor: Color = MaterialTheme.colors.primary,
     onClick: (() -> Unit)? = null
 ) {
     Box(
@@ -109,6 +113,7 @@ fun CircularIcon(
         Card(
             modifier = Modifier
                 .size(45.dp),
+            backgroundColor = backgroundColor,
             elevation = 0.dp,
             shape = CircleShape, onClick = { onClick?.invoke() }) {
             Icon(
@@ -125,7 +130,9 @@ fun CircularIcon(
 @Composable
 fun CircularImage(
     modifier: Modifier = Modifier,
-    icon: String, onClick: (() -> Unit)? = null
+    icon: String,
+    iconTint: ColorFilter? =null,
+    onClick: (() -> Unit)? = null
 ) {
     Box(
         modifier = modifier
@@ -136,11 +143,13 @@ fun CircularImage(
             modifier = Modifier
                 .size(45.dp),
             elevation = 0.dp,
+            backgroundColor = MaterialTheme.colors.primary,
             shape = CircleShape, onClick = { onClick?.invoke() }) {
             Image(
                 modifier = Modifier.wrapContentSize().padding(5.dp),
                 painter = painterResource(res = icon),
-                contentDescription = ""
+                contentDescription = "",
+                colorFilter = iconTint
             )
         }
     }

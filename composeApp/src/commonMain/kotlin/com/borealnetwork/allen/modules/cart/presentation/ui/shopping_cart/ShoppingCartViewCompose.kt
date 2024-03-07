@@ -30,11 +30,12 @@ fun ShoppingCartViewCompose(navigator: Navigator) {
             startClicked = {
                 navigator.goBack()
             },
-            endIcon = "ic_coupon.xml"
+            endIcon = "ic_coupon.xml",
+            endIconTint = null
         )
     },
         bottomBar = {
-            BottomBuyCartItem{
+            BottomBuyCartItem {
                 navigator.navigate(RESUME_BUY_CART_CLIENT_GRAPH)
             }
         }) {

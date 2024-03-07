@@ -11,15 +11,17 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material.Card
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.White
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.borealnetwork.allen.theme.GrayBorder
 import org.jetbrains.compose.resources.painterResource
 
 
@@ -32,6 +34,7 @@ fun TopTitle(
         modifier = Modifier
             .fillMaxWidth(),
         elevation = 5.dp,
+        backgroundColor = MaterialTheme.colors.primary,
         shape = RectangleShape
     ) {
         Box {
@@ -46,6 +49,7 @@ fun TopTitle(
                         .padding(start = 30.dp)
                         .width(35.dp)
                         .height(35.dp),
+                    iconTint = White,
                     icon = "ic_back_arrow.xml"
                 ) {
                     backClicked?.invoke()
@@ -55,6 +59,7 @@ fun TopTitle(
             SemiBoldText(
                 modifier = Modifier.wrapContentWidth().align(Alignment.Center),
                 text = titleText,
+                color = White,
                 textAlign = TextAlign.Center
             )
         }
@@ -72,6 +77,7 @@ fun TopTitleImg(
         modifier = Modifier
             .fillMaxWidth(),
         elevation = 5.dp,
+        backgroundColor = MaterialTheme.colors.primary,
         shape = RectangleShape
     ) {
         Box {
@@ -86,6 +92,7 @@ fun TopTitleImg(
                         .padding(start = 30.dp)
                         .width(35.dp)
                         .height(35.dp),
+                    iconTint = White,
                     icon = "ic_back_arrow.xml"
                 ) {
                     backClicked?.invoke()
@@ -126,7 +133,7 @@ fun TopTitleImg(
 fun ToolbarSearchHome(
     modifier: Modifier = Modifier,
     textPlaceHolder: String = "Buscar",
-    startIconTint: Color = GrayBorder,
+    startIconTint: Color = White,
     startIcon: String = "ic_menu_icon.xml",
     startClicked: (() -> Unit)? = null,
     searchClicked: (() -> Unit)? = null,
@@ -137,7 +144,8 @@ fun ToolbarSearchHome(
             .fillMaxWidth()
             .height(80.dp),
         shape = RectangleShape,
-        elevation = 5.dp
+        elevation = 5.dp,
+        backgroundColor = MaterialTheme.colors.primary
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             CircularIcon(
@@ -154,6 +162,7 @@ fun ToolbarSearchHome(
             )
             CircularIcon(
                 modifier = Modifier.weight(1f),
+                iconTint = White,
                 onClick = cartClicked,
                 icon = "ic_cart_icon.xml"
             )
@@ -177,6 +186,7 @@ fun ToolbarSearch(
             .fillMaxWidth()
             .height(80.dp),
         shape = RectangleShape,
+        backgroundColor = MaterialTheme.colors.primary,
         elevation = 5.dp
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -184,6 +194,7 @@ fun ToolbarSearch(
                 modifier = Modifier
                     .padding(start = 10.dp)
                     .size(35.dp),
+                iconTint = White,
                 icon = "ic_back_arrow.xml"
             ) {
                 backClicked?.invoke()
@@ -199,6 +210,7 @@ fun ToolbarSearch(
             CircularIcon(
                 modifier = Modifier.weight(1f),
                 onClick = endClicked,
+                iconTint = White,
                 icon = "ic_settings_gray.xml"
             )
         }
@@ -302,6 +314,7 @@ fun ToolbarTitle(
     endClicked: (() -> Unit)? = null,
     showEndImage: Boolean = true,
     startIcon: String = "ic_back_arrow.xml",
+    endIconTint: Color? = White,
     endIcon: String = "ic_cart_icon.xml"
 ) {
     Card(
@@ -309,6 +322,7 @@ fun ToolbarTitle(
             .fillMaxWidth()
             .height(80.dp),
         shape = RectangleShape,
+        backgroundColor = MaterialTheme.colors.primary,
         elevation = 5.dp
     ) {
         Box {
@@ -324,12 +338,14 @@ fun ToolbarTitle(
                 modifier = Modifier.align(Alignment.Center),
                 fontSize = 20.sp,
                 text = titleText,
+                color = White,
                 textAlign = TextAlign.Center
             )
             if (showEndImage) {
                 CircularImage(
                     modifier = Modifier.align(Alignment.CenterEnd).padding(end = 5.dp),
                     onClick = endClicked,
+                    iconTint = if (endIconTint != null) ColorFilter.tint(color = endIconTint) else null,
                     icon = endIcon
                 )
             }
