@@ -13,7 +13,6 @@ import kotlinx.datetime.toLocalDateTime
 import moe.tlaster.precompose.navigation.transition.NavTransition
 import kotlin.math.round
 import kotlin.random.Random
-import kotlin.time.Duration
 
 
 fun String.isEmailValid() = if (trim { it <= ' ' }.isEmpty()) {
@@ -51,6 +50,14 @@ fun Double.round(decimals: Int = 2): Double {
     var multiplier = 1.0
     repeat(decimals) { multiplier *= 10 }
     return round(this * multiplier) / multiplier
+}
+
+fun Double.rounded(): String {
+    return if (this.rem(1).equals(0.0)) {
+        "${this}0"
+    } else {
+        toString()
+    }
 }
 
 fun Double.discount(porcentage: Int): Double {

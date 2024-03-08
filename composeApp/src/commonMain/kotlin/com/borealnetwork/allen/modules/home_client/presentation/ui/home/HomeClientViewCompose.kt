@@ -66,7 +66,7 @@ fun HomeClientViewCompose(navigator: Navigator) {
             nameProduct = "Sensor Dummy",
             imgProduct = "imagen",
             categoryItem = "Electronica",
-            price = 34.0,
+            price = 34.54,
             discountPercentage = 0.0
         ),
         MinimalProductModel(

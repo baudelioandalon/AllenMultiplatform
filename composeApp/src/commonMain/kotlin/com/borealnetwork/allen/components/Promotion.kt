@@ -113,7 +113,7 @@ fun PriceBeforeDiscount(
             modifier = modifier
                 .wrapContentWidth()
                 .align(Alignment.Center),
-            text = "$${price.round(2)}",
+            text = "$${price.round()}",
             color = OrangeTransparent,
             fontSize = 12.sp
         )

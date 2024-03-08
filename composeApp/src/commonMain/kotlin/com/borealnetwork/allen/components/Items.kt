@@ -92,6 +92,8 @@ import com.borealnetwork.allen.theme.RedEndColor
 import com.borealnetwork.allen.theme.RedStartColor
 import com.borealnetwork.allen.theme.StarColor
 import com.borealnetwork.allen.tools.limit
+import com.borealnetwork.allen.tools.round
+import com.borealnetwork.allen.tools.rounded
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 
@@ -320,15 +322,17 @@ fun ProductItem(
                 )
             }
 
-            NameProductText(
+            SemiBoldText(
                 modifier = Modifier.padding(start = 14.dp).fillMaxWidth(),
                 text = model.nameProduct,
+                fontSize = 17.sp,
                 textAlign = TextAlign.Start
             )
-            CategoryProductText(
+            SemiBoldText(
                 modifier = Modifier.padding(start = 14.dp).fillMaxWidth(),
                 text = model.categoryItem,
                 color = GrayLetterCategoryProduct,
+                fontSize = 10.sp,
                 textAlign = TextAlign.Start
             )
 
@@ -339,7 +343,8 @@ fun ProductItem(
             ) {
                 BoldText(
                     modifier = Modifier.padding(bottom = 5.dp).wrapContentSize(),
-                    text = "$${model.price}"
+                    text = "$${model.price.round(2).rounded()}",
+                    color = Black
                 )
                 LittleAddButton()
             }
@@ -350,7 +355,8 @@ fun ProductItem(
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun ProductResultItem(
-    modifier: Modifier = Modifier, productClicked: (() -> Unit)? = null
+    modifier: Modifier = Modifier,
+    productClicked: (() -> Unit)? = null
 ) {
     Card(
         modifier = modifier.wrapContentHeight().fillMaxWidth(),
@@ -1961,7 +1967,9 @@ fun BottomContinueItem(
     onClicked: (() -> Unit)? = null
 ) {
     Card(
-        modifier = modifier.fillMaxWidth().padding(bottom = 40.dp), shape = RectangleShape, elevation = 15.dp
+        modifier = modifier.fillMaxWidth().padding(bottom = 40.dp),
+        shape = RectangleShape,
+        elevation = 15.dp
     ) {
         Row(
             modifier = Modifier.fillMaxWidth().background(White).padding(
@@ -2219,8 +2227,11 @@ fun <T> HorizontalContainerListItem(
             if (endIcon != null) {
                 endIcon()
             } else {
-                SeeAll(
-                    modifier = Modifier.padding(top = 20.dp, end = 9.dp), text = endText.orEmpty()
+                BoldText(
+                    modifier = Modifier.padding(top = 20.dp, end = 30.dp),
+                    text = endText.orEmpty(),
+                    fontSize = 18.sp,
+                    color = GrayLetterSeeAll
                 )
             }
         }
