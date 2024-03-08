@@ -254,7 +254,7 @@ fun HomeClientViewCompose(navigator: Navigator) {
                         item {
                             Card(
                                 modifier = Modifier
-                                    .padding(top = 30.dp, bottom = 50.dp)
+                                    .padding(top = 30.dp, bottom = 40.dp)
                                     .fillMaxWidth(),
                                 shape = RectangleShape,
                                 elevation = 5.dp

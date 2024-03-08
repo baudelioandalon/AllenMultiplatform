@@ -1,8 +1,13 @@
 package com.borealnetwork.allen.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -38,35 +43,46 @@ fun TopTitle(
         backgroundColor = MaterialTheme.colors.primary,
         shape = RectangleShape
     ) {
-        Box {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(60.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                CircularIcon(
-                    modifier = Modifier
-                        .padding(start = 30.dp)
-                        .width(35.dp)
-                        .height(35.dp),
-                    iconTint = White,
-                    icon = "ic_back_arrow.xml"
-                ) {
-                    backClicked?.invoke()
-                }
-
-            }
-            SemiBoldText(
-                modifier = Modifier.wrapContentWidth().align(Alignment.Center),
-                text = titleText,
-                color = White,
-                textAlign = TextAlign.Center
+        Column(
+            modifier = Modifier.fillMaxWidth().fillMaxHeight(),
+            verticalArrangement = Arrangement.Center
+        ) {
+            Box(
+                modifier = Modifier.fillMaxWidth().height(30.dp)
+                    .background(MaterialTheme.colors.primary)
             )
+            Box(
+                modifier = Modifier.fillMaxSize()
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(60.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    CircularIcon(
+                        modifier = Modifier
+                            .padding(start = 30.dp)
+                            .width(35.dp)
+                            .height(35.dp),
+                        iconTint = White,
+                        icon = "ic_back_arrow.xml"
+                    ) {
+                        backClicked?.invoke()
+                    }
+
+                }
+                SemiBoldText(
+                    modifier = Modifier.wrapContentWidth().align(Alignment.Center),
+                    text = titleText,
+                    color = White,
+                    textAlign = TextAlign.Center
+                )
+            }
+
         }
 
     }
-
 }
 
 
@@ -81,32 +97,44 @@ fun TopTitleImg(
         backgroundColor = MaterialTheme.colors.primary,
         shape = RectangleShape
     ) {
-        Box {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(60.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                CircularIcon(
-                    modifier = Modifier
-                        .padding(start = 30.dp)
-                        .width(35.dp)
-                        .height(35.dp),
-                    iconTint = White,
-                    icon = "ic_back_arrow.xml"
-                ) {
-                    backClicked?.invoke()
-                }
-
-            }
-            Image(
-                modifier = Modifier.width(53.dp)
-                    .height(23.dp).align(Alignment.Center),
-                painter = painterResource(resource = DrawableResource(  "allen_blue_logo.xml")),
-                contentDescription = "logo"
+        Column(
+            modifier = Modifier.fillMaxWidth().fillMaxHeight(),
+            verticalArrangement = Arrangement.Center
+        ) {
+            Box(
+                modifier = Modifier.fillMaxWidth().height(30.dp)
+                    .background(MaterialTheme.colors.primary)
             )
+            Box(
+                modifier = Modifier.fillMaxSize()
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(60.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    CircularIcon(
+                        modifier = Modifier
+                            .padding(start = 30.dp)
+                            .width(35.dp)
+                            .height(35.dp),
+                        iconTint = White,
+                        icon = "ic_back_arrow.xml"
+                    ) {
+                        backClicked?.invoke()
+                    }
+
+                }
+                Image(
+                    modifier = Modifier.width(53.dp)
+                        .height(23.dp).align(Alignment.Center),
+                    painter = painterResource(resource = DrawableResource("allen_blue_logo.xml")),
+                    contentDescription = "logo"
+                )
+            }
         }
+
     }
 
 }
@@ -143,30 +171,40 @@ fun ToolbarSearchHome(
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .height(80.dp),
+            .height(110.dp),
         shape = RectangleShape,
         elevation = 5.dp,
         backgroundColor = MaterialTheme.colors.primary
     ) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            CircularIcon(
-                modifier = Modifier.weight(1f),
-                onClick = startClicked,
-                icon = startIcon,
-                iconTint = startIconTint
+        Column(
+            modifier = Modifier.fillMaxWidth().fillMaxHeight(),
+            verticalArrangement = Arrangement.Center
+        ) {
+            Box(
+                modifier = Modifier.fillMaxWidth().height(30.dp)
+                    .background(MaterialTheme.colors.primary)
             )
-            SearchOutlinedTextField(
-                value = "",
-                placeHolder = textPlaceHolder,
-                itemClicked = { searchClicked?.invoke() },
-                onValueChange = {}
-            )
-            CircularIcon(
-                modifier = Modifier.weight(1f),
-                iconTint = White,
-                onClick = cartClicked,
-                icon = "ic_cart_icon.xml"
-            )
+
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                CircularIcon(
+                    modifier = Modifier.weight(1f),
+                    onClick = startClicked,
+                    icon = startIcon,
+                    iconTint = startIconTint
+                )
+                SearchOutlinedTextField(
+                    value = "",
+                    placeHolder = textPlaceHolder,
+                    itemClicked = { searchClicked?.invoke() },
+                    onValueChange = {}
+                )
+                CircularIcon(
+                    modifier = Modifier.weight(1f),
+                    iconTint = White,
+                    onClick = cartClicked,
+                    icon = "ic_cart_icon.xml"
+                )
+            }
         }
     }
 
@@ -185,35 +223,47 @@ fun ToolbarSearch(
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .height(80.dp),
+            .height(110.dp),
         shape = RectangleShape,
         backgroundColor = MaterialTheme.colors.primary,
         elevation = 5.dp
     ) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            CircularIcon(
-                modifier = Modifier
-                    .padding(start = 10.dp)
-                    .size(35.dp),
-                iconTint = White,
-                icon = "ic_back_arrow.xml"
-            ) {
-                backClicked?.invoke()
-            }
-            SearcherWithSettings(
-                value = "",
-                placeHolder = "Escribe el producto o marca...",
-                itemClicked = { searchClicked?.invoke() },
-                settingsClicked = {
-                    settingsClicked?.invoke()
+        Column(
+            modifier = Modifier.fillMaxWidth().fillMaxHeight(),
+            verticalArrangement = Arrangement.Center
+        ) {
+            Box(
+                modifier = Modifier.fillMaxWidth().height(30.dp)
+                    .background(MaterialTheme.colors.primary)
+            )
+
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                CircularIcon(
+                    modifier = Modifier
+                        .padding(start = 10.dp)
+                        .size(35.dp),
+                    iconTint = White,
+                    icon = "ic_back_arrow.xml"
+                ) {
+                    backClicked?.invoke()
                 }
-            )
-            CircularIcon(
-                modifier = Modifier.weight(1f),
-                onClick = endClicked,
-                iconTint = White,
-                icon = "ic_settings_gray.xml"
-            )
+                SearcherWithSettings(
+                    value = "",
+                    placeHolder = "Escribe el producto o marca...",
+                    itemClicked = { searchClicked?.invoke() },
+                    settingsClicked = {
+                        settingsClicked?.invoke()
+                    }
+                )
+                CircularIcon(
+                    modifier = Modifier.weight(1f),
+                    onClick = endClicked,
+                    iconTint = White,
+                    icon = "ic_settings_gray.xml"
+                )
+            }
+
+
         }
     }
 }
@@ -321,34 +371,46 @@ fun ToolbarTitle(
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .height(80.dp),
+            .height(100.dp),
         shape = RectangleShape,
         backgroundColor = MaterialTheme.colors.primary,
         elevation = 5.dp
     ) {
-        Box {
-            if (showStartImage) {
-                CircularIcon(
-                    modifier = Modifier.padding(start = 10.dp).align(Alignment.CenterStart),
-                    icon = startIcon
-                ) {
-                    startClicked?.invoke()
-                }
-            }
-            SemiBoldText(
-                modifier = Modifier.align(Alignment.Center),
-                fontSize = 20.sp,
-                text = titleText,
-                color = White,
-                textAlign = TextAlign.Center
+        Column(
+            modifier = Modifier.fillMaxWidth().fillMaxHeight(),
+            verticalArrangement = Arrangement.Center
+        ) {
+            Box(
+                modifier = Modifier.fillMaxWidth().height(30.dp)
+                    .background(MaterialTheme.colors.primary)
             )
-            if (showEndImage) {
-                CircularImage(
-                    modifier = Modifier.align(Alignment.CenterEnd).padding(end = 5.dp),
-                    onClick = endClicked,
-                    iconTint = if (endIconTint != null) ColorFilter.tint(color = endIconTint) else null,
-                    icon = endIcon
+            Box(
+                modifier = Modifier.fillMaxSize()
+            ) {
+                if (showStartImage) {
+                    CircularIcon(
+                        modifier = Modifier.padding(start = 10.dp)
+                            .align(Alignment.CenterStart),
+                        icon = startIcon
+                    ) {
+                        startClicked?.invoke()
+                    }
+                }
+                SemiBoldText(
+                    modifier = Modifier.align(Alignment.Center),
+                    fontSize = 20.sp,
+                    text = titleText,
+                    color = White,
+                    textAlign = TextAlign.Center
                 )
+                if (showEndImage) {
+                    CircularImage(
+                        modifier = Modifier.align(Alignment.CenterEnd).padding(end = 5.dp),
+                        onClick = endClicked,
+                        iconTint = if (endIconTint != null) ColorFilter.tint(color = endIconTint) else null,
+                        icon = endIcon
+                    )
+                }
             }
         }
     }

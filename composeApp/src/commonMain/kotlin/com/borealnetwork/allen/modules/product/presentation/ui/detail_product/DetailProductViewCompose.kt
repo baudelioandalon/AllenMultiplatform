@@ -101,7 +101,7 @@ fun DetailProductViewCompose(navigator: Navigator) {
         bottomBar = {
             Card(
                 modifier = Modifier
-                    .fillMaxWidth(),
+                    .fillMaxWidth().padding(bottom = 40.dp),
                 shape = RectangleShape,
                 elevation = 9.dp
             ) {
@@ -440,6 +440,7 @@ fun DetailProductViewCompose(navigator: Navigator) {
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(bottom = 100.dp),
+                    shape = RectangleShape,
                     elevation = 5.dp
                 ) {
                     HorizontalContainerListItem(

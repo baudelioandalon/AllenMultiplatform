@@ -47,7 +47,7 @@ fun DrawerHeaderClient(closeClicked: (() -> Unit)? = null) {
             .background(MaterialTheme.colors.primary)
             .wrapContentHeight(unbounded = true)
             .fillMaxWidth()
-            .padding(top = 20.dp, start = 30.dp, end = 15.dp, bottom = 20.dp),
+            .padding(top = 60.dp, start = 30.dp, end = 15.dp, bottom = 20.dp),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Card(
