@@ -16,7 +16,7 @@ import com.borealnetwork.allen.components.ToolbarTitle
 import com.borealnetwork.allen.components.bottom_actions.BottomBuyCartItem
 import com.borealnetwork.allen.domain.model.ItemCartModel
 import com.borealnetwork.allen.domain.model.ProductShoppingCart
-import com.borealnetwork.allen.domain.screen.RESUME_BUY_CART_CLIENT_GRAPH
+import com.borealnetwork.allen.modules.cart.domain.navigation.CartClientScreen
 import com.borealnetwork.allen.theme.GrayBackgroundMain
 import moe.tlaster.precompose.navigation.Navigator
 
@@ -86,7 +86,7 @@ fun ShoppingCartViewCompose(navigator: Navigator) {
     },
         bottomBar = {
             BottomBuyCartItem {
-                navigator.navigate(RESUME_BUY_CART_CLIENT_GRAPH)
+                navigator.navigate(CartClientScreen.ResumeBuyCartClientScreen.route)
             }
         }) {
 

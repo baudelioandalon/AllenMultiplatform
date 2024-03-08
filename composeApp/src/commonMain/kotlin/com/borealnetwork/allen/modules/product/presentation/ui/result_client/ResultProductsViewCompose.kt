@@ -15,7 +15,6 @@ import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color.Companion.Black
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -24,7 +23,7 @@ import com.borealnetwork.allen.components.BrandingHorizontal
 import com.borealnetwork.allen.components.ProductResultItem
 import com.borealnetwork.allen.components.SemiBoldText
 import com.borealnetwork.allen.components.ToolbarSearchHome
-import com.borealnetwork.allen.domain.screen.PRODUCT_DETAIL_CLIENT_GRAPH
+import com.borealnetwork.allen.modules.product.domain.navigation.ProductClientScreen
 import com.borealnetwork.allen.theme.GrayBorder
 import moe.tlaster.precompose.navigation.Navigator
 
@@ -91,7 +90,7 @@ fun ResultProductsViewCompose(
                         top = if (index % 2 != 0) 20.dp else 0.dp
                     ),
                     productClicked = {
-                        navigator.navigate(PRODUCT_DETAIL_CLIENT_GRAPH)
+                        navigator.navigate(ProductClientScreen.ProductDetailClient.route)
                     }
                 )
             }

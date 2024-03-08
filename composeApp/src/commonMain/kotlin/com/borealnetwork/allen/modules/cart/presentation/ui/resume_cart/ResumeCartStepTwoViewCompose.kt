@@ -38,7 +38,7 @@ import com.borealnetwork.allen.components.bottom_actions.BottomBuyCartItem
 import com.borealnetwork.allen.components.extensions.DottedShape
 import com.borealnetwork.allen.domain.model.ItemCartModel
 import com.borealnetwork.allen.domain.model.ProductShoppingCart
-import com.borealnetwork.allen.domain.screen.DETAIL_BUY_CART_CLIENT_GRAPH
+import com.borealnetwork.allen.modules.cart.domain.navigation.CartClientScreen
 import com.borealnetwork.allen.theme.GrayBackgroundMain
 import com.borealnetwork.allen.theme.GrayMedium
 import com.borealnetwork.allen.theme.GraySinceTo
@@ -112,7 +112,7 @@ fun ResumeCartStepTwoViewCompose(navigator: Navigator) {
         },
         bottomBar = {
             BottomBuyCartItem {
-                navigator.navigate(DETAIL_BUY_CART_CLIENT_GRAPH)
+                navigator.navigate(CartClientScreen.DetailBuyCartClientScreen.route)
             }
         }
     ) {

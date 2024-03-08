@@ -25,8 +25,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.borealnetwork.allen.components.RegularText
 import com.borealnetwork.allen.components.ToolbarSearch
-import com.borealnetwork.allen.domain.screen.HOME_CLIENT_GRAPH
-import com.borealnetwork.allen.domain.screen.RESULT_PRODUCTS_CLIENT_GRAPH
+import com.borealnetwork.allen.modules.home_client.domain.navigation.HomeClientScreen
+import com.borealnetwork.allen.modules.product.domain.navigation.ProductClientScreen
 import com.borealnetwork.allen.theme.GrayBackgroundMain
 import com.borealnetwork.allen.theme.GrayLetterHint
 import moe.tlaster.precompose.navigation.NavOptions
@@ -77,10 +77,10 @@ fun SearchProductViewCompose(
                                         )
                                     ) {
                                         navigator.navigate(
-                                            route = RESULT_PRODUCTS_CLIENT_GRAPH,
+                                            route = ProductClientScreen.ResultProductsClient.route,
                                             options = NavOptions(
                                                 popUpTo = PopUpTo(
-                                                    HOME_CLIENT_GRAPH
+                                                    HomeClientScreen.HomeDefaultClientScreen.route
                                                 )
                                             )
                                         )
@@ -93,7 +93,7 @@ fun SearchProductViewCompose(
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
                                 Image(
-                                    painter = painterResource(resource = DrawableResource(  "ic_clock_gray.xml")),
+                                    painter = painterResource(resource = DrawableResource("ic_clock_gray.xml")),
                                     contentDescription = ""
                                 )
                                 RegularText(
@@ -109,7 +109,7 @@ fun SearchProductViewCompose(
                                     fontSize = 15.sp
                                 )
                                 Icon(
-                                    painter = painterResource(resource = DrawableResource(  "ic_search_icon.xml")),
+                                    painter = painterResource(resource = DrawableResource("ic_search_icon.xml")),
                                     contentDescription = "",
                                     tint = GrayLetterHint
                                 )

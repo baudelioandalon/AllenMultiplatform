@@ -25,11 +25,10 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.borealnetwork.allen.domain.model.BirdImage
-import com.borealnetwork.allen.domain.screen.HOME_CLIENT_GRAPH
-import com.borealnetwork.allen.domain.screen.ORDER_CLIENT_IN_PROGRESS_STATUS_GRAPH
 import com.borealnetwork.allen.modules.cart.domain.navigation.detailBuyCartClientNavigationGraph
 import com.borealnetwork.allen.modules.cart.domain.navigation.resumeBuyCartClientNavigationGraph
 import com.borealnetwork.allen.modules.cart.domain.navigation.shoppingCartClientNavigationGraph
+import com.borealnetwork.allen.modules.home_client.domain.navigation.HomeClientScreen
 import com.borealnetwork.allen.modules.home_client.domain.navigation.homeClientNavigationGraph
 import com.borealnetwork.allen.modules.notifications.domain.navigation.notificationClientNavigationGraph
 import com.borealnetwork.allen.modules.orders.domain.navigation.orderClientFinishDetailNavigationGraph
@@ -78,7 +77,7 @@ internal fun App() = PreComposeApp {
         val navigator = rememberNavigator()
         NavHost(
             navigator = navigator,
-            initialRoute = HOME_CLIENT_GRAPH
+            initialRoute = HomeClientScreen.HomeDefaultClientScreen.route
         ) {
             // Define a scene to the navigation graph
             homeClientNavigationGraph(navigator)

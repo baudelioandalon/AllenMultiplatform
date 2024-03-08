@@ -41,11 +41,10 @@ import com.borealnetwork.allen.components.drawer.model.DrawerOptions
 import com.borealnetwork.allen.components.drawer.model.MenuItem
 import com.borealnetwork.allen.domain.model.MinimalProductModel
 import com.borealnetwork.allen.domain.model.PromotionItem
-import com.borealnetwork.allen.domain.screen.NOTIFICATION_CLIENT_GRAPH
-import com.borealnetwork.allen.domain.screen.ORDERS_CLIENT_GRAPH
-import com.borealnetwork.allen.domain.screen.PRODUCT_DETAIL_CLIENT_GRAPH
-import com.borealnetwork.allen.domain.screen.SEARCH_CLIENT_GRAPH
-import com.borealnetwork.allen.domain.screen.SHOPPING_CART_CLIENT_GRAPH
+import com.borealnetwork.allen.modules.cart.domain.navigation.CartClientScreen
+import com.borealnetwork.allen.modules.notifications.domain.navigation.NotificationsClientScreen
+import com.borealnetwork.allen.modules.orders.domain.navigation.OrdersClientScreen
+import com.borealnetwork.allen.modules.product.domain.navigation.ProductClientScreen
 import com.borealnetwork.allen.theme.GrayBackgroundMain
 import com.borealnetwork.allen.theme.categorySelectorColors
 import kotlinx.coroutines.delay
@@ -88,11 +87,11 @@ fun HomeClientViewCompose(navigator: Navigator) {
 
         }, cartClicked = {
             navigator.navigate(
-                route = SHOPPING_CART_CLIENT_GRAPH
+                route = CartClientScreen.ShoppingCartClientScreen.route
             )
 //                            navController?.navigate(SHOPPING_CART_GRAPH)
         }, searchClicked = {
-            navigator.navigate(SEARCH_CLIENT_GRAPH)
+            navigator.navigate(ProductClientScreen.SearchClientScreen.route)
         })
 
     },
@@ -155,7 +154,7 @@ fun HomeClientViewCompose(navigator: Navigator) {
                         scope.launch {
                             scaffoldState.drawerState.close()
                         }
-                        navigator.navigate(route = ORDERS_CLIENT_GRAPH)
+                        navigator.navigate(route = OrdersClientScreen.OrdersListClientScreen.route)
                     }
 
                     DrawerOptions.Favorites -> {
@@ -175,7 +174,7 @@ fun HomeClientViewCompose(navigator: Navigator) {
                         scope.launch {
                             scaffoldState.drawerState.close()
                         }
-                        navigator.navigate(route = NOTIFICATION_CLIENT_GRAPH)
+                        navigator.navigate(route = NotificationsClientScreen.NotificationsDefaultClientScreen.route)
                     }
 
                     else -> {
@@ -231,7 +230,7 @@ fun HomeClientViewCompose(navigator: Navigator) {
                                 listItem = lastProductsList
                             ) { minimalProductModel, index ->
                                 ProductItem(minimalProductModel) {
-                                    navigator.navigate(PRODUCT_DETAIL_CLIENT_GRAPH)
+                                    navigator.navigate(ProductClientScreen.ProductDetailClient.route)
                                 }
                             }
                         }
@@ -261,7 +260,7 @@ fun HomeClientViewCompose(navigator: Navigator) {
                                 listItem = lastProductsList
                             ) { minimalProductModel, index ->
                                 ProductItem(minimalProductModel) {
-                                    navigator.navigate(PRODUCT_DETAIL_CLIENT_GRAPH)
+                                    navigator.navigate(ProductClientScreen.ProductDetailClient.route)
                                 }
                             }
                         }

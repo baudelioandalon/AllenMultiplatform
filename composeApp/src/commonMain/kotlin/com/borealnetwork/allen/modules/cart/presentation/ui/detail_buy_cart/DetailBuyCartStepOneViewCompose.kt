@@ -21,7 +21,7 @@ import com.borealnetwork.allen.components.ShippingSelector
 import com.borealnetwork.allen.components.ToolbarTitle
 import com.borealnetwork.allen.components.UserSelector
 import com.borealnetwork.allen.components.bottom_actions.BottomBuyCartItem
-import com.borealnetwork.allen.domain.screen.ADDRESS_CLIENT_GRAPH
+import com.borealnetwork.allen.modules.profile.domain.navigation.ProfileScreen
 import com.borealnetwork.allen.theme.GrayBackgroundMain
 import moe.tlaster.precompose.navigation.Navigator
 
@@ -84,7 +84,7 @@ fun DetailBuyCartStepOneViewCompose(navigator: Navigator) {
                             textTop = "Para",
                             iconRes = "ic_goal.xml"
                         ) {
-                            navigator.navigate(ADDRESS_CLIENT_GRAPH)
+                            navigator.navigate(ProfileScreen.AddressClientScreen.route)
                         }
                         UserSelector(
                             modifier = Modifier.padding(top = 20.dp)

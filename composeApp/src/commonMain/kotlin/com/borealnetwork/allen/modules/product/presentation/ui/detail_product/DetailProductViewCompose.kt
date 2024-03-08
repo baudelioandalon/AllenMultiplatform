@@ -49,10 +49,8 @@ import com.borealnetwork.allen.components.ToolbarTitle
 import com.borealnetwork.allen.components.bottom_actions.BottomPriceItem
 import com.borealnetwork.allen.components.drawer.StarStatus
 import com.borealnetwork.allen.domain.model.MinimalProductModel
-import com.borealnetwork.allen.domain.screen.PRODUCT_DETAIL_CLIENT_GRAPH
-import com.borealnetwork.allen.domain.screen.QUESTION_PRODUCT_CLIENT_GRAPH
-import com.borealnetwork.allen.domain.screen.RATING_PRODUCT_CLIENT_GRAPH
-import com.borealnetwork.allen.domain.screen.SHOPPING_CART_CLIENT_GRAPH
+import com.borealnetwork.allen.modules.cart.domain.navigation.CartClientScreen
+import com.borealnetwork.allen.modules.product.domain.navigation.ProductClientScreen
 import com.borealnetwork.allen.theme.GrayBackgroundDrawerDismiss
 import com.borealnetwork.allen.theme.GrayBackgroundMain
 import com.borealnetwork.allen.theme.GrayLetterShipping
@@ -90,7 +88,7 @@ fun DetailProductViewCompose(navigator: Navigator) {
                 titleText = "Articulo", startClicked = {
                     navigator.goBack()
                 }, endClicked = {
-                    navigator.navigate(SHOPPING_CART_CLIENT_GRAPH)
+                    navigator.navigate(CartClientScreen.ShoppingCartClientScreen.route)
                 }
             )
         },
@@ -281,7 +279,7 @@ fun DetailProductViewCompose(navigator: Navigator) {
                             text = "Calificaciones",
                             iconRes = "ic_rating_icon.xml"
                         ) {
-                            navigator.navigate(RATING_PRODUCT_CLIENT_GRAPH)
+                            navigator.navigate(ProductClientScreen.RatingProductClient.route)
                         }
                         SeparatorGray(
                             modifier = Modifier
@@ -297,7 +295,7 @@ fun DetailProductViewCompose(navigator: Navigator) {
                             text = "Preguntas",
                             iconRes = "ic_questions_icon.xml"
                         ) {
-                            navigator.navigate(QUESTION_PRODUCT_CLIENT_GRAPH)
+                            navigator.navigate(ProductClientScreen.QuestionProductClient.route)
                         }
                     }
                 }
@@ -347,7 +345,7 @@ fun DetailProductViewCompose(navigator: Navigator) {
                         }, listItem = lastProductsList
                     ) { minimalProductModel, index ->
                         ProductItem(model = minimalProductModel) {
-                            navigator.navigate(PRODUCT_DETAIL_CLIENT_GRAPH)
+                            navigator.navigate(ProductClientScreen.ProductDetailClient.route)
                         }
                     }
                 }
@@ -380,7 +378,7 @@ fun DetailProductViewCompose(navigator: Navigator) {
                         }, listItem = lastProductsList
                     ) { minimalProductModel, index ->
                         ProductItem(model = minimalProductModel) {
-                            navigator.navigate(PRODUCT_DETAIL_CLIENT_GRAPH)
+                            navigator.navigate(ProductClientScreen.ProductDetailClient.route)
                         }
                     }
                 }
