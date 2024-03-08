@@ -328,7 +328,7 @@ fun DetailProductViewCompose(navigator: Navigator) {
                         )
                         SelectorDetail(
                             text = "Calificaciones",
-                            iconRes = "ic_comment_icon.xml"
+                            iconRes = "ic_rating_icon.xml"
                         ) {
                             navigator.navigate(RATING_PRODUCT_CLIENT_GRAPH)
                         }

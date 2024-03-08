@@ -18,6 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.White
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.borealnetwork.allen.components.EditText
@@ -41,17 +42,19 @@ fun QuestionViewCompose(navigator: Navigator) {
         modifier = Modifier.fillMaxSize(), topBar = {
             ToolbarTitle(
                 titleText = "Preguntas", startClicked = {
-//                navController?.navigateUp()
+                    navigator.goBack()
                 },
-                endIcon = "ic_questions_icon.xml"
+                endIconTint = null,
+                endIcon = "ic_questions.xml"
             )
 
         },
         bottomBar = {
             Card(
                 modifier = Modifier
-                    .fillMaxWidth(),
-                elevation = 9.dp
+                    .fillMaxWidth().padding(bottom = 40.dp),
+                shape = RectangleShape,
+                elevation = 15.dp
             ) {
                 Row(
                     modifier = Modifier
