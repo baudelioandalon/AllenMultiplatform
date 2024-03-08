@@ -28,18 +28,17 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.borealnetwork.allen.components.BottomBuyCartItem
 import com.borealnetwork.allen.components.GoalIcon
 import com.borealnetwork.allen.components.LocationIcon
 import com.borealnetwork.allen.components.MediumText
 import com.borealnetwork.allen.components.ResumeSelector
 import com.borealnetwork.allen.components.ShoppingCartStoreItem
 import com.borealnetwork.allen.components.ToolbarTitle
+import com.borealnetwork.allen.components.bottom_actions.BottomBuyCartItem
 import com.borealnetwork.allen.components.extensions.DottedShape
 import com.borealnetwork.allen.domain.model.ItemCartModel
 import com.borealnetwork.allen.domain.model.ProductShoppingCart
 import com.borealnetwork.allen.domain.screen.DETAIL_BUY_CART_CLIENT_GRAPH
-import com.borealnetwork.allen.domain.screen.RESUME_BUY_CART_CLIENT_GRAPH
 import com.borealnetwork.allen.theme.GrayBackgroundMain
 import com.borealnetwork.allen.theme.GrayMedium
 import com.borealnetwork.allen.theme.GraySinceTo
@@ -112,7 +111,7 @@ fun ResumeCartStepTwoViewCompose(navigator: Navigator) {
             )
         },
         bottomBar = {
-            BottomBuyCartItem{
+            BottomBuyCartItem {
                 navigator.navigate(DETAIL_BUY_CART_CLIENT_GRAPH)
             }
         }
@@ -212,7 +211,8 @@ fun ResumeCartStepTwoViewCompose(navigator: Navigator) {
                 ResumeSelector(
                     modifier = Modifier.padding(horizontal = 30.dp),
                     textTop = "Articulos",
-                    textBottom = "${listItems.sumOf { it.listItems.size }} articulos", lineBottom = false
+                    textBottom = "${listItems.sumOf { it.listItems.size }} articulos",
+                    lineBottom = false
                 )
             }
             itemsIndexed(

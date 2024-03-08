@@ -26,6 +26,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.borealnetwork.allen.domain.model.BirdImage
 import com.borealnetwork.allen.domain.screen.HOME_CLIENT_GRAPH
+import com.borealnetwork.allen.domain.screen.QUESTION_PRODUCT_CLIENT_GRAPH
+import com.borealnetwork.allen.domain.screen.RATING_PRODUCT_CLIENT_GRAPH
 import com.borealnetwork.allen.modules.cart.domain.navigation.detailBuyCartClientNavigationGraph
 import com.borealnetwork.allen.modules.cart.domain.navigation.resumeBuyCartClientNavigationGraph
 import com.borealnetwork.allen.modules.cart.domain.navigation.shoppingCartClientNavigationGraph
@@ -77,7 +79,8 @@ internal fun App() = PreComposeApp {
         val navigator = rememberNavigator()
         NavHost(
             navigator = navigator,
-            initialRoute = HOME_CLIENT_GRAPH,
+//            initialRoute = HOME_CLIENT_GRAPH,
+            initialRoute = QUESTION_PRODUCT_CLIENT_GRAPH,
         ) {
             // Define a scene to the navigation graph
             homeClientNavigationGraph(navigator)

@@ -32,7 +32,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.borealnetwork.allen.components.BoldText
 import com.borealnetwork.allen.components.BrandingItem
-import com.borealnetwork.allen.components.Discount
 import com.borealnetwork.allen.components.FavoriteButton
 import com.borealnetwork.allen.components.FreeShipping
 import com.borealnetwork.allen.components.HorizontalContainerListItem
@@ -44,19 +43,16 @@ import com.borealnetwork.allen.components.SelectorDetail
 import com.borealnetwork.allen.components.SellerItem
 import com.borealnetwork.allen.components.SemiBoldText
 import com.borealnetwork.allen.components.SeparatorGray
-import com.borealnetwork.allen.components.ShadowButton
 import com.borealnetwork.allen.components.ShareButton
-import com.borealnetwork.allen.components.SmallText
 import com.borealnetwork.allen.components.StartIcon
 import com.borealnetwork.allen.components.ToolbarTitle
+import com.borealnetwork.allen.components.bottom_actions.BottomPriceItem
 import com.borealnetwork.allen.components.drawer.StarStatus
-import com.borealnetwork.allen.components.extensions.drawColoredShadow
 import com.borealnetwork.allen.domain.model.MinimalProductModel
 import com.borealnetwork.allen.domain.screen.PRODUCT_DETAIL_CLIENT_GRAPH
 import com.borealnetwork.allen.domain.screen.QUESTION_PRODUCT_CLIENT_GRAPH
 import com.borealnetwork.allen.domain.screen.RATING_PRODUCT_CLIENT_GRAPH
 import com.borealnetwork.allen.domain.screen.SHOPPING_CART_CLIENT_GRAPH
-import com.borealnetwork.allen.theme.BlueTransparent
 import com.borealnetwork.allen.theme.GrayBackgroundDrawerDismiss
 import com.borealnetwork.allen.theme.GrayBackgroundMain
 import com.borealnetwork.allen.theme.GrayLetterShipping
@@ -99,56 +95,11 @@ fun DetailProductViewCompose(navigator: Navigator) {
             )
         },
         bottomBar = {
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth().padding(bottom = 40.dp),
-                shape = RectangleShape,
-                elevation = 9.dp
+            BottomPriceItem(
+                priceProduct = 490.0,
+                discount = 15
             ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 10.dp)
-                        .background(White),
-                    verticalAlignment = Alignment.Bottom,
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Column(
-                        modifier = Modifier.padding(
-                            start = 30.dp,
-                            bottom = 18.dp
-                        ),
-                        verticalArrangement = Arrangement.SpaceBetween,
-                        horizontalAlignment = Alignment.Start
-                    ) {
-                        Discount()
-                        Row(verticalAlignment = Alignment.Bottom) {
-                            BoldText(
-                                text = "$435.00",
-                                color = Black
-                            )
-                            SmallText(
-                                modifier = Modifier.padding(
-                                    start = 10.dp,
-                                ), text = "$490.00"
-                            )
-                        }
-                    }
 
-                    ShadowButton(
-                        modifier = Modifier
-                            .padding(bottom = 18.dp, end = 30.dp)
-                            .width(117.dp)
-                            .height(52.dp)
-                            .drawColoredShadow(
-                                color = BlueTransparent, alpha = 1f, borderRadius = 10.dp,
-                                offsetY = 6.dp, offsetX = 5.dp, blurRadius = 10.dp
-                            ),
-                        text = "Agregar al carrito",
-                        size = 15.sp
-                    )
-
-                }
             }
         }
     ) {

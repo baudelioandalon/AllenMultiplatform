@@ -91,6 +91,7 @@ import com.borealnetwork.allen.theme.OrangeTransparent
 import com.borealnetwork.allen.theme.RedEndColor
 import com.borealnetwork.allen.theme.RedStartColor
 import com.borealnetwork.allen.theme.StarColor
+import com.borealnetwork.allen.tools.discount
 import com.borealnetwork.allen.tools.limit
 import com.borealnetwork.allen.tools.round
 import com.borealnetwork.allen.tools.rounded
@@ -1759,90 +1760,6 @@ fun ItemSold() {
 }
 
 
-//Items de Compra
-@Composable
-fun BottomBuyCartItem(
-    modifier: Modifier = Modifier,
-    payed: Boolean = false,
-    nextClicked: (() -> Unit)? = null
-) {
-    Card(
-        modifier = modifier.fillMaxWidth().padding(bottom = 40.dp),
-        shape = RectangleShape, elevation = 15.dp
-    ) {
-        Row(
-            modifier = Modifier.fillMaxWidth().padding(top = 10.dp).background(White),
-            verticalAlignment = Alignment.Bottom,
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            Column(
-                modifier = Modifier.padding(
-                    start = 30.dp, end = 30.dp, bottom = 18.dp
-                ),
-                verticalArrangement = Arrangement.SpaceBetween,
-                horizontalAlignment = Alignment.Start
-            ) {
-                Row(
-                    modifier = Modifier.fillMaxWidth().padding(top = 15.dp, bottom = 15.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    MediumText(
-                        text = "Descuento de tienda", color = GrayLetterSeeAll, fontSize = 13.sp
-                    )
-                    SemiBoldText(
-                        text = "8%", color = GrayLetterShipping, fontSize = 15.sp
-                    )
-                }
-
-                Box(
-                    Modifier.height(1.dp).fillMaxWidth()
-                        .background(Color.Gray, shape = DottedShape(step = 20.dp))
-                )
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceEvenly,
-                    verticalAlignment = Alignment.Bottom
-                ) {
-                    SemiBoldText(
-                        modifier = Modifier.weight(1f),
-                        text = if (payed) "Pagado" else "Pagar",
-                        color = GrayLetterShipping,
-                        fontSize = 18.sp
-                    )
-                    BoldText(
-                        modifier = Modifier.wrapContentWidth().padding(bottom = 5.dp),
-                        text = "$100",
-                        color = OrangeTransparent,
-                        fontSize = 12.sp
-                    )
-                    BoldText(
-                        modifier = Modifier.wrapContentWidth().padding(start = 21.dp),
-                        text = "$92",
-                        color = GreenStrong,
-                        fontSize = 30.sp,
-                        textAlign = TextAlign.End
-                    )
-                }
-                if (!payed) {
-                    BlueButton(
-                        modifier = Modifier.padding(bottom = 18.dp, top = 24.dp).fillMaxWidth()
-                            .drawColoredShadow(
-                                color = BlueTransparent,
-                                alpha = 1f,
-                                borderRadius = 10.dp,
-                                offsetY = 6.dp,
-                                offsetX = 5.dp,
-                                blurRadius = 10.dp
-                            ), text = "Continuar"
-                    ) {
-                        nextClicked?.invoke()
-                    }
-                }
-
-            }
-        }
-    }
-}
 
 @Composable
 fun ResumeItem(
@@ -1955,35 +1872,6 @@ fun AddButton(
                 contentDescription = "more_icon",
                 tint = White
             )
-        }
-    }
-}
-
-
-@Composable
-fun BottomContinueItem(
-    modifier: Modifier = Modifier,
-    textButton: String = "Continuar",
-    onClicked: (() -> Unit)? = null
-) {
-    Card(
-        modifier = modifier.fillMaxWidth().padding(bottom = 40.dp),
-        shape = RectangleShape,
-        elevation = 15.dp
-    ) {
-        Row(
-            modifier = Modifier.fillMaxWidth().background(White).padding(
-                top = 10.dp, start = 30.dp, end = 30.dp, bottom = 18.dp
-            ),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center
-        ) {
-            BlueButton(
-                modifier = Modifier.padding(bottom = 18.dp, top = 24.dp).fillMaxWidth(),
-                text = textButton
-            ) {
-                onClicked?.invoke()
-            }
         }
     }
 }

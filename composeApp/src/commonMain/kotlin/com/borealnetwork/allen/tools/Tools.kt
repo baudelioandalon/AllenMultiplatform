@@ -53,7 +53,7 @@ fun Double.round(decimals: Int = 2): Double {
 }
 
 fun Double.rounded(): String {
-    return if (this.rem(1).equals(0.0)) {
+    return if (rem(1.0).toString().substringAfter('.').length == 1) {
         "${this}0"
     } else {
         toString()
@@ -61,7 +61,7 @@ fun Double.rounded(): String {
 }
 
 fun Double.discount(porcentage: Int): Double {
-    return this - (this * (porcentage / 100.0))
+    return if (porcentage != 0) this - (this * (porcentage / 100.0)) else this
 }
 
 fun defaultTransition(duration: Int = 150) = NavTransition(

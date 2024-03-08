@@ -2,36 +2,23 @@ package com.borealnetwork.allen.modules.product.presentation.ui.question
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.material.Card
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.White
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.borealnetwork.allen.components.EditText
 import com.borealnetwork.allen.components.QuestionItem
 import com.borealnetwork.allen.components.SearcherWithButton
-import com.borealnetwork.allen.components.SemiBoldText
-import com.borealnetwork.allen.components.ShadowButton
 import com.borealnetwork.allen.components.ToolbarTitle
-import com.borealnetwork.allen.components.extensions.drawColoredShadow
+import com.borealnetwork.allen.components.bottom_actions.BottomEditTextItem
 import com.borealnetwork.allen.modules.product.domain.models.QuestionModel
-import com.borealnetwork.allen.theme.BlueTransparent
 import com.borealnetwork.allen.theme.GrayBackgroundMain
-import com.borealnetwork.allen.theme.GraySubtitleBottom
 import moe.tlaster.precompose.navigation.Navigator
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -50,53 +37,12 @@ fun QuestionViewCompose(navigator: Navigator) {
 
         },
         bottomBar = {
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth().padding(bottom = 40.dp),
-                shape = RectangleShape,
-                elevation = 15.dp
+            BottomEditTextItem(
+                topText = "Preguntar",
+                placeHolderText = "Escribe una preguna al vendedor",
+                buttonText = "Hacer pregunta"
             ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 10.dp)
-                        .background(White),
-                    verticalAlignment = Alignment.Bottom,
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Column(
-                        modifier = Modifier.padding(
-                            start = 30.dp, end = 30.dp,
-                            bottom = 18.dp
-                        ),
-                        verticalArrangement = Arrangement.SpaceBetween,
-                        horizontalAlignment = Alignment.Start
-                    ) {
-                        SemiBoldText(
-                            text = "Preguntar",
-                            color = GraySubtitleBottom,
-                            fontSize = 18.sp
-                        )
-                        EditText(
-                            modifier = Modifier.padding(bottom = 30.dp, top = 18.dp),
-                            placeHolderText = "Escribe una pregunta al vendedor",
-                            value = "",
-                            onValueChange = {
 
-                            }
-                        )
-                        ShadowButton(
-                            modifier = Modifier
-                                .padding(bottom = 18.dp)
-                                .fillMaxWidth()
-                                .drawColoredShadow(
-                                    color = BlueTransparent, alpha = 1f, borderRadius = 10.dp,
-                                    offsetY = 6.dp, offsetX = 5.dp, blurRadius = 10.dp
-                                ),
-                            text = "Hacer pregunta"
-                        )
-                    }
-                }
             }
         }) {
 

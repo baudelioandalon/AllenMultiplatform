@@ -15,11 +15,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.borealnetwork.allen.components.BottomContinueItem
 import com.borealnetwork.allen.components.EditTextTopLabel
 import com.borealnetwork.allen.components.ResumeItem
 import com.borealnetwork.allen.components.SelectorSpinner
 import com.borealnetwork.allen.components.ToolbarTitle
+import com.borealnetwork.allen.components.bottom_actions.BottomContinueItem
 import com.borealnetwork.allen.theme.GrayBackgroundMain
 import moe.tlaster.precompose.navigation.Navigator
 
@@ -35,7 +35,7 @@ fun NewAddressClientViewCompose(navigator: Navigator) {
             )
         },
         bottomBar = {
-            BottomContinueItem{
+            BottomContinueItem {
                 navigator.goBack()
             }
         }

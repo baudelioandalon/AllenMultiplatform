@@ -15,12 +15,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.borealnetwork.allen.components.AddressSelector
-import com.borealnetwork.allen.components.BottomBuyCartItem
 import com.borealnetwork.allen.components.ResumeItem
 import com.borealnetwork.allen.components.SelectorSpinner
 import com.borealnetwork.allen.components.ShippingSelector
 import com.borealnetwork.allen.components.ToolbarTitle
 import com.borealnetwork.allen.components.UserSelector
+import com.borealnetwork.allen.components.bottom_actions.BottomBuyCartItem
 import com.borealnetwork.allen.domain.screen.ADDRESS_CLIENT_GRAPH
 import com.borealnetwork.allen.theme.GrayBackgroundMain
 import moe.tlaster.precompose.navigation.Navigator

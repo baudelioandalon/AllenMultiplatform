@@ -79,204 +79,199 @@ fun HomeClientViewCompose(navigator: Navigator) {
         )
     )
 
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        Scaffold(modifier = Modifier
-            .fillMaxWidth(), drawerShape = RectangleShape, topBar = {
-            ToolbarSearchHome(startClicked = {
-                scope.launch {
-                    scaffoldState.drawerState.open()
-                }
+    Scaffold(modifier = Modifier
+        .fillMaxWidth(), drawerShape = RectangleShape, topBar = {
+        ToolbarSearchHome(startClicked = {
+            scope.launch {
+                scaffoldState.drawerState.open()
+            }
 
-            }, cartClicked = {
-                navigator.navigate(
-                    route = SHOPPING_CART_CLIENT_GRAPH
-                )
+        }, cartClicked = {
+            navigator.navigate(
+                route = SHOPPING_CART_CLIENT_GRAPH
+            )
 //                            navController?.navigate(SHOPPING_CART_GRAPH)
-            }, searchClicked = {
-                navigator.navigate(SEARCH_CLIENT_GRAPH)
-            })
+        }, searchClicked = {
+            navigator.navigate(SEARCH_CLIENT_GRAPH)
+        })
 
-        },
-            drawerGesturesEnabled = scaffoldState.drawerState.isOpen,
-            scaffoldState = scaffoldState,
-            drawerContent = {
-                DrawerHeaderClient {
-                    scope.launch {
-                        scaffoldState.drawerState.close()
-                    }
+    },
+        drawerGesturesEnabled = scaffoldState.drawerState.isOpen,
+        scaffoldState = scaffoldState,
+        drawerContent = {
+            DrawerHeaderClient {
+                scope.launch {
+                    scaffoldState.drawerState.close()
                 }
-                DrawerBodyClient(
-                    items = listOf(
-                        MenuItem(
-                            "Compras",
-                            icon = "ic_cart_icon.xml",
-                            contentDescription = "Cart",
-                            option = DrawerOptions.Buys
-                        ),
-                        MenuItem(
-                            "Favoritos",
-                            icon = "ic_heart_icon.xml",
-                            contentDescription = "Favorites",
-                            option = DrawerOptions.Favorites
-                        ),
-                        MenuItem(
-                            "Tiendas",
-                            icon = "ic_stores_icon.xml",
-                            contentDescription = "Stores",
-                            option = DrawerOptions.Stores
-                        ),
-                        MenuItem(
-                            "Notificaciónes",
-                            icon = "ic_bell_icon.xml",
-                            contentDescription = "Notifications",
-                            option = DrawerOptions.Notifications
-                        ),
-                        MenuItem(
-                            "Salir",
-                            icon = "ic_arrow_right.xml",
-                            contentDescription = "Exit",
-                            option = DrawerOptions.Exit,
-                            close = 0
-                        ),
-                        MenuItem(
-                            "Cerrar sesión",
-                            icon = "ic_close_session_icon.xml",
-                            contentDescription = "Close session",
-                            option = DrawerOptions.CloseSession
-                        )
+            }
+            DrawerBodyClient(
+                items = listOf(
+                    MenuItem(
+                        "Compras",
+                        icon = "ic_cart_icon.xml",
+                        contentDescription = "Cart",
+                        option = DrawerOptions.Buys
                     ),
-                ) {
-                    println("Clicked on ${it.option.name}")
-                    when (it.option) {
-                        DrawerOptions.Exit -> {
+                    MenuItem(
+                        "Favoritos",
+                        icon = "ic_heart_icon.xml",
+                        contentDescription = "Favorites",
+                        option = DrawerOptions.Favorites
+                    ),
+                    MenuItem(
+                        "Tiendas",
+                        icon = "ic_stores_icon.xml",
+                        contentDescription = "Stores",
+                        option = DrawerOptions.Stores
+                    ),
+                    MenuItem(
+                        "Notificaciónes",
+                        icon = "ic_bell_icon.xml",
+                        contentDescription = "Notifications",
+                        option = DrawerOptions.Notifications
+                    ),
+                    MenuItem(
+                        "Salir",
+                        icon = "ic_arrow_right.xml",
+                        contentDescription = "Exit",
+                        option = DrawerOptions.Exit,
+                        close = 0
+                    ),
+                    MenuItem(
+                        "Cerrar sesión",
+                        icon = "ic_close_session_icon.xml",
+                        contentDescription = "Close session",
+                        option = DrawerOptions.CloseSession
+                    )
+                ),
+            ) {
+                println("Clicked on ${it.option.name}")
+                when (it.option) {
+                    DrawerOptions.Exit -> {
 
+                    }
+
+                    DrawerOptions.Buys -> {
+                        scope.launch {
+                            scaffoldState.drawerState.close()
                         }
+                        navigator.navigate(route = ORDERS_CLIENT_GRAPH)
+                    }
 
-                        DrawerOptions.Buys -> {
-                            scope.launch {
-                                scaffoldState.drawerState.close()
-                            }
-                            navigator.navigate(route = ORDERS_CLIENT_GRAPH)
+                    DrawerOptions.Favorites -> {
+                        scope.launch {
+                            scaffoldState.drawerState.close()
                         }
+                    }
 
-                        DrawerOptions.Favorites -> {
-                            scope.launch {
-                                scaffoldState.drawerState.close()
-                            }
-                        }
-
-                        DrawerOptions.Stores -> {
+                    DrawerOptions.Stores -> {
 //                            navController?.navigate(STORES_MAPS_GENERAL_GRAPH)
-                            scope.launch {
-                                scaffoldState.drawerState.close()
-                            }
-                        }
-
-                        DrawerOptions.Notifications -> {
-                            scope.launch {
-                                scaffoldState.drawerState.close()
-                            }
-                            navigator.navigate(route = NOTIFICATION_CLIENT_GRAPH)
-                        }
-
-                        else -> {
-
+                        scope.launch {
+                            scaffoldState.drawerState.close()
                         }
                     }
+
+                    DrawerOptions.Notifications -> {
+                        scope.launch {
+                            scaffoldState.drawerState.close()
+                        }
+                        navigator.navigate(route = NOTIFICATION_CLIENT_GRAPH)
+                    }
+
+                    else -> {
+
+                    }
                 }
-            },
-            content = {
-                Box(
+            }
+        },
+        content = {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(White)
+            ) {
+
+                LazyColumn(
                     modifier = Modifier
-                        .fillMaxSize().align(Alignment.TopCenter)
-                        .background(White)
+                        .fillMaxWidth()
+                        .background(GrayBackgroundMain)
                 ) {
-
-                    LazyColumn(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .background(GrayBackgroundMain)
-                    ) {
-                        item {
-                            Card(
-                                modifier = Modifier
-                                    .fillMaxWidth(),
-                                shape = RectangleShape,
-                                elevation = 5.dp
-                            ) {
-                                TopContainer()
-                            }
+                    item {
+                        Card(
+                            modifier = Modifier
+                                .fillMaxWidth(),
+                            shape = RectangleShape,
+                            elevation = 5.dp
+                        ) {
+                            TopContainer()
                         }
-                        item {
-                            Card(
-                                modifier = Modifier
-                                    .padding(top = 30.dp)
-                                    .fillMaxWidth(),
-                                shape = RectangleShape,
-                                elevation = 5.dp
-                            ) {
-                                BrandingContainer()
-                            }
+                    }
+                    item {
+                        Card(
+                            modifier = Modifier
+                                .padding(top = 30.dp)
+                                .fillMaxWidth(),
+                            shape = RectangleShape,
+                            elevation = 5.dp
+                        ) {
+                            BrandingContainer()
                         }
-                        item {
-                            Card(
-                                modifier = Modifier
-                                    .padding(top = 30.dp)
-                                    .fillMaxWidth(),
-                                shape = RectangleShape,
-                                elevation = 5.dp
-                            ) {
-                                HorizontalContainerListItem(
-                                    startText = "Ultimos articulos",
-                                    endText = "Ver todos",
-                                    listItem = lastProductsList
-                                ) { minimalProductModel, index ->
-                                    ProductItem(minimalProductModel) {
-                                        navigator.navigate(PRODUCT_DETAIL_CLIENT_GRAPH)
-                                    }
+                    }
+                    item {
+                        Card(
+                            modifier = Modifier
+                                .padding(top = 30.dp)
+                                .fillMaxWidth(),
+                            shape = RectangleShape,
+                            elevation = 5.dp
+                        ) {
+                            HorizontalContainerListItem(
+                                startText = "Ultimos articulos",
+                                endText = "Ver todos",
+                                listItem = lastProductsList
+                            ) { minimalProductModel, index ->
+                                ProductItem(minimalProductModel) {
+                                    navigator.navigate(PRODUCT_DETAIL_CLIENT_GRAPH)
                                 }
                             }
                         }
-                        item {
-                            Card(
-                                modifier = Modifier
-                                    .padding(top = 30.dp)
-                                    .fillMaxWidth(),
-                                shape = RectangleShape,
-                                elevation = 5.dp
-                            ) {
-                                CategoryListContainer()
-                            }
+                    }
+                    item {
+                        Card(
+                            modifier = Modifier
+                                .padding(top = 30.dp)
+                                .fillMaxWidth(),
+                            shape = RectangleShape,
+                            elevation = 5.dp
+                        ) {
+                            CategoryListContainer()
                         }
-                        item {
-                            Card(
-                                modifier = Modifier
-                                    .padding(top = 30.dp, bottom = 40.dp)
-                                    .fillMaxWidth(),
-                                shape = RectangleShape,
-                                elevation = 5.dp
-                            ) {
-                                HorizontalContainerListItem(
-                                    startText = "Ofertas",
-                                    endText = "Ver todos",
-                                    listItem = lastProductsList
-                                ) { minimalProductModel, index ->
-                                    ProductItem(minimalProductModel) {
-                                        navigator.navigate(PRODUCT_DETAIL_CLIENT_GRAPH)
-                                    }
+                    }
+                    item {
+                        Card(
+                            modifier = Modifier
+                                .padding(top = 30.dp, bottom = 40.dp)
+                                .fillMaxWidth(),
+                            shape = RectangleShape,
+                            elevation = 5.dp
+                        ) {
+                            HorizontalContainerListItem(
+                                startText = "Ofertas",
+                                endText = "Ver todos",
+                                listItem = lastProductsList
+                            ) { minimalProductModel, index ->
+                                ProductItem(minimalProductModel) {
+                                    navigator.navigate(PRODUCT_DETAIL_CLIENT_GRAPH)
                                 }
                             }
                         }
                     }
                 }
+            }
 
-                it.calculateBottomPadding()
-            })
+            it.calculateBottomPadding()
+        })
 
-    }
 }
 
 @Composable
@@ -387,7 +382,7 @@ fun AutoSliding() {
         verticalArrangement = Arrangement.Center
     ) {
         Image(
-            painter = painterResource(resource = DrawableResource( promotion[0].imgUrl)),
+            painter = painterResource(resource = DrawableResource(promotion[0].imgUrl)),
             contentDescription = promotion[page.value].title,
             contentScale = ContentScale.Crop,
             modifier = Modifier

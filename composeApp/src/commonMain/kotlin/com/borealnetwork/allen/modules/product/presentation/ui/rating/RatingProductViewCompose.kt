@@ -2,9 +2,7 @@ package com.borealnetwork.allen.modules.product.presentation.ui.rating
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -13,26 +11,20 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.White
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.borealnetwork.allen.components.EditText
 import com.borealnetwork.allen.components.RatingByUserItem
 import com.borealnetwork.allen.components.SemiBoldText
-import com.borealnetwork.allen.components.ShadowButton
 import com.borealnetwork.allen.components.ToolbarTitle
-import com.borealnetwork.allen.components.extensions.drawColoredShadow
+import com.borealnetwork.allen.components.bottom_actions.BottomEditTextItem
 import com.borealnetwork.allen.modules.product.domain.models.QuestionModel
-import com.borealnetwork.allen.theme.BlueTransparent
 import com.borealnetwork.allen.theme.GrayBackgroundMain
-import com.borealnetwork.allen.theme.GraySubtitleBottom
 import moe.tlaster.precompose.navigation.Navigator
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
@@ -51,53 +43,12 @@ fun RatingProductViewCompose(navigator: Navigator) {
             endIcon = "ic_rating.xml"
         )
     }, bottomBar = {
-        Card(
-            modifier = Modifier
-                .fillMaxWidth().padding(bottom = 40.dp),
-            shape = RectangleShape,
-            elevation = 15.dp
+        BottomEditTextItem(
+            topText = "Calificar",
+            placeHolderText = "Califica el producto",
+            buttonText = "Enviar calificación"
         ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 10.dp)
-                    .background(White),
-                verticalAlignment = Alignment.Bottom,
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Column(
-                    modifier = Modifier.padding(
-                        start = 30.dp, end = 30.dp,
-                        bottom = 18.dp
-                    ),
-                    verticalArrangement = Arrangement.SpaceBetween,
-                    horizontalAlignment = Alignment.Start
-                ) {
-                    SemiBoldText(
-                        text = "Calificar",
-                        color = GraySubtitleBottom,
-                        fontSize = 18.sp
-                    )
-                    EditText(
-                        modifier = Modifier.padding(bottom = 30.dp, top = 18.dp),
-                        placeHolderText = "Califica el producto",
-                        value = "",
-                        onValueChange = {
 
-                        }
-                    )
-                    ShadowButton(
-                        modifier = Modifier
-                            .padding(bottom = 18.dp)
-                            .fillMaxWidth()
-                            .drawColoredShadow(
-                                color = BlueTransparent, alpha = 1f, borderRadius = 10.dp,
-                                offsetY = 6.dp, offsetX = 5.dp, blurRadius = 10.dp
-                            ),
-                        text = "Enviar calificación"
-                    )
-                }
-            }
         }
     }) {
 

@@ -11,9 +11,9 @@ import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.borealnetwork.allen.components.BottomBuyCartItem
 import com.borealnetwork.allen.components.ShoppingCartStoreItem
 import com.borealnetwork.allen.components.ToolbarTitle
+import com.borealnetwork.allen.components.bottom_actions.BottomBuyCartItem
 import com.borealnetwork.allen.domain.model.ItemCartModel
 import com.borealnetwork.allen.domain.model.ProductShoppingCart
 import com.borealnetwork.allen.domain.screen.RESUME_BUY_CART_CLIENT_GRAPH
@@ -22,6 +22,56 @@ import moe.tlaster.precompose.navigation.Navigator
 
 @Composable
 fun ShoppingCartViewCompose(navigator: Navigator) {
+
+    val sellersList = listOf(
+        ItemCartModel(
+            nameStore = "Ferreteria La Hormiga",
+            idStore = "idmidjikjdokjdo",
+            imgStore = "didimd",
+            listItems = listOf(
+                ProductShoppingCart(
+                    skuProduct = "d2d232",
+                    nameProduct = "1KG Clavo 1/2 pulgada",
+                    imgProduct = "ccdcdomd",
+                    categoryItem = "Ropa",
+                    quantity = 1,
+                    discountPercentage = 0.0,
+                    fastOrder = true,
+                    minimalFastOrder = 2,
+                    price = 46.0
+                ),
+                ProductShoppingCart(
+                    skuProduct = "d2d232",
+                    nameProduct = "Martillo",
+                    imgProduct = "ccdcdomd",
+                    categoryItem = "Ropa",
+                    quantity = 1,
+                    discountPercentage = 15.0,
+                    fastOrder = true,
+                    minimalFastOrder = 2,
+                    price = 46.0
+                )
+            )
+        ),
+        ItemCartModel(
+            nameStore = "Nike Store",
+            idStore = "idmidjikjdokjdo",
+            imgStore = "didimd",
+            listItems = listOf(
+                ProductShoppingCart(
+                    skuProduct = "d2d232",
+                    nameProduct = "Balon Basketball num 6edcwedwedwedcedwcef",
+                    imgProduct = "ccdcdomd",
+                    categoryItem = "Deportes",
+                    quantity = 2,
+                    discountPercentage = 10.0,
+                    fastOrder = true,
+                    minimalFastOrder = 2,
+                    price = 50.0
+                )
+            )
+        )
+    )
 
     Scaffold(topBar = {
 
@@ -39,55 +89,7 @@ fun ShoppingCartViewCompose(navigator: Navigator) {
                 navigator.navigate(RESUME_BUY_CART_CLIENT_GRAPH)
             }
         }) {
-        val sellersList = listOf(
-            ItemCartModel(
-                nameStore = "Ferreteria La Hormiga",
-                idStore = "idmidjikjdokjdo",
-                imgStore = "didimd",
-                listItems = listOf(
-                    ProductShoppingCart(
-                        skuProduct = "d2d232",
-                        nameProduct = "1KG Clavo 1/2 pulgada",
-                        imgProduct = "ccdcdomd",
-                        categoryItem = "Ropa",
-                        quantity = 1,
-                        discountPercentage = 0.0,
-                        fastOrder = true,
-                        minimalFastOrder = 2,
-                        price = 46.0
-                    ),
-                    ProductShoppingCart(
-                        skuProduct = "d2d232",
-                        nameProduct = "Martillo",
-                        imgProduct = "ccdcdomd",
-                        categoryItem = "Ropa",
-                        quantity = 1,
-                        discountPercentage = 15.0,
-                        fastOrder = true,
-                        minimalFastOrder = 2,
-                        price = 46.0
-                    )
-                )
-            ),
-            ItemCartModel(
-                nameStore = "Nike Store",
-                idStore = "idmidjikjdokjdo",
-                imgStore = "didimd",
-                listItems = listOf(
-                    ProductShoppingCart(
-                        skuProduct = "d2d232",
-                        nameProduct = "Balon Basketball num 6edcwedwedwedcedwcef",
-                        imgProduct = "ccdcdomd",
-                        categoryItem = "Deportes",
-                        quantity = 2,
-                        discountPercentage = 10.0,
-                        fastOrder = true,
-                        minimalFastOrder = 2,
-                        price = 50.0
-                    )
-                )
-            )
-        )
+
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()

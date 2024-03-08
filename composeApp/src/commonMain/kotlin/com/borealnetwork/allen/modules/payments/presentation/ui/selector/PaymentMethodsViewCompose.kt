@@ -20,11 +20,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.borealnetwork.allen.components.AddButton
-import com.borealnetwork.allen.components.BottomContinueItem
 import com.borealnetwork.allen.components.CardFilled
 import com.borealnetwork.allen.components.ResumeItem
 import com.borealnetwork.allen.components.SelectorWithRadioButton
 import com.borealnetwork.allen.components.ToolbarTitle
+import com.borealnetwork.allen.components.bottom_actions.BottomContinueItem
 import com.borealnetwork.allen.modules.payments.domain.models.CardModel
 import com.borealnetwork.allen.modules.payments.domain.models.TypeCard
 import com.borealnetwork.allen.modules.payments.domain.models.paymentList
