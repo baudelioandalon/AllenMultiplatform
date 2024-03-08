@@ -336,20 +336,14 @@ fun SearcherWithSettings(
             )
 
         }
-        Card(
-            modifier = Modifier
-                .padding(horizontal = 10.dp)
-                .width(35.dp)
-                .height(35.dp),
-            elevation = 0.dp,
-            shape = CircleShape,
-            onClick = { settingsClicked?.invoke() }) {
-            Icon(
-                modifier = Modifier.wrapContentSize(),
-                painter = painterResource(resource = DrawableResource( "ic_settings_gray.xml")),
-                contentDescription = "settingsIcon",
-                tint = Black
-            )
-        }
+        CircularIcon(
+            modifier = Modifier.padding(start = 10.dp)
+                .size(35.dp),
+            icon = "ic_settings_gray.xml",
+            onClick = {
+                settingsClicked?.invoke()
+            }
+        )
+
     }
 }

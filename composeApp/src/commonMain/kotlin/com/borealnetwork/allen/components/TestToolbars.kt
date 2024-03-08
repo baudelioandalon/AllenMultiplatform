@@ -21,6 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Red
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.RectangleShape
@@ -248,18 +249,13 @@ fun ToolbarSearch(
                     backClicked?.invoke()
                 }
                 SearcherWithSettings(
+                    modifier = Modifier.padding(horizontal = 20.dp),
                     value = "",
                     placeHolder = "Escribe el producto o marca...",
                     itemClicked = { searchClicked?.invoke() },
                     settingsClicked = {
                         settingsClicked?.invoke()
                     }
-                )
-                CircularIcon(
-                    modifier = Modifier.weight(1f),
-                    onClick = endClicked,
-                    iconTint = White,
-                    icon = "ic_settings_gray.xml"
                 )
             }
 

@@ -26,7 +26,6 @@ import com.borealnetwork.allen.components.SemiBoldText
 import com.borealnetwork.allen.components.ToolbarSearchHome
 import com.borealnetwork.allen.domain.screen.PRODUCT_DETAIL_CLIENT_GRAPH
 import com.borealnetwork.allen.theme.GrayBorder
-import moe.tlaster.precompose.navigation.NavOptions
 import moe.tlaster.precompose.navigation.Navigator
 
 @Composable
@@ -36,7 +35,6 @@ fun ResultProductsViewCompose(
 
     Scaffold(topBar = {
         ToolbarSearchHome(
-            startIconTint = Black,
             startIcon = "ic_back_arrow.xml",
             textPlaceHolder = "Ropa",
             startClicked = {
