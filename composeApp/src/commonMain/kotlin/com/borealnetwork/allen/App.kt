@@ -26,14 +26,14 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.borealnetwork.allen.domain.model.BirdImage
 import com.borealnetwork.allen.domain.screen.HOME_CLIENT_GRAPH
-import com.borealnetwork.allen.domain.screen.QUESTION_PRODUCT_CLIENT_GRAPH
-import com.borealnetwork.allen.domain.screen.RATING_PRODUCT_CLIENT_GRAPH
+import com.borealnetwork.allen.domain.screen.ORDER_CLIENT_IN_PROGRESS_STATUS_GRAPH
 import com.borealnetwork.allen.modules.cart.domain.navigation.detailBuyCartClientNavigationGraph
 import com.borealnetwork.allen.modules.cart.domain.navigation.resumeBuyCartClientNavigationGraph
 import com.borealnetwork.allen.modules.cart.domain.navigation.shoppingCartClientNavigationGraph
 import com.borealnetwork.allen.modules.home_client.domain.navigation.homeClientNavigationGraph
 import com.borealnetwork.allen.modules.notifications.domain.navigation.notificationClientNavigationGraph
-import com.borealnetwork.allen.modules.orders.domain.navigation.orderClientDetailNavigationGraph
+import com.borealnetwork.allen.modules.orders.domain.navigation.orderClientFinishDetailNavigationGraph
+import com.borealnetwork.allen.modules.orders.domain.navigation.orderClientStatusNavigationGraph
 import com.borealnetwork.allen.modules.orders.domain.navigation.ordersClientNavigationGraph
 import com.borealnetwork.allen.modules.payments.domain.navigation.newCardClientNavigationGraph
 import com.borealnetwork.allen.modules.payments.domain.navigation.paymentsMethodClientNavigationGraph
@@ -71,7 +71,6 @@ fun BirdAppTheme(
 }
 
 
-
 @Composable
 internal fun App() = PreComposeApp {
     AppTheme {
@@ -79,14 +78,16 @@ internal fun App() = PreComposeApp {
         val navigator = rememberNavigator()
         NavHost(
             navigator = navigator,
-//            initialRoute = HOME_CLIENT_GRAPH,
-            initialRoute = QUESTION_PRODUCT_CLIENT_GRAPH,
+            initialRoute = HOME_CLIENT_GRAPH
         ) {
             // Define a scene to the navigation graph
             homeClientNavigationGraph(navigator)
             notificationClientNavigationGraph(navigator)
+
+            //Orders
             ordersClientNavigationGraph(navigator)
-            orderClientDetailNavigationGraph(navigator)
+            orderClientFinishDetailNavigationGraph(navigator)
+            orderClientStatusNavigationGraph(navigator)
 
             //Product
             searchClientNavigationGraph(navigator)
@@ -98,8 +99,12 @@ internal fun App() = PreComposeApp {
             shoppingCartClientNavigationGraph(navigator)
             resumeBuyCartClientNavigationGraph(navigator)
             detailBuyCartClientNavigationGraph(navigator)
+
+            //Profile
             addressClientNavigationGraph(navigator)
             newAddressClientNavigationGraph(navigator)
+
+            //Payments
             newCardClientNavigationGraph(navigator)
             paymentsMethodClientNavigationGraph(navigator)
         }

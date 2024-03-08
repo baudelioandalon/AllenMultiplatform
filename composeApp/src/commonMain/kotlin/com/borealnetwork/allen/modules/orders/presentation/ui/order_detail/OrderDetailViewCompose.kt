@@ -31,7 +31,7 @@ import moe.tlaster.precompose.navigation.Navigator
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun OrderDetailViewCompose(navigator: Navigator) {
+fun OrderClientFinishDetailViewCompose(navigator: Navigator) {
 
     val listItems = listOf(
         ItemCartModel(

@@ -14,7 +14,7 @@ import com.borealnetwork.allen.components.ResumeItem
 import com.borealnetwork.allen.components.ShoppingCategoryHistoryItem
 import com.borealnetwork.allen.components.ToolbarTitle
 import com.borealnetwork.allen.domain.model.ItemShoppingModel
-import com.borealnetwork.allen.domain.screen.ORDER_CLIENT_DETAIL_GRAPH
+import com.borealnetwork.allen.domain.screen.ORDER_CLIENT_FINISH_DETAIL_GRAPH
 import com.borealnetwork.allen.theme.GrayBackgroundMain
 import moe.tlaster.precompose.navigation.Navigator
 
@@ -134,7 +134,7 @@ fun OrdersListViewCompose(navigator: Navigator) {
                                 hideTopLine = index != listInProgress.lastIndex
                             ) {
                                 navigator.navigate(
-                                    ORDER_CLIENT_DETAIL_GRAPH
+                                    ORDER_CLIENT_FINISH_DETAIL_GRAPH
                                 )
                             }
                         }
@@ -163,7 +163,7 @@ fun OrdersListViewCompose(navigator: Navigator) {
                                 hideTopLine = index != listDone.lastIndex
                             ) {
                                 navigator.navigate(
-                                    ORDER_CLIENT_DETAIL_GRAPH
+                                    ORDER_CLIENT_FINISH_DETAIL_GRAPH
                                 )
                             }
                         }

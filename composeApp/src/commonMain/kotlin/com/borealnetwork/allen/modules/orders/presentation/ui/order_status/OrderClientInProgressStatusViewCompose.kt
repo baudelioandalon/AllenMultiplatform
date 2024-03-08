@@ -37,7 +37,7 @@ import moe.tlaster.precompose.navigation.Navigator
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun OrderStatusViewCompose(navigator: Navigator) {
+fun OrderClientInProgressStatusViewCompose(navigator: Navigator) {
 
     Scaffold(topBar = {
         ToolbarTitle(
