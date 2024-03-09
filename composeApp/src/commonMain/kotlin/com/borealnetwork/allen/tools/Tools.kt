@@ -53,8 +53,12 @@ fun Double.round(decimals: Int = 2): Double {
 }
 
 fun Double.rounded(): String {
-    return if (rem(1.0).toString().substringAfter('.').length == 1) {
+    val remResultAfter = rem(1.0).toString().substringAfter('.')
+    val remSize = remResultAfter.length
+    return if (remSize == 1) {
         "${this}0"
+    } else if (remSize > 2) {
+        "${this.toString().substringBefore('.')}.${remResultAfter.substring(0,2)}"
     } else {
         toString()
     }

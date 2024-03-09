@@ -45,6 +45,7 @@ import com.borealnetwork.allen.modules.cart.domain.navigation.CartClientScreen
 import com.borealnetwork.allen.modules.notifications.domain.navigation.NotificationsClientScreen
 import com.borealnetwork.allen.modules.orders.domain.navigation.OrdersClientScreen
 import com.borealnetwork.allen.modules.product.domain.navigation.ProductClientScreen
+import com.borealnetwork.allen.modules.stores.domain.navigation.StoresScreen
 import com.borealnetwork.allen.theme.GrayBackgroundMain
 import com.borealnetwork.allen.theme.categorySelectorColors
 import kotlinx.coroutines.delay
@@ -89,7 +90,6 @@ fun HomeClientViewCompose(navigator: Navigator) {
             navigator.navigate(
                 route = CartClientScreen.ShoppingCartClientScreen.route
             )
-//                            navController?.navigate(SHOPPING_CART_GRAPH)
         }, searchClicked = {
             navigator.navigate(ProductClientScreen.SearchClientScreen.route)
         })
@@ -154,20 +154,25 @@ fun HomeClientViewCompose(navigator: Navigator) {
                         scope.launch {
                             scaffoldState.drawerState.close()
                         }
-                        navigator.navigate(route = OrdersClientScreen.OrdersListClientScreen.route)
+                        navigator.navigate(
+                            route = OrdersClientScreen.OrdersListClientScreen.route
+                        )
                     }
 
                     DrawerOptions.Favorites -> {
                         scope.launch {
                             scaffoldState.drawerState.close()
                         }
+                        navigator.navigate(route = ProductClientScreen.FavoritesProductsClient.route)
                     }
 
                     DrawerOptions.Stores -> {
-//                            navController?.navigate(STORES_MAPS_GENERAL_GRAPH)
                         scope.launch {
                             scaffoldState.drawerState.close()
                         }
+                        navigator.navigate(
+                            route = StoresScreen.StoresInMapScreen.route
+                        )
                     }
 
                     DrawerOptions.Notifications -> {

@@ -36,13 +36,16 @@ import com.borealnetwork.allen.modules.orders.domain.navigation.orderClientStatu
 import com.borealnetwork.allen.modules.orders.domain.navigation.ordersClientNavigationGraph
 import com.borealnetwork.allen.modules.payments.domain.navigation.newCardClientNavigationGraph
 import com.borealnetwork.allen.modules.payments.domain.navigation.paymentsMethodClientNavigationGraph
+import com.borealnetwork.allen.modules.product.domain.navigation.ProductClientScreen
 import com.borealnetwork.allen.modules.product.domain.navigation.detailProductClientNavigationGraph
+import com.borealnetwork.allen.modules.product.domain.navigation.favoritesClientNavigationGraph
 import com.borealnetwork.allen.modules.product.domain.navigation.questionsProductClientNavigationGraph
 import com.borealnetwork.allen.modules.product.domain.navigation.ratingProductClientNavigationGraph
 import com.borealnetwork.allen.modules.product.domain.navigation.resultProductsClientNavigationGraph
 import com.borealnetwork.allen.modules.product.domain.navigation.searchClientNavigationGraph
 import com.borealnetwork.allen.modules.profile.domain.navigation.addressClientNavigationGraph
 import com.borealnetwork.allen.modules.profile.domain.navigation.newAddressClientNavigationGraph
+import com.borealnetwork.allen.modules.stores.domain.navigation.storesInMapNavigationGraph
 import com.borealnetwork.allen.theme.AppTheme
 import com.borealnetwork.allen.viewmodel.LoginViewModel
 import dev.icerock.moko.mvvm.compose.getViewModel
@@ -79,8 +82,10 @@ internal fun App() = PreComposeApp {
             navigator = navigator,
             initialRoute = HomeClientScreen.HomeDefaultClientScreen.route
         ) {
-            // Define a scene to the navigation graph
+            //HomeClient
             homeClientNavigationGraph(navigator)
+
+            //Client
             notificationClientNavigationGraph(navigator)
 
             //Orders
@@ -94,7 +99,9 @@ internal fun App() = PreComposeApp {
             detailProductClientNavigationGraph(navigator)
             ratingProductClientNavigationGraph(navigator)
             questionsProductClientNavigationGraph(navigator)
+            favoritesClientNavigationGraph(navigator)
 
+            //Cart
             shoppingCartClientNavigationGraph(navigator)
             resumeBuyCartClientNavigationGraph(navigator)
             detailBuyCartClientNavigationGraph(navigator)
@@ -106,6 +113,9 @@ internal fun App() = PreComposeApp {
             //Payments
             newCardClientNavigationGraph(navigator)
             paymentsMethodClientNavigationGraph(navigator)
+
+            //Stores
+            storesInMapNavigationGraph(navigator)
         }
 
 

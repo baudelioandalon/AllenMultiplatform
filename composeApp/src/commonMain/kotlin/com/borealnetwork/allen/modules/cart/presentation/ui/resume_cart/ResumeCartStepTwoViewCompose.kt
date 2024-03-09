@@ -61,7 +61,7 @@ fun ResumeCartStepTwoViewCompose(navigator: Navigator) {
                     imgProduct = "ccdcdomd",
                     categoryItem = "Ropa",
                     quantity = 1,
-                    discountPercentage = 0.0,
+                    discountPercentage = 0,
                     fastOrder = true,
                     minimalFastOrder = 2,
                     price = 46.0
@@ -72,7 +72,7 @@ fun ResumeCartStepTwoViewCompose(navigator: Navigator) {
                     imgProduct = "ccdcdomd",
                     categoryItem = "Ropa",
                     quantity = 1,
-                    discountPercentage = 15.0,
+                    discountPercentage = 15,
                     fastOrder = true,
                     minimalFastOrder = 2,
                     price = 46.0
@@ -90,7 +90,7 @@ fun ResumeCartStepTwoViewCompose(navigator: Navigator) {
                     imgProduct = "ccdcdomd",
                     categoryItem = "Deportes",
                     quantity = 2,
-                    discountPercentage = 10.0,
+                    discountPercentage = 10,
                     fastOrder = true,
                     minimalFastOrder = 2,
                     price = 50.0

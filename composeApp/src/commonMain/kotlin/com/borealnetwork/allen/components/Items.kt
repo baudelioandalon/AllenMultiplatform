@@ -61,7 +61,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.borealnetwork.allen.components.extensions.DottedShape
-import com.borealnetwork.allen.components.extensions.drawColoredShadow
 import com.borealnetwork.allen.components.extensions.mirror
 import com.borealnetwork.allen.domain.model.ItemCartModel
 import com.borealnetwork.allen.domain.model.ItemShoppingModel
@@ -71,7 +70,6 @@ import com.borealnetwork.allen.domain.model.order_resume.PinStatusHistoryModel
 import com.borealnetwork.allen.modules.payments.domain.models.CardModel
 import com.borealnetwork.allen.modules.payments.domain.models.TypeCard
 import com.borealnetwork.allen.theme.BlueStatusLineColor
-import com.borealnetwork.allen.theme.BlueTransparent
 import com.borealnetwork.allen.theme.CategoryBackgroundSelectorOne
 import com.borealnetwork.allen.theme.GrayBackgroundDrawerDismiss
 import com.borealnetwork.allen.theme.GrayBorderLight
@@ -80,18 +78,14 @@ import com.borealnetwork.allen.theme.GrayCategoryBackground
 import com.borealnetwork.allen.theme.GrayLetterCategoryProduct
 import com.borealnetwork.allen.theme.GrayLetterHint
 import com.borealnetwork.allen.theme.GrayLetterSeeAll
-import com.borealnetwork.allen.theme.GrayLetterShipping
 import com.borealnetwork.allen.theme.GrayMedium
 import com.borealnetwork.allen.theme.GraySinceTo
 import com.borealnetwork.allen.theme.GrayStrong
 import com.borealnetwork.allen.theme.GreenStrong
 import com.borealnetwork.allen.theme.OrangeMedium
 import com.borealnetwork.allen.theme.OrangeStrong
-import com.borealnetwork.allen.theme.OrangeTransparent
 import com.borealnetwork.allen.theme.RedEndColor
 import com.borealnetwork.allen.theme.RedStartColor
-import com.borealnetwork.allen.theme.StarColor
-import com.borealnetwork.allen.tools.discount
 import com.borealnetwork.allen.tools.limit
 import com.borealnetwork.allen.tools.round
 import com.borealnetwork.allen.tools.rounded
@@ -652,10 +646,11 @@ fun ShoppingCartStoreItem(
                             counter = counter,
                             deleteOptions = deleteOptions,
                             check = check,
-                            removeClicked = { item ->
+                            endText = "Agregar al carrito",
+                            startClicked = { item ->
 
                             },
-                            saveAfterClicked = { item ->
+                            endClicked = { item ->
 
                             })
                     }
@@ -739,7 +734,7 @@ fun ShoppingCartItem(
         imgProduct = "ccdcdomd",
         categoryItem = "Deportes",
         quantity = 2,
-        discountPercentage = 10.0,
+        discountPercentage = 10,
         fastOrder = true,
         minimalFastOrder = 2,
         price = 588880.0
@@ -747,11 +742,14 @@ fun ShoppingCartItem(
     counter: Boolean = true,
     deleteOptions: Boolean = true,
     check: Boolean = false,
-    removeClicked: ((ProductShoppingCart) -> Unit)? = null,
-    saveAfterClicked: ((ProductShoppingCart) -> Unit)? = null,
+    startText: String = "Remover",
+    endText: String = "Guardar para después",
+    showBottomDivider: Boolean = false,
+    startClicked: ((ProductShoppingCart) -> Unit)? = null,
+    endClicked: ((ProductShoppingCart) -> Unit)? = null
 ) {
     Column(
-        modifier = if (deleteOptions) Modifier.fillMaxWidth()
+        modifier = if (deleteOptions) Modifier.fillMaxWidth().background(White)
             .padding(start = 30.dp, end = 30.dp, top = 14.dp, bottom = 20.dp)
         else Modifier.fillMaxWidth().padding(top = 14.dp, bottom = 20.dp)
     ) {
@@ -802,8 +800,9 @@ fun ShoppingCartItem(
                     }
                     BoldText(
                         modifier = Modifier.fillMaxWidth().weight(1f),
-                        text = "$${productShoppingCart.getProductWithDiscount().toInt()}",
+                        text = "$${productShoppingCart.finalPriceInString()}",
                         fontSize = 15.sp,
+                        color = Black,
                         textAlign = TextAlign.End
                     )
                 }
@@ -836,20 +835,6 @@ fun ShoppingCartItem(
                     SelectorCounter(
                         quantity = productShoppingCart.quantity
                     )
-                } else {
-                    Row(
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.Bottom
-                    ) {
-                        SemiBoldText(
-                            modifier = Modifier.padding(
-                                end = 14.dp, bottom = 5.dp, start = 10.dp
-                            ), text = "Cantidad", fontSize = 15.sp
-                        )
-                        SemiBoldText(
-                            text = "${productShoppingCart.quantity}", fontSize = 25.sp
-                        )
-                    }
                 }
             }
             if (check) {
@@ -863,138 +848,26 @@ fun ShoppingCartItem(
         if (deleteOptions) {
             Row(modifier = Modifier.padding(top = 12.dp)) {
                 BoldText(
-                    text = "Remover", fontSize = 12.sp, color = OrangeStrong
+                    modifier = Modifier.padding(10.dp),
+                    text = startText, fontSize = 12.sp, color = OrangeStrong
                 ) {
-                    removeClicked?.invoke(productShoppingCart)
+                    startClicked?.invoke(productShoppingCart)
                 }
                 BoldText(
-                    modifier = Modifier.padding(start = 38.dp),
-                    text = "Guardar para después",
+                    modifier = Modifier.padding(10.dp),
+                    text = endText,
                     fontSize = 12.sp,
                     color = OrangeStrong
                 ) {
-                    saveAfterClicked?.invoke(productShoppingCart)
+                    endClicked?.invoke(productShoppingCart)
                 }
             }
         }
-    }
-}
-
-@Composable
-fun FavoriteItem(
-    productShoppingCart: ProductShoppingCart = ProductShoppingCart(
-        skuProduct = "d2d232",
-        nameProduct = "Balon Basketball num 6edcwedwedwedcedwcef",
-        imgProduct = "ccdcdomd",
-        categoryItem = "Deportes",
-        quantity = 1,
-        discountPercentage = 10.0,
-        fastOrder = true,
-        minimalFastOrder = 2,
-        price = 588880.0
-    )
-) {
-    Card(
-        modifier = Modifier.fillMaxWidth(), elevation = 10.dp
-    ) {
-        Column(
-            modifier = Modifier.fillMaxWidth().background(White)
-                .padding(start = 30.dp, end = 30.dp, top = 14.dp, bottom = 20.dp)
-        ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-
-                Column(
-                    modifier = Modifier.wrapContentWidth()
-                ) {
-                    Card(
-                        modifier = Modifier.size(81.dp),
-                        backgroundColor = GrayBackgroundDrawerDismiss,
-                        elevation = 0.dp,
-                        shape = RoundedCornerShape(10.dp)
-                    ) {
-
-                    }
-
-                }
-                Column(
-                    modifier = Modifier.height(81.dp).padding(start = 27.dp).weight(0.3f),
-                    verticalArrangement = Arrangement.SpaceAround
-                ) {
-                    SemiBoldText(
-                        text = productShoppingCart.nameProduct,
-                        fontSize = 13.sp,
-                        maxLines = 3,
-                        textOverflow = TextOverflow.Ellipsis
-                    )
-                    SemiBoldText(
-                        modifier = Modifier.wrapContentHeight(),
-                        text = productShoppingCart.categoryItem,
-                        color = GrayLetterCategoryProduct,
-                        fontSize = 10.sp
-                    )
-                    Row(
-                        modifier = Modifier.weight(1f),
-                        verticalAlignment = Alignment.Bottom,
-                        horizontalArrangement = Arrangement.End
-                    ) {
-                        if (productShoppingCart.discountPercentage > 0) {
-                            PriceBeforeDiscount(
-                                modifier = Modifier.weight(0.3f), price = productShoppingCart.price
-                            )
-                        }
-                        BoldText(
-                            modifier = Modifier.fillMaxWidth().weight(1f),
-                            text = "$${productShoppingCart.getProductWithDiscount().toInt()}",
-                            fontSize = 15.sp,
-                            textAlign = TextAlign.End
-                        )
-                    }
-                }
-                Column(
-                    modifier = Modifier.height(81.dp).weight(0.3f),
-                    verticalArrangement = Arrangement.SpaceBetween,
-                    horizontalAlignment = Alignment.End
-                ) {
-                    Row(
-                        modifier = Modifier.fillMaxWidth().wrapContentHeight(),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        if (productShoppingCart.discountPercentage > 0) {
-                            Discount(
-                                modifier = Modifier.padding(start = 10.dp),
-                                discount = productShoppingCart.discountPercentage.toInt()
-                            )
-                        } else {
-                            Spacer(modifier = Modifier.padding(start = 10.dp))
-                        }
-                        if (productShoppingCart.fastOrder) {
-                            Icon(
-                                painter = painterResource(resource = DrawableResource("ic_thunder_icon.xml")),
-                                contentDescription = "free shipping",
-                                tint = StarColor
-                            )
-                        }
-                    }
-                }
-            }
-            Row(modifier = Modifier.padding(top = 12.dp)) {
-                BoldText(
-                    text = "Remover", fontSize = 12.sp, color = OrangeStrong
-                ) {
-
-                }
-                BoldText(
-                    modifier = Modifier.padding(start = 38.dp),
-                    text = "Guardar para después",
-                    fontSize = 12.sp,
-                    color = OrangeStrong
-                )
-            }
+        if (showBottomDivider) {
+            Divider(
+                modifier = Modifier.padding(top = 10.dp),
+                thickness = 1.5.dp, color = GrayBorderLight
+            )
         }
     }
 }
@@ -1758,7 +1631,6 @@ fun ItemSold() {
         }
     }
 }
-
 
 
 @Composable

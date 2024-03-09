@@ -31,6 +31,7 @@ import com.borealnetwork.allen.theme.OrangeTransparent
 import com.borealnetwork.allen.theme.StarColor
 import com.borealnetwork.allen.tools.discount
 import com.borealnetwork.allen.tools.round
+import com.borealnetwork.allen.tools.rounded
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 
@@ -113,7 +114,7 @@ fun PriceBeforeDiscount(
             modifier = modifier
                 .wrapContentWidth()
                 .align(Alignment.Center),
-            text = "$${price.round()}",
+            text = "$${price.round().rounded()}",
             color = OrangeTransparent,
             fontSize = 12.sp
         )

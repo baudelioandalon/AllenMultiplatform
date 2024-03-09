@@ -1,5 +1,9 @@
 package com.borealnetwork.allen.domain.model
 
+import com.borealnetwork.allen.tools.discount
+import com.borealnetwork.allen.tools.round
+import com.borealnetwork.allen.tools.rounded
+
 data class ItemCartModel(
     val nameStore: String,
     val idStore: String,
@@ -13,16 +17,12 @@ data class ProductShoppingCart(
     val imgProduct: String,
     val categoryItem: String,
     val quantity: Int,
-    val discountPercentage: Double,
+    val discountPercentage: Int,
     val fastOrder: Boolean,
     val minimalFastOrder: Int,
     val price: Double
 ) {
-    fun getProductWithDiscount() = if (discountPercentage > 0) {
-        price - (price * (discountPercentage / 100))
-    } else {
-        price
-    }
+    fun finalPriceInString() = price.discount(discountPercentage).round().rounded()
 }
 
 data class MinimalProductModel(
