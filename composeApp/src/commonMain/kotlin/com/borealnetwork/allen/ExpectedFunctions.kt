@@ -18,4 +18,9 @@ internal interface Platform {
     val osName: String
     val versionName: String
     val versionCode: String
+    val currency: String
+}
+
+internal interface BasicData {
+    val currency: String
 }

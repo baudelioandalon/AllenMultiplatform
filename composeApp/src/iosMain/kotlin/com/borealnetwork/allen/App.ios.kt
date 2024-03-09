@@ -25,6 +25,7 @@ internal class IOSPlatform : Platform {
     override val osName = UIDevice.currentDevice.systemName()
     override val versionName = BuildConfig.versionName
     override val versionCode = BuildConfig.versionCode
+    override val currency = BuildConfig.currency
 }
 
 private val cache: MutableMap<String, Font> = mutableMapOf()

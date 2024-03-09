@@ -60,8 +60,8 @@ class AndroidPlatform : Platform {
     override val osName = "Android"
     override val versionName = BuildConfig.versionName
     override val versionCode = BuildConfig.versionCode
+    override val currency = BuildConfig.currency
 }
-
 
 @Composable
 actual fun font(name: String, res: String, weight: FontWeight, style: FontStyle): Font {

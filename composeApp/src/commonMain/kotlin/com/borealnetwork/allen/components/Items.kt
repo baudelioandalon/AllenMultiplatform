@@ -613,7 +613,8 @@ fun ShoppingCartStoreItem(
 ) {
 
     Card(
-        modifier = modifier.fillMaxWidth(), shape = RectangleShape, elevation = elevation
+        modifier = modifier.fillMaxWidth(),
+        shape = RectangleShape, elevation = elevation
     ) {
 
         val showItems = rememberSaveable { mutableStateOf(true) }
@@ -641,12 +642,13 @@ fun ShoppingCartStoreItem(
                     modifier = Modifier.fillMaxWidth(),
                 ) {
                     //Items
-                    item.listItems.forEach {
-                        ShoppingCartItem(productShoppingCart = it,
+                    item.listItems.forEachIndexed { index, model ->
+                        ShoppingCartItem(productShoppingCart = model,
                             counter = counter,
                             deleteOptions = deleteOptions,
                             check = check,
                             endText = "Agregar al carrito",
+                            showBottomDivider = index != item.listItems.limit(),
                             startClicked = { item ->
 
                             },
@@ -750,11 +752,11 @@ fun ShoppingCartItem(
 ) {
     Column(
         modifier = if (deleteOptions) Modifier.fillMaxWidth().background(White)
-            .padding(start = 30.dp, end = 30.dp, top = 14.dp, bottom = 20.dp)
-        else Modifier.fillMaxWidth().padding(top = 14.dp, bottom = 20.dp)
+            .padding(top = 14.dp, bottom = 20.dp)
+        else Modifier.fillMaxWidth().background(White).padding(top = 14.dp, bottom = 20.dp)
     ) {
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 30.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
@@ -763,7 +765,7 @@ fun ShoppingCartItem(
                 modifier = Modifier.wrapContentWidth()
             ) {
                 Card(
-                    modifier = Modifier.size(81.dp),
+                    modifier = Modifier.size(91.dp),
                     backgroundColor = GrayBackgroundDrawerDismiss,
                     elevation = 0.dp,
                     shape = RoundedCornerShape(10.dp)
@@ -779,19 +781,19 @@ fun ShoppingCartItem(
                 SemiBoldText(
                     text = productShoppingCart.nameProduct,
                     fontSize = 13.sp,
-                    maxLines = 3,
+                    maxLines = 2,
                     textOverflow = TextOverflow.Ellipsis
                 )
                 SemiBoldText(
-                    modifier = Modifier.wrapContentHeight(),
+                    modifier = Modifier.wrapContentHeight().padding(bottom = 5.dp),
                     text = productShoppingCart.categoryItem,
                     color = GrayLetterCategoryProduct,
                     fontSize = 10.sp
                 )
-                Row(
+                Column (
                     modifier = Modifier.weight(1f),
-                    verticalAlignment = Alignment.Bottom,
-                    horizontalArrangement = Arrangement.End
+                    horizontalAlignment = Alignment.Start,
+                    verticalArrangement = Arrangement.SpaceBetween
                 ) {
                     if (productShoppingCart.discountPercentage > 0) {
                         PriceBeforeDiscount(
@@ -801,9 +803,9 @@ fun ShoppingCartItem(
                     BoldText(
                         modifier = Modifier.fillMaxWidth().weight(1f),
                         text = "$${productShoppingCart.finalPriceInString()}",
-                        fontSize = 15.sp,
+                        fontSize = 18.sp,
                         color = Black,
-                        textAlign = TextAlign.End
+                        textAlign = TextAlign.Start
                     )
                 }
             }
@@ -846,15 +848,25 @@ fun ShoppingCartItem(
             }
         }
         if (deleteOptions) {
-            Row(modifier = Modifier.padding(top = 12.dp)) {
+            Row(modifier = Modifier.padding(start = 20.dp, top = 12.dp)) {
                 BoldText(
-                    modifier = Modifier.padding(10.dp),
+                    modifier = Modifier.padding(
+                        start = 10.dp,
+                        end = 10.dp,
+                        bottom = 5.dp,
+                        top = 10.dp
+                    ),
                     text = startText, fontSize = 12.sp, color = OrangeStrong
                 ) {
                     startClicked?.invoke(productShoppingCart)
                 }
                 BoldText(
-                    modifier = Modifier.padding(10.dp),
+                    modifier = Modifier.padding(
+                        start = 10.dp,
+                        end = 10.dp,
+                        bottom = 5.dp,
+                        top = 10.dp
+                    ),
                     text = endText,
                     fontSize = 12.sp,
                     color = OrangeStrong

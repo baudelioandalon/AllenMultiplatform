@@ -10,25 +10,22 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.shape.AbsoluteCutCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.borealnetwork.allen.domain.model.BirdImage
+import com.borealnetwork.allen.modules.cart.domain.navigation.CartClientScreen
 import com.borealnetwork.allen.modules.cart.domain.navigation.detailBuyCartClientNavigationGraph
 import com.borealnetwork.allen.modules.cart.domain.navigation.resumeBuyCartClientNavigationGraph
 import com.borealnetwork.allen.modules.cart.domain.navigation.shoppingCartClientNavigationGraph
-import com.borealnetwork.allen.modules.home_client.domain.navigation.HomeClientScreen
 import com.borealnetwork.allen.modules.home_client.domain.navigation.homeClientNavigationGraph
 import com.borealnetwork.allen.modules.notifications.domain.navigation.notificationClientNavigationGraph
 import com.borealnetwork.allen.modules.orders.domain.navigation.orderClientFinishDetailNavigationGraph
@@ -36,7 +33,6 @@ import com.borealnetwork.allen.modules.orders.domain.navigation.orderClientStatu
 import com.borealnetwork.allen.modules.orders.domain.navigation.ordersClientNavigationGraph
 import com.borealnetwork.allen.modules.payments.domain.navigation.newCardClientNavigationGraph
 import com.borealnetwork.allen.modules.payments.domain.navigation.paymentsMethodClientNavigationGraph
-import com.borealnetwork.allen.modules.product.domain.navigation.ProductClientScreen
 import com.borealnetwork.allen.modules.product.domain.navigation.detailProductClientNavigationGraph
 import com.borealnetwork.allen.modules.product.domain.navigation.favoritesClientNavigationGraph
 import com.borealnetwork.allen.modules.product.domain.navigation.questionsProductClientNavigationGraph
@@ -56,22 +52,6 @@ import moe.tlaster.precompose.PreComposeApp
 import moe.tlaster.precompose.navigation.NavHost
 import moe.tlaster.precompose.navigation.rememberNavigator
 
-@Composable
-fun BirdAppTheme(
-    content: @Composable () -> Unit
-) {
-    MaterialTheme(
-        colorScheme = MaterialTheme.colorScheme.copy(primary = Color.Black),
-        shapes = MaterialTheme.shapes.copy(
-            small = AbsoluteCutCornerShape(0.dp),
-            medium = AbsoluteCutCornerShape(0.dp),
-            large = AbsoluteCutCornerShape(0.dp)
-        )
-    ) {
-        content()
-    }
-}
-
 
 @Composable
 internal fun App() = PreComposeApp {
@@ -80,7 +60,8 @@ internal fun App() = PreComposeApp {
         val navigator = rememberNavigator()
         NavHost(
             navigator = navigator,
-            initialRoute = HomeClientScreen.HomeDefaultClientScreen.route
+//            initialRoute = HomeClientScreen.HomeDefaultClientScreen.route
+            initialRoute = CartClientScreen.ShoppingCartClientScreen.route
         ) {
             //HomeClient
             homeClientNavigationGraph(navigator)
@@ -122,25 +103,7 @@ internal fun App() = PreComposeApp {
 //    WelcomeViewCompose()
 //    RegisterViewCompose()
 //    LoginViewCompose(loginViewModel)
-//    HomeClientViewCompose()
 //    ProductViewCompose()//TODO PROBLEMA CON FREESHIPPING
-//    QuestionViewCompose()
-//    RatingProductViewCompose()
-//    ShoppingCartViewCompose()
-//    DetailBuyCartStepOneViewCompose()
-//    PaymentMethodsViewCompose()
-//    NewCardViewCompose()
-//    AddressClientViewCompose()
-//    NewAddressClientViewCompose()
-//    ResumeCartStepTwoViewCompose()
-//    SearchProductViewCompose()
-//    ResultProductsViewCompose()
-//    StatusPurchaseViewCompose()
-//    NotificationClientViewCompose()
-//    OrderDetailViewCompose()
-//    OrderStatusViewCompose()
-//    OrderDetailViewCompose()
-//        OrdersListViewCompose()
     }
 }
 

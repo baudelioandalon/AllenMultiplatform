@@ -31,6 +31,8 @@ import com.borealnetwork.allen.components.MediumText
 import com.borealnetwork.allen.components.SemiBoldText
 import com.borealnetwork.allen.components.ShadowButton
 import com.borealnetwork.allen.components.SmallText
+import com.borealnetwork.allen.components.currency.CurrencyInBottomItem
+import com.borealnetwork.allen.components.currency.CurrencyInDiscountItem
 import com.borealnetwork.allen.components.extensions.DottedShape
 import com.borealnetwork.allen.components.extensions.drawColoredShadow
 import com.borealnetwork.allen.theme.BlueTransparent
@@ -96,19 +98,23 @@ fun BottomBuyCartItem(
                             color = GrayLetterShipping,
                             fontSize = 18.sp
                         )
-                        BoldText(
-                            modifier = Modifier.wrapContentWidth().padding(bottom = 5.dp),
-                            text = "$100",
-                            color = OrangeTransparent,
-                            fontSize = 12.sp
-                        )
-                        BoldText(
-                            modifier = Modifier.wrapContentWidth().padding(start = 21.dp),
-                            text = "$92",
-                            color = GreenStrong,
-                            fontSize = 30.sp,
-                            textAlign = TextAlign.End
-                        )
+                        CurrencyInDiscountItem {
+                            BoldText(
+                                text = "$100",
+                                color = OrangeTransparent,
+                                fontSize = 12.sp
+                            )
+                        }
+                        CurrencyInBottomItem(modifier = Modifier.padding(start = 21.dp)) {
+                            BoldText(
+                                text = "$92",
+                                color = GreenStrong,
+                                fontSize = 30.sp,
+                                textAlign = TextAlign.End
+                            )
+
+                        }
+
                     }
                     if (!payed) {
                         BlueButton(

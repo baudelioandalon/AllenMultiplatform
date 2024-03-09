@@ -134,6 +134,7 @@ buildConfig {
     packageName(AndroidConfig.namespace)
     buildConfigField("String", "versionName", "\"${AndroidConfig.versionName}\"")
     buildConfigField("String", "versionCode", "\"${AndroidConfig.versionCode}\"")
+    buildConfigField("String", "currency", "\"MXN\"")
 }
 
 sqldelight {

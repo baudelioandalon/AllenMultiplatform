@@ -24,6 +24,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.borealnetwork.allen.platform
 import com.borealnetwork.allen.theme.GreenStrong
 import com.borealnetwork.allen.theme.GreenTransparent
 import com.borealnetwork.allen.theme.OrangeMedium
@@ -157,7 +158,7 @@ fun PriceWithDiscount(
         ) {
             LightText(
                 modifier = Modifier.wrapContentWidth().padding(end = 2.dp),
-                text = "MXN", fontSize = 10.sp,
+                text =  platform().currency, fontSize = 10.sp,
                 color = Color.Black
             )
             BoldText(
