@@ -8,11 +8,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -22,12 +24,18 @@ import com.borealnetwork.allen.components.CornerImgButton
 import com.borealnetwork.allen.components.EditTextTopLabel
 import com.borealnetwork.allen.components.SemiBoldText
 import com.borealnetwork.allen.components.SeparatorHorizontal
-import com.borealnetwork.allen.components.TopTitleImg
+import com.borealnetwork.allen.components.ToolbarImg
 import com.borealnetwork.allen.domain.login.StateApi
+import com.borealnetwork.allen.modules.auth.domain.navigation.AuthScreen
+import com.borealnetwork.allen.modules.home_client.domain.navigation.HomeClientScreen
 import com.borealnetwork.allen.viewmodel.LoginViewModel
+import moe.tlaster.precompose.navigation.Navigator
 
 @Composable
-fun LoginViewCompose(loginViewModel: LoginViewModel) {
+fun LoginViewCompose(
+    navigator: Navigator,
+    loginViewModel: LoginViewModel
+) {
 
     val scrollState = rememberScrollState()
 
@@ -35,7 +43,9 @@ fun LoginViewCompose(loginViewModel: LoginViewModel) {
         .fillMaxSize()
         .background(Color.White),
         topBar = {
-            TopTitleImg()
+            ToolbarImg {
+                navigator.navigate(AuthScreen.WelcomeScreen.route)
+            }
         }) {
         Column(
             modifier = Modifier
@@ -57,6 +67,7 @@ fun LoginViewCompose(loginViewModel: LoginViewModel) {
                 modifier = Modifier.padding(top = 31.dp).fillMaxWidth(),
                 placeHolderText = "correo@dominio.com",
                 topLabelText = "Correo",
+                keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.None),
                 enabledHelper = true,
                 isError = loginViewModel.loginUserState == StateApi.Error,
                 value = loginViewModel.loginEmailUser,
@@ -100,8 +111,9 @@ fun LoginViewCompose(loginViewModel: LoginViewModel) {
                 modifier = Modifier.padding(top = 25.dp),
                 text = "Entrar"
             ) {
-                loginViewModel.login()
-//                navController.navigate(HOME_CLIENT_GRAPH)
+                loginViewModel.login {
+                    navigator.navigate(HomeClientScreen.HomeDefaultClientScreen.route)
+                }
             }
 
             SeparatorHorizontal(
@@ -143,7 +155,7 @@ fun LoginViewCompose(loginViewModel: LoginViewModel) {
             )
 
             CornerButton(text = "Quiero ser socio vendedor") {
-//                navController.navigate(LoginScreen.RegisterLoginScreen.route)
+                navigator.navigate(AuthScreen.RegisterScreen.route)
             }
         }
         it.calculateBottomPadding()

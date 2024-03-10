@@ -13,9 +13,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material.Card
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -33,13 +33,13 @@ import org.jetbrains.compose.resources.painterResource
 
 
 @Composable
-fun TopTitle(
-    titleText: String,
-    backClicked: (() -> Unit)? = null
+fun ToolbarImg(
+    startIcon: String = "ic_back_arrow.xml",
+    startClicked: (() -> Unit)? = null
 ) {
     Card(
         modifier = Modifier
-            .fillMaxWidth(),
+            .fillMaxWidth().height(110.dp),
         elevation = 5.dp,
         backgroundColor = MaterialTheme.colors.primary,
         shape = RectangleShape
@@ -55,83 +55,19 @@ fun TopTitle(
             Box(
                 modifier = Modifier.fillMaxSize()
             ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(60.dp),
-                    verticalAlignment = Alignment.CenterVertically
+                CircularIcon(
+                    modifier = Modifier.padding(start = 10.dp)
+                        .align(Alignment.CenterStart),
+                    icon = startIcon
                 ) {
-                    CircularIcon(
-                        modifier = Modifier
-                            .padding(start = 30.dp)
-                            .width(35.dp)
-                            .height(35.dp),
-                        iconTint = White,
-                        icon = "ic_back_arrow.xml"
-                    ) {
-                        backClicked?.invoke()
-                    }
-
+                    startClicked?.invoke()
                 }
-                SemiBoldText(
-                    modifier = Modifier.wrapContentWidth().align(Alignment.Center),
-                    text = titleText,
-                    color = White,
-                    textAlign = TextAlign.Center
-                )
-            }
-
-        }
-
-    }
-}
-
-
-@Composable
-fun TopTitleImg(
-    backClicked: (() -> Unit)? = null
-) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth(),
-        elevation = 5.dp,
-        backgroundColor = MaterialTheme.colors.primary,
-        shape = RectangleShape
-    ) {
-        Column(
-            modifier = Modifier.fillMaxWidth().fillMaxHeight(),
-            verticalArrangement = Arrangement.Center
-        ) {
-            Box(
-                modifier = Modifier.fillMaxWidth().height(30.dp)
-                    .background(MaterialTheme.colors.primary)
-            )
-            Box(
-                modifier = Modifier.fillMaxSize()
-            ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(60.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    CircularIcon(
-                        modifier = Modifier
-                            .padding(start = 30.dp)
-                            .width(35.dp)
-                            .height(35.dp),
-                        iconTint = White,
-                        icon = "ic_back_arrow.xml"
-                    ) {
-                        backClicked?.invoke()
-                    }
-
-                }
-                Image(
+                Icon(
                     modifier = Modifier.width(53.dp)
                         .height(23.dp).align(Alignment.Center),
                     painter = painterResource(resource = DrawableResource("allen_blue_logo.xml")),
-                    contentDescription = "logo"
+                    contentDescription = "logo",
+                    tint = White
                 )
             }
         }
@@ -367,7 +303,7 @@ fun ToolbarTitle(
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .height(100.dp),
+            .height(110.dp),
         shape = RectangleShape,
         backgroundColor = MaterialTheme.colors.primary,
         elevation = 5.dp

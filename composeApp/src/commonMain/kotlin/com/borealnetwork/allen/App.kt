@@ -22,10 +22,14 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.borealnetwork.allen.domain.model.BirdImage
-import com.borealnetwork.allen.modules.cart.domain.navigation.CartClientScreen
+import com.borealnetwork.allen.modules.auth.domain.navigation.AuthScreen
+import com.borealnetwork.allen.modules.auth.domain.navigation.loginNavigationGraph
+import com.borealnetwork.allen.modules.auth.domain.navigation.registerNavigationGraph
+import com.borealnetwork.allen.modules.auth.domain.navigation.welcomeNavigationGraph
 import com.borealnetwork.allen.modules.cart.domain.navigation.detailBuyCartClientNavigationGraph
 import com.borealnetwork.allen.modules.cart.domain.navigation.resumeBuyCartClientNavigationGraph
 import com.borealnetwork.allen.modules.cart.domain.navigation.shoppingCartClientNavigationGraph
+import com.borealnetwork.allen.modules.home_client.domain.navigation.HomeClientScreen
 import com.borealnetwork.allen.modules.home_client.domain.navigation.homeClientNavigationGraph
 import com.borealnetwork.allen.modules.notifications.domain.navigation.notificationClientNavigationGraph
 import com.borealnetwork.allen.modules.orders.domain.navigation.orderClientFinishDetailNavigationGraph
@@ -60,9 +64,14 @@ internal fun App() = PreComposeApp {
         val navigator = rememberNavigator()
         NavHost(
             navigator = navigator,
+            initialRoute = AuthScreen.LoginScreen.route
 //            initialRoute = HomeClientScreen.HomeDefaultClientScreen.route
-            initialRoute = CartClientScreen.ShoppingCartClientScreen.route
         ) {
+            //Auth
+            welcomeNavigationGraph(navigator)
+            loginNavigationGraph(navigator, loginViewModel)
+            registerNavigationGraph(navigator)
+
             //HomeClient
             homeClientNavigationGraph(navigator)
 

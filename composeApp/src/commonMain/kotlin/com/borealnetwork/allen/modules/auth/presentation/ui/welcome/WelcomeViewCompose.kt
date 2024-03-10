@@ -27,12 +27,14 @@ import com.borealnetwork.allen.components.BlueButton
 import com.borealnetwork.allen.components.BoldText
 import com.borealnetwork.allen.components.CornerButton
 import com.borealnetwork.allen.components.LogoBlue
+import com.borealnetwork.allen.modules.auth.domain.navigation.AuthScreen
 import com.borealnetwork.allen.theme.mediumTypo
+import moe.tlaster.precompose.navigation.Navigator
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
-fun WelcomeViewCompose() {
+fun WelcomeViewCompose(navigator: Navigator) {
 
     val scrollRemember = rememberScrollState()
     Column(
@@ -46,7 +48,7 @@ fun WelcomeViewCompose() {
                 .padding(top = 100.dp, bottom = 49.dp)
                 .width(300.dp)
                 .height(200.dp),
-            painter = painterResource(resource = DrawableResource(  "login_shopping.png")),
+            painter = painterResource(resource = DrawableResource("login_shopping.png")),
             contentDescription = "shoppingImage"
         )
         Column(
@@ -62,7 +64,7 @@ fun WelcomeViewCompose() {
             Image(
                 modifier = Modifier.padding(top = 7.dp),
                 painter = painterResource(
-                    resource = DrawableResource(  "allen_blue_logo.xml")
+                    resource = DrawableResource("allen_blue_logo.xml")
                 ), contentDescription = "allenIcon"
             )
             BoldText(
@@ -111,14 +113,14 @@ fun WelcomeViewCompose() {
                 modifier = Modifier.padding(top = 40.dp),
                 text = "Entrar"
             ) {
-//                navController.navigate(LoginScreen.LoginLoginScreen.route)
+                navigator.navigate(AuthScreen.LoginScreen.route)
             }
             CornerButton(
                 text = "Quiero ser socio vendedor", modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 26.dp)
             ) {
-//                navController.navigate(LoginScreen.RegisterLoginScreen.route)
+                navigator.navigate(AuthScreen.RegisterScreen.route)
             }
 
             LogoBlue(

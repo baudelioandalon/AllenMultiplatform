@@ -70,7 +70,7 @@ class LoginViewModel : ViewModel() {
             .body<List<BirdImage>>()
     }
 
-    fun login() {
+    fun login(success: () -> Unit) {
         if (!loginEmailUser.isEmailValid()) {
             loginUserState = StateApi.Error.error("El usuario es invalido")
         } else if (loginTokenUser.isEmpty()) {
@@ -79,6 +79,7 @@ class LoginViewModel : ViewModel() {
             loginTokenState = StateApi.Error.error("Minimo 8 caracteres")
         } else {
             //GoToLogin
+            success()
         }
     }
 

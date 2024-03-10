@@ -84,7 +84,7 @@ fun CustomBottomNavigationItem(item: SellerScreen, isSelected: Boolean, onClick:
         ) {
 
             Icon(
-                painter = painterResource(resource = DrawableResource( item.icon)),
+                painter = painterResource(resource = DrawableResource(item.icon)),
                 contentDescription = null,
                 tint = contentColor
             )
