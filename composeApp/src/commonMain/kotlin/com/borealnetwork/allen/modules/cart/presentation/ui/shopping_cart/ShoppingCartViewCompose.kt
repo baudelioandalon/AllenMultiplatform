@@ -85,7 +85,10 @@ fun ShoppingCartViewCompose(navigator: Navigator) {
         )
     },
         bottomBar = {
-            BottomBuyCartItem {
+            BottomBuyCartItem(
+                price = 100.0,
+                discount = 8
+            ) {
                 navigator.navigate(CartClientScreen.ResumeBuyCartClientScreen.route)
             }
         }) {
@@ -102,7 +105,10 @@ fun ShoppingCartViewCompose(navigator: Navigator) {
                 ShoppingCartStoreItem(
                     modifier = Modifier.padding(bottom = 30.dp),
                     item = item,
-                    elevation = 5.dp
+                    elevation = 5.dp,
+                    check = true,
+                    startTextButton = "Remover",
+                    endTextButton = "Guardar para despues"
                 )
             }
 

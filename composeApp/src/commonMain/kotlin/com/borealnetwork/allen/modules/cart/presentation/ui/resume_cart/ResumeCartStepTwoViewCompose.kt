@@ -17,6 +17,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
+import androidx.compose.material.Divider
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
@@ -40,6 +41,7 @@ import com.borealnetwork.allen.domain.model.ItemCartModel
 import com.borealnetwork.allen.domain.model.ProductShoppingCart
 import com.borealnetwork.allen.modules.cart.domain.navigation.CartClientScreen
 import com.borealnetwork.allen.theme.GrayBackgroundMain
+import com.borealnetwork.allen.theme.GrayBorderLight
 import com.borealnetwork.allen.theme.GrayMedium
 import com.borealnetwork.allen.theme.GraySinceTo
 import com.borealnetwork.allen.theme.GrayStrong
@@ -111,7 +113,10 @@ fun ResumeCartStepTwoViewCompose(navigator: Navigator) {
             )
         },
         bottomBar = {
-            BottomBuyCartItem {
+            BottomBuyCartItem(
+                price = 100.0,
+                discount = 8
+            ) {
                 navigator.navigate(CartClientScreen.DetailBuyCartClientScreen.route)
             }
         }
@@ -126,7 +131,7 @@ fun ResumeCartStepTwoViewCompose(navigator: Navigator) {
                 Column(
                     modifier = Modifier
                         .wrapContentWidth()
-                        .padding(start = 30.dp, top = 40.dp, bottom = 30.dp),
+                        .padding(start = 30.dp, top = 20.dp, bottom = 30.dp),
                     verticalArrangement = Arrangement.SpaceBetween,
                     horizontalAlignment = Alignment.Start
                 ) {
@@ -193,6 +198,10 @@ fun ResumeCartStepTwoViewCompose(navigator: Navigator) {
                 ) {
 
                 }
+                Divider(
+                    color = GrayBorderLight,
+                    thickness = 1.dp
+                )
                 ResumeSelector(
                     modifier = Modifier.padding(horizontal = 30.dp),
                     textTop = "Forma de pago",
@@ -219,7 +228,7 @@ fun ResumeCartStepTwoViewCompose(navigator: Navigator) {
                 listItems
             ) { index, item ->
                 ShoppingCartStoreItem(
-                    modifier = Modifier.padding(start = 30.dp, end = 30.dp),
+                    topModifier = Modifier.padding(horizontal = 20.dp),
                     item = item,
                     counter = false,
                     deleteOptions = false,

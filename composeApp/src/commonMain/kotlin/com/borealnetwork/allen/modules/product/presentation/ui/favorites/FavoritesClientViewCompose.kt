@@ -65,7 +65,7 @@ fun FavoritesClientViewCompose(navigator: Navigator) {
                 list
             ) { index, item ->
                 ShoppingCartItem(productShoppingCart = item,
-                    endText = "Mover al carrito",
+                    endTextButton = "Mover al carrito",
                     counter = false,
                     showBottomDivider = true,
                     startClicked = { item ->

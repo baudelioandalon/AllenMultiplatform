@@ -49,6 +49,8 @@ import com.borealnetwork.allen.tools.rounded
 fun BottomBuyCartItem(
     modifier: Modifier = Modifier,
     payed: Boolean = false,
+    discount: Int,
+    price: Double,
     nextClicked: (() -> Unit)? = null
 ) {
     Column(
@@ -100,14 +102,14 @@ fun BottomBuyCartItem(
                         )
                         CurrencyInDiscountItem {
                             BoldText(
-                                text = "$100",
+                                text = "$${price.discount(discount).round().rounded()}",
                                 color = OrangeTransparent,
                                 fontSize = 12.sp
                             )
                         }
                         CurrencyInBottomItem(modifier = Modifier.padding(start = 21.dp)) {
                             BoldText(
-                                text = "$92",
+                                text = "$${price.round().rounded()}",
                                 color = GreenStrong,
                                 fontSize = 30.sp,
                                 textAlign = TextAlign.End

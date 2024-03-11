@@ -1,5 +1,6 @@
 [versions]
 
+firebaseAuth = "1.11.1"
 kotlin = "1.9.21"
 compose = "1.6.0"
 agp = "8.2.2"
@@ -33,6 +34,7 @@ constraintlayout = "2.1.4"
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidx-appcompat" }
 androidx-activityCompose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
 compose-uitooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose-uitooling" }
+firebase-auth = { module = "dev.gitlive:firebase-auth", version.ref = "firebaseAuth" }
 precompose = { module = "moe.tlaster:precompose", version.ref = "precompose" }
 voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
 composeImageLoader = { module = "io.github.qdsfdhvh:image-loader", version.ref = "composeImageLoader" }

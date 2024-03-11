@@ -60,6 +60,7 @@ kotlin {
             implementation(libs.kamel.image)
             api(compose.foundation)
             api(compose.animation)
+            implementation(libs.firebase.auth)
 //...
 //            implementation(libs.voyager.navigator)
             api(libs.precompose)

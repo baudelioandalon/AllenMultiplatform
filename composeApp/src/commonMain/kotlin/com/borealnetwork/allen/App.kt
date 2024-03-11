@@ -26,6 +26,7 @@ import com.borealnetwork.allen.modules.auth.domain.navigation.AuthScreen
 import com.borealnetwork.allen.modules.auth.domain.navigation.loginNavigationGraph
 import com.borealnetwork.allen.modules.auth.domain.navigation.registerNavigationGraph
 import com.borealnetwork.allen.modules.auth.domain.navigation.welcomeNavigationGraph
+import com.borealnetwork.allen.modules.cart.domain.navigation.CartClientScreen
 import com.borealnetwork.allen.modules.cart.domain.navigation.detailBuyCartClientNavigationGraph
 import com.borealnetwork.allen.modules.cart.domain.navigation.resumeBuyCartClientNavigationGraph
 import com.borealnetwork.allen.modules.cart.domain.navigation.shoppingCartClientNavigationGraph

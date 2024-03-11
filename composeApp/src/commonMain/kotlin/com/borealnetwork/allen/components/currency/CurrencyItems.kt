@@ -18,10 +18,11 @@ import com.borealnetwork.allen.theme.OrangeTransparent
 
 @Composable
 fun CurrencyInDiscountItem(
+    modifier: Modifier = Modifier,
     composable: @Composable RowScope.() -> Unit
 ){
     Row(
-        modifier = Modifier.wrapContentWidth(),
+        modifier = modifier.wrapContentWidth(),
         verticalAlignment = Alignment.Bottom
     ) {
         BoldText(
@@ -47,6 +48,26 @@ fun CurrencyInBottomItem(
             text = platform().currency,
             color = GreenStrong,
             fontSize = 20.sp,
+            textAlign = TextAlign.End
+        )
+        composable(this)
+    }
+}
+
+@Composable
+fun CurrencyInShoppingItem(
+    modifier: Modifier = Modifier,
+    composable: @Composable RowScope.() -> Unit
+){
+    Row(
+        modifier = modifier.wrapContentWidth(),
+        verticalAlignment = Alignment.Bottom
+    ) {
+        BoldText(
+            modifier = Modifier.wrapContentWidth().padding(end = 5.dp),
+            text = platform().currency,
+            color = GreenStrong,
+            fontSize = 12.sp,
             textAlign = TextAlign.End
         )
         composable(this)

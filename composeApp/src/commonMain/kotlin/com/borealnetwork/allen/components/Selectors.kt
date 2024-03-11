@@ -294,7 +294,7 @@ fun ResumeSelector(
     onClicked: (() -> Unit)? = null
 ) {
     Column(
-        modifier = modifier
+        modifier = Modifier
             .fillMaxWidth()
             .height(60.dp)
             .background(White)
@@ -302,7 +302,7 @@ fun ResumeSelector(
         verticalArrangement = Arrangement.SpaceBetween
     ) {
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.Start,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -328,13 +328,7 @@ fun ResumeSelector(
                 )
             }
             Spacer(modifier = Modifier.weight(1f))
-            Image(
-                modifier = Modifier
-                    .wrapContentSize()
-                    .rotate(90f),
-                painter = painterResource(resource = DrawableResource(  "ic_selector_right.xml")),
-                contentDescription = "right selector"
-            )
+
         }
         if (lineBottom) {
             Divider(

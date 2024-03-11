@@ -24,6 +24,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.borealnetwork.allen.components.currency.CurrencyInDiscountItem
 import com.borealnetwork.allen.platform
 import com.borealnetwork.allen.theme.GreenStrong
 import com.borealnetwork.allen.theme.GreenTransparent
@@ -57,7 +58,7 @@ fun FreeShipping(modifier: Modifier = Modifier) {
         )
         Icon(
             modifier = Modifier.requiredSize(20.dp).padding(start = 4.dp, end = 10.dp),
-            painter = painterResource(resource = DrawableResource(  "ic_thunder_icon.xml")),
+            painter = painterResource(resource = DrawableResource("ic_thunder_icon.xml")),
             contentDescription = "free shipping",
             tint = StarColor
         )
@@ -106,23 +107,25 @@ fun Discount(modifier: Modifier = Modifier, discount: Int = 15) {
 @Composable
 fun PriceBeforeDiscount(
     modifier: Modifier = Modifier,
-    firstModifier: Modifier = Modifier,
     price: Double = 50.0
 ) {
 
-    Box(modifier = firstModifier) {
-        BoldText(
-            modifier = modifier
-                .wrapContentWidth()
-                .align(Alignment.Center),
-            text = "$${price.round().rounded()}",
-            color = OrangeTransparent,
-            fontSize = 12.sp
-        )
+    Box(modifier = modifier) {
+        CurrencyInDiscountItem(
+            modifier = Modifier.align(Alignment.CenterStart)
+        ) {
+            BoldText(
+                text = "$${price.round().rounded()}",
+                color = OrangeTransparent,
+                fontSize = 12.sp,
+                maxLines = 1,
+                textOverflow = TextOverflow.Ellipsis
+            )
+        }
         Canvas(
             modifier = Modifier
-                .fillMaxWidth(0.3f)
-                .align(Alignment.Center)
+                .fillMaxWidth()
+                .align(Alignment.CenterStart)
         ) {
             var yCord = 0f
             drawLine(
@@ -133,7 +136,6 @@ fun PriceBeforeDiscount(
             )
             yCord += 1.8f * 15.toDp().toPx()
         }
-
 
     }
 }
@@ -158,7 +160,7 @@ fun PriceWithDiscount(
         ) {
             LightText(
                 modifier = Modifier.wrapContentWidth().padding(end = 2.dp),
-                text =  platform().currency, fontSize = 10.sp,
+                text = platform().currency, fontSize = 10.sp,
                 color = Color.Black
             )
             BoldText(

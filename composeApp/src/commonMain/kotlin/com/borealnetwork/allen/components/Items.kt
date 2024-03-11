@@ -37,6 +37,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.RadioButton
 import androidx.compose.material.RadioButtonDefaults
 import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
@@ -60,6 +61,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.borealnetwork.allen.components.currency.CurrencyInShoppingItem
 import com.borealnetwork.allen.components.extensions.DottedShape
 import com.borealnetwork.allen.components.extensions.mirror
 import com.borealnetwork.allen.domain.model.ItemCartModel
@@ -79,6 +81,7 @@ import com.borealnetwork.allen.theme.GrayLetterCategoryProduct
 import com.borealnetwork.allen.theme.GrayLetterHint
 import com.borealnetwork.allen.theme.GrayLetterSeeAll
 import com.borealnetwork.allen.theme.GrayMedium
+import com.borealnetwork.allen.theme.GraySelector
 import com.borealnetwork.allen.theme.GraySinceTo
 import com.borealnetwork.allen.theme.GrayStrong
 import com.borealnetwork.allen.theme.GreenStrong
@@ -601,6 +604,7 @@ fun AnswerItem(modifier: Modifier = Modifier, text: String = "") {
 @Composable
 fun ShoppingCartStoreItem(
     modifier: Modifier = Modifier,
+    topModifier: Modifier = Modifier,
     item: ItemCartModel = ItemCartModel(
         "Test", "3e23dc2", "dd", listOf()
     ),
@@ -609,12 +613,15 @@ fun ShoppingCartStoreItem(
     selector: Boolean = true,
     elevation: Dp = 0.dp,
     hideTopLine: Boolean = false,
-    check: Boolean = false
+    check: Boolean = false,
+    startTextButton: String = "",
+    endTextButton: String = ""
 ) {
 
     Card(
         modifier = modifier.fillMaxWidth(),
-        shape = RectangleShape, elevation = elevation
+        shape = RectangleShape,
+        elevation = elevation
     ) {
 
         val showItems = rememberSaveable { mutableStateOf(true) }
@@ -628,6 +635,7 @@ fun ShoppingCartStoreItem(
             }
             //TopStoreInformation
             StoreInformationItem(
+                modifier = topModifier,
                 deleteOptions = deleteOptions,
                 selector = selector,
                 itemNotPayed = item,
@@ -647,7 +655,8 @@ fun ShoppingCartStoreItem(
                             counter = counter,
                             deleteOptions = deleteOptions,
                             check = check,
-                            endText = "Agregar al carrito",
+                            startText = startTextButton,
+                            endTextButton = endTextButton,
                             showBottomDivider = index != item.listItems.limit(),
                             startClicked = { item ->
 
@@ -664,6 +673,7 @@ fun ShoppingCartStoreItem(
 
 @Composable
 fun StoreInformationItem(
+    modifier: Modifier,
     deleteOptions: Boolean,
     selector: Boolean,
     hideArrow: Boolean = true,
@@ -672,7 +682,7 @@ fun StoreInformationItem(
     showItems: MutableState<Boolean>,
 ) {
     Row(
-        modifier = Modifier.fillMaxWidth()
+        modifier = modifier.fillMaxWidth()
             .padding(top = 12.dp, bottom = 14.dp, end = if (deleteOptions) 20.dp else 0.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceAround
@@ -728,6 +738,7 @@ fun StoreInformationItem(
     }
 }
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun ShoppingCartItem(
     productShoppingCart: ProductShoppingCart = ProductShoppingCart(
@@ -743,16 +754,16 @@ fun ShoppingCartItem(
     ),
     counter: Boolean = true,
     deleteOptions: Boolean = true,
-    check: Boolean = false,
+    check: Boolean = true,
     startText: String = "Remover",
-    endText: String = "Guardar para después",
+    endTextButton: String = "Guardar para después",
     showBottomDivider: Boolean = false,
     startClicked: ((ProductShoppingCart) -> Unit)? = null,
     endClicked: ((ProductShoppingCart) -> Unit)? = null
 ) {
     Column(
         modifier = if (deleteOptions) Modifier.fillMaxWidth().background(White)
-            .padding(top = 14.dp, bottom = 20.dp)
+            .padding(bottom = 20.dp)
         else Modifier.fillMaxWidth().background(White).padding(top = 14.dp, bottom = 20.dp)
     ) {
         Row(
@@ -761,21 +772,31 @@ fun ShoppingCartItem(
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
 
-            Column(
+            //ImageProduct
+            Box(
                 modifier = Modifier.wrapContentWidth()
             ) {
                 Card(
                     modifier = Modifier.size(91.dp),
                     backgroundColor = GrayBackgroundDrawerDismiss,
                     elevation = 0.dp,
-                    shape = RoundedCornerShape(10.dp)
+                    shape = RoundedCornerShape(10.dp),
+                    onClick = {
+
+                    }
                 ) {
 
                 }
+                Image(
+                    modifier = Modifier.padding(start = 5.dp, top = 5.dp),
+                    painter = painterResource(resource = DrawableResource(if (check) "ic_checked.xml" else "ic_check.xml")),
+                    contentDescription = "check"
+                )
 
             }
+            //NameProduct, Category, PriceBeforeDiscount
             Column(
-                modifier = Modifier.height(81.dp).padding(start = 27.dp).weight(0.3f),
+                modifier = Modifier.height(81.dp).padding(start = 25.dp).weight(0.3f),
                 verticalArrangement = Arrangement.SpaceAround
             ) {
                 SemiBoldText(
@@ -788,27 +809,20 @@ fun ShoppingCartItem(
                     modifier = Modifier.wrapContentHeight().padding(bottom = 5.dp),
                     text = productShoppingCart.categoryItem,
                     color = GrayLetterCategoryProduct,
-                    fontSize = 10.sp
+                    maxLines = 1,
+                    textOverflow = TextOverflow.Ellipsis,
+                    fontSize = 12.sp
                 )
-                Column (
-                    modifier = Modifier.weight(1f),
-                    horizontalAlignment = Alignment.Start,
-                    verticalArrangement = Arrangement.SpaceBetween
-                ) {
-                    if (productShoppingCart.discountPercentage > 0) {
-                        PriceBeforeDiscount(
-                            modifier = Modifier.weight(0.3f), price = productShoppingCart.price
-                        )
-                    }
-                    BoldText(
-                        modifier = Modifier.fillMaxWidth().weight(1f),
-                        text = "$${productShoppingCart.finalPriceInString()}",
-                        fontSize = 18.sp,
-                        color = Black,
-                        textAlign = TextAlign.Start
+
+                if (productShoppingCart.discountPercentage > 0) {
+                    PriceBeforeDiscount(
+                        modifier = Modifier.weight(0.3f).padding(end = 20.dp),
+                        price = productShoppingCart.price
                     )
                 }
+
             }
+            //Discount, FreeShipping
             Column(
                 modifier = Modifier.height(81.dp).weight(0.3f),
                 verticalArrangement = Arrangement.SpaceBetween,
@@ -839,13 +853,62 @@ fun ShoppingCartItem(
                     )
                 }
             }
-            if (check) {
-                Image(
-                    modifier = Modifier.padding(start = 30.dp),
-                    painter = painterResource(resource = DrawableResource("ic_checked.xml")),
-                    contentDescription = "check"
+
+        }
+        Row(
+            modifier = Modifier.fillMaxWidth().padding(start = 30.dp, top = 17.dp)
+        ) {
+            Spinner(
+                modifier = Modifier.width(91.dp),
+                dropDownModifier = Modifier.wrapContentSize(),
+                items = listOf("Talla M", "Talla S"),
+                selectedItem = "Talla M",
+                onItemSelected = {},
+                selectedItemFactory = { modifierContainer, item ->
+                    Card(
+                        modifier = modifierContainer
+                            .fillMaxWidth()
+                            .wrapContentHeight(),
+                        elevation = 0.dp,
+                        shape = RoundedCornerShape(10.dp),
+                        backgroundColor = GraySelector
+                    ) {
+                        Row(
+                            modifier = modifierContainer.fillMaxWidth()
+                                .padding(horizontal = 10.dp, vertical = 5.dp),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            SemiBoldText(
+                                modifier = Modifier.padding(end = 8.dp),
+                                text = item,
+                                fontSize = 15.sp
+                            )
+                            Icon(
+                                painter = painterResource(resource = DrawableResource("ic_arrow_down.xml")),
+                                contentDescription = "drop down arrow"
+                            )
+                        }
+                    }
+
+                },
+                dropdownItemFactory = { item, _ ->
+                    Text(text = item)
+                }
+            )
+            CurrencyInShoppingItem(
+                modifier = Modifier.padding(start = 25.dp)
+            ) {
+                BoldText(
+                    modifier = Modifier.fillMaxWidth(),
+                    text = "$3242.45",
+                    fontSize = 18.sp,
+                    color = GreenStrong,
+                    textAlign = TextAlign.Start,
+                    textOverflow = TextOverflow.Clip
                 )
             }
+
         }
         if (deleteOptions) {
             Row(modifier = Modifier.padding(start = 20.dp, top = 12.dp)) {
@@ -867,7 +930,7 @@ fun ShoppingCartItem(
                         bottom = 5.dp,
                         top = 10.dp
                     ),
-                    text = endText,
+                    text = endTextButton,
                     fontSize = 12.sp,
                     color = OrangeStrong
                 ) {
@@ -1411,6 +1474,7 @@ fun ShoppingCategoryHistoryItem(
                 )
             }
             StoreInformationItem(
+                modifier = Modifier.padding(horizontal = 30.dp),
                 deleteOptions,
                 selector,
                 hideArrow = hideArrow,

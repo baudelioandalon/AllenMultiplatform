@@ -37,7 +37,10 @@ fun DetailBuyCartStepOneViewCompose(navigator: Navigator) {
         )
     },
         bottomBar = {
-            BottomBuyCartItem()
+            BottomBuyCartItem(
+                price = 100.0,
+                discount = 8
+            )
         }) {
         LazyColumn(
             modifier = Modifier

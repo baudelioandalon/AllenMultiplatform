@@ -95,7 +95,11 @@ fun OrderClientFinishDetailViewCompose(navigator: Navigator) {
             )
         },
         bottomBar = {
-            BottomBuyCartItem(payed = true)
+            BottomBuyCartItem(
+                payed = true,
+                price = 100.0,
+                discount = 8
+            )
         }
     ) {
         LazyColumn(
