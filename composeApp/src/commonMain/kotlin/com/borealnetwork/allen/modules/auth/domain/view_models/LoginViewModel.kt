@@ -39,7 +39,7 @@ class LoginViewModel : ViewModel() {
     var loginTokenState by mutableStateOf<StateApi>(StateApi.None)
 
     init {
-        updateImages()
+//        updateImages()
     }
 
     private val httpClient = HttpClient {
@@ -83,6 +83,7 @@ class LoginViewModel : ViewModel() {
         } else {
             //GoToLogin
             viewModelScope.launch {
+                loginTokenState = StateApi.Loading
                 try {
                     val result =
                         Firebase.auth.signInWithEmailAndPassword(loginEmailUser, loginTokenUser)
