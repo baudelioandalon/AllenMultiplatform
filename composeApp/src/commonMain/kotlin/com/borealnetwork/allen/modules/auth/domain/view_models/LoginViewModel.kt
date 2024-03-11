@@ -1,4 +1,4 @@
-package com.borealnetwork.allen.viewmodel
+package com.borealnetwork.allen.modules.auth.domain.view_models
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -6,6 +6,9 @@ import androidx.compose.runtime.setValue
 import com.borealnetwork.allen.domain.login.StateApi
 import com.borealnetwork.allen.domain.model.BirdImage
 import com.borealnetwork.allen.tools.isEmailValid
+import dev.gitlive.firebase.Firebase
+import dev.gitlive.firebase.auth.FirebaseAuthException
+import dev.gitlive.firebase.auth.auth
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -29,8 +32,8 @@ class LoginViewModel : ViewModel() {
 
     private val _uiState = MutableStateFlow(BirdsUiState())
     val uiState = _uiState.asStateFlow()
-    var loginEmailUser by mutableStateOf("")
-    var loginTokenUser by mutableStateOf("")
+    var loginEmailUser by mutableStateOf("baudelioandalon@gmail.com")
+    var loginTokenUser by mutableStateOf("yeyo132A")
 
     var loginUserState by mutableStateOf<StateApi>(StateApi.None)
     var loginTokenState by mutableStateOf<StateApi>(StateApi.None)
@@ -79,7 +82,20 @@ class LoginViewModel : ViewModel() {
             loginTokenState = StateApi.Error.error("Minimo 8 caracteres")
         } else {
             //GoToLogin
-            success()
+            viewModelScope.launch {
+                try {
+                    val result =
+                        Firebase.auth.signInWithEmailAndPassword(loginEmailUser, loginTokenUser)
+                    if (result.user != null) {
+                        success()
+                    }
+                } catch (exception: Exception) {
+                    val authException = (exception as FirebaseAuthException)
+                    loginTokenState = StateApi.Error.error(authException.message.orEmpty())
+                    authException.message
+                }
+            }
+
         }
     }
 

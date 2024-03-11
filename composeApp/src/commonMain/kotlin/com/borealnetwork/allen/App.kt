@@ -26,11 +26,9 @@ import com.borealnetwork.allen.modules.auth.domain.navigation.AuthScreen
 import com.borealnetwork.allen.modules.auth.domain.navigation.loginNavigationGraph
 import com.borealnetwork.allen.modules.auth.domain.navigation.registerNavigationGraph
 import com.borealnetwork.allen.modules.auth.domain.navigation.welcomeNavigationGraph
-import com.borealnetwork.allen.modules.cart.domain.navigation.CartClientScreen
 import com.borealnetwork.allen.modules.cart.domain.navigation.detailBuyCartClientNavigationGraph
 import com.borealnetwork.allen.modules.cart.domain.navigation.resumeBuyCartClientNavigationGraph
 import com.borealnetwork.allen.modules.cart.domain.navigation.shoppingCartClientNavigationGraph
-import com.borealnetwork.allen.modules.home_client.domain.navigation.HomeClientScreen
 import com.borealnetwork.allen.modules.home_client.domain.navigation.homeClientNavigationGraph
 import com.borealnetwork.allen.modules.notifications.domain.navigation.notificationClientNavigationGraph
 import com.borealnetwork.allen.modules.orders.domain.navigation.orderClientFinishDetailNavigationGraph
@@ -48,7 +46,11 @@ import com.borealnetwork.allen.modules.profile.domain.navigation.addressClientNa
 import com.borealnetwork.allen.modules.profile.domain.navigation.newAddressClientNavigationGraph
 import com.borealnetwork.allen.modules.stores.domain.navigation.storesInMapNavigationGraph
 import com.borealnetwork.allen.theme.AppTheme
-import com.borealnetwork.allen.viewmodel.LoginViewModel
+import com.borealnetwork.allen.modules.auth.domain.view_models.LoginViewModel
+import dev.gitlive.firebase.Firebase
+import dev.gitlive.firebase.FirebaseOptions
+import dev.gitlive.firebase.auth.auth
+import dev.gitlive.firebase.initialize
 import dev.icerock.moko.mvvm.compose.getViewModel
 import dev.icerock.moko.mvvm.compose.viewModelFactory
 import io.kamel.image.KamelImage
@@ -60,12 +62,16 @@ import moe.tlaster.precompose.navigation.rememberNavigator
 
 @Composable
 internal fun App() = PreComposeApp {
+
+    //TODO INICIALIZAR CON ESTE MANUAL
+    //https://medium.com/@carlosgub/how-to-implement-firebase-firestore-in-kotlin-multiplatform-mobile-with-compose-multiplatform-32b66cdba9f7
+
     AppTheme {
         val loginViewModel = getViewModel(Unit, viewModelFactory { LoginViewModel() })
         val navigator = rememberNavigator()
         NavHost(
             navigator = navigator,
-            initialRoute = AuthScreen.LoginScreen.route
+            initialRoute = AuthScreen.WelcomeScreen.route
 //            initialRoute = HomeClientScreen.HomeDefaultClientScreen.route
         ) {
             //Auth

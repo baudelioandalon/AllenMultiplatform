@@ -1,6 +1,9 @@
 [versions]
 
 firebaseAuth = "1.11.1"
+firebaseCommon = "1.11.1"
+firebaseCommonKtx = "20.4.2"
+firebaseFirestore = "1.11.1"
 kotlin = "1.9.21"
 compose = "1.6.0"
 agp = "8.2.2"
@@ -26,6 +29,7 @@ koin = "3.5.3"
 kstore = "0.7.1"
 sqlDelight = "2.0.1"
 apollo = "4.0.0-beta.4"
+google-services = "4.3.14"
 kamel-image = "0.9.1"
 constraintlayout = "2.1.4"
 
@@ -35,6 +39,9 @@ androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "a
 androidx-activityCompose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
 compose-uitooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose-uitooling" }
 firebase-auth = { module = "dev.gitlive:firebase-auth", version.ref = "firebaseAuth" }
+firebase-common-ktx = { module = "com.google.firebase:firebase-common-ktx", version.ref = "firebaseCommonKtx" }
+gitlive-firebase-common = { module = "dev.gitlive:firebase-common", version.ref = "firebaseCommon" }
+gitlive-firebase-firestore = { module = "dev.gitlive:firebase-firestore", version.ref = "firebaseFirestore" }
 precompose = { module = "moe.tlaster:precompose", version.ref = "precompose" }
 voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
 composeImageLoader = { module = "io.github.qdsfdhvh:image-loader", version.ref = "composeImageLoader" }
@@ -75,3 +82,4 @@ buildConfig = { id = "com.github.gmazzo.buildconfig", version.ref = "buildConfig
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 sqlDelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }
 apollo = { id = "com.apollographql.apollo3", version.ref = "apollo" }
+google-services = { id = "com.google.gms.google-services", version.ref = "google-services" }

@@ -16,6 +16,8 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.core.view.WindowCompat
+import com.google.firebase.Firebase
+import com.google.firebase.initialize
 import java.math.RoundingMode
 import java.text.DecimalFormat
 import java.util.UUID
@@ -35,6 +37,8 @@ class AppActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //Firebase
+        Firebase.initialize(this)
         setContent {
             App()
         }

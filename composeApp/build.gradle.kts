@@ -1,4 +1,3 @@
-
 plugins {
     alias(libs.plugins.multiplatform)
     alias(libs.plugins.compose)
@@ -7,6 +6,7 @@ plugins {
     alias(libs.plugins.kotlinx.serialization)
     alias(libs.plugins.sqlDelight)
     alias(libs.plugins.apollo)
+    alias(libs.plugins.google.services)
 }
 
 kotlin {
@@ -60,10 +60,14 @@ kotlin {
             implementation(libs.kamel.image)
             api(compose.foundation)
             api(compose.animation)
-            implementation(libs.firebase.auth)
 //...
 //            implementation(libs.voyager.navigator)
             api(libs.precompose)
+
+            //Firebase
+            implementation(libs.firebase.auth)
+            implementation(libs.gitlive.firebase.firestore) // This line
+            implementation(libs.gitlive.firebase.common)// This line
 
 // api("moe.tlaster:precompose-molecule:$precompose_version") // For Molecule intergration
 
@@ -83,6 +87,9 @@ kotlin {
             implementation(libs.kotlinx.coroutines.android)
             implementation(libs.ktor.client.okhttp)
             implementation(libs.sqlDelight.driver.android)
+
+            //firebase
+            implementation(libs.firebase.common.ktx)
         }
 
         iosMain.dependencies {
@@ -136,6 +143,13 @@ buildConfig {
     buildConfigField("String", "versionName", "\"${AndroidConfig.versionName}\"")
     buildConfigField("String", "versionCode", "\"${AndroidConfig.versionCode}\"")
     buildConfigField("String", "currency", "\"MXN\"")
+    buildConfigField("String", "FirebaseApplicationId", "\"1:838368023593:android:87ef6f3644df1f353c7838\"")
+    buildConfigField("String", "FirebaseApiKey", "\"AIzaSyD-zDz_-JJNXB2s3Y_CuS7xK4vjFN7iS-o\"")
+    buildConfigField("String", "FirebaseDatabaseUrl", "\"NO_DISPONIBLE\"")
+    buildConfigField("String", "FirebaseStorageBucket", "\"allenecommerce.appspot.com\"")
+    buildConfigField("String", "FirebaseProjectId", "\"allenecommerce\"")
+    buildConfigField("String", "FirebaseGcmSenderId", "\"838368023593\"")
+
 }
 
 sqldelight {

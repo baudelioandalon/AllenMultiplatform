@@ -28,7 +28,7 @@ import com.borealnetwork.allen.components.ToolbarImg
 import com.borealnetwork.allen.domain.login.StateApi
 import com.borealnetwork.allen.modules.auth.domain.navigation.AuthScreen
 import com.borealnetwork.allen.modules.home_client.domain.navigation.HomeClientScreen
-import com.borealnetwork.allen.viewmodel.LoginViewModel
+import com.borealnetwork.allen.modules.auth.domain.view_models.LoginViewModel
 import moe.tlaster.precompose.navigation.Navigator
 
 @Composable

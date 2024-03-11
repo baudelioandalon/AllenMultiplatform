@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "838368023593",
+    "project_id": "allenecommerce",
+    "storage_bucket": "allenecommerce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:838368023593:android:e072e2535288f3a73c7838",
+        "android_client_info": {
+          "package_name": "com.borealnetwork.allenEcommerce"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "838368023593-adat6satfp4chetv896dkbe7jd6vu0k7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-zDz_-JJNXB2s3Y_CuS7xK4vjFN7iS-o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "838368023593-adat6satfp4chetv896dkbe7jd6vu0k7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "838368023593-qj4ksibm2di44n0hqlnvhd0nn50i36lm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.borealnetwork.allen.iosApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
