@@ -10,9 +10,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Text
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -26,6 +26,7 @@ import com.borealnetwork.allen.modules.auth.domain.navigation.AuthScreen
 import com.borealnetwork.allen.modules.auth.domain.navigation.loginNavigationGraph
 import com.borealnetwork.allen.modules.auth.domain.navigation.registerNavigationGraph
 import com.borealnetwork.allen.modules.auth.domain.navigation.welcomeNavigationGraph
+import com.borealnetwork.allen.modules.auth.domain.view_models.LoginViewModel
 import com.borealnetwork.allen.modules.cart.domain.navigation.detailBuyCartClientNavigationGraph
 import com.borealnetwork.allen.modules.cart.domain.navigation.resumeBuyCartClientNavigationGraph
 import com.borealnetwork.allen.modules.cart.domain.navigation.shoppingCartClientNavigationGraph
@@ -46,13 +47,6 @@ import com.borealnetwork.allen.modules.profile.domain.navigation.addressClientNa
 import com.borealnetwork.allen.modules.profile.domain.navigation.newAddressClientNavigationGraph
 import com.borealnetwork.allen.modules.stores.domain.navigation.storesInMapNavigationGraph
 import com.borealnetwork.allen.theme.AppTheme
-import com.borealnetwork.allen.modules.auth.domain.view_models.LoginViewModel
-import dev.gitlive.firebase.Firebase
-import dev.gitlive.firebase.FirebaseOptions
-import dev.gitlive.firebase.auth.auth
-import dev.gitlive.firebase.initialize
-import dev.icerock.moko.mvvm.compose.getViewModel
-import dev.icerock.moko.mvvm.compose.viewModelFactory
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 import moe.tlaster.precompose.PreComposeApp
@@ -65,18 +59,20 @@ internal fun App() = PreComposeApp {
 
     //TODO INICIALIZAR CON ESTE MANUAL
     //https://medium.com/@carlosgub/how-to-implement-firebase-firestore-in-kotlin-multiplatform-mobile-with-compose-multiplatform-32b66cdba9f7
+    //https://medium.com/@j.c.moreirapinto/simplifying-cross-platform-app-development-dependency-injection-with-koin-in-compose-multiplatform-f77595396fbc
 
     AppTheme {
-        val loginViewModel = getViewModel(Unit, viewModelFactory { LoginViewModel() })
+//        val loginViewModel = getViewModel(Unit, viewModelFactory { LoginViewModel() })
+//        val loginViewModel = LoginViewModel by Viewmode
         val navigator = rememberNavigator()
         NavHost(
             navigator = navigator,
-            initialRoute = AuthScreen.WelcomeScreen.route
+            initialRoute = AuthScreen.LoginScreen.route
 //            initialRoute = HomeClientScreen.HomeDefaultClientScreen.route
         ) {
             //Auth
             welcomeNavigationGraph(navigator)
-            loginNavigationGraph(navigator, loginViewModel)
+            loginNavigationGraph(navigator)
             registerNavigationGraph(navigator)
 
             //HomeClient
@@ -141,7 +137,7 @@ fun BirdsPage(viewModel: LoginViewModel) {
                     onClick = {
                         viewModel.selectCategory(category)
                     }, modifier = Modifier.aspectRatio(1.0f).fillMaxSize().weight(1.0f),
-                    elevation = ButtonDefaults.buttonElevation(
+                    elevation = ButtonDefaults.elevation(
                         defaultElevation = 0.dp,
                         focusedElevation = 0.dp
                     ), shape = RectangleShape

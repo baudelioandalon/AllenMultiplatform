@@ -6,6 +6,7 @@ import ComposeApp
 struct iosApp: App {
     init(){
         FirebaseApp.configure()
+        KoinHelperKt.doInitKoin()
       }
     var body: some Scene {
         WindowGroup {

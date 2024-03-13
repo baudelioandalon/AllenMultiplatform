@@ -52,7 +52,7 @@ import org.jetbrains.compose.resources.painterResource
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun FavoriteButton(modifier: Modifier = Modifier, clicked: (() -> Unit)? = null) {
-    Card(modifier = modifier.layoutId("favorite_selector").size(35.dp),
+    Card(modifier = modifier.size(35.dp),
         elevation = 0.dp,
         shape = CircleShape,
         onClick = { clicked?.invoke() }) {
@@ -72,7 +72,6 @@ fun FavoriteCounterButton(
 ) {
     Card(
         modifier = modifier
-            .layoutId("favorite_selector")
             .height(35.dp)
             .wrapContentWidth(),
         elevation = 0.dp,
@@ -108,7 +107,6 @@ fun FavoriteCounterButton(
 fun ShareButton(modifier: Modifier = Modifier, clicked: (() -> Unit)? = null) {
     Card(
         modifier = modifier
-            .layoutId("share_selector")
             .size(35.dp),
         elevation = 0.dp,
         shape = CircleShape, onClick = { clicked?.invoke() }) {
@@ -160,7 +158,6 @@ fun RightRoundedButton(modifier: Modifier = Modifier, clicked: (() -> Unit)) {
     ) {
         Card(
             modifier = Modifier
-                .layoutId("rounded_selector")
                 .size(40.dp),
             elevation = 0.dp,
             shape = CircleShape, onClick = { clicked?.invoke() }) {

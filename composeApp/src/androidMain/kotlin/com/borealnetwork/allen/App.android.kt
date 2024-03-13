@@ -5,9 +5,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.view.WindowInsets
-import android.view.WindowInsetsController
-import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
@@ -15,12 +12,18 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.core.view.WindowCompat
+import com.borealnetwork.allen.di.initKoin
 import com.google.firebase.Firebase
 import com.google.firebase.initialize
-import java.math.RoundingMode
-import java.text.DecimalFormat
+import org.koin.android.ext.koin.androidContext
 import java.util.UUID
+import dev.icerock.moko.mvvm.viewmodel.ViewModel
+import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.core.definition.Definition
+import org.koin.core.definition.KoinDefinition
+import org.koin.core.module.Module
+import org.koin.core.qualifier.Qualifier
+
 
 class AndroidApp : Application() {
     companion object {
@@ -29,6 +32,9 @@ class AndroidApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        initKoin().apply {
+            androidContext(this@AndroidApp)
+        }
         INSTANCE = this
     }
 }
@@ -45,6 +51,13 @@ class AppActivity : ComponentActivity() {
     }
 }
 
+
+
+actual inline fun <reified T : ViewModel> Module.viewModelDefinition(
+    qualifier: Qualifier?,
+    noinline definition: Definition<T>,
+): KoinDefinition<T> = viewModel(qualifier = qualifier, definition = definition)
+
 internal actual fun openUrl(url: String?) {
     val uri = url?.let { Uri.parse(it) } ?: return
     val intent = Intent().apply {
@@ -57,7 +70,7 @@ internal actual fun openUrl(url: String?) {
 
 internal actual fun randomUUID() = UUID.randomUUID().toString()
 
-internal actual fun platform() : Platform = AndroidPlatform()
+internal actual fun platform(): Platform = AndroidPlatform()
 
 class AndroidPlatform : Platform {
     override val name = "Android ${Build.VERSION.SDK_INT}"

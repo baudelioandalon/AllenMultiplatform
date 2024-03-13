@@ -3,12 +3,14 @@ package com.borealnetwork.allen.modules.auth.domain.view_models
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import com.borealnetwork.allen.domain.login.StateApi
 import com.borealnetwork.allen.domain.model.BirdImage
 import com.borealnetwork.allen.tools.isEmailValid
-import dev.gitlive.firebase.Firebase
-import dev.gitlive.firebase.auth.FirebaseAuthException
-import dev.gitlive.firebase.auth.auth
+import com.borealnetwork.shared.core.auth.domain.use_cases.LoginEmailUseCase
+import com.borealnetwork.shared.core.auth.domain.use_cases.LoginGoogleUseCase
+import com.borealnetwork.shared.core.network.domain.models.AuthLoginEmailModel
+import com.borealnetwork.shared.domain.models.StateApi
+import com.borealnetwork.shared.domain.models.UseCase
+import dev.gitlive.firebase.auth.AuthCredential
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -28,7 +30,13 @@ data class BirdsUiState(
     val selectedImages = images.filter { it.category == selectedCategory }
 }
 
-class LoginViewModel : ViewModel() {
+
+class LoginViewModel (
+    private val getLoginEmailUseCase: UseCase<LoginEmailUseCase.Input, LoginEmailUseCase.Output>
+): ViewModel() {
+
+
+//    private val getAuthLoginUseCase: UseCase<LoginGoogleUseCase.Input, LoginGoogleUseCase.Output> by Koin()
 
     private val _uiState = MutableStateFlow(BirdsUiState())
     val uiState = _uiState.asStateFlow()
@@ -84,17 +92,14 @@ class LoginViewModel : ViewModel() {
             //GoToLogin
             viewModelScope.launch {
                 loginTokenState = StateApi.Loading
-                try {
-                    val result =
-                        Firebase.auth.signInWithEmailAndPassword(loginEmailUser, loginTokenUser)
-                    if (result.user != null) {
-                        success()
-                    }
-                } catch (exception: Exception) {
-                    val authException = (exception as FirebaseAuthException)
-                    loginTokenState = StateApi.Error.error(authException.message.orEmpty())
-                    authException.message
-                }
+                getLoginEmailUseCase.execute(
+                    LoginEmailUseCase.Input(
+                        AuthLoginEmailModel(
+                            email = loginEmailUser,
+                            token = loginTokenUser
+                        )
+                    )
+                )
             }
 
         }

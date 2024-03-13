@@ -54,7 +54,6 @@ kotlin {
             implementation(libs.kotlinx.serialization.json)
             implementation(libs.kotlinx.datetime)
             implementation(libs.multiplatformSettings)
-            implementation(libs.koin.core)
             implementation(libs.kstore)
             implementation(libs.apollo.runtime)
             implementation(libs.kamel.image)
@@ -62,6 +61,11 @@ kotlin {
             api(compose.animation)
 //...
 //            implementation(libs.voyager.navigator)
+
+            //Koin
+            implementation(libs.koin.core)
+            implementation(libs.koin.compose)
+
             api(libs.precompose)
 
             //Firebase
@@ -74,6 +78,7 @@ kotlin {
 // api("moe.tlaster:precompose-viewmodel:$precompose_version") // For ViewModel intergration
 
 // api("moe.tlaster:precompose-koin:$precompose_version")
+            implementation(project(":shared"))
         }
 
         commonTest.dependencies {
@@ -87,7 +92,8 @@ kotlin {
             implementation(libs.kotlinx.coroutines.android)
             implementation(libs.ktor.client.okhttp)
             implementation(libs.sqlDelight.driver.android)
-
+            implementation(libs.koin.core)
+            implementation(libs.koin.android)
             //firebase
             implementation(libs.firebase.common.ktx)
         }
@@ -132,9 +138,6 @@ android {
         kotlinCompilerExtensionVersion = "1.5.4"
     }
 }
-dependencies {
-    implementation(libs.androidx.constraintlayout)
-}
 
 buildConfig {
     // BuildConfig configuration here.
@@ -143,13 +146,6 @@ buildConfig {
     buildConfigField("String", "versionName", "\"${AndroidConfig.versionName}\"")
     buildConfigField("String", "versionCode", "\"${AndroidConfig.versionCode}\"")
     buildConfigField("String", "currency", "\"MXN\"")
-    buildConfigField("String", "FirebaseApplicationId", "\"1:838368023593:android:87ef6f3644df1f353c7838\"")
-    buildConfigField("String", "FirebaseApiKey", "\"AIzaSyD-zDz_-JJNXB2s3Y_CuS7xK4vjFN7iS-o\"")
-    buildConfigField("String", "FirebaseDatabaseUrl", "\"NO_DISPONIBLE\"")
-    buildConfigField("String", "FirebaseStorageBucket", "\"allenecommerce.appspot.com\"")
-    buildConfigField("String", "FirebaseProjectId", "\"allenecommerce\"")
-    buildConfigField("String", "FirebaseGcmSenderId", "\"838368023593\"")
-
 }
 
 sqldelight {

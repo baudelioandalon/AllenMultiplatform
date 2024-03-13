@@ -5,6 +5,9 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/composeApp/AllenMultiplatform.composeApp.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/composeApp/AllenMultiplatform.composeApp.androidTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/composeApp/AllenMultiplatform.composeApp.main.iml" filepath="$PROJECT_DIR$/.idea/modules/composeApp/AllenMultiplatform.composeApp.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/composeApp/AllenMultiplatform.composeApp.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/composeApp/AllenMultiplatform.composeApp.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/shared/AllenMultiplatform.shared.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/shared/AllenMultiplatform.shared.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/shared/AllenMultiplatform.shared.main.iml" filepath="$PROJECT_DIR$/.idea/modules/shared/AllenMultiplatform.shared.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/shared/AllenMultiplatform.shared.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/shared/AllenMultiplatform.shared.unitTest.iml" />
     </modules>
   </component>
 </project>

@@ -1,6 +1,5 @@
 package com.borealnetwork.allen.modules.auth.domain.navigation
 
-import com.borealnetwork.allen.modules.auth.domain.view_models.LoginViewModel
 import com.borealnetwork.allen.modules.auth.presentation.ui.login.LoginViewCompose
 import com.borealnetwork.allen.modules.auth.presentation.ui.register.RegisterViewCompose
 import com.borealnetwork.allen.modules.auth.presentation.ui.welcome.WelcomeViewCompose
@@ -12,14 +11,13 @@ import moe.tlaster.precompose.navigation.Navigator
 import moe.tlaster.precompose.navigation.RouteBuilder
 
 fun RouteBuilder.loginNavigationGraph(
-    navigator: Navigator,
-    loginViewModel: LoginViewModel
+    navigator: Navigator
 ) {
     scene(
         route = AuthScreen.LoginScreen.route,
         navTransition = defaultTransition()
     ) {
-        LoginViewCompose(navigator, loginViewModel)
+        LoginViewCompose(navigator)
     }
 }
 

@@ -6,7 +6,7 @@ firebaseCommonKtx = "20.4.2"
 firebaseFirestore = "1.11.1"
 kotlin = "1.9.21"
 compose = "1.6.0"
-agp = "8.2.2"
+agp = "8.2.0"
 androidx-appcompat = "1.6.1"
 androidx-activityCompose = "1.8.1"
 compose-uitooling = "1.6.2"
@@ -32,6 +32,8 @@ apollo = "4.0.0-beta.4"
 google-services = "4.3.14"
 kamel-image = "0.9.1"
 constraintlayout = "2.1.4"
+lifecycleViewmodelKtx = "2.7.0"
+lifecycleViewmodelAndroid = "2.8.0-alpha02"
 
 [libraries]
 
@@ -42,6 +44,8 @@ firebase-auth = { module = "dev.gitlive:firebase-auth", version.ref = "firebaseA
 firebase-common-ktx = { module = "com.google.firebase:firebase-common-ktx", version.ref = "firebaseCommonKtx" }
 gitlive-firebase-common = { module = "dev.gitlive:firebase-common", version.ref = "firebaseCommon" }
 gitlive-firebase-firestore = { module = "dev.gitlive:firebase-firestore", version.ref = "firebaseFirestore" }
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
+koin-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin" }
 precompose = { module = "moe.tlaster:precompose", version.ref = "precompose" }
 voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
 composeImageLoader = { module = "io.github.qdsfdhvh:image-loader", version.ref = "composeImageLoader" }
@@ -73,11 +77,14 @@ kamel-image = { module = "media.kamel:kamel-image", version.ref = "kamel-image" 
 moko-core = {module = "dev.icerock.moko:mvvm-core",version.ref="moko-core"}
 moko-mvvm = { module = "dev.icerock.moko:mvvm-compose", version.ref = "moko-mvvm" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+androidx-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
+androidx-lifecycle-viewmodel-android = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-android", version.ref = "lifecycleViewmodelAndroid" }
 [plugins]
 
 multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 compose = { id = "org.jetbrains.compose", version.ref = "compose" }
 android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
 buildConfig = { id = "com.github.gmazzo.buildconfig", version.ref = "buildConfig" }
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 sqlDelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }

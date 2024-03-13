@@ -7,4 +7,5 @@ plugins {
     alias(libs.plugins.sqlDelight).apply(false)
     alias(libs.plugins.apollo).apply(false)
     alias(libs.plugins.google.services).apply(false)
+    alias(libs.plugins.android.library).apply(false)
 }

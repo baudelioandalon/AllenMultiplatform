@@ -25,16 +25,17 @@ import com.borealnetwork.allen.components.EditTextTopLabel
 import com.borealnetwork.allen.components.SemiBoldText
 import com.borealnetwork.allen.components.SeparatorHorizontal
 import com.borealnetwork.allen.components.ToolbarImg
-import com.borealnetwork.allen.domain.login.StateApi
 import com.borealnetwork.allen.modules.auth.domain.navigation.AuthScreen
 import com.borealnetwork.allen.modules.home_client.domain.navigation.HomeClientScreen
 import com.borealnetwork.allen.modules.auth.domain.view_models.LoginViewModel
+import com.borealnetwork.shared.domain.models.StateApi
 import moe.tlaster.precompose.navigation.Navigator
+import org.koin.compose.koinInject
 
 @Composable
 fun LoginViewCompose(
     navigator: Navigator,
-    loginViewModel: LoginViewModel
+    loginViewModel: LoginViewModel = koinInject()
 ) {
 
     val scrollState = rememberScrollState()
@@ -72,7 +73,7 @@ fun LoginViewCompose(
                 isError = loginViewModel.loginUserState == StateApi.Error,
                 value = loginViewModel.loginEmailUser,
                 errorMessage = when (loginViewModel.loginUserState) {
-                    is StateApi.Success, StateApi.Loading, StateApi.None -> {
+                    is StateApi.Success<*>, StateApi.Loading, StateApi.None -> {
                         ""
                     }
 
@@ -93,7 +94,7 @@ fun LoginViewCompose(
                 isError = loginViewModel.loginTokenState == StateApi.Error,
                 value = loginViewModel.loginTokenUser,
                 errorMessage = when (loginViewModel.loginTokenState) {
-                    is StateApi.Success, StateApi.Loading, StateApi.None -> {
+                    is StateApi.Success<*>, StateApi.Loading, StateApi.None -> {
                         ""
                     }
 
