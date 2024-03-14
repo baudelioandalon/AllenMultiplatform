@@ -13,15 +13,21 @@ import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
 val loginModule = module {
-    single<GetLoginDataSource> { RemoteLoginDataSource() }
+    single<GetLoginDataSource>(named("RemoteLoginDataSource")) { RemoteLoginDataSource() }
 //    single<GetAuthUserDataSource>(named("ALocalAuthDataSource")) {
 //        ALocalAuthDataSource()
 //    }
-    single<LoginEmailRepository> { DefaultLoginEmailRepository(
-        get(named("RemoteLoginDataSource"))
-    ) }
+    single<LoginEmailRepository>(named("DefaultLoginEmailRepository")) {
+        DefaultLoginEmailRepository(
+            get(named("RemoteLoginDataSource"))
+        )
+    }
 
-    single<LoginGoogleRepository> { DefaultLoginGoogleRepository(get()) }
+    single<LoginGoogleRepository>(named("DefaultLoginGoogleRepository")) {
+        DefaultLoginGoogleRepository(
+            get()
+        )
+    }
 
 //    single<AuthRepository>(named("DefaultAuthRepository")) {
 //        DefaultAuthRepository(

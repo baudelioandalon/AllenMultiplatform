@@ -1,16 +1,12 @@
 package com.borealnetwork.shared.core.auth.domain.base
 
-import com.borealnetwork.shared.core.network.domain.models.error_handler.AuthenticationErrorEnum
 import com.borealnetwork.shared.core.network.domain.models.error_handler.FirestoreErrorEnum
 import dev.gitlive.firebase.Firebase
-import dev.gitlive.firebase.auth.FirebaseAuthInvalidCredentialsException
-import dev.gitlive.firebase.auth.FirebaseAuthInvalidUserException
+import dev.gitlive.firebase.auth.FirebaseAuthException
 import dev.gitlive.firebase.auth.auth
-import dev.gitlive.firebase.firestore.FirebaseFirestore
 import dev.gitlive.firebase.firestore.FirebaseFirestoreException
 import dev.gitlive.firebase.firestore.FirestoreExceptionCode
 import dev.gitlive.firebase.firestore.code
-import dev.gitlive.firebase.firestore.firestore
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 
@@ -18,108 +14,124 @@ abstract class FirestoreRepository {
 
     protected val coroutineScope: CoroutineScope = MainScope()
     protected val firebaseAuth = Firebase.auth
+
     companion object {
-        fun errorResponse(causeThrowable: Throwable) =
-            if (causeThrowable is FirebaseFirestoreException) {
-                errorResponse(exception = causeThrowable)
-            } else {
-                FirestoreErrorEnum.ERROR_UNAVAILABLE
+        fun errorResponse(causeThrowable: Exception) =
+            when (causeThrowable) {
+                is FirebaseFirestoreException -> {
+                    findFirestoreException(exception = causeThrowable)
+                }
+
+                is FirebaseAuthException -> {
+                    findAuthenticationException(exception = causeThrowable)
+                }
+
+                else -> {
+                    FirestoreErrorEnum.ERROR_UNAVAILABLE.messageError
+                }
             }
 
 
-        fun errorResponse(exception: FirebaseFirestoreException): FirestoreErrorEnum {
+        private fun findFirestoreException(exception: FirebaseFirestoreException): String {
             return when (exception.code) {
                 FirestoreExceptionCode.UNAVAILABLE -> {
-                    FirestoreErrorEnum.ERROR_UNAVAILABLE
+                    FirestoreErrorEnum.ERROR_UNAVAILABLE.messageError
                 }
+
                 FirestoreExceptionCode.INVALID_ARGUMENT -> {
-                    FirestoreErrorEnum.ERROR_UNAVAILABLE
+                    FirestoreErrorEnum.ERROR_INVALID_PATH.messageError
                 }
+
                 FirestoreExceptionCode.ABORTED -> {
-                    FirestoreErrorEnum.ERROR_UNAVAILABLE
+                    FirestoreErrorEnum.ERROR_PAYMENT_PAYED.messageError
                 }
+
                 FirestoreExceptionCode.ALREADY_EXISTS -> {
-                    FirestoreErrorEnum.ERROR_UNAVAILABLE
+                    FirestoreErrorEnum.ERROR_UNAVAILABLE.messageError
                 }
+
                 FirestoreExceptionCode.CANCELLED -> {
-                    FirestoreErrorEnum.ERROR_UNAVAILABLE
+                    FirestoreErrorEnum.ERROR_UNAVAILABLE.messageError
                 }
+
                 FirestoreExceptionCode.DATA_LOSS -> {
-                    FirestoreErrorEnum.ERROR_UNAVAILABLE
+                    FirestoreErrorEnum.ERROR_UNAVAILABLE.messageError
                 }
+
                 FirestoreExceptionCode.DEADLINE_EXCEEDED -> {
-                    FirestoreErrorEnum.ERROR_UNAVAILABLE
+                    FirestoreErrorEnum.ERROR_UNAVAILABLE.messageError
                 }
+
                 FirestoreExceptionCode.FAILED_PRECONDITION -> {
-                    FirestoreErrorEnum.ERROR_UNAVAILABLE
+                    FirestoreErrorEnum.ERROR_UNAVAILABLE.messageError
                 }
+
                 FirestoreExceptionCode.INTERNAL -> {
-                    FirestoreErrorEnum.ERROR_UNAVAILABLE
+                    FirestoreErrorEnum.ERROR_UNAVAILABLE.messageError
                 }
+
                 FirestoreExceptionCode.NOT_FOUND -> {
-                    FirestoreErrorEnum.ERROR_NOT_FOUND
+                    FirestoreErrorEnum.ERROR_NOT_FOUND.messageError
                 }
+
                 FirestoreExceptionCode.OK -> {
-                    FirestoreErrorEnum.ERROR_UNAVAILABLE
+                    FirestoreErrorEnum.ERROR_UNAVAILABLE.messageError
                 }
+
                 FirestoreExceptionCode.OUT_OF_RANGE -> {
-                    FirestoreErrorEnum.ERROR_UNAVAILABLE
+                    FirestoreErrorEnum.ERROR_UNAVAILABLE.messageError
                 }
+
                 FirestoreExceptionCode.PERMISSION_DENIED -> {
-                    FirestoreErrorEnum.ERROR_PERMISSION_DENIED
+                    FirestoreErrorEnum.ERROR_PERMISSION_DENIED.messageError
                 }
+
                 FirestoreExceptionCode.RESOURCE_EXHAUSTED -> {
-                    FirestoreErrorEnum.ERROR_UNAVAILABLE
+                    FirestoreErrorEnum.ERROR_UNAVAILABLE.messageError
                 }
+
                 FirestoreExceptionCode.UNAUTHENTICATED -> {
-                    FirestoreErrorEnum.ERROR_UNAVAILABLE
+                    FirestoreErrorEnum.ERROR_UNAVAILABLE.messageError
                 }
+
                 FirestoreExceptionCode.UNIMPLEMENTED -> {
-                    FirestoreErrorEnum.ERROR_UNAVAILABLE
+                    FirestoreErrorEnum.ERROR_UNAVAILABLE.messageError
                 }
+
                 FirestoreExceptionCode.UNKNOWN -> {
-                    FirestoreErrorEnum.ERROR_UNAVAILABLE
+                    FirestoreErrorEnum.ERROR_UNAVAILABLE.messageError
                 }
 
                 else -> {
-                    FirestoreErrorEnum.ERROR_UNAVAILABLE
+                    exception.message.orEmpty()
                 }
             }
         }
 
-        fun validationError(errorReceived: String): FirestoreErrorEnum {
-            return when {
-                errorReceived.contains(FirestoreErrorEnum.ERROR_INVALID_PATH.defaultError) -> {
-                    FirestoreErrorEnum.ERROR_INVALID_PATH
+        private fun findAuthenticationException(exception: FirebaseAuthException): String {
+            return when (exception.message.orEmpty()) {
+                FirestoreErrorEnum.ERROR_INVALID_PASSWORD.defaultError -> {
+                    FirestoreErrorEnum.ERROR_INVALID_PASSWORD.messageError
                 }
-                errorReceived.contains(FirestoreErrorEnum.ERROR_INVALID_FIELD_PATH.defaultError) -> {
-                    FirestoreErrorEnum.ERROR_INVALID_FIELD_PATH
+
+                FirestoreErrorEnum.ERROR_USER_NOT_FOUND.defaultError -> {
+                    FirestoreErrorEnum.ERROR_USER_NOT_FOUND.messageError
                 }
-                errorReceived.contains(FirestoreErrorEnum.ERROR_NOT_FOUND.defaultError) -> {
-                    FirestoreErrorEnum.ERROR_NOT_FOUND
+
+                FirestoreErrorEnum.ERROR_NOT_VERIFIED_EMAIL.defaultError -> {
+                    FirestoreErrorEnum.ERROR_NOT_VERIFIED_EMAIL.messageError
                 }
-                errorReceived.contains(FirestoreErrorEnum.ERROR_DESERIALIZE_OBJECT.defaultError) -> {
-                    FirestoreErrorEnum.ERROR_DESERIALIZE_OBJECT
+
+                FirestoreErrorEnum.ERROR_USER_NOT_LOGGED_IN.defaultError -> {
+                    FirestoreErrorEnum.ERROR_USER_NOT_LOGGED_IN.messageError
                 }
+
                 else -> {
-                    FirestoreErrorEnum.ERROR_DEFAULT
+                    exception.message.orEmpty()
                 }
             }
         }
 
-        fun authenticationValidException(exception: Exception): AuthenticationErrorEnum {
-            return when (exception) {
-                is FirebaseAuthInvalidUserException -> {
-                    AuthenticationErrorEnum.ERROR_USER_NOT_FOUND
-                }
-                is FirebaseAuthInvalidCredentialsException -> {
-                    AuthenticationErrorEnum.ERROR_INVALID_PASSWORD
-                }
-                else -> {
-                    AuthenticationErrorEnum.ERROR_DEFAULT
-                }
-            }
-        }
     }
 
 

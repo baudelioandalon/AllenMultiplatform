@@ -73,7 +73,7 @@ fun LoginViewCompose(
                 isError = loginViewModel.loginUserState == StateApi.Error,
                 value = loginViewModel.loginEmailUser,
                 errorMessage = when (loginViewModel.loginUserState) {
-                    is StateApi.Success<*>, StateApi.Loading, StateApi.None -> {
+                    is StateApi.Success, StateApi.Loading, StateApi.None -> {
                         ""
                     }
 
@@ -94,7 +94,7 @@ fun LoginViewCompose(
                 isError = loginViewModel.loginTokenState == StateApi.Error,
                 value = loginViewModel.loginTokenUser,
                 errorMessage = when (loginViewModel.loginTokenState) {
-                    is StateApi.Success<*>, StateApi.Loading, StateApi.None -> {
+                    is StateApi.Success, StateApi.Loading, StateApi.None -> {
                         ""
                     }
 

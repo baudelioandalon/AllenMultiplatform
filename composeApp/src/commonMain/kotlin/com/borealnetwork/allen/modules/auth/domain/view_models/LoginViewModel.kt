@@ -6,11 +6,14 @@ import androidx.compose.runtime.setValue
 import com.borealnetwork.allen.domain.model.BirdImage
 import com.borealnetwork.allen.tools.isEmailValid
 import com.borealnetwork.shared.core.auth.domain.use_cases.LoginEmailUseCase
-import com.borealnetwork.shared.core.auth.domain.use_cases.LoginGoogleUseCase
+import com.borealnetwork.shared.core.network.domain.models.ApiResponse
 import com.borealnetwork.shared.core.network.domain.models.AuthLoginEmailModel
+import com.borealnetwork.shared.core.network.domain.models.error
+import com.borealnetwork.shared.core.network.domain.models.loading
+import com.borealnetwork.shared.core.network.domain.models.success
 import com.borealnetwork.shared.domain.models.StateApi
 import com.borealnetwork.shared.domain.models.UseCase
-import dev.gitlive.firebase.auth.AuthCredential
+import dev.gitlive.firebase.auth.FirebaseUser
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -31,9 +34,9 @@ data class BirdsUiState(
 }
 
 
-class LoginViewModel (
+class LoginViewModel(
     private val getLoginEmailUseCase: UseCase<LoginEmailUseCase.Input, LoginEmailUseCase.Output>
-): ViewModel() {
+) : ViewModel() {
 
 
 //    private val getAuthLoginUseCase: UseCase<LoginGoogleUseCase.Input, LoginGoogleUseCase.Output> by Koin()
@@ -45,6 +48,8 @@ class LoginViewModel (
 
     var loginUserState by mutableStateOf<StateApi>(StateApi.None)
     var loginTokenState by mutableStateOf<StateApi>(StateApi.None)
+    private val _loginResult = MutableStateFlow<ApiResponse<FirebaseUser>?>(null)
+    val loginResult = _loginResult.asStateFlow()
 
     init {
 //        updateImages()
@@ -91,7 +96,9 @@ class LoginViewModel (
         } else {
             //GoToLogin
             viewModelScope.launch {
-                loginTokenState = StateApi.Loading
+                _loginResult.update {
+                    loading()
+                }
                 getLoginEmailUseCase.execute(
                     LoginEmailUseCase.Input(
                         AuthLoginEmailModel(
@@ -99,7 +106,20 @@ class LoginViewModel (
                             token = loginTokenUser
                         )
                     )
-                )
+                ).collect {
+                    it.result.success { response ->
+                        _loginResult.update {
+                            success()
+                            response
+                        }
+                    }
+                    it.result.error { error ->
+                        _loginResult.update {
+                            error
+                        }
+                    }
+
+                }
             }
 
         }
