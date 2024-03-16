@@ -61,7 +61,7 @@ internal fun App() = PreComposeApp {
     //TODO INICIALIZAR CON ESTE MANUAL
     //https://medium.com/@carlosgub/how-to-implement-firebase-firestore-in-kotlin-multiplatform-mobile-with-compose-multiplatform-32b66cdba9f7
     //https://medium.com/@j.c.moreirapinto/simplifying-cross-platform-app-development-dependency-injection-with-koin-in-compose-multiplatform-f77595396fbc
-    //
+    //https://github.com/alexzhirkevich/compottie
 
     AppTheme {
 //        val loginViewModel = getViewModel(Unit, viewModelFactory { LoginViewModel() })
