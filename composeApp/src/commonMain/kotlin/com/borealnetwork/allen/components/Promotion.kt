@@ -19,6 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Red
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
@@ -38,14 +39,14 @@ import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
-fun FreeShipping(modifier: Modifier = Modifier) {
+fun FreeShipping(modifier: Modifier = Modifier, unbounded: Boolean = false) {
     Row(
         modifier = modifier
             .background(
                 color = GreenStrong,
                 shape = RoundedCornerShape(5.dp)
             )
-            .wrapContentSize(),
+            .wrapContentSize(unbounded = unbounded),
         verticalAlignment = Alignment.CenterVertically
     ) {
         BoldText(

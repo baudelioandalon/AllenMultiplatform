@@ -7,10 +7,12 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.borealnetwork.allen.components.ShoppingCartItem
 import com.borealnetwork.allen.components.ToolbarTitle
 import com.borealnetwork.allen.domain.model.ProductShoppingCart
 import com.borealnetwork.allen.theme.GrayBackgroundMain
+import com.borealnetwork.allen.tools.firstItem
 import moe.tlaster.precompose.navigation.Navigator
 
 @Composable
@@ -19,17 +21,37 @@ fun FavoritesClientViewCompose(navigator: Navigator) {
     val list = listOf(
         ProductShoppingCart(
             skuProduct = "d2d232",
-            nameProduct = "1KG Clavo 1/2 pulgada",
+            nameProduct = "1KG Clavo 1/2 pulgada Mas descripcion para dos lineas",
             imgProduct = "ccdcdomd",
             categoryItem = "Ropa",
             quantity = 1,
-            discountPercentage = 0,
+            discountPercentage = 5,
             fastOrder = true,
             minimalFastOrder = 2,
             price = 46.0
         ), ProductShoppingCart(
             skuProduct = "d2d232",
-            nameProduct = "Martillo",
+            nameProduct = "1KG Clavo 1/2 pulgada Mas descripcion para dos lineas",
+            imgProduct = "ccdcdomd",
+            categoryItem = "Ropa",
+            quantity = 1,
+            discountPercentage = 5,
+            fastOrder = true,
+            minimalFastOrder = 2,
+            price = 46.0
+        ), ProductShoppingCart(
+            skuProduct = "d2d232",
+            nameProduct = "1KG Clavo 1/2 pulgada Mas descripcion para dos lineas",
+            imgProduct = "ccdcdomd",
+            categoryItem = "Ropa",
+            quantity = 1,
+            discountPercentage = 5,
+            fastOrder = true,
+            minimalFastOrder = 2,
+            price = 46.0
+        ), ProductShoppingCart(
+            skuProduct = "d2d232",
+            nameProduct = "Martillo Mas descripcion para dos lineas Mas descripcion para dos lineas",
             imgProduct = "ccdcdomd",
             categoryItem = "Ropa",
             quantity = 1,
@@ -53,7 +75,7 @@ fun FavoritesClientViewCompose(navigator: Navigator) {
         ToolbarTitle(
             titleText = "Favoritos", startClicked = {
                 navigator.goBack()
-            }, endIcon = "ic_favorite_unselected.xml"
+            }, endIcon = "ic_white_heart.xml"
         )
     }) {
 
@@ -68,6 +90,11 @@ fun FavoritesClientViewCompose(navigator: Navigator) {
                     endTextButton = "Mover al carrito",
                     counter = false,
                     showBottomDivider = true,
+                    showChecked = false,
+                    topPadding = if (index == list.firstItem()) 20.dp else 0.dp,
+                    imgClicked = {item ->
+
+                    },
                     startClicked = { item ->
 
                     }, endClicked = { item ->

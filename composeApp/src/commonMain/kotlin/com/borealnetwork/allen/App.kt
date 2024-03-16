@@ -37,6 +37,7 @@ import com.borealnetwork.allen.modules.orders.domain.navigation.orderClientStatu
 import com.borealnetwork.allen.modules.orders.domain.navigation.ordersClientNavigationGraph
 import com.borealnetwork.allen.modules.payments.domain.navigation.newCardClientNavigationGraph
 import com.borealnetwork.allen.modules.payments.domain.navigation.paymentsMethodClientNavigationGraph
+import com.borealnetwork.allen.modules.product.domain.navigation.ProductClientScreen
 import com.borealnetwork.allen.modules.product.domain.navigation.detailProductClientNavigationGraph
 import com.borealnetwork.allen.modules.product.domain.navigation.favoritesClientNavigationGraph
 import com.borealnetwork.allen.modules.product.domain.navigation.questionsProductClientNavigationGraph
@@ -68,7 +69,7 @@ internal fun App() = PreComposeApp {
         val navigator = rememberNavigator()
         NavHost(
             navigator = navigator,
-            initialRoute = AuthScreen.LoginScreen.route
+            initialRoute = AuthScreen.WelcomeScreen.route
 //            initialRoute = HomeClientScreen.HomeDefaultClientScreen.route
         ) {
             //Auth

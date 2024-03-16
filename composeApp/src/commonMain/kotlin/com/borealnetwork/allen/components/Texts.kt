@@ -29,6 +29,7 @@ fun SemiBoldText(
     color: Color = Color.Black,
     textAlign: TextAlign? = null,
     fontSize: TextUnit = 18.sp,
+    lineHeight: TextUnit = 14.sp,
     textOverflow: TextOverflow = TextOverflow.Clip,
     maxLines: Int = Int.MAX_VALUE,
     minLines: Int = 1
@@ -42,6 +43,7 @@ fun SemiBoldText(
         color = color,
         fontWeight = SemiBold,
         textAlign = textAlign,
+        lineHeight = lineHeight,
         overflow = textOverflow,
         maxLines = maxLines,
         minLines = minLines,
@@ -57,8 +59,10 @@ fun BoldText(
     fontSize: TextUnit = 25.sp,
     color: Color = Color.White,
     textAlign: TextAlign? = null,
+    lineHeight: TextUnit = 14.sp,
     textOverflow: TextOverflow = TextOverflow.Clip,
     maxLines: Int = Int.MAX_VALUE,
+    minLines: Int = 1,
     onClicked: (() -> Unit)? = null
 ) {
     Text(
@@ -68,6 +72,8 @@ fun BoldText(
         color = color,
         letterSpacing = letterSpacing,
         textAlign = textAlign,
+        lineHeight = lineHeight,
+        minLines =minLines,
         overflow = textOverflow,
         maxLines = maxLines,
         fontFamily = boldTypo()

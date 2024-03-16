@@ -673,7 +673,7 @@ fun ShoppingCartStoreItem(
 
 @Composable
 fun StoreInformationItem(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     deleteOptions: Boolean,
     selector: Boolean,
     hideArrow: Boolean = true,
@@ -755,15 +755,18 @@ fun ShoppingCartItem(
     counter: Boolean = true,
     deleteOptions: Boolean = true,
     check: Boolean = true,
+    showChecked: Boolean = true,
     startText: String = "Remover",
     endTextButton: String = "Guardar para después",
     showBottomDivider: Boolean = false,
+    topPadding: Dp = 0.dp,
+    imgClicked: ((ProductShoppingCart) -> Unit)? = null,
     startClicked: ((ProductShoppingCart) -> Unit)? = null,
     endClicked: ((ProductShoppingCart) -> Unit)? = null
 ) {
     Column(
         modifier = if (deleteOptions) Modifier.fillMaxWidth().background(White)
-            .padding(bottom = 20.dp)
+            .padding(bottom = 20.dp, top = topPadding)
         else Modifier.fillMaxWidth().background(White).padding(top = 14.dp, bottom = 20.dp)
     ) {
         Row(
@@ -782,21 +785,24 @@ fun ShoppingCartItem(
                     elevation = 0.dp,
                     shape = RoundedCornerShape(10.dp),
                     onClick = {
-
+                        imgClicked?.invoke(productShoppingCart)
                     }
                 ) {
 
                 }
-                Image(
-                    modifier = Modifier.padding(start = 5.dp, top = 5.dp),
-                    painter = painterResource(resource = DrawableResource(if (check) "ic_checked.xml" else "ic_check.xml")),
-                    contentDescription = "check"
-                )
+                if (showChecked) {
+                    Image(
+                        modifier = Modifier.padding(start = 5.dp, top = 5.dp),
+                        painter = painterResource(resource = DrawableResource(if (check) "ic_checked.xml" else "ic_check.xml")),
+                        contentDescription = "check"
+                    )
+                }
+
 
             }
             //NameProduct, Category, PriceBeforeDiscount
             Column(
-                modifier = Modifier.height(81.dp).padding(start = 25.dp).weight(0.3f),
+                modifier = Modifier.height(90.dp).padding(start = 15.dp).weight(0.3f),
                 verticalArrangement = Arrangement.SpaceAround
             ) {
                 SemiBoldText(
@@ -1440,6 +1446,7 @@ fun StepIndicatorNotification(
 @Composable
 fun ShoppingCategoryHistoryItem(
     modifier: Modifier = Modifier,
+    topModifier: Modifier = Modifier,
     itemPayed: ItemShoppingModel = ItemShoppingModel(
         nameStore = "Ferreteria La hormiga",
         idStore = "d2d232",
@@ -1452,7 +1459,6 @@ fun ShoppingCategoryHistoryItem(
         canceledBy = "NONE",
         numberProducts = 1
     ),
-    counter: Boolean = true,
     deleteOptions: Boolean = true,
     selector: Boolean = true,
     elevation: Dp = 0.dp,
@@ -1466,7 +1472,7 @@ fun ShoppingCategoryHistoryItem(
     ) {
         val showItems = rememberSaveable { mutableStateOf(true) }
         Column(
-            modifier = modifier.fillMaxWidth().background(White)
+            modifier = modifier.fillMaxWidth()
         ) {
             if (!hideTopLine) {
                 Divider(
@@ -1474,9 +1480,9 @@ fun ShoppingCategoryHistoryItem(
                 )
             }
             StoreInformationItem(
-                modifier = Modifier.padding(horizontal = 30.dp),
-                deleteOptions,
-                selector,
+                modifier = topModifier,
+                deleteOptions = deleteOptions,
+                selector = selector,
                 hideArrow = hideArrow,
                 itemPayed = itemPayed,
                 showItems = showItems
@@ -1485,9 +1491,7 @@ fun ShoppingCategoryHistoryItem(
                 Divider(
                     thickness = 1.5.dp, color = GrayBorderLight
                 )
-                ShoppingHistoryItem(
-                    counter = counter, deleteOptions = deleteOptions, historyModel = itemPayed
-                ) {
+                ShoppingHistoryItem(historyModel = itemPayed) {
                     onClicked?.invoke()
                 }
 
@@ -1509,12 +1513,11 @@ fun ShoppingHistoryItem(
         apologyStatus = "NONE",
         canceledBy = "NONE",
         numberProducts = 1
-    ), counter: Boolean = true, deleteOptions: Boolean = true, onClicked: (() -> Unit)? = null
+    ), onClicked: (() -> Unit)? = null
 ) {
     Column(
-        modifier = if (deleteOptions) Modifier.fillMaxWidth()
-            .padding(start = 30.dp, end = 30.dp, top = 14.dp, bottom = 20.dp)
-        else Modifier.fillMaxWidth().padding(top = 14.dp, bottom = 20.dp)
+        modifier = Modifier.fillMaxWidth()
+            .padding(top = 14.dp, bottom = 20.dp, start = 30.dp, end = 30.dp)
     ) {
 
         Row(
@@ -1752,7 +1755,7 @@ fun ResumeItem(
                 Row {
                     SemiBoldText(
                         modifier = Modifier.padding(
-                            if (startPadding > 0.dp) 0.dp else innerStartPadding
+                            start = if (startPadding > 0.dp) 0.dp else innerStartPadding
                         ), text = title, fontSize = 15.sp
                     )
                     if (topCounter) {

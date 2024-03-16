@@ -32,6 +32,8 @@ fun String.isEmailValid() = if (trim { it <= ' ' }.isEmpty()) {
 
 fun <E> List<E>.limit() = size - 1
 
+fun <E> List<E>.firstItem() = 0
+
 
 fun getGradient() = listOf(
     startColors[Random.nextInt(startColors.lastIndex)],

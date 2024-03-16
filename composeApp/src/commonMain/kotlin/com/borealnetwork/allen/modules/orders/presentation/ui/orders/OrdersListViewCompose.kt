@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
@@ -115,6 +116,10 @@ fun OrdersListViewCompose(navigator: Navigator) {
 
             item {
                 ResumeItem(
+                    startPadding = 0.dp,
+                    endPadding = 0.dp,
+                    innerStartPadding = 30.dp,
+                    innerEndPadding = 30.dp,
                     title = "En curso",
                     topCounter = true,
                     numberCounter = listInProgress.size,
@@ -126,8 +131,8 @@ fun OrdersListViewCompose(navigator: Navigator) {
 
                         listInProgress.forEachIndexed { index, item ->
                             ShoppingCategoryHistoryItem(
+                                topModifier = Modifier.padding(horizontal = 30.dp),
                                 itemPayed = item,
-                                counter = false,
                                 deleteOptions = false,
                                 selector = false,
                                 hideArrow = false,
@@ -156,7 +161,6 @@ fun OrdersListViewCompose(navigator: Navigator) {
                         listDone.forEachIndexed { index, item ->
                             ShoppingCategoryHistoryItem(
                                 itemPayed = item,
-                                counter = false,
                                 deleteOptions = false,
                                 selector = false,
                                 hideArrow = false,

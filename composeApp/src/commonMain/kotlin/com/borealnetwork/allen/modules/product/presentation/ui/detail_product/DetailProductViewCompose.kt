@@ -161,7 +161,7 @@ fun DetailProductViewCompose(navigator: Navigator) {
                             verticalAlignment = Alignment.CenterVertically,
                             horizontalArrangement = Arrangement.SpaceBetween
                         ) {
-                            FreeShipping(modifier = Modifier.padding())
+                            FreeShipping(modifier = Modifier.padding(), unbounded = true)
                             MediumText(
                                 text = "Comprando 4 articulos",
                                 fontSize = 10.sp,
