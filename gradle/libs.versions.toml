@@ -1,5 +1,6 @@
 [versions]
 
+compottie = "1.1.1"
 firebaseAuth = "1.11.1"
 firebaseCommon = "1.11.1"
 firebaseCommonKtx = "20.4.2"
@@ -40,6 +41,7 @@ lifecycleViewmodelAndroid = "2.8.0-alpha02"
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidx-appcompat" }
 androidx-activityCompose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
 compose-uitooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose-uitooling" }
+compottie = { module = "io.github.alexzhirkevich:compottie", version.ref = "compottie" }
 firebase-auth = { module = "dev.gitlive:firebase-auth", version.ref = "firebaseAuth" }
 firebase-common-ktx = { module = "com.google.firebase:firebase-common-ktx", version.ref = "firebaseCommonKtx" }
 gitlive-firebase-common = { module = "dev.gitlive:firebase-common", version.ref = "firebaseCommon" }

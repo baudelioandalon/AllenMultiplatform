@@ -12,6 +12,10 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardCapitalization
@@ -25,9 +29,10 @@ import com.borealnetwork.allen.components.EditTextTopLabel
 import com.borealnetwork.allen.components.SemiBoldText
 import com.borealnetwork.allen.components.SeparatorHorizontal
 import com.borealnetwork.allen.components.ToolbarImg
+import com.borealnetwork.allen.components.loading.Loading
 import com.borealnetwork.allen.modules.auth.domain.navigation.AuthScreen
-import com.borealnetwork.allen.modules.home_client.domain.navigation.HomeClientScreen
 import com.borealnetwork.allen.modules.auth.domain.view_models.LoginViewModel
+import com.borealnetwork.allen.modules.home_client.domain.navigation.HomeClientScreen
 import com.borealnetwork.shared.domain.models.StateApi
 import moe.tlaster.precompose.navigation.Navigator
 import org.koin.compose.koinInject
@@ -39,6 +44,7 @@ fun LoginViewCompose(
 ) {
 
     val scrollState = rememberScrollState()
+    val status = loginViewModel.loginResult.collectAsState().value
 
     Scaffold(modifier = Modifier
         .fillMaxSize()
@@ -48,13 +54,13 @@ fun LoginViewCompose(
                 navigator.navigate(AuthScreen.WelcomeScreen.route)
             }
         }) {
+
+        Loading(showOrHide = status?.status == StateApi.Loading)
         Column(
             modifier = Modifier
                 .padding(horizontal = 30.dp)
                 .verticalScroll(scrollState)
         ) {
-
-
             SemiBoldText(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -62,8 +68,6 @@ fun LoginViewCompose(
                 fontSize = 20.sp,
                 text = "Iniciar sesión"
             )
-
-
             EditTextTopLabel(
                 modifier = Modifier.padding(top = 31.dp).fillMaxWidth(),
                 placeHolderText = "correo@dominio.com",

@@ -20,6 +20,7 @@ import io.ktor.client.call.body
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.get
 import io.ktor.serialization.kotlinx.json.json
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -107,6 +108,9 @@ class LoginViewModel(
                         )
                     )
                 ).collect {
+                    if(it.result.status == StateApi.Success){
+                        delay(2000)
+                    }
                     it.result.success { response ->
                         _loginResult.update {
                             success()

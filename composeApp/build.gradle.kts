@@ -59,6 +59,7 @@ kotlin {
             implementation(libs.kamel.image)
             api(compose.foundation)
             api(compose.animation)
+            implementation(libs.compottie)
 //...
 //            implementation(libs.voyager.navigator)
 
