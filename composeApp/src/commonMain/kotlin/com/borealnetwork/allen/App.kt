@@ -64,8 +64,6 @@ internal fun App() = PreComposeApp {
     //https://github.com/alexzhirkevich/compottie
 
     AppTheme {
-//        val loginViewModel = getViewModel(Unit, viewModelFactory { LoginViewModel() })
-//        val loginViewModel = LoginViewModel by Viewmode
         val navigator = rememberNavigator()
         NavHost(
             navigator = navigator,
