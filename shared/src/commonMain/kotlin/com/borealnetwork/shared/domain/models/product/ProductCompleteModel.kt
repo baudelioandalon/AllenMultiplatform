@@ -12,6 +12,7 @@ data class ProductCompleteModel(
     val idSeller: String,
     val minimalFreeShipping: Double,
     val nameProduct: String,
+    val nameSeller: String,
     val price: Double,
     val quantity: Double,
     val rating: List<RatingProductModel>,

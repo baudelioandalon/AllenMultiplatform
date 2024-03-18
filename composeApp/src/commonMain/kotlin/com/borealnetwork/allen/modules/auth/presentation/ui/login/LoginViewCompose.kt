@@ -37,7 +37,7 @@ import org.koin.compose.koinInject
 @Composable
 fun LoginViewCompose(
     navigator: Navigator,
-    loginViewModel: LoginViewModel = koinInject()
+    loginViewModel: LoginViewModel
 ) {
 
     val scrollState = rememberScrollState()

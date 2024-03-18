@@ -17,6 +17,7 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -34,6 +35,7 @@ import com.borealnetwork.allen.modules.home_client.domain.view_model.HomeClientV
 import com.borealnetwork.allen.modules.notifications.domain.navigation.NotificationsClientScreen
 import com.borealnetwork.allen.modules.orders.domain.navigation.OrdersClientScreen
 import com.borealnetwork.allen.modules.product.domain.navigation.ProductClientScreen
+import com.borealnetwork.allen.modules.product.domain.view_models.ShowProductViewModel
 import com.borealnetwork.allen.modules.stores.domain.navigation.StoresScreen
 import com.borealnetwork.allen.platform
 import com.borealnetwork.allensharedui.components.BoldText
@@ -49,6 +51,7 @@ import com.borealnetwork.allensharedui.components.drawer.model.DrawerOptions
 import com.borealnetwork.allensharedui.components.drawer.model.MenuItem
 import com.borealnetwork.allensharedui.theme.GrayBackgroundMain
 import com.borealnetwork.allensharedui.theme.categorySelectorColors
+import com.borealnetwork.shared.domain.models.StateApi
 import com.borealnetwork.shared.domain.models.cart.MinimalProductModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -64,10 +67,12 @@ import org.koin.compose.koinInject
 @Composable
 fun HomeClientViewCompose(
     navigator: Navigator,
-    homeClientViewModel: HomeClientViewModel = koinInject()
+    homeClientViewModel: HomeClientViewModel,
+    showProductViewModel: ShowProductViewModel
 ) {
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
+    val productsResult = homeClientViewModel.productsResult.collectAsState().value
 
 
     val lastProductsList = listOf(
@@ -266,10 +271,27 @@ fun HomeClientViewCompose(
                             HorizontalContainerListItem(
                                 startText = "Ultimos articulos",
                                 endText = "Ver todos",
-                                listItem = lastProductsList
+                                listItem = if (productsResult?.status == StateApi.Success) {
+                                    productsResult.response?.map {
+                                        MinimalProductModel(
+                                            skuProduct = it.skuProduct,
+                                            nameProduct = it.nameProduct,
+                                            imgProduct = it.variants.first().images.first(),
+                                            categoryItem = it.categoryItem,
+                                            price = it.price,
+                                            discountPercentage = it.discount
+                                        )
+                                    } ?: lastProductsList
+                                } else {
+                                    lastProductsList
+                                }
                             ) { minimalProductModel, index ->
                                 ProductItem(minimalProductModel) {
-                                    navigator.navigate(ProductClientScreen.ShowProductClient.route)
+                                    productsResult?.response?.get(index)?.let { modelSelected ->
+                                        showProductViewModel.setTopProductModel(modelSelected)
+                                        navigator.navigate(ProductClientScreen.ShowProductClient.route)
+                                    }
+
                                 }
                             }
                         }

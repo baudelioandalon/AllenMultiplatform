@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
@@ -24,8 +25,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.Black
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.borealnetwork.allen.modules.cart.domain.navigation.CartClientScreen
+import com.borealnetwork.allen.modules.product.domain.navigation.ProductClientScreen
+import com.borealnetwork.allen.modules.product.domain.view_models.ShowProductViewModel
 import com.borealnetwork.allensharedui.components.BoldText
 import com.borealnetwork.allensharedui.components.BrandingItem
 import com.borealnetwork.allensharedui.components.FavoriteButton
@@ -44,16 +49,21 @@ import com.borealnetwork.allensharedui.components.StartIcon
 import com.borealnetwork.allensharedui.components.ToolbarTitle
 import com.borealnetwork.allensharedui.components.bottom_actions.BottomPriceItem
 import com.borealnetwork.allensharedui.components.drawer.StarStatus
-import com.borealnetwork.shared.domain.models.cart.MinimalProductModel
-import com.borealnetwork.allen.modules.cart.domain.navigation.CartClientScreen
-import com.borealnetwork.allen.modules.product.domain.navigation.ProductClientScreen
 import com.borealnetwork.allensharedui.theme.GrayBackgroundDrawerDismiss
 import com.borealnetwork.allensharedui.theme.GrayBackgroundMain
 import com.borealnetwork.allensharedui.theme.GrayLetterShipping
+import com.borealnetwork.shared.domain.models.cart.MinimalProductModel
+import io.kamel.image.KamelImage
+import io.kamel.image.asyncPainterResource
 import moe.tlaster.precompose.navigation.Navigator
+import org.koin.compose.koinInject
 
 @Composable
-fun ShowProductViewCompose(navigator: Navigator) {
+fun ShowProductViewCompose(
+    navigator: Navigator,
+    showProductViewModel: ShowProductViewModel
+) {
+    val getLastProduct = showProductViewModel.getTopProductModel()
 
     val lastProductsList = listOf(
         MinimalProductModel(
@@ -94,12 +104,13 @@ fun ShowProductViewCompose(navigator: Navigator) {
             }
         }
     ) {
-        val imageList = listOf("", "", "", "", "", "", "")
+        val imageList = getLastProduct?.variants?.first()?.images ?: emptyList()
         val firstVariantList = listOf("110V", "220V", "110V - 220V", "12V", "24V", "48V")
         val secondVariantList =
             listOf("Amarillo", "Verde", "Azul", "Morado", "Rojo", "Rosa", "Cafe")
         var firstItemSelected by rememberSaveable { mutableStateOf(firstVariantList.first()) }
         var secondItemSelected by rememberSaveable { mutableStateOf(secondVariantList.first()) }
+        var itemSelected by rememberSaveable{ mutableStateOf(imageList.first()) }
         LazyColumn(
             modifier = Modifier
                 .wrapContentWidth()
@@ -121,7 +132,12 @@ fun ShowProductViewCompose(navigator: Navigator) {
                             elevation = 0.dp,
                             shape = RectangleShape
                         ) {
-
+                            KamelImage(
+                                modifier = Modifier.fillMaxSize(),
+                                resource = asyncPainterResource(itemSelected),
+                                contentScale = ContentScale.Crop,
+                                contentDescription = "imageExample"
+                            )
                         }
                         HorizontalImageViewer(
                             modifier = Modifier.padding(vertical = 15.dp),
@@ -129,7 +145,7 @@ fun ShowProductViewCompose(navigator: Navigator) {
                             itemList = imageList,
                             zoomWhenSelected = true,
                             itemClicked = { index, item ->
-
+                                itemSelected = item
                             }
                         )
 
@@ -143,7 +159,7 @@ fun ShowProductViewCompose(navigator: Navigator) {
                         ) {
                             BoldText(
                                 modifier = Modifier.weight(1f),
-                                text = "Miniesmeriladora Angular",
+                                text = getLastProduct?.nameProduct.orEmpty(),
                                 color = Black,
                                 lineHeight = 22.sp
                             )
@@ -165,7 +181,7 @@ fun ShowProductViewCompose(navigator: Navigator) {
                         ) {
                             FreeShipping(modifier = Modifier.padding(), unbounded = true)
                             MediumText(
-                                text = "Comprando 4 articulos",
+                                text = "Comprando ${getLastProduct?.minimalFreeShipping?.toInt()} articulos",
                                 fontSize = 10.sp,
                                 color = GrayLetterShipping
                             )
@@ -286,8 +302,8 @@ fun ShowProductViewCompose(navigator: Navigator) {
                             SellerItem(
                                 modifier = Modifier.fillMaxWidth()
                                     .padding(start = 30.dp, bottom = 35.dp, top = 22.dp),
-                                topText = "Ferreteria La Hormiga",
-                                bottomText = "Para Casa y Hogar"
+                                topText = getLastProduct?.nameProduct.orEmpty(),
+                                bottomText = "Para ${getLastProduct?.categoryItem}"
                             ) {
 
                             }
@@ -336,7 +352,7 @@ fun ShowProductViewCompose(navigator: Navigator) {
                                     top = 20.dp, start = 30.dp
                                 ),
                                 topText = "Para",
-                                bottomText = "Casa y Hogar"
+                                bottomText = getLastProduct?.categoryItem.orEmpty()
                             )
                         },
                         endIcon = {

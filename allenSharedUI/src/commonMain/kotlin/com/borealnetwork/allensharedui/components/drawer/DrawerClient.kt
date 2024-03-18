@@ -23,6 +23,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Black
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.text.style.TextAlign
@@ -96,7 +97,8 @@ fun StarStatus(
 ) {
     Column(modifier = modifier) {
         StarsUser(
-            stars = stars
+            stars = stars,
+            color = Black
         )
         BoldText(
             modifier = Modifier.padding(start = 10.dp),
@@ -110,7 +112,7 @@ fun StarStatus(
 }
 
 @Composable
-fun StarsUser(stars: String = "4.6"){
+fun StarsUser(stars: String = "4.6", color: Color = White){
     Row(
         modifier = Modifier
             .padding(top = 4.dp), verticalAlignment = CenterVertically
@@ -124,7 +126,7 @@ fun StarsUser(stars: String = "4.6"){
             modifier = Modifier.padding(start = 5.dp),
             fontSize = 15.sp,
             text = stars,
-            color = White
+            color = color
         )
 
     }

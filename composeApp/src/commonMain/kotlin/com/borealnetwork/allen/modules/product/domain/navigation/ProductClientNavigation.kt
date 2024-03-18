@@ -1,5 +1,6 @@
 package com.borealnetwork.allen.modules.product.domain.navigation
 
+import com.borealnetwork.allen.modules.product.domain.view_models.ShowProductViewModel
 import com.borealnetwork.allen.modules.product.presentation.ui.favorites.FavoritesClientViewCompose
 import com.borealnetwork.allen.modules.product.presentation.ui.question.QuestionViewCompose
 import com.borealnetwork.allen.modules.product.presentation.ui.rating.RatingProductViewCompose
@@ -32,14 +33,17 @@ fun RouteBuilder.resultProductsClientNavigationGraph(navigator: Navigator) {
     }
 }
 
-fun RouteBuilder.showProductClientNavigationGraph(navigator: Navigator) {
+fun RouteBuilder.showProductClientNavigationGraph(
+    navigator: Navigator,
+    showProductViewModel: ShowProductViewModel
+) {
     scene(
         // Scene's route path
         route = ProductClientScreen.ShowProductClient.route,
         // Navigation transition for this scene, this is optional
         navTransition = defaultTransition(),
     ) {
-        ShowProductViewCompose(navigator)
+        ShowProductViewCompose(navigator, showProductViewModel)
     }
 }
 

@@ -5,8 +5,11 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -22,6 +25,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Black
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -30,6 +34,8 @@ import com.borealnetwork.allensharedui.theme.GrayBackgroundDrawerDismiss
 import com.borealnetwork.shared.tools.cut
 import com.borealnetwork.shared.tools.firstItem
 import com.borealnetwork.shared.tools.limit
+import io.kamel.image.KamelImage
+import io.kamel.image.asyncPainterResource
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -72,7 +78,12 @@ fun HorizontalImageViewer(
                         itemClicked?.invoke(index, item)
                     }
                 ) {
-
+                    KamelImage(
+                        modifier = Modifier.size(54.dp),
+                        resource = asyncPainterResource(item),
+                        contentScale = ContentScale.Crop,
+                        contentDescription = "imageExample"
+                    )
                 }
                 if (bottomText) {
                     BoldText(

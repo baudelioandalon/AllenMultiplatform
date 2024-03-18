@@ -87,12 +87,13 @@ import com.borealnetwork.shared.domain.models.cart.MinimalProductModel
 import com.borealnetwork.shared.domain.models.cart.ProductShoppingCart
 import com.borealnetwork.shared.domain.models.payments.CardModel
 import com.borealnetwork.shared.domain.models.payments.TypeCard
-import com.borealnetwork.shared.platform
 import com.borealnetwork.shared.tools.DottedShape
 import com.borealnetwork.shared.tools.limit
 import com.borealnetwork.shared.tools.mirror
 import com.borealnetwork.shared.tools.round
 import com.borealnetwork.shared.tools.rounded
+import io.kamel.image.KamelImage
+import io.kamel.image.asyncPainterResource
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 
@@ -291,14 +292,7 @@ fun SellerItem(
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun ProductItem(
-    model: MinimalProductModel = MinimalProductModel(
-        skuProduct = "dd323234",
-        nameProduct = "Sensor Dummy",
-        imgProduct = "imagen",
-        categoryItem = "Electronica",
-        price = 34.0,
-        discountPercentage = 0.0
-    ), onClicked: (() -> Unit)? = null
+    model: MinimalProductModel, onClicked: (() -> Unit)? = null
 ) {
     Card(
         modifier = Modifier.padding(start = 30.dp, end = 4.dp).height(240.dp).width(178.dp),
@@ -313,12 +307,14 @@ fun ProductItem(
             verticalArrangement = Arrangement.Center
         ) {
             Box {
-                FavoriteButton()
-                Image(
+                KamelImage(
                     modifier = Modifier.padding(top = 10.dp).fillMaxWidth().height(130.dp),
-                    painter = painterResource(resource = DrawableResource("tools_icon.png")),
-                    contentDescription = "item"
+                    resource = asyncPainterResource(
+                        model.imgProduct,
+                    ),
+                    contentDescription = "imageExample"
                 )
+                FavoriteButton()
             }
 
             SemiBoldText(

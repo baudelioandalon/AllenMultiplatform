@@ -31,6 +31,7 @@ import com.borealnetwork.allen.modules.cart.domain.navigation.detailBuyCartClien
 import com.borealnetwork.allen.modules.cart.domain.navigation.resumeBuyCartClientNavigationGraph
 import com.borealnetwork.allen.modules.cart.domain.navigation.shoppingCartClientNavigationGraph
 import com.borealnetwork.allen.modules.home_client.domain.navigation.homeClientNavigationGraph
+import com.borealnetwork.allen.modules.home_client.domain.view_model.HomeClientViewModel
 import com.borealnetwork.allen.modules.notifications.domain.navigation.notificationClientNavigationGraph
 import com.borealnetwork.allen.modules.orders.domain.navigation.orderClientFinishDetailNavigationGraph
 import com.borealnetwork.allen.modules.orders.domain.navigation.orderClientStatusNavigationGraph
@@ -43,6 +44,7 @@ import com.borealnetwork.allen.modules.product.domain.navigation.ratingProductCl
 import com.borealnetwork.allen.modules.product.domain.navigation.resultProductsClientNavigationGraph
 import com.borealnetwork.allen.modules.product.domain.navigation.searchClientNavigationGraph
 import com.borealnetwork.allen.modules.product.domain.navigation.showProductClientNavigationGraph
+import com.borealnetwork.allen.modules.product.domain.view_models.ShowProductViewModel
 import com.borealnetwork.allen.modules.profile.domain.navigation.addressClientNavigationGraph
 import com.borealnetwork.allen.modules.profile.domain.navigation.newAddressClientNavigationGraph
 import com.borealnetwork.allen.modules.stores.domain.navigation.storesInMapNavigationGraph
@@ -52,11 +54,16 @@ import io.kamel.image.asyncPainterResource
 import moe.tlaster.precompose.PreComposeApp
 import moe.tlaster.precompose.navigation.NavHost
 import moe.tlaster.precompose.navigation.rememberNavigator
+import org.koin.compose.koinInject
 
 
 @Composable
 internal fun App() = PreComposeApp {
 
+
+    val loginViewModel: LoginViewModel = koinInject()
+    val showProductViewModel: ShowProductViewModel = koinInject()
+    val homeClientViewModel: HomeClientViewModel = koinInject()
 
     AppTheme {
         val navigator = rememberNavigator()
@@ -65,12 +72,12 @@ internal fun App() = PreComposeApp {
             initialRoute = AuthScreen.WelcomeScreen.route
         ) {
             //Auth
-            welcomeNavigationGraph(navigator)
-            loginNavigationGraph(navigator)
+            welcomeNavigationGraph(navigator, homeClientViewModel, showProductViewModel)
+            loginNavigationGraph(navigator,loginViewModel)
             registerNavigationGraph(navigator)
 
             //HomeClient
-            homeClientNavigationGraph(navigator)
+            homeClientNavigationGraph(navigator, homeClientViewModel, showProductViewModel)
 
             //Client
             notificationClientNavigationGraph(navigator)
@@ -83,7 +90,7 @@ internal fun App() = PreComposeApp {
             //Product
             searchClientNavigationGraph(navigator)
             resultProductsClientNavigationGraph(navigator)
-            showProductClientNavigationGraph(navigator)
+            showProductClientNavigationGraph(navigator,showProductViewModel)
             ratingProductClientNavigationGraph(navigator)
             questionsProductClientNavigationGraph(navigator)
             favoritesClientNavigationGraph(navigator)
