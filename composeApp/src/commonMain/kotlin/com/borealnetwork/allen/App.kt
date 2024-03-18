@@ -64,7 +64,6 @@ internal fun App() = PreComposeApp {
         NavHost(
             navigator = navigator,
             initialRoute = AuthScreen.WelcomeScreen.route
-//            initialRoute = HomeClientScreen.HomeDefaultClientScreen.route
         ) {
             //Auth
             welcomeNavigationGraph(navigator)
