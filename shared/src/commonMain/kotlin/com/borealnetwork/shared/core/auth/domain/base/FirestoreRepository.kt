@@ -7,13 +7,14 @@ import dev.gitlive.firebase.auth.auth
 import dev.gitlive.firebase.firestore.FirebaseFirestoreException
 import dev.gitlive.firebase.firestore.FirestoreExceptionCode
 import dev.gitlive.firebase.firestore.code
+import dev.gitlive.firebase.firestore.firestore
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 
 abstract class FirestoreRepository {
 
-    protected val coroutineScope: CoroutineScope = MainScope()
     protected val firebaseAuth = Firebase.auth
+    protected val firebaseFirestore = Firebase.firestore
 
     companion object {
         fun errorResponse(causeThrowable: Exception) =

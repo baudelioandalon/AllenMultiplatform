@@ -28,7 +28,7 @@ import com.borealnetwork.allensharedui.components.SeparatorHorizontal
 import com.borealnetwork.allensharedui.components.ToolbarImg
 import com.borealnetwork.allensharedui.components.loading.Loading
 import com.borealnetwork.allen.modules.auth.domain.navigation.AuthScreen
-import com.borealnetwork.allen.modules.auth.domain.view_models.LoginViewModel
+import com.borealnetwork.allen.modules.auth.domain.view_model.LoginViewModel
 import com.borealnetwork.allen.modules.home_client.domain.navigation.HomeClientScreen
 import com.borealnetwork.shared.domain.models.StateApi
 import moe.tlaster.precompose.navigation.Navigator

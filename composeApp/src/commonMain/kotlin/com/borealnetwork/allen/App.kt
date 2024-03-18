@@ -26,7 +26,7 @@ import com.borealnetwork.allen.modules.auth.domain.navigation.AuthScreen
 import com.borealnetwork.allen.modules.auth.domain.navigation.loginNavigationGraph
 import com.borealnetwork.allen.modules.auth.domain.navigation.registerNavigationGraph
 import com.borealnetwork.allen.modules.auth.domain.navigation.welcomeNavigationGraph
-import com.borealnetwork.allen.modules.auth.domain.view_models.LoginViewModel
+import com.borealnetwork.allen.modules.auth.domain.view_model.LoginViewModel
 import com.borealnetwork.allen.modules.cart.domain.navigation.detailBuyCartClientNavigationGraph
 import com.borealnetwork.allen.modules.cart.domain.navigation.resumeBuyCartClientNavigationGraph
 import com.borealnetwork.allen.modules.cart.domain.navigation.shoppingCartClientNavigationGraph
@@ -37,7 +37,6 @@ import com.borealnetwork.allen.modules.orders.domain.navigation.orderClientStatu
 import com.borealnetwork.allen.modules.orders.domain.navigation.ordersClientNavigationGraph
 import com.borealnetwork.allen.modules.payments.domain.navigation.newCardClientNavigationGraph
 import com.borealnetwork.allen.modules.payments.domain.navigation.paymentsMethodClientNavigationGraph
-import com.borealnetwork.allen.modules.product.domain.navigation.ProductClientScreen
 import com.borealnetwork.allen.modules.product.domain.navigation.favoritesClientNavigationGraph
 import com.borealnetwork.allen.modules.product.domain.navigation.questionsProductClientNavigationGraph
 import com.borealnetwork.allen.modules.product.domain.navigation.ratingProductClientNavigationGraph

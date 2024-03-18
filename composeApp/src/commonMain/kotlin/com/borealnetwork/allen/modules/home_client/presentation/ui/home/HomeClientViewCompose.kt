@@ -28,6 +28,14 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.borealnetwork.allen.domain.model.PromotionItem
+import com.borealnetwork.allen.modules.cart.domain.navigation.CartClientScreen
+import com.borealnetwork.allen.modules.home_client.domain.view_model.HomeClientViewModel
+import com.borealnetwork.allen.modules.notifications.domain.navigation.NotificationsClientScreen
+import com.borealnetwork.allen.modules.orders.domain.navigation.OrdersClientScreen
+import com.borealnetwork.allen.modules.product.domain.navigation.ProductClientScreen
+import com.borealnetwork.allen.modules.stores.domain.navigation.StoresScreen
+import com.borealnetwork.allen.platform
 import com.borealnetwork.allensharedui.components.BoldText
 import com.borealnetwork.allensharedui.components.BrandingHorizontal
 import com.borealnetwork.allensharedui.components.CategoryItem
@@ -39,27 +47,28 @@ import com.borealnetwork.allensharedui.components.drawer.DrawerBodyClient
 import com.borealnetwork.allensharedui.components.drawer.DrawerHeaderClient
 import com.borealnetwork.allensharedui.components.drawer.model.DrawerOptions
 import com.borealnetwork.allensharedui.components.drawer.model.MenuItem
-import com.borealnetwork.shared.domain.models.cart.MinimalProductModel
-import com.borealnetwork.allen.domain.model.PromotionItem
-import com.borealnetwork.allen.modules.cart.domain.navigation.CartClientScreen
-import com.borealnetwork.allen.modules.notifications.domain.navigation.NotificationsClientScreen
-import com.borealnetwork.allen.modules.orders.domain.navigation.OrdersClientScreen
-import com.borealnetwork.allen.modules.product.domain.navigation.ProductClientScreen
-import com.borealnetwork.allen.modules.stores.domain.navigation.StoresScreen
-import com.borealnetwork.allen.platform
 import com.borealnetwork.allensharedui.theme.GrayBackgroundMain
 import com.borealnetwork.allensharedui.theme.categorySelectorColors
+import com.borealnetwork.shared.domain.models.cart.MinimalProductModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.yield
+import moe.tlaster.precompose.lifecycle.Lifecycle
+import moe.tlaster.precompose.lifecycle.LifecycleObserver
+import moe.tlaster.precompose.lifecycle.LocalLifecycleOwner
 import moe.tlaster.precompose.navigation.Navigator
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
+import org.koin.compose.koinInject
 
 @Composable
-fun HomeClientViewCompose(navigator: Navigator) {
+fun HomeClientViewCompose(
+    navigator: Navigator,
+    homeClientViewModel: HomeClientViewModel = koinInject()
+) {
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
+
 
     val lastProductsList = listOf(
         MinimalProductModel(
@@ -191,6 +200,29 @@ fun HomeClientViewCompose(navigator: Navigator) {
             }
         },
         content = {
+            val lifecycle = LocalLifecycleOwner.current
+            lifecycle.lifecycle.addObserver(object : LifecycleObserver {
+                override fun onStateChanged(state: Lifecycle.State) {
+                    when (state) {
+                        Lifecycle.State.Initialized -> {
+
+                        }
+
+                        Lifecycle.State.Active -> {
+                            homeClientViewModel.getProducts()
+                        }
+
+                        Lifecycle.State.InActive -> {
+
+                        }
+
+                        Lifecycle.State.Destroyed -> {
+
+                        }
+                    }
+                }
+            })
+
             Box(
                 modifier = Modifier
                     .fillMaxSize()
