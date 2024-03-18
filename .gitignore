@@ -49,3 +49,4 @@ replay_pid*
 /buildSrc/.gradle/8.0/checksums/md5-checksums.bin
 /buildSrc/.gradle/buildOutputCleanup/outputFiles.bin
 /buildSrc/.gradle/8.0/checksums/sha1-checksums.bin
+/allenSharedUI/*
