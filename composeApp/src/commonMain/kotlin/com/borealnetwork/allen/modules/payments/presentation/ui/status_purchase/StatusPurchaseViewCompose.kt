@@ -15,11 +15,11 @@ import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.borealnetwork.allen.components.SemiBoldText
+import com.borealnetwork.allensharedui.components.SemiBoldText
 import com.borealnetwork.allen.domain.enum.StatusEnum
-import com.borealnetwork.allen.theme.ErrorColor
-import com.borealnetwork.allen.theme.SuccessColor
-import com.borealnetwork.allen.theme.WarningColor
+import com.borealnetwork.allensharedui.theme.ErrorColor
+import com.borealnetwork.allensharedui.theme.SuccessColor
+import com.borealnetwork.allensharedui.theme.WarningColor
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 

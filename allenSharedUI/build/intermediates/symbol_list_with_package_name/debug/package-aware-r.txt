@@ -1,0 +1,23 @@
+com.borealnetwork.allensharedui
+font avenir_black
+font avenir_heavy
+font avenir_medium
+font helvetica
+font helvetica_bold
+font helvetica_light
+font helvetica_neue
+font helvetica_neue_bold
+font helvetica_neue_light
+font helvetica_neue_thin
+font montserrat_bold
+font montserrat_extrabold
+font montserrat_light
+font montserrat_medium
+font montserrat_regular
+font montserrat_semibold
+font montserrat_thin
+font roboto
+font roboto_bold
+font roboto_light
+font roboto_medium
+font roboto_thin

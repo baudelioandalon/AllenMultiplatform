@@ -14,15 +14,16 @@ import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.borealnetwork.allen.components.AddressSelector
-import com.borealnetwork.allen.components.ResumeItem
-import com.borealnetwork.allen.components.SelectorSpinner
-import com.borealnetwork.allen.components.ShippingSelector
-import com.borealnetwork.allen.components.ToolbarTitle
-import com.borealnetwork.allen.components.UserSelector
-import com.borealnetwork.allen.components.bottom_actions.BottomBuyCartItem
+import com.borealnetwork.allensharedui.components.AddressSelector
+import com.borealnetwork.allensharedui.components.ResumeItem
+import com.borealnetwork.allensharedui.components.SelectorSpinner
+import com.borealnetwork.allensharedui.components.ShippingSelector
+import com.borealnetwork.allensharedui.components.ToolbarTitle
+import com.borealnetwork.allensharedui.components.UserSelector
+import com.borealnetwork.allensharedui.components.bottom_actions.BottomBuyCartItem
 import com.borealnetwork.allen.modules.profile.domain.navigation.ProfileScreen
-import com.borealnetwork.allen.theme.GrayBackgroundMain
+import com.borealnetwork.allen.platform
+import com.borealnetwork.allensharedui.theme.GrayBackgroundMain
 import moe.tlaster.precompose.navigation.Navigator
 
 @Composable
@@ -39,7 +40,8 @@ fun DetailBuyCartStepOneViewCompose(navigator: Navigator) {
         bottomBar = {
             BottomBuyCartItem(
                 price = 100.0,
-                discount = 8
+                discount = 8,
+                currency = platform().currency
             )
         }) {
         LazyColumn(

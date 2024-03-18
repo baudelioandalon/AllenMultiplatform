@@ -3,7 +3,7 @@ package com.borealnetwork.allen.modules.orders.domain.navigation
 import com.borealnetwork.allen.modules.orders.presentation.ui.order_detail.OrderClientFinishDetailViewCompose
 import com.borealnetwork.allen.modules.orders.presentation.ui.order_status.OrderClientInProgressStatusViewCompose
 import com.borealnetwork.allen.modules.orders.presentation.ui.orders.OrdersListViewCompose
-import com.borealnetwork.allen.tools.defaultTransition
+import com.borealnetwork.allensharedui.theme.defaultTransition
 import moe.tlaster.precompose.navigation.Navigator
 import moe.tlaster.precompose.navigation.RouteBuilder
 

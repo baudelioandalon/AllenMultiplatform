@@ -8,11 +8,12 @@ import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.borealnetwork.allen.components.ShoppingCartItem
-import com.borealnetwork.allen.components.ToolbarTitle
-import com.borealnetwork.allen.domain.model.ProductShoppingCart
-import com.borealnetwork.allen.theme.GrayBackgroundMain
-import com.borealnetwork.allen.tools.firstItem
+import com.borealnetwork.allen.platform
+import com.borealnetwork.allensharedui.components.ShoppingCartItem
+import com.borealnetwork.allensharedui.components.ToolbarTitle
+import com.borealnetwork.shared.domain.models.cart.ProductShoppingCart
+import com.borealnetwork.allensharedui.theme.GrayBackgroundMain
+import com.borealnetwork.shared.tools.firstItem
 import moe.tlaster.precompose.navigation.Navigator
 
 @Composable
@@ -91,6 +92,7 @@ fun FavoritesClientViewCompose(navigator: Navigator) {
                     counter = false,
                     showBottomDivider = true,
                     showChecked = false,
+                    currency = platform().currency,
                     topPadding = if (index == list.firstItem()) 20.dp else 0.dp,
                     imgClicked = {item ->
 

@@ -11,10 +11,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.borealnetwork.allen.components.SemiBoldText
-import com.borealnetwork.allen.components.ToolbarTitle
+import com.borealnetwork.allensharedui.components.SemiBoldText
+import com.borealnetwork.allensharedui.components.ToolbarTitle
 import com.borealnetwork.allen.modules.cart.domain.navigation.CartClientScreen
-import com.borealnetwork.allen.theme.GrayLetterShipping
+import com.borealnetwork.allensharedui.theme.GrayLetterShipping
 import moe.tlaster.precompose.navigation.Navigator
 
 @Composable

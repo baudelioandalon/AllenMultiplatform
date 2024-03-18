@@ -2,7 +2,7 @@ package com.borealnetwork.allen.modules.payments.domain.navigation
 
 import com.borealnetwork.allen.modules.payments.presentation.ui.new_card.NewCardViewCompose
 import com.borealnetwork.allen.modules.payments.presentation.ui.payments_methods.PaymentMethodsViewCompose
-import com.borealnetwork.allen.tools.defaultTransition
+import com.borealnetwork.allensharedui.theme.defaultTransition
 import moe.tlaster.precompose.navigation.Navigator
 import moe.tlaster.precompose.navigation.RouteBuilder
 

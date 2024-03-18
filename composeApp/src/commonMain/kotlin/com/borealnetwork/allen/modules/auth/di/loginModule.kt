@@ -1,7 +1,7 @@
 package com.borealnetwork.allen.modules.auth.di
 
 import com.borealnetwork.allen.modules.auth.domain.view_models.LoginViewModel
-import com.borealnetwork.allen.viewModelDefinition
+import com.borealnetwork.shared.viewModelDefinition
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 

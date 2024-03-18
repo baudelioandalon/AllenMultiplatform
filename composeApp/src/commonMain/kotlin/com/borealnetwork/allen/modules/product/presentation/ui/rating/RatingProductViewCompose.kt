@@ -19,12 +19,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.borealnetwork.allen.components.RatingByUserItem
-import com.borealnetwork.allen.components.SemiBoldText
-import com.borealnetwork.allen.components.ToolbarTitle
-import com.borealnetwork.allen.components.bottom_actions.BottomEditTextItem
+import com.borealnetwork.allensharedui.components.RatingByUserItem
+import com.borealnetwork.allensharedui.components.SemiBoldText
+import com.borealnetwork.allensharedui.components.ToolbarTitle
+import com.borealnetwork.allensharedui.components.bottom_actions.BottomEditTextItem
 import com.borealnetwork.allen.modules.product.domain.models.QuestionModel
-import com.borealnetwork.allen.theme.GrayBackgroundMain
+import com.borealnetwork.allensharedui.theme.GrayBackgroundMain
 import moe.tlaster.precompose.navigation.Navigator
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource

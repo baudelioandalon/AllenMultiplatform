@@ -23,16 +23,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.Transparent
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.dp
-import com.borealnetwork.allen.components.ResumeSelector
-import com.borealnetwork.allen.components.ShoppingCartStoreItem
-import com.borealnetwork.allen.components.StatusPackageItem
-import com.borealnetwork.allen.components.StatusPreviouPackageItem
-import com.borealnetwork.allen.components.ToolbarTitle
-import com.borealnetwork.allen.components.bottom_actions.BottomBuyCartItem
-import com.borealnetwork.allen.domain.model.ItemCartModel
-import com.borealnetwork.allen.domain.model.ProductShoppingCart
-import com.borealnetwork.allen.theme.GrayBackgroundDrawerDismiss
-import com.borealnetwork.allen.theme.GrayBackgroundMain
+import com.borealnetwork.allen.platform
+import com.borealnetwork.allensharedui.components.ResumeSelector
+import com.borealnetwork.allensharedui.components.ShoppingCartStoreItem
+import com.borealnetwork.allensharedui.components.StatusPackageItem
+import com.borealnetwork.allensharedui.components.StatusPreviouPackageItem
+import com.borealnetwork.allensharedui.components.ToolbarTitle
+import com.borealnetwork.allensharedui.components.bottom_actions.BottomBuyCartItem
+import com.borealnetwork.allensharedui.theme.GrayBackgroundDrawerDismiss
+import com.borealnetwork.allensharedui.theme.GrayBackgroundMain
+import com.borealnetwork.shared.domain.models.cart.ItemCartModel
+import com.borealnetwork.shared.domain.models.cart.ProductShoppingCart
 import moe.tlaster.precompose.navigation.Navigator
 
 @OptIn(ExperimentalLayoutApi::class)
@@ -53,7 +54,8 @@ fun OrderClientInProgressStatusViewCompose(navigator: Navigator) {
             BottomBuyCartItem(
                 payed = true,
                 price = 100.0,
-                discount = 8
+                discount = 8,
+                currency = platform().currency
             )
         }) {
         LazyColumn(
@@ -201,6 +203,7 @@ fun OrderClientInProgressStatusViewCompose(navigator: Navigator) {
                                     modifier = Modifier.padding(start = 30.dp, end = 30.dp),
                                     item = item,
                                     counter = false,
+                                    currency = platform().currency,
                                     deleteOptions = false,
                                     selector = false
                                 )

@@ -12,13 +12,13 @@ import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.borealnetwork.allen.components.AddressSelector
-import com.borealnetwork.allen.components.NewAddressSelector
-import com.borealnetwork.allen.components.ResumeItem
-import com.borealnetwork.allen.components.ToolbarTitle
-import com.borealnetwork.allen.components.bottom_actions.BottomContinueItem
+import com.borealnetwork.allensharedui.components.AddressSelector
+import com.borealnetwork.allensharedui.components.NewAddressSelector
+import com.borealnetwork.allensharedui.components.ResumeItem
+import com.borealnetwork.allensharedui.components.ToolbarTitle
+import com.borealnetwork.allensharedui.components.bottom_actions.BottomContinueItem
 import com.borealnetwork.allen.modules.profile.domain.navigation.ProfileScreen
-import com.borealnetwork.allen.theme.GrayBackgroundMain
+import com.borealnetwork.allensharedui.theme.GrayBackgroundMain
 import moe.tlaster.precompose.navigation.Navigator
 
 @Composable

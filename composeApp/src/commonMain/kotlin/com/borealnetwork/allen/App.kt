@@ -22,7 +22,6 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.borealnetwork.allen.domain.model.BirdImage
-import com.borealnetwork.allen.modules.auth.domain.navigation.AuthScreen
 import com.borealnetwork.allen.modules.auth.domain.navigation.loginNavigationGraph
 import com.borealnetwork.allen.modules.auth.domain.navigation.registerNavigationGraph
 import com.borealnetwork.allen.modules.auth.domain.navigation.welcomeNavigationGraph
@@ -38,16 +37,16 @@ import com.borealnetwork.allen.modules.orders.domain.navigation.ordersClientNavi
 import com.borealnetwork.allen.modules.payments.domain.navigation.newCardClientNavigationGraph
 import com.borealnetwork.allen.modules.payments.domain.navigation.paymentsMethodClientNavigationGraph
 import com.borealnetwork.allen.modules.product.domain.navigation.ProductClientScreen
-import com.borealnetwork.allen.modules.product.domain.navigation.detailProductClientNavigationGraph
 import com.borealnetwork.allen.modules.product.domain.navigation.favoritesClientNavigationGraph
 import com.borealnetwork.allen.modules.product.domain.navigation.questionsProductClientNavigationGraph
 import com.borealnetwork.allen.modules.product.domain.navigation.ratingProductClientNavigationGraph
 import com.borealnetwork.allen.modules.product.domain.navigation.resultProductsClientNavigationGraph
 import com.borealnetwork.allen.modules.product.domain.navigation.searchClientNavigationGraph
+import com.borealnetwork.allen.modules.product.domain.navigation.showProductClientNavigationGraph
 import com.borealnetwork.allen.modules.profile.domain.navigation.addressClientNavigationGraph
 import com.borealnetwork.allen.modules.profile.domain.navigation.newAddressClientNavigationGraph
 import com.borealnetwork.allen.modules.stores.domain.navigation.storesInMapNavigationGraph
-import com.borealnetwork.allen.theme.AppTheme
+import com.borealnetwork.allensharedui.theme.AppTheme
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 import moe.tlaster.precompose.PreComposeApp
@@ -85,7 +84,7 @@ internal fun App() = PreComposeApp {
             //Product
             searchClientNavigationGraph(navigator)
             resultProductsClientNavigationGraph(navigator)
-            detailProductClientNavigationGraph(navigator)
+            showProductClientNavigationGraph(navigator)
             ratingProductClientNavigationGraph(navigator)
             questionsProductClientNavigationGraph(navigator)
             favoritesClientNavigationGraph(navigator)

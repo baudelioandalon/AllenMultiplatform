@@ -4,7 +4,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import com.borealnetwork.allen.domain.model.BirdImage
-import com.borealnetwork.allen.tools.isEmailValid
+import com.borealnetwork.shared.tools.isEmailValid
 import com.borealnetwork.shared.core.auth.domain.use_cases.LoginEmailUseCase
 import com.borealnetwork.shared.core.network.domain.models.ApiResponse
 import com.borealnetwork.shared.core.network.domain.models.AuthLoginEmailModel

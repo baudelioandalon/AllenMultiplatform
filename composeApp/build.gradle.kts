@@ -80,6 +80,7 @@ kotlin {
 
 // api("moe.tlaster:precompose-koin:$precompose_version")
             implementation(project(":shared"))
+            implementation(project(":allenSharedUI"))
         }
 
         commonTest.dependencies {

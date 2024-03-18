@@ -23,12 +23,12 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.borealnetwork.allen.components.RegularText
-import com.borealnetwork.allen.components.ToolbarSearch
+import com.borealnetwork.allensharedui.components.RegularText
+import com.borealnetwork.allensharedui.components.ToolbarSearch
 import com.borealnetwork.allen.modules.home_client.domain.navigation.HomeClientScreen
 import com.borealnetwork.allen.modules.product.domain.navigation.ProductClientScreen
-import com.borealnetwork.allen.theme.GrayBackgroundMain
-import com.borealnetwork.allen.theme.GrayLetterHint
+import com.borealnetwork.allensharedui.theme.GrayBackgroundMain
+import com.borealnetwork.allensharedui.theme.GrayLetterHint
 import moe.tlaster.precompose.navigation.NavOptions
 import moe.tlaster.precompose.navigation.Navigator
 import moe.tlaster.precompose.navigation.PopUpTo

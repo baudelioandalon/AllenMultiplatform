@@ -6,8 +6,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.borealnetwork.allen.components.ToolbarTitle
-import com.borealnetwork.allen.theme.GrayBackgroundMain
+import com.borealnetwork.allensharedui.components.ToolbarTitle
+import com.borealnetwork.allensharedui.theme.GrayBackgroundMain
 import moe.tlaster.precompose.navigation.Navigator
 
 @Composable

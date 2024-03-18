@@ -11,12 +11,12 @@ import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.borealnetwork.allen.components.ResumeItem
-import com.borealnetwork.allen.components.ShoppingCategoryHistoryItem
-import com.borealnetwork.allen.components.ToolbarTitle
-import com.borealnetwork.allen.domain.model.ItemShoppingModel
+import com.borealnetwork.allensharedui.components.ResumeItem
+import com.borealnetwork.allensharedui.components.ShoppingCategoryHistoryItem
+import com.borealnetwork.allensharedui.components.ToolbarTitle
+import com.borealnetwork.shared.domain.models.cart.ItemShoppingModel
 import com.borealnetwork.allen.modules.orders.domain.navigation.OrdersClientScreen
-import com.borealnetwork.allen.theme.GrayBackgroundMain
+import com.borealnetwork.allensharedui.theme.GrayBackgroundMain
 import moe.tlaster.precompose.navigation.Navigator
 
 @OptIn(ExperimentalLayoutApi::class)

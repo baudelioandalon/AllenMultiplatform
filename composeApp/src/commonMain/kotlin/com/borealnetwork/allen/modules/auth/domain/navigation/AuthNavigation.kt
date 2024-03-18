@@ -4,7 +4,7 @@ import com.borealnetwork.allen.modules.auth.presentation.ui.login.LoginViewCompo
 import com.borealnetwork.allen.modules.auth.presentation.ui.register.RegisterViewCompose
 import com.borealnetwork.allen.modules.auth.presentation.ui.welcome.WelcomeViewCompose
 import com.borealnetwork.allen.modules.home_client.presentation.ui.home.HomeClientViewCompose
-import com.borealnetwork.allen.tools.defaultTransition
+import com.borealnetwork.allensharedui.theme.defaultTransition
 import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.auth.auth
 import moe.tlaster.precompose.navigation.Navigator

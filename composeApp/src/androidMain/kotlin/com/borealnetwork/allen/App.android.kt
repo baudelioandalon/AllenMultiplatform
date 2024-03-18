@@ -53,12 +53,7 @@ class AppActivity : ComponentActivity() {
 
 
 
-actual inline fun <reified T : ViewModel> Module.viewModelDefinition(
-    qualifier: Qualifier?,
-    noinline definition: Definition<T>,
-): KoinDefinition<T> = viewModel(qualifier = qualifier, definition = definition)
-
-internal actual fun openUrl(url: String?) {
+actual fun openUrl(url: String?) {
     val uri = url?.let { Uri.parse(it) } ?: return
     val intent = Intent().apply {
         action = Intent.ACTION_VIEW
@@ -68,21 +63,11 @@ internal actual fun openUrl(url: String?) {
     AndroidApp.INSTANCE.startActivity(intent)
 }
 
-internal actual fun randomUUID() = UUID.randomUUID().toString()
 
 internal actual fun platform(): Platform = AndroidPlatform()
 
 class AndroidPlatform : Platform {
-    override val name = "Android ${Build.VERSION.SDK_INT}"
-    override val osName = "Android"
     override val versionName = BuildConfig.versionName
     override val versionCode = BuildConfig.versionCode
     override val currency = BuildConfig.currency
-}
-
-@Composable
-actual fun font(name: String, res: String, weight: FontWeight, style: FontStyle): Font {
-    val context = LocalContext.current
-    val id = context.resources.getIdentifier(res, "font", context.packageName)
-    return Font(id, weight, style)
 }

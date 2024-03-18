@@ -29,22 +29,23 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.borealnetwork.allen.components.GoalIcon
-import com.borealnetwork.allen.components.LocationIcon
-import com.borealnetwork.allen.components.MediumText
-import com.borealnetwork.allen.components.ResumeSelector
-import com.borealnetwork.allen.components.ShoppingCartStoreItem
-import com.borealnetwork.allen.components.ToolbarTitle
-import com.borealnetwork.allen.components.bottom_actions.BottomBuyCartItem
-import com.borealnetwork.allen.components.extensions.DottedShape
-import com.borealnetwork.allen.domain.model.ItemCartModel
-import com.borealnetwork.allen.domain.model.ProductShoppingCart
+import com.borealnetwork.allensharedui.components.GoalIcon
+import com.borealnetwork.allensharedui.components.LocationIcon
+import com.borealnetwork.allensharedui.components.MediumText
+import com.borealnetwork.allensharedui.components.ResumeSelector
+import com.borealnetwork.allensharedui.components.ShoppingCartStoreItem
+import com.borealnetwork.allensharedui.components.ToolbarTitle
+import com.borealnetwork.allensharedui.components.bottom_actions.BottomBuyCartItem
+import com.borealnetwork.shared.tools.DottedShape
+import com.borealnetwork.shared.domain.models.cart.ItemCartModel
+import com.borealnetwork.shared.domain.models.cart.ProductShoppingCart
 import com.borealnetwork.allen.modules.cart.domain.navigation.CartClientScreen
-import com.borealnetwork.allen.theme.GrayBackgroundMain
-import com.borealnetwork.allen.theme.GrayBorderLight
-import com.borealnetwork.allen.theme.GrayMedium
-import com.borealnetwork.allen.theme.GraySinceTo
-import com.borealnetwork.allen.theme.GrayStrong
+import com.borealnetwork.allen.platform
+import com.borealnetwork.allensharedui.theme.GrayBackgroundMain
+import com.borealnetwork.allensharedui.theme.GrayBorderLight
+import com.borealnetwork.allensharedui.theme.GrayMedium
+import com.borealnetwork.allensharedui.theme.GraySinceTo
+import com.borealnetwork.allensharedui.theme.GrayStrong
 import moe.tlaster.precompose.navigation.Navigator
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -115,7 +116,8 @@ fun ResumeCartStepTwoViewCompose(navigator: Navigator) {
         bottomBar = {
             BottomBuyCartItem(
                 price = 100.0,
-                discount = 8
+                discount = 8,
+                currency = platform().currency
             ) {
                 navigator.navigate(CartClientScreen.DetailBuyCartClientScreen.route)
             }
@@ -231,6 +233,7 @@ fun ResumeCartStepTwoViewCompose(navigator: Navigator) {
                     topModifier = Modifier.padding(horizontal = 20.dp),
                     item = item,
                     counter = false,
+                    currency = platform().currency,
                     deleteOptions = false,
                     selector = false
                 )

@@ -18,13 +18,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.borealnetwork.allen.components.BoldText
-import com.borealnetwork.allen.components.BrandingHorizontal
-import com.borealnetwork.allen.components.ProductResultItem
-import com.borealnetwork.allen.components.SemiBoldText
-import com.borealnetwork.allen.components.ToolbarSearchHome
+import com.borealnetwork.allensharedui.components.BoldText
+import com.borealnetwork.allensharedui.components.BrandingHorizontal
+import com.borealnetwork.allensharedui.components.ProductResultItem
+import com.borealnetwork.allensharedui.components.SemiBoldText
+import com.borealnetwork.allensharedui.components.ToolbarSearchHome
 import com.borealnetwork.allen.modules.product.domain.navigation.ProductClientScreen
-import com.borealnetwork.allen.theme.GrayBorder
+import com.borealnetwork.allen.platform
+import com.borealnetwork.allensharedui.theme.GrayBorder
 import moe.tlaster.precompose.navigation.Navigator
 
 @Composable
@@ -89,6 +90,7 @@ fun ResultProductsViewCompose(
                         end = if (index % 2 == 0) 10.dp else 30.dp,
                         top = if (index % 2 != 0) 20.dp else 0.dp
                     ),
+                    currency = platform().currency,
                     productClicked = {
                         navigator.navigate(ProductClientScreen.ShowProductClient.route)
                     }

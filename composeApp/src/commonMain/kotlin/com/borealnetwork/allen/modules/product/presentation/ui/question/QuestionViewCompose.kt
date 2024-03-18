@@ -13,12 +13,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.unit.dp
-import com.borealnetwork.allen.components.QuestionItem
-import com.borealnetwork.allen.components.SearcherWithButton
-import com.borealnetwork.allen.components.ToolbarTitle
-import com.borealnetwork.allen.components.bottom_actions.BottomEditTextItem
+import com.borealnetwork.allensharedui.components.QuestionItem
+import com.borealnetwork.allensharedui.components.SearcherWithButton
+import com.borealnetwork.allensharedui.components.ToolbarTitle
+import com.borealnetwork.allensharedui.components.bottom_actions.BottomEditTextItem
 import com.borealnetwork.allen.modules.product.domain.models.QuestionModel
-import com.borealnetwork.allen.theme.GrayBackgroundMain
+import com.borealnetwork.allensharedui.theme.GrayBackgroundMain
 import moe.tlaster.precompose.navigation.Navigator
 
 @OptIn(ExperimentalFoundationApi::class)

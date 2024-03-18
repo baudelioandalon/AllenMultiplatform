@@ -31,31 +31,31 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
-import com.borealnetwork.allen.components.BlueButton
-import com.borealnetwork.allen.components.BoldText
-import com.borealnetwork.allen.components.CircularIcon
-import com.borealnetwork.allen.components.CornerButton
-import com.borealnetwork.allen.components.CornerImgButton
-import com.borealnetwork.allen.components.FavoriteButton
-import com.borealnetwork.allen.components.FavoriteCounterButton
-import com.borealnetwork.allen.components.GoalIcon
-import com.borealnetwork.allen.components.GrayButton
-import com.borealnetwork.allen.components.LittleAddButton
-import com.borealnetwork.allen.components.LocationIcon
-import com.borealnetwork.allen.components.MinimumAddButton
-import com.borealnetwork.allen.components.RightRoundedButton
-import com.borealnetwork.allen.components.ScannerButton
-import com.borealnetwork.allen.components.ShareButton
 import com.borealnetwork.allen.openUrl
-import com.borealnetwork.allen.platform
-import com.borealnetwork.allen.theme.AppTheme
-import com.borealnetwork.allen.theme.LocalThemeIsDark
+import com.borealnetwork.allensharedui.components.BlueButton
+import com.borealnetwork.allensharedui.components.BoldText
+import com.borealnetwork.allensharedui.components.CircularIcon
+import com.borealnetwork.allensharedui.components.CornerButton
+import com.borealnetwork.allensharedui.components.CornerImgButton
+import com.borealnetwork.allensharedui.components.FavoriteButton
+import com.borealnetwork.allensharedui.components.FavoriteCounterButton
+import com.borealnetwork.allensharedui.components.GoalIcon
+import com.borealnetwork.allensharedui.components.GrayButton
+import com.borealnetwork.allensharedui.components.LittleAddButton
+import com.borealnetwork.allensharedui.components.LocationIcon
+import com.borealnetwork.allensharedui.components.MinimumAddButton
+import com.borealnetwork.allensharedui.components.RightRoundedButton
+import com.borealnetwork.allensharedui.components.ScannerButton
+import com.borealnetwork.allensharedui.components.ShareButton
+import com.borealnetwork.shared.platform
+import com.borealnetwork.allensharedui.theme.AppTheme
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 
@@ -82,7 +82,7 @@ internal fun LoginUI() = AppTheme {
 
             Spacer(modifier = Modifier.weight(1.0f))
 
-            var isDark by LocalThemeIsDark.current
+            var isDark by rememberSaveable{ mutableStateOf(false) }
             IconButton(
                 onClick = { isDark = !isDark }
             ) {

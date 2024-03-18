@@ -3,7 +3,7 @@ package com.borealnetwork.allen.modules.cart.domain.navigation
 import com.borealnetwork.allen.modules.cart.presentation.ui.detail_buy_cart.DetailBuyCartStepOneViewCompose
 import com.borealnetwork.allen.modules.cart.presentation.ui.resume_cart.ResumeCartStepTwoViewCompose
 import com.borealnetwork.allen.modules.cart.presentation.ui.shopping_cart.ShoppingCartViewCompose
-import com.borealnetwork.allen.tools.defaultTransition
+import com.borealnetwork.allensharedui.theme.defaultTransition
 import moe.tlaster.precompose.navigation.Navigator
 import moe.tlaster.precompose.navigation.RouteBuilder
 

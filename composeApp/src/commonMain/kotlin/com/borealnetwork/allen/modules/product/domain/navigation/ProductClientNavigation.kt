@@ -1,12 +1,12 @@
 package com.borealnetwork.allen.modules.product.domain.navigation
 
-import com.borealnetwork.allen.modules.product.presentation.ui.show_product.ShowProductViewCompose
 import com.borealnetwork.allen.modules.product.presentation.ui.favorites.FavoritesClientViewCompose
 import com.borealnetwork.allen.modules.product.presentation.ui.question.QuestionViewCompose
 import com.borealnetwork.allen.modules.product.presentation.ui.rating.RatingProductViewCompose
 import com.borealnetwork.allen.modules.product.presentation.ui.result_client.ResultProductsViewCompose
 import com.borealnetwork.allen.modules.product.presentation.ui.search.SearchProductViewCompose
-import com.borealnetwork.allen.tools.defaultTransition
+import com.borealnetwork.allen.modules.product.presentation.ui.show_product.ShowProductViewCompose
+import com.borealnetwork.allensharedui.theme.defaultTransition
 import moe.tlaster.precompose.navigation.Navigator
 import moe.tlaster.precompose.navigation.RouteBuilder
 
@@ -32,7 +32,7 @@ fun RouteBuilder.resultProductsClientNavigationGraph(navigator: Navigator) {
     }
 }
 
-fun RouteBuilder.detailProductClientNavigationGraph(navigator: Navigator) {
+fun RouteBuilder.showProductClientNavigationGraph(navigator: Navigator) {
     scene(
         // Scene's route path
         route = ProductClientScreen.ShowProductClient.route,
@@ -65,7 +65,7 @@ fun RouteBuilder.questionsProductClientNavigationGraph(navigator: Navigator) {
     }
 }
 
-fun RouteBuilder.favoritesClientNavigationGraph(navigator: Navigator){
+fun RouteBuilder.favoritesClientNavigationGraph(navigator: Navigator) {
     scene(
         // Scene's route path
         route = ProductClientScreen.FavoritesProductsClient.route,

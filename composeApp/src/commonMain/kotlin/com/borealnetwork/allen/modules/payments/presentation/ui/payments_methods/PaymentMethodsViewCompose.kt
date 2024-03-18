@@ -19,17 +19,18 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.borealnetwork.allen.components.AddButton
-import com.borealnetwork.allen.components.CardFilled
-import com.borealnetwork.allen.components.ResumeItem
-import com.borealnetwork.allen.components.SelectorWithRadioButton
-import com.borealnetwork.allen.components.ToolbarTitle
-import com.borealnetwork.allen.components.bottom_actions.BottomContinueItem
-import com.borealnetwork.allen.modules.payments.domain.models.CardModel
-import com.borealnetwork.allen.modules.payments.domain.models.TypeCard
-import com.borealnetwork.allen.modules.payments.domain.models.paymentList
-import com.borealnetwork.allen.theme.GrayBackgroundMain
-import com.borealnetwork.allen.tools.limit
+import com.borealnetwork.allensharedui.components.AddButton
+import com.borealnetwork.allensharedui.components.CardFilled
+import com.borealnetwork.allensharedui.components.ResumeItem
+import com.borealnetwork.allensharedui.components.SelectorWithRadioButton
+import com.borealnetwork.allensharedui.components.ToolbarTitle
+import com.borealnetwork.allensharedui.components.bottom_actions.BottomContinueItem
+import com.borealnetwork.shared.domain.models.payments.CardModel
+import com.borealnetwork.shared.domain.models.payments.TypeCard
+import com.borealnetwork.shared.domain.models.payments.paymentList
+import com.borealnetwork.allensharedui.theme.GrayBackgroundMain
+import com.borealnetwork.allensharedui.theme.getGradient
+import com.borealnetwork.shared.tools.limit
 import moe.tlaster.precompose.navigation.Navigator
 
 @Composable
@@ -43,7 +44,8 @@ fun PaymentMethodsViewCompose(navigator: Navigator) {
             lastFourNumber = 1234,
             month = "12",
             year = "30",
-            type = TypeCard.VISA
+            type = TypeCard.VISA,
+            listColor  = getGradient()
         ),
         CardModel(
             aliasCard = "TDD BANORTE",
@@ -51,7 +53,8 @@ fun PaymentMethodsViewCompose(navigator: Navigator) {
             lastFourNumber = 4312,
             month = "06",
             year = "29",
-            type = TypeCard.MASTERCARD
+            type = TypeCard.MASTERCARD,
+            listColor  = getGradient()
         ),
         CardModel(
             aliasCard = "TDD BANORTE",
@@ -59,7 +62,8 @@ fun PaymentMethodsViewCompose(navigator: Navigator) {
             lastFourNumber = 4312,
             month = "06",
             year = "29",
-            type = TypeCard.MASTERCARD
+            type = TypeCard.MASTERCARD,
+            listColor  = getGradient()
         )
     )
     Scaffold(topBar = {

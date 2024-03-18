@@ -23,12 +23,12 @@ import androidx.compose.ui.text.font.FontWeight.Companion.Medium
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.borealnetwork.allen.components.BlueButton
-import com.borealnetwork.allen.components.BoldText
-import com.borealnetwork.allen.components.CornerButton
-import com.borealnetwork.allen.components.LogoBlue
+import com.borealnetwork.allensharedui.components.BlueButton
+import com.borealnetwork.allensharedui.components.BoldText
+import com.borealnetwork.allensharedui.components.CornerButton
+import com.borealnetwork.allensharedui.components.LogoBlue
 import com.borealnetwork.allen.modules.auth.domain.navigation.AuthScreen
-import com.borealnetwork.allen.theme.mediumTypo
+import com.borealnetwork.allensharedui.theme.mediumTypo
 import moe.tlaster.precompose.navigation.Navigator
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource

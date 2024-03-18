@@ -56,9 +56,21 @@ kotlin {
             implementation(libs.firebase.auth)
             implementation(libs.gitlive.firebase.firestore) // This line
             implementation(libs.gitlive.firebase.common)// This line
+
+            api(libs.moko.core)
+            api(libs.moko.mvvm)
         }
         commonTest.dependencies {
             implementation(kotlin("test"))
+        }
+        androidMain.dependencies {
+            implementation(libs.androidx.appcompat)
+            implementation(libs.androidx.activityCompose)
+            implementation(libs.compose.uitooling)
+            implementation(libs.kotlinx.coroutines.android)
+
+            implementation(libs.koin.core)
+            implementation(libs.koin.android)
         }
     }
 }

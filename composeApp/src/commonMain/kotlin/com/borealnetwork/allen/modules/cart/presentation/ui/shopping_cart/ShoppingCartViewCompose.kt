@@ -11,13 +11,14 @@ import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.borealnetwork.allen.components.ShoppingCartStoreItem
-import com.borealnetwork.allen.components.ToolbarTitle
-import com.borealnetwork.allen.components.bottom_actions.BottomBuyCartItem
-import com.borealnetwork.allen.domain.model.ItemCartModel
-import com.borealnetwork.allen.domain.model.ProductShoppingCart
+import com.borealnetwork.allensharedui.components.ShoppingCartStoreItem
+import com.borealnetwork.allensharedui.components.ToolbarTitle
+import com.borealnetwork.allensharedui.components.bottom_actions.BottomBuyCartItem
+import com.borealnetwork.shared.domain.models.cart.ItemCartModel
+import com.borealnetwork.shared.domain.models.cart.ProductShoppingCart
 import com.borealnetwork.allen.modules.cart.domain.navigation.CartClientScreen
-import com.borealnetwork.allen.theme.GrayBackgroundMain
+import com.borealnetwork.allen.platform
+import com.borealnetwork.allensharedui.theme.GrayBackgroundMain
 import moe.tlaster.precompose.navigation.Navigator
 
 @Composable
@@ -87,7 +88,8 @@ fun ShoppingCartViewCompose(navigator: Navigator) {
         bottomBar = {
             BottomBuyCartItem(
                 price = 100.0,
-                discount = 8
+                discount = 8,
+                currency = platform().currency
             ) {
                 navigator.navigate(CartClientScreen.ResumeBuyCartClientScreen.route)
             }
@@ -107,6 +109,7 @@ fun ShoppingCartViewCompose(navigator: Navigator) {
                     item = item,
                     elevation = 5.dp,
                     check = true,
+                    currency = platform().currency,
                     startTextButton = "Remover",
                     endTextButton = "Guardar para despues"
                 )

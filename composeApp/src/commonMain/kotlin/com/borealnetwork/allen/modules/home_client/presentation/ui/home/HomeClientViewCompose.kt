@@ -28,26 +28,27 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.borealnetwork.allen.components.BoldText
-import com.borealnetwork.allen.components.BrandingHorizontal
-import com.borealnetwork.allen.components.CategoryItem
-import com.borealnetwork.allen.components.CategorySelectorItem
-import com.borealnetwork.allen.components.HorizontalContainerListItem
-import com.borealnetwork.allen.components.ProductItem
-import com.borealnetwork.allen.components.ToolbarSearchHome
-import com.borealnetwork.allen.components.drawer.DrawerBodyClient
-import com.borealnetwork.allen.components.drawer.DrawerHeaderClient
-import com.borealnetwork.allen.components.drawer.model.DrawerOptions
-import com.borealnetwork.allen.components.drawer.model.MenuItem
-import com.borealnetwork.allen.domain.model.MinimalProductModel
+import com.borealnetwork.allensharedui.components.BoldText
+import com.borealnetwork.allensharedui.components.BrandingHorizontal
+import com.borealnetwork.allensharedui.components.CategoryItem
+import com.borealnetwork.allensharedui.components.CategorySelectorItem
+import com.borealnetwork.allensharedui.components.HorizontalContainerListItem
+import com.borealnetwork.allensharedui.components.ProductItem
+import com.borealnetwork.allensharedui.components.ToolbarSearchHome
+import com.borealnetwork.allensharedui.components.drawer.DrawerBodyClient
+import com.borealnetwork.allensharedui.components.drawer.DrawerHeaderClient
+import com.borealnetwork.allensharedui.components.drawer.model.DrawerOptions
+import com.borealnetwork.allensharedui.components.drawer.model.MenuItem
+import com.borealnetwork.shared.domain.models.cart.MinimalProductModel
 import com.borealnetwork.allen.domain.model.PromotionItem
 import com.borealnetwork.allen.modules.cart.domain.navigation.CartClientScreen
 import com.borealnetwork.allen.modules.notifications.domain.navigation.NotificationsClientScreen
 import com.borealnetwork.allen.modules.orders.domain.navigation.OrdersClientScreen
 import com.borealnetwork.allen.modules.product.domain.navigation.ProductClientScreen
 import com.borealnetwork.allen.modules.stores.domain.navigation.StoresScreen
-import com.borealnetwork.allen.theme.GrayBackgroundMain
-import com.borealnetwork.allen.theme.categorySelectorColors
+import com.borealnetwork.allen.platform
+import com.borealnetwork.allensharedui.theme.GrayBackgroundMain
+import com.borealnetwork.allensharedui.theme.categorySelectorColors
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.yield
@@ -143,6 +144,7 @@ fun HomeClientViewCompose(navigator: Navigator) {
                         option = DrawerOptions.CloseSession
                     )
                 ),
+                versionName = platform().versionName
             ) {
                 println("Clicked on ${it.option.name}")
                 when (it.option) {

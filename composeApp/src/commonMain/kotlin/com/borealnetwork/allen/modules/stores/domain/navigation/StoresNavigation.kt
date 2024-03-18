@@ -1,7 +1,7 @@
 package com.borealnetwork.allen.modules.stores.domain.navigation
 
 import com.borealnetwork.allen.modules.stores.presentation.ui.stores.StoresInMapViewCompose
-import com.borealnetwork.allen.tools.defaultTransition
+import com.borealnetwork.allensharedui.theme.defaultTransition
 import moe.tlaster.precompose.navigation.Navigator
 import moe.tlaster.precompose.navigation.RouteBuilder
 
