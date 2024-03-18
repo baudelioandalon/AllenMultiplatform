@@ -22,6 +22,7 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.borealnetwork.allen.domain.model.BirdImage
+import com.borealnetwork.allen.modules.auth.domain.navigation.AuthScreen
 import com.borealnetwork.allen.modules.auth.domain.navigation.loginNavigationGraph
 import com.borealnetwork.allen.modules.auth.domain.navigation.registerNavigationGraph
 import com.borealnetwork.allen.modules.auth.domain.navigation.welcomeNavigationGraph
@@ -62,7 +63,7 @@ internal fun App() = PreComposeApp {
         val navigator = rememberNavigator()
         NavHost(
             navigator = navigator,
-            initialRoute = ProductClientScreen.ShowProductClient.route
+            initialRoute = AuthScreen.WelcomeScreen.route
 //            initialRoute = HomeClientScreen.HomeDefaultClientScreen.route
         ) {
             //Auth

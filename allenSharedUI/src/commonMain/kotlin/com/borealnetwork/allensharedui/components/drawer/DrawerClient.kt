@@ -74,7 +74,7 @@ fun DrawerHeaderClient(closeClicked: (() -> Unit)? = null) {
                 fontSize = 15.sp,
             )
             BoldText(text = "Luna", color = White)
-            StarStatus()
+            StarsUser()
 
         }
 
@@ -95,23 +95,9 @@ fun StarStatus(
     stars: String = "4.6"
 ) {
     Column(modifier = modifier) {
-        Row(
-            modifier = Modifier
-                .padding(top = 4.dp), verticalAlignment = CenterVertically
-        ) {
-            Icon(
-                painter = painterResource(resource = DrawableResource("ic_star_icon.xml")),
-                contentDescription = "star User",
-                tint = StarColor
-            )
-            BoldText(
-                modifier = Modifier.padding(start = 5.dp),
-                fontSize = 15.sp,
-                text = stars,
-                color = Black
-            )
-
-        }
+        StarsUser(
+            stars = stars
+        )
         BoldText(
             modifier = Modifier.padding(start = 10.dp),
             text = text,
@@ -121,6 +107,27 @@ fun StarStatus(
         )
     }
 
+}
+
+@Composable
+fun StarsUser(stars: String = "4.6"){
+    Row(
+        modifier = Modifier
+            .padding(top = 4.dp), verticalAlignment = CenterVertically
+    ) {
+        Icon(
+            painter = painterResource(resource = DrawableResource("ic_star_icon.xml")),
+            contentDescription = "star User",
+            tint = StarColor
+        )
+        BoldText(
+            modifier = Modifier.padding(start = 5.dp),
+            fontSize = 15.sp,
+            text = stars,
+            color = White
+        )
+
+    }
 }
 
 @Composable
