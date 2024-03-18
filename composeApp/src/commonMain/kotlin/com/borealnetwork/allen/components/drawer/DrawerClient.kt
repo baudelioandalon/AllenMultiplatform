@@ -23,7 +23,9 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color.Companion.Black
 import androidx.compose.ui.graphics.Color.Companion.White
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.borealnetwork.allen.components.BoldText
@@ -57,7 +59,7 @@ fun DrawerHeaderClient(closeClicked: (() -> Unit)? = null) {
             shape = CircleShape, onClick = { }) {
             Image(
                 modifier = Modifier.height(50.dp),
-                painter = painterResource(resource = DrawableResource(  "person_test.png")),
+                painter = painterResource(resource = DrawableResource("person_test.png")),
                 contentDescription = ""
             )
         }
@@ -90,32 +92,36 @@ fun DrawerHeaderClient(closeClicked: (() -> Unit)? = null) {
 @Composable
 fun StarStatus(
     modifier: Modifier = Modifier,
-    text: String = "(12 Compras)",
+    text: String = "12 Compras",
     stars: String = "4.6"
 ) {
-    Row(
-        modifier = modifier
-            .padding(top = 4.dp)
-            .fillMaxSize(), verticalAlignment = CenterVertically
-    ) {
-        Icon(
-            painter = painterResource(resource = DrawableResource(  "ic_star_icon.xml")),
-            contentDescription = "star User",
-            tint = StarColor
-        )
-        BoldText(
-            modifier = Modifier.padding(start = 5.dp),
-            fontSize = 15.sp,
-            text = stars,
-            color = White
-        )
+    Column(modifier = modifier) {
+        Row(
+            modifier = Modifier
+                .padding(top = 4.dp), verticalAlignment = CenterVertically
+        ) {
+            Icon(
+                painter = painterResource(resource = DrawableResource("ic_star_icon.xml")),
+                contentDescription = "star User",
+                tint = StarColor
+            )
+            BoldText(
+                modifier = Modifier.padding(start = 5.dp),
+                fontSize = 15.sp,
+                text = stars,
+                color = Black
+            )
+
+        }
         BoldText(
             modifier = Modifier.padding(start = 10.dp),
             text = text,
-            color = White,
-            fontSize = 15.sp
+            textAlign = TextAlign.Center,
+            color = GrayBorder,
+            fontSize = 10.sp
         )
     }
+
 }
 
 @Composable
@@ -157,7 +163,7 @@ fun DrawerBodyClient(
 
                 Icon(
                     modifier = Modifier.size(22.dp),
-                    painter = painterResource(resource = DrawableResource(  item.icon)),
+                    painter = painterResource(resource = DrawableResource(item.icon)),
                     contentDescription = item.contentDescription,
                     tint = GrayBorder
                 )
@@ -170,7 +176,7 @@ fun DrawerBodyClient(
                 )
                 Image(
                     modifier = Modifier.size(30.dp),
-                    painter = painterResource(resource = DrawableResource( "ic_rounded_arrow_right.xml")),
+                    painter = painterResource(resource = DrawableResource("ic_rounded_arrow_right.xml")),
                     contentDescription = ""
                 )
             }

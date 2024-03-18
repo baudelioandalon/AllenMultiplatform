@@ -63,6 +63,7 @@ fun BoldText(
     textOverflow: TextOverflow = TextOverflow.Clip,
     maxLines: Int = Int.MAX_VALUE,
     minLines: Int = 1,
+    softWrap: Boolean = true,
     onClicked: (() -> Unit)? = null
 ) {
     Text(
@@ -73,8 +74,9 @@ fun BoldText(
         letterSpacing = letterSpacing,
         textAlign = textAlign,
         lineHeight = lineHeight,
-        minLines =minLines,
+        minLines = minLines,
         overflow = textOverflow,
+        softWrap = softWrap,
         maxLines = maxLines,
         fontFamily = boldTypo()
     )

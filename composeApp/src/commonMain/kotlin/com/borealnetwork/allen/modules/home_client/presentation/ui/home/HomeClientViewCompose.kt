@@ -235,7 +235,7 @@ fun HomeClientViewCompose(navigator: Navigator) {
                                 listItem = lastProductsList
                             ) { minimalProductModel, index ->
                                 ProductItem(minimalProductModel) {
-                                    navigator.navigate(ProductClientScreen.ProductDetailClient.route)
+                                    navigator.navigate(ProductClientScreen.ShowProductClient.route)
                                 }
                             }
                         }
@@ -265,7 +265,7 @@ fun HomeClientViewCompose(navigator: Navigator) {
                                 listItem = lastProductsList
                             ) { minimalProductModel, index ->
                                 ProductItem(minimalProductModel) {
-                                    navigator.navigate(ProductClientScreen.ProductDetailClient.route)
+                                    navigator.navigate(ProductClientScreen.ShowProductClient.route)
                                 }
                             }
                         }

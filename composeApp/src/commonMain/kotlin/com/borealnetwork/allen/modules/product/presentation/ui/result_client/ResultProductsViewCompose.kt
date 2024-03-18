@@ -90,7 +90,7 @@ fun ResultProductsViewCompose(
                         top = if (index % 2 != 0) 20.dp else 0.dp
                     ),
                     productClicked = {
-                        navigator.navigate(ProductClientScreen.ProductDetailClient.route)
+                        navigator.navigate(ProductClientScreen.ShowProductClient.route)
                     }
                 )
             }

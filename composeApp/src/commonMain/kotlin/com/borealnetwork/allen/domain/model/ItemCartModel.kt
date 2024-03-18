@@ -19,6 +19,7 @@ data class ProductShoppingCart(
     val quantity: Int,
     val discountPercentage: Int,
     val fastOrder: Boolean,
+    val description: String = "",
     val minimalFastOrder: Int,
     val price: Double
 ) {
