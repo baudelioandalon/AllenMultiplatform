@@ -111,7 +111,15 @@ fun ShowProductViewCompose(
                 getLastProduct?.variants?.get(indexToShow)?.images ?: emptyList()
             )
         }
-        var itemSelected by rememberSaveable { mutableStateOf(imageList[indexToShow]) }
+        var itemImageSelected by rememberSaveable { mutableStateOf(imageList[indexToShow]) }
+        var itemTextSelected by rememberSaveable {
+            mutableStateOf(
+                getLastProduct?.variants?.get(
+                    indexToShow
+                )?.skuProduct?.substringBefore("-").orEmpty()
+            )
+        }
+
 
         LazyColumn(
             modifier = Modifier
@@ -136,7 +144,7 @@ fun ShowProductViewCompose(
                         ) {
                             KamelImage(
                                 modifier = Modifier.fillMaxSize(),
-                                resource = asyncPainterResource(itemSelected),
+                                resource = asyncPainterResource(itemImageSelected),
                                 contentScale = ContentScale.Crop,
                                 contentDescription = "imageExample"
                             )
@@ -147,8 +155,8 @@ fun ShowProductViewCompose(
                             itemList = imageList,
                             zoomWhenSelected = true,
                             itemClicked = { index, item ->
-                                if (item != itemSelected) {
-                                    itemSelected = item
+                                if (item != itemImageSelected) {
+                                    itemImageSelected = item
                                 }
                             }
                         )
@@ -195,16 +203,57 @@ fun ShowProductViewCompose(
                             ShareButton()
                         }
 
+                        val firstVariantSelected by rememberSaveable {
+                            mutableStateOf(
+                                getLastProduct?.attributes?.first()?.options ?: emptyList()
+                            )
+                        }
+
+
                         VariantsViewerSelector(
                             modifier = Modifier.padding(bottom = 15.dp),
                             actualPosition = indexToShow,
-                            list = getLastProduct?.attributes ?: emptyList()
-                        ) { variantSelected ->
-                            getLastProduct?.variants?.find { it.skuProduct == variantSelected }?.images?.let { newImages ->
-                                itemSelected = newImages[START_INDEX]
+                            title = getLastProduct?.attributes?.first()?.name.orEmpty(),
+                            list = firstVariantSelected
+                        ) { index, variantSelected ->
+                            getLastProduct?.variants?.find { it.skuProduct.substringBefore("-") == variantSelected }?.images?.let { newImages ->
+                                itemImageSelected = newImages[START_INDEX]
                                 imageList = newImages
+                                itemTextSelected = variantSelected
+                                showProductViewModel.newVariantSelected("$itemTextSelected-${
+                                    getLastProduct.variants.filter {
+                                        it.skuProduct.substringBefore(
+                                            "-"
+                                        ) == itemTextSelected
+                                    }.map {
+                                        it.skuProduct.substringAfter("-")
+                                    }.first()}")
                             }
                         }
+
+
+                        VariantsViewerSelector(
+                            modifier = Modifier.padding(bottom = 15.dp),
+                            actualPosition = indexToShow,
+                            title = getLastProduct?.attributes?.get(1)?.name.orEmpty(),
+                            list = getLastProduct?.variants?.filter {
+                                it.skuProduct.substringBefore(
+                                    "-"
+                                ) == itemTextSelected
+                            }?.map {
+                                it.skuProduct.substringAfter("-")
+                            } ?: emptyList()
+                        ) { index, variantSelected ->
+                            variantSelected
+                            showProductViewModel.newVariantSelected("$itemTextSelected-$variantSelected")
+//                            itemTextSelected = variantSelected
+//                            getLastProduct?.variants?.find { it.skuProduct == variantSelected }?.images?.let { newImages ->
+//                                itemSelected = newImages[START_INDEX]
+//                                newItemIndex = index
+//                                imageList = newImages
+//                            }
+                        }
+
 
 
                         SelectorDetail(

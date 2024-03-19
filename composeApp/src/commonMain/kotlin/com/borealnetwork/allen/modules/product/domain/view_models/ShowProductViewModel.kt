@@ -19,4 +19,8 @@ class ShowProductViewModel : ViewModel() {
         return data
     }
 
+    fun newVariantSelected(variantChange: String) {
+        variantChange
+    }
+
 }

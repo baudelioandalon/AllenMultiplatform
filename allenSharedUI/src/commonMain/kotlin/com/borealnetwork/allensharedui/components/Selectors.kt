@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import androidx.compose.foundation.layout.FlowColumn
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -65,7 +64,6 @@ import com.borealnetwork.allensharedui.theme.GraySelector
 import com.borealnetwork.allensharedui.theme.GraySinceTo
 import com.borealnetwork.allensharedui.theme.GreenStrong
 import com.borealnetwork.allensharedui.theme.robotoMediumTypo
-import com.borealnetwork.shared.domain.models.product.AttributeProductModel
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 
@@ -885,29 +883,32 @@ fun SelectorWithRadioButton(
 @Composable
 fun VariantsViewerSelector(
     modifier: Modifier = Modifier,
-    list: List<AttributeProductModel>,
+    title: String,
+    list: List<String>,
     actualPosition: Int,
-    variantSelected: (String) -> Unit
+    variantSelected: (Int, String) -> Unit
 ) {
-    val itemResult by rememberSaveable{ mutableStateOf(list.map { it.options[actualPosition] }.toMutableList()) }
-    FlowColumn(modifier = modifier) {
-        list.forEachIndexed { index, item ->
-            VariantSelectorItem(
-                attributeProductModel = item,
-            ) { child ->
-                itemResult[index] = child
-                variantSelected(itemResult.joinToString(separator = "-"))
-            }
-        }
+    var itemResult by rememberSaveable { mutableStateOf(list.toMutableList().first()) }
+//    FlowColumn(modifier = modifier) {
+//        list.forEachIndexed { index, item ->
+    VariantSelectorItem(
+        title = title,
+        attributeProductModel = list,
+    ) { index, child ->
+        itemResult = child
+        variantSelected(index, itemResult)
     }
+//        }
+//    }
 }
 
 @Composable
 fun VariantSelectorItem(
-    attributeProductModel: AttributeProductModel,
-    variantSelected: (String) -> Unit
+    title: String,
+    attributeProductModel: List<String>,
+    variantSelected: (Int, String) -> Unit
 ) {
-    var itemSelected by rememberSaveable { mutableStateOf(attributeProductModel.options.first()) }
+    var itemSelected = attributeProductModel.first()
     Row(
         modifier = Modifier
             .fillMaxWidth().wrapContentHeight()
@@ -917,7 +918,7 @@ fun VariantSelectorItem(
     ) {
         RegularText(
             modifier = Modifier.padding(start = 30.dp, end = 5.dp).wrapContentHeight(),
-            text = "${attributeProductModel.name}:",
+            text = "${title}:",
             fontSize = 14.sp
         )
         BoldText(
@@ -930,10 +931,10 @@ fun VariantSelectorItem(
     HorizontalImageViewer(
         modifier = Modifier.padding(bottom = 15.dp),
         bottomText = true,
-        itemList = attributeProductModel.options,
+        itemList = attributeProductModel,
         itemClicked = { index, item ->
             itemSelected = item
-            variantSelected.invoke(item)
+            variantSelected.invoke(index, item)
         }
     )
 
