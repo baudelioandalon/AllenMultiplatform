@@ -30,6 +30,7 @@ import com.borealnetwork.allen.modules.auth.domain.view_model.LoginViewModel
 import com.borealnetwork.allen.modules.cart.domain.navigation.detailBuyCartClientNavigationGraph
 import com.borealnetwork.allen.modules.cart.domain.navigation.resumeBuyCartClientNavigationGraph
 import com.borealnetwork.allen.modules.cart.domain.navigation.shoppingCartClientNavigationGraph
+import com.borealnetwork.allen.modules.home_client.domain.navigation.HomeClientScreen
 import com.borealnetwork.allen.modules.home_client.domain.navigation.homeClientNavigationGraph
 import com.borealnetwork.allen.modules.home_client.domain.view_model.HomeClientViewModel
 import com.borealnetwork.allen.modules.notifications.domain.navigation.notificationClientNavigationGraph
@@ -38,6 +39,7 @@ import com.borealnetwork.allen.modules.orders.domain.navigation.orderClientStatu
 import com.borealnetwork.allen.modules.orders.domain.navigation.ordersClientNavigationGraph
 import com.borealnetwork.allen.modules.payments.domain.navigation.newCardClientNavigationGraph
 import com.borealnetwork.allen.modules.payments.domain.navigation.paymentsMethodClientNavigationGraph
+import com.borealnetwork.allen.modules.product.domain.navigation.ProductClientScreen
 import com.borealnetwork.allen.modules.product.domain.navigation.favoritesClientNavigationGraph
 import com.borealnetwork.allen.modules.product.domain.navigation.questionsProductClientNavigationGraph
 import com.borealnetwork.allen.modules.product.domain.navigation.ratingProductClientNavigationGraph
@@ -69,7 +71,7 @@ internal fun App() = PreComposeApp {
         val navigator = rememberNavigator()
         NavHost(
             navigator = navigator,
-            initialRoute = AuthScreen.WelcomeScreen.route
+            initialRoute = HomeClientScreen.HomeDefaultClientScreen.route
         ) {
             //Auth
             welcomeNavigationGraph(navigator, homeClientViewModel, showProductViewModel)

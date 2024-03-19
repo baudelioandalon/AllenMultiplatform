@@ -44,7 +44,7 @@ fun HorizontalImageViewer(
     sizeItem: Dp = 53.dp,
     colorSelected: Color = MaterialTheme.colors.primary,
     zoomWhenSelected: Boolean = false,
-    itemList: List<String> = listOf("110V", "220V", "110V - 220V", "12V", "24V", "48"),
+    itemList: List<String>,
     itemClicked: ((Int, String) -> Unit)? = null,
     bottomText: Boolean = false
 ) {

@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
@@ -39,7 +38,6 @@ import com.borealnetwork.allensharedui.components.HorizontalContainerListItem
 import com.borealnetwork.allensharedui.components.HorizontalImageViewer
 import com.borealnetwork.allensharedui.components.MediumText
 import com.borealnetwork.allensharedui.components.ProductItem
-import com.borealnetwork.allensharedui.components.RegularText
 import com.borealnetwork.allensharedui.components.RightRoundedButton
 import com.borealnetwork.allensharedui.components.SelectorDetail
 import com.borealnetwork.allensharedui.components.SellerItem
@@ -47,6 +45,7 @@ import com.borealnetwork.allensharedui.components.SeparatorGray
 import com.borealnetwork.allensharedui.components.ShareButton
 import com.borealnetwork.allensharedui.components.StartIcon
 import com.borealnetwork.allensharedui.components.ToolbarTitle
+import com.borealnetwork.allensharedui.components.VariantsViewerSelector
 import com.borealnetwork.allensharedui.components.bottom_actions.BottomPriceItem
 import com.borealnetwork.allensharedui.components.drawer.StarStatus
 import com.borealnetwork.allensharedui.theme.GrayBackgroundDrawerDismiss
@@ -56,7 +55,6 @@ import com.borealnetwork.shared.domain.models.cart.MinimalProductModel
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 import moe.tlaster.precompose.navigation.Navigator
-import org.koin.compose.koinInject
 
 @Composable
 fun ShowProductViewCompose(
@@ -104,13 +102,16 @@ fun ShowProductViewCompose(
             }
         }
     ) {
-        val imageList = getLastProduct?.variants?.first()?.images ?: emptyList()
-        val firstVariantList = listOf("110V", "220V", "110V - 220V", "12V", "24V", "48V")
-        val secondVariantList =
-            listOf("Amarillo", "Verde", "Azul", "Morado", "Rojo", "Rosa", "Cafe")
-        var firstItemSelected by rememberSaveable { mutableStateOf(firstVariantList.first()) }
-        var secondItemSelected by rememberSaveable { mutableStateOf(secondVariantList.first()) }
-        var itemSelected by rememberSaveable{ mutableStateOf(imageList.first()) }
+        val indexToShow by rememberSaveable {
+            mutableStateOf(getLastProduct?.variants?.indexOfFirst { it.images.isNotEmpty() } ?: 0)
+        }
+        var imageList by rememberSaveable {
+            mutableStateOf(
+                getLastProduct?.variants?.get(indexToShow)?.images ?: emptyList()
+            )
+        }
+        var itemSelected by rememberSaveable { mutableStateOf(imageList[indexToShow]) }
+
         LazyColumn(
             modifier = Modifier
                 .wrapContentWidth()
@@ -191,63 +192,16 @@ fun ShowProductViewCompose(
                             ShareButton()
                         }
 
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .background(White)
-                                .padding(start = 30.dp, bottom = 15.dp),
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.Start
-                        ) {
-                            RegularText(
-                                modifier = Modifier.padding(end = 5.dp).wrapContentHeight(),
-                                text = "Modelo:",
-                                fontSize = 14.sp
-                            )
-                            BoldText(
-                                text = firstItemSelected,
-                                fontSize = 14.sp,
-                                color = Black
-                            )
-                        }
-
-                        HorizontalImageViewer(
-                            modifier = Modifier.padding(bottom = 15.dp),
-                            bottomText = true,
-                            itemClicked = { index, item ->
-                                firstItemSelected = item
+                        VariantsViewerSelector(
+                            modifier = Modifier.padding( bottom = 15.dp),
+                            actualPosition = indexToShow,
+                            list = getLastProduct?.attributes ?: emptyList()
+                        ) { variantSelected ->
+                            getLastProduct?.variants?.find { it.skuProduct == variantSelected }?.images?.let {newImages ->
+                                itemSelected = newImages[0]
+                                imageList = newImages
                             }
-                        )
-
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .background(White)
-                                .padding(start = 30.dp),
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.Start
-                        ) {
-                            RegularText(
-                                modifier = Modifier.padding(end = 5.dp).wrapContentHeight(),
-                                text = "Color:",
-                                fontSize = 14.sp
-                            )
-                            BoldText(
-                                text = secondItemSelected,
-                                fontSize = 14.sp,
-                                color = Black
-                            )
                         }
-
-                        HorizontalImageViewer(
-                            modifier = Modifier.padding(top = 15.dp, bottom = 20.dp),
-                            sizeItem = 43.dp,
-                            itemList = secondVariantList,
-                            bottomText = true,
-                            itemClicked = { index, item ->
-                                secondItemSelected = item
-                            }
-                        )
 
 
                         SelectorDetail(

@@ -48,14 +48,7 @@ data class RatingProductModel(
 
 @Serializable
 data class VariantProductModel(
-    val attributes: List<UniqueAttributeProductModel>,
     val images: List<String>,
     val price: Double,
     val skuProduct: String
-)
-
-@Serializable
-data class UniqueAttributeProductModel(
-    val name: String,
-    val value: String
 )
