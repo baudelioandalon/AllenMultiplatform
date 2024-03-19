@@ -930,7 +930,6 @@ fun VariantSelectorItem(
     HorizontalImageViewer(
         modifier = Modifier.padding(bottom = 15.dp),
         bottomText = true,
-        showIcon = true,
         itemList = attributeProductModel.options,
         itemClicked = { index, item ->
             itemSelected = item
