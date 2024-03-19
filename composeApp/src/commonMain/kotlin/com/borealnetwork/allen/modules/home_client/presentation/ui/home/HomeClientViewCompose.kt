@@ -51,6 +51,7 @@ import com.borealnetwork.allensharedui.components.drawer.model.DrawerOptions
 import com.borealnetwork.allensharedui.components.drawer.model.MenuItem
 import com.borealnetwork.allensharedui.theme.GrayBackgroundMain
 import com.borealnetwork.allensharedui.theme.categorySelectorColors
+import com.borealnetwork.shared.domain.models.START_INDEX
 import com.borealnetwork.shared.domain.models.StateApi
 import com.borealnetwork.shared.domain.models.cart.MinimalProductModel
 import kotlinx.coroutines.delay
@@ -421,7 +422,7 @@ fun AutoSliding() {
         PromotionItem("Title two", "pager_two.png")
     )
     val page = rememberSaveable {
-        mutableStateOf(0)
+        mutableStateOf(START_INDEX)
     }
     LaunchedEffect(Unit) {
         while (true) {

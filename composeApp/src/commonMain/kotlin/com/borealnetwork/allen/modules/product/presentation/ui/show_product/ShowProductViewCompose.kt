@@ -51,6 +51,7 @@ import com.borealnetwork.allensharedui.components.drawer.StarStatus
 import com.borealnetwork.allensharedui.theme.GrayBackgroundDrawerDismiss
 import com.borealnetwork.allensharedui.theme.GrayBackgroundMain
 import com.borealnetwork.allensharedui.theme.GrayLetterShipping
+import com.borealnetwork.shared.domain.models.START_INDEX
 import com.borealnetwork.shared.domain.models.cart.MinimalProductModel
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
@@ -146,7 +147,9 @@ fun ShowProductViewCompose(
                             itemList = imageList,
                             zoomWhenSelected = true,
                             itemClicked = { index, item ->
-                                itemSelected = item
+                                if (item != itemSelected) {
+                                    itemSelected = item
+                                }
                             }
                         )
 
@@ -193,12 +196,12 @@ fun ShowProductViewCompose(
                         }
 
                         VariantsViewerSelector(
-                            modifier = Modifier.padding( bottom = 15.dp),
+                            modifier = Modifier.padding(bottom = 15.dp),
                             actualPosition = indexToShow,
                             list = getLastProduct?.attributes ?: emptyList()
                         ) { variantSelected ->
-                            getLastProduct?.variants?.find { it.skuProduct == variantSelected }?.images?.let {newImages ->
-                                itemSelected = newImages[0]
+                            getLastProduct?.variants?.find { it.skuProduct == variantSelected }?.images?.let { newImages ->
+                                itemSelected = newImages[START_INDEX]
                                 imageList = newImages
                             }
                         }
